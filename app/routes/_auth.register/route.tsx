@@ -49,9 +49,9 @@ export default function Register({ actionData }: Route.ComponentProps) {
                 </div>
             </div>
 
-            <div className="justify-center gap-18 items-start max-w-fit flex mx-auto py-10">
-                <div className="flex-1 hidden md:block z-10">
-                    <h1 className="text-2xl text-primary font-semibold tracking-tight my-5 pb-5">
+            <div className="justify-center gap-18 items-start max-w-fit flex mx-auto">
+                <div className="flex-1 hidden md:block z-10 mt-8">
+                    <h1 className="text-2xl text-primary font-bold tracking-tighter my-5 pb-5">
                         Sign up for free, <br className="hidden md:block" />
                         Join the <span className="text-primary-theme px-1.5 rounded-md bg-primary-bg border border-primary-theme">communtiy!</span>
                     </h1>
@@ -61,7 +61,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                 <CheckCheck size="25" strokeWidth={"2"} className="text-primary-theme" />
                             </div>
                             <p className="text-sm text-gray-600">
-                                Unlimited access to free courses
+                                Unlimited access to events
                             </p>
                         </div>
                         <div className="flex gap-3 items-center">
@@ -69,7 +69,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                 <CheckCheck size="25" strokeWidth={"2"} className="text-primary-theme" />
                             </div>
                             <p className="text-sm text-gray-600">
-                                Instant feedback on assignments
+                                Instant purchases and bookings
                             </p>
                         </div>
                         <div className="flex gap-3 items-center">
@@ -77,7 +77,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                 <CheckCheck size="25" strokeWidth={"2"} className="text-primary-theme" />
                             </div>
                             <p className="text-sm text-gray-600">
-                                Expert tips to help you succeed
+                                Expert support 24/7
                             </p>
                         </div>
                     </div>

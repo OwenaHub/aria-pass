@@ -149,8 +149,8 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
 
                             {/* Empty State for Spaces */}
                             {(!invitedSpaces?.length && !ownedSpaces?.length) && (
-                                <div className="col-span-full text-center py-10 text-gray-500 text-sm">
-                                    No spaces found. Join or create one to get started!
+                                <div className="col-span-full text-center py-5 text-gray-500 text-sm">
+                                    Your collaborations will appear here.
                                 </div>
                             )}
                         </div>

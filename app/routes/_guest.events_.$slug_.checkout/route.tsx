@@ -6,7 +6,7 @@ import { useState } from 'react';
 import PaystackPurchaseButton from './paystack-purchase-button';
 import { Button } from '~/components/ui/button';
 import FormatPrice from '~/components/utility/format-price';
-import { ArrowLeft, Dot } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Dot } from 'lucide-react';
 import { STORAGE_URL } from '~/config/defaults';
 import { isPastEventDate } from '~/lib/utils';
 
@@ -34,9 +34,9 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
         : "/images/banners/default-course-img.png";
 
     return (
-        <div className='px-14'>
+        <div className='lg:px-14'>
             <section className='container flex flex-col md:flex-row py-10 md:gap-20 gap-10'>
-                <div className="bg-white flex-1 overflow-hidden relative">
+                <div className="bg-white hidden md:block flex-1 overflow-hidden relative">
                     <img
                         src={banner}
                         alt={event.title}
@@ -54,7 +54,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                     )}
                 </div>
 
-                <div id='checkout' className='border flex-1 py-5 px-5 bg-gray-50 rounded-2xl shadow-lg'>
+                <div className='border flex-1 py-5 px-5 bg-gray-50 rounded-2xl shadow-lg'>
                     <div className="mb-5">
                         <p className='text-gray-500 text-sm tracking-tighter'>Ticket checkout</p>
                         <h1 className='font-bold text-xl tracking-tighter'>
@@ -102,11 +102,11 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                             <br />
 
                             <Button
-                                className="py-6 rounded-lg text-center w-full text-xs uppercase font-light"
+                                className="py-6 rounded-none text-center w-full text-xs uppercase font-light"
                                 disabled={!ticket || (ticket.quantityAvailable - ticket.ticketPurchases <= 0)}
                                 onClick={() => setNext(!next)}
                             >
-                                Continue
+                                Continue <ArrowRight />
                             </Button>
                         </>
                     )}

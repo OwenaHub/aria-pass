@@ -15,11 +15,11 @@ export default function AvatarGroup({ names, max = names.length }: AvatarGroupPr
                 <CustomAvatar key={index} name={name} styles="md:size-9 size-10 text-sm" />
             ))}
 
-            {extraCount > 0 && (
-                <div className="ms-1 md:h-10 md:w-10 h-8 w-8 flex items-center justify-center rounded-full bg-primary-bg text-primary text-base font-light">
+            {/* {extraCount > 0 && ( */}
+                <div className="ms-1 size-8 md:size-7 flex items-center justify-center rounded-full bg-primary-bg text-primary text-xs font-medium">
                     +{extraCount}
                 </div>
-            )}
+            {/* )} */}
         </div>
     );
 }

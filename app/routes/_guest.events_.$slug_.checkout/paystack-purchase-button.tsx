@@ -246,7 +246,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                 <PaystackButton
                     {...componentProps}
                     disabled={form.email.length < 5 || form.phone.length < 11}
-                    className="w-full py-3 rounded-lg bg-primary font-light text-sm text-white cursor-pointer disabled:bg-gray-500 disabled:cursor-not-allowed hover:bg-muted-foreground transition"
+                    className="w-full py-3 uppercase rounded-none bg-primary font-light text-sm text-white cursor-pointer disabled:bg-gray-500 disabled:cursor-not-allowed hover:bg-muted-foreground transition"
                 />
             </div>
         </div>

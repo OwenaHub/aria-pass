@@ -223,36 +223,67 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                     </div>
 
                     {/* Banner image */}
-                    <div className="mb-5">
-                        <label htmlFor="cover-photo" className="block text-sm/6 font-medium text-white">Cover photo</label>
-                        <div className="flex justify-center rounded-xl border border-dashed border-gray-300 px-6 py-10">
-                            <div className="text-center">
-                                <svg viewBox="0 0 24 24" fill="currentColor" data-slot="icon" aria-hidden="true" className="mx-auto size-12 text-gray-600">
-                                    <path d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clipRule="evenodd" fillRule="evenodd" />
-                                </svg>
-                                <div className="mt-4 flex text-sm/6 text-gray-400">
-                                    <label htmlFor="file-upload" className="relative cursor-pointer rounded-md bg-transparent font-semibold text-primary-theme focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-indigo-500 hover:text-indigo-300">
-                                        <span>Upload a file</span>
-                                        <Input onChange={(e) => {
-                                            const file = e.target.files![0];
-                                            if (file) {
-                                                setForm((i) => ({
-                                                    ...i, banner_url: file
-                                                }));
-                                                setBannerPreview(URL.createObjectURL(file));
-                                            }
-                                        }
-                                        }
-                                            id="file-upload" type="file" accept="image/*" name="banner_url" className="sr-only"
-                                        />
-                                    </label>
-                                    <p className="pl-1">or drag and drop</p>
+
+                    {form.banner_url
+                        ? (<div className="mb-5">
+                            <label htmlFor="cover-photo" className="block text-sm/6 font-medium text-white">Cover photo</label>
+                            <div className="flex justify-center bg-gray-100 rounded-xl  border-gray-300 px-6 py-10">
+                                <div className="text-center">
+                                    <img src={bannerPreview} alt="Banner preview" className="mx-auto max-h-60 object-contain rounded-md" />
+                                    <div className="mt-4 flex text-sm/6 text-gray-400">
+                                        <label htmlFor="file-upload" className="relative cursor-pointer rounded-md bg-transparent font-semibold text-primary-theme focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-indigo-500 hover:text-indigo-300">
+                                            <span>Change file</span>
+                                            <Input onChange={(e) => {
+                                                const file = e.target.files![0];
+                                                if (file) {
+                                                    setForm((i) => ({
+                                                        ...i, banner_url: file
+                                                    }));
+                                                    setBannerPreview(URL.createObjectURL(file))
+                                                }
+                                            }}
+                                                id="file-upload" type="file" accept="image/*" name="banner_url" className="sr-only"
+                                            />
+                                        </label>
+                                        <p className="pl-1">or drag and drop</p>
+                                    </div>
+                                    <p className="text-xs/5 text-gray-400">PNG,ß JPG, GIF up to 10MB</p>
                                 </div>
-                                <p className="text-xs/5 text-gray-400">PNG, JPG, GIF up to 10MB</p>
                             </div>
+                            <InputError for="banner_url" error={errors} />
+                        </div>)
+                        : (<div className="mb-5">
+                            <label htmlFor="cover-photo" className="block text-sm/6 font-medium text-white">Cover photo</label>
+                            <div className="flex justify-center rounded-xl border border-dashed border-gray-300 px-6 py-10">
+                                <div className="text-center">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" data-slot="icon" aria-hidden="true" className="mx-auto size-12 text-gray-600">
+                                        <path d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clipRule="evenodd" fillRule="evenodd" />
+                                    </svg>
+                                    <div className="mt-4 flex text-sm/6 text-gray-400">
+                                        <label htmlFor="file-upload" className="relative cursor-pointer rounded-md bg-transparent font-semibold text-primary-theme focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-indigo-500 hover:text-indigo-300">
+                                            <span>Upload a file</span>
+                                            <Input onChange={(e) => {
+                                                const file = e.target.files![0];
+                                                if (file) {
+                                                    setForm((i) => ({
+                                                        ...i, banner_url: file
+                                                    }));
+                                                    setBannerPreview(URL.createObjectURL(file));
+                                                }
+                                            }
+                                            }
+                                                id="file-upload" type="file" accept="image/*" name="banner_url" className="sr-only"
+                                            />
+                                        </label>
+                                        <p className="pl-1">or drag and drop</p>
+                                    </div>
+                                    <p className="text-xs/5 text-gray-400">PNG, JPG, GIF up to 10MB</p>
+                                </div>
+                            </div>
+                            <InputError for="banner_url" error={errors} />
                         </div>
-                        <InputError for="banner_url" error={errors} />
-                    </div>
+                        )
+                    }
 
                     <div className="flex flex-row gap-4">
                         <div className="flex-1">
