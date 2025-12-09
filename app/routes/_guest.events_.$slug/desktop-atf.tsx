@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar, Ellipsis, Heart, MapPin, Share } from "lucide-react";
+import { ArrowRight, Calendar, Ellipsis, Heart, MapPin, Share, Ticket } from "lucide-react";
 import { STORAGE_URL } from "~/config/defaults";
 import dayjs from "dayjs";
 import TicketCard from "~/components/cards/ticket-card";
@@ -177,22 +177,27 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                     <aside className="bg-white px-8 py-6 rounded-3xl border border-gray-100 mb-8">
                         <div className="text-sm relative">
                             <div className="flex items-center justify-between">
-                                <h3 className="font-semibold text-xl">Event Tickets</h3>
+                                <h3 className="font-medium text-xl tracking-tighter flex items-center gap-2">
+                                    <Ticket className="-rotate-45" />
+                                    <span>Available tickets</span>
+                                </h3>
                                 <Ellipsis />
                             </div>
-                            <div className="flex items-stretch gap-7 mt-8 overflow-x-auto pb-5">
+                            <div className="mt-8 overflow-x-auto pb-5 flex flex-col gap-6">
                                 {event.tickets.length
-                                    ? event.tickets.map(ticket =>
-                                        <TicketCard ticket={ticket} user="user" key={ticket.id} />
-                                    )
+                                    ? event.tickets.map(ticket => (
+                                        <div className="flex items-center justify-between">
+                                            <div className="font-light text-lg tracking-tighter">
+                                                {ticket.name}
+                                            </div>
+                                            <div className="font-light text-lg tracking-tighter">
+                                                <FormatPrice price={ticket.price} />
+                                            </div>
+                                        </div>
+                                    ))
                                     : <span className="text-gray-400">No tickets yet</span>
                                 }
                             </div>
-                            {event.tickets.length > 1 && (
-                                <div className="rounded-full p-3 shadow-lg absolute top-1/2 -right-2 bg-gray-100">
-                                    <ArrowRight />
-                                </div>
-                            )}
                         </div>
 
                         <hr className="my-10" />

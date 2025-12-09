@@ -44,9 +44,13 @@ export async function clientLoader() {
         return { user, spaces, invitedSpaces };
     } catch ({ response }: any) {
         if (response?.status === 401) {
+            intendedRoute(window.location.pathname);
+
             toast.warning("Your session has expired!", {
                 description: "Login to continue using OwenaHub",
-            })
+            });
+            
+            return redirect('/login');
         } else {
             toast.error("Something went wrong", {
                 action: {
@@ -55,7 +59,7 @@ export async function clientLoader() {
                 },
             })
         }
-        intendedRoute(window.location.pathname);
+
         return redirect('/login');
     }
 }
@@ -137,7 +141,7 @@ export default function ProtectedLayout({ loaderData }: Route.ComponentProps) {
                                                         </span>)
                                                     }
                                                 </span>
-                                                
+
                                                 <div
                                                     className={`
                                                         grid transition-all duration-300 ease-in-out
@@ -162,5 +166,5 @@ export default function ProtectedLayout({ loaderData }: Route.ComponentProps) {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  return <DefaultError error={error} />
+    return <DefaultError error={error} />
 }

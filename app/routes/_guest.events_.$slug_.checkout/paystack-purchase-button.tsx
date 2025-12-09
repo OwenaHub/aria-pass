@@ -9,8 +9,11 @@ import client from "~/http/client";
 import { MinusIcon, PlusIcon } from "lucide-react"
 import { Button } from "~/components/ui/button"
 import { ButtonGroup } from "~/components/ui/button-group"
+import useRoute from "~/hooks/use-route";
 
 export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticket, user?: User | undefined }) {
+    const { intendedRoute, getIntentedRoute } = useRoute()
+
     const publicKey = PAYSTACK_PUBK;
 
     const [form, setForm] = useState({
@@ -58,6 +61,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
         publicKey,
         text: "Buy Now",
 
+        // *  Paystack response
         // {
         //     "reference": "T116036255015831",
         //     "trans": "5088330337",
@@ -89,8 +93,13 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                         tickets: form.tickets,
                     });
 
+                    if (user && Object.keys(user).length > 2 && user.email.length > 8) {
+                        return navigate(`/purchases/?reference=${e.reference}&message=${e.message}`);
+                    }
+
                     resolve('Congratulations! Ticket purchased');
-                    return navigate(`/purchases/?reference=${e.reference}&message=${e.message}`);
+
+                    return navigate(`/login?redirect=/purchases`);
                 } catch (error: any) {
                     toast.warning('Something went wrong', {
                         description: error.response?.data?.error || "Please try again later"
@@ -109,7 +118,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
         },
         onClose: () => {
             toast.warning('Got cold feet? 🤔', {
-                description: "You can contact our founder directly—ernest@owenahub.com"
+                description: "You can complete your purchase anytime from your purchases page."
             });
         },
     }
@@ -161,6 +170,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                                             className="h-fit"
                                         >
                                             <Button
+                                                className="px-8 py-5"
                                                 onClick={() => {
                                                     if (form.quantity === 1) return;
                                                     setForm((i) => (
@@ -177,6 +187,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                                                 <MinusIcon />
                                             </Button>
                                             <Button
+                                                className="px-8 py-5"
                                                 onClick={() => {
                                                     setForm((i) => (
                                                         {
@@ -202,7 +213,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                         <div className="flex-1">
                             <Label className="mb-1 text-xs" htmlFor="name">Name</Label>
                             <Input
-                                className="py-5 rounded-xl bg-white"
+                                className="py-5 rounded-xl text-sm bg-white"
                                 type="text"
                                 id="name"
                                 placeholder="First Last"
@@ -216,7 +227,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                         <div className="flex-1">
                             <Label className="mb-1 text-xs" htmlFor="email">Email</Label>
                             <Input
-                                className="py-5 rounded-xl bg-white"
+                                className="py-5 rounded-xl text-sm bg-white"
                                 type="text"
                                 id="email"
                                 placeholder="your@email.com"
@@ -237,6 +248,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                         type="text"
                         id="phone"
                         placeholder="0800 000 0000"
+                        maxLength={11}
                         onChange={(e) => setForm((i) => (
                             { ...i, phone: e.target.value }
                         ))}
@@ -246,7 +258,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                 <PaystackButton
                     {...componentProps}
                     disabled={form.email.length < 5 || form.phone.length < 11}
-                    className="w-full py-3 uppercase rounded-none bg-primary font-light text-sm text-white cursor-pointer disabled:bg-gray-500 disabled:cursor-not-allowed hover:bg-muted-foreground transition"
+                    className="w-full py-3 uppercase rounded-xl bg-primary font-semibold text-sm text-white cursor-pointer disabled:bg-gray-500 disabled:cursor-not-allowed hover:bg-muted-foreground transition"
                 />
             </div>
         </div>

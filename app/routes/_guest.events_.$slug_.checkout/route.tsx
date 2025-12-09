@@ -102,7 +102,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                             <br />
 
                             <Button
-                                className="py-6 rounded-none text-center w-full text-xs uppercase font-light"
+                                className="py-6 rounded-xl text-center w-full text-xs uppercase font-light"
                                 disabled={!ticket || (ticket.quantityAvailable - ticket.ticketPurchases <= 0)}
                                 onClick={() => setNext(!next)}
                             >

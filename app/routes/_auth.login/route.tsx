@@ -24,8 +24,10 @@ export const meta: MetaFunction = (args) => {
 export async function clientAction({ request }: Route.ClientActionArgs) {
   const credentials = await parseForm(request);
 
+  const url = new URL(request.url);
+  
   const { getIntentedRoute } = useRoute();
-  let route = (await getIntentedRoute());
+  let route = url.searchParams.get('redirect') || (await getIntentedRoute());
 
   try {
     await authRequest(credentials, 'login');
@@ -57,7 +59,7 @@ export default function Login({ actionData }: Route.ComponentProps) {
 
       <div className="justify-center gap-10 items-center max-w-sm md:flex mx-auto py-10">
         <div className="flex-1">
-          <div className="z-10 h-full rounded-xl md:px-8 px-5 py-6">
+          <div className="z-10 h-full rounded-xl md:px-8 px-5">
             <div className="text-center pb-8">
               <p className="text-2xl text-primary font-medium tracking-tighter">
                 Login to your account
@@ -66,7 +68,7 @@ export default function Login({ actionData }: Route.ComponentProps) {
 
             <GoogleAuthButton text="Log in" />
 
-            <HrWithText text="Or continue with" />
+            <HrWithText text="Or use password" />
 
             <Form method="POST">
               <div className="mb-5">

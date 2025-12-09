@@ -94,7 +94,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
 
                         <GoogleAuthButton text="Register" />
 
-                        <HrWithText text="Or continue with" />
+                        <HrWithText text="Or use password" />
 
                         <Form method="POST" className="mt-5">
                             <div className="mb-5">
@@ -166,7 +166,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                             <Link to="/privacy-policy">Privacy Policy</Link>.
                         </p>
                     </div>
-                    <div className="text-foreground text-sm py-5 flex items-center gap-1 justify-center">
+                    <div className="text-foreground text-sm flex items-center gap-1 justify-center">
                         <span>Have an account?</span>{" "}
                         <Link to="/login" className="text-primary-theme underline underline-offset-2" viewTransition>Login</Link>
                     </div>

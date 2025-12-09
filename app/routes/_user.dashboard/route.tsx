@@ -126,7 +126,7 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
                         <div className='flex flex-wrap gap-3 items-center pb-3 w-max mx-auto'>
                             <QuickAction to='/my-events/new' icon={Calendar} label='Create event' />
                             <QuickAction to='/purchases' icon={ShoppingBag} label='See purchases' />
-                            <QuickAction to='/purchases' icon={UserCog} label='Add Teammember' />
+                            {/* <QuickAction to='/purchases' icon={UserCog} label='Add Teammember' /> */}
                         </div>
                     </div>
                 </div>

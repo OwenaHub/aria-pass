@@ -5,7 +5,7 @@ export default function useRoute() {
     async function intendedRoute(path: string): Promise<void> {
         if (path === "/")
             path = "/dashboard";
-        Cookies.set(storageKeys.route, path, { expires: 1 / 48 });
+        Cookies.set(storageKeys.route, path);
     }
 
     async function getIntentedRoute(): Promise<string> {

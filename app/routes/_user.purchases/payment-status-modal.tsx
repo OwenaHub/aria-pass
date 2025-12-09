@@ -47,12 +47,12 @@ export default function PaymentStatusModal() {
                 }}>
                     <DialogContent className='bg-primary-bg outline-2 outline-offset-4 outline-primary-theme rounded-4xl py-10'>
                         <DialogHeader className='text-start md:text-center mb-5'>
-                            <DialogTitle className='text-gray-800 font-bold text-2xl md:text-3xl text-pretty mb-2 tracking-tight'>
+                            <DialogTitle className='text-gray-800 text-center font-bold text-2xl md:text-3xl text-pretty mb-2 tracking-tight'>
                                 {TITLES[randomIndex]}
                             </DialogTitle>
                             <DialogDescription>
                                 <div className='flex flex-col gap-2'>
-                                    <p className='text-base md:text-xl text-gray-600'>
+                                    <p className='text-base text-center md:text-xl text-gray-600'>
                                         {DESCRIPTIONS[randomIndex]}
                                     </p>
                                 </div>
