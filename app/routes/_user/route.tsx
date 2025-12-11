@@ -12,36 +12,18 @@ import {
 } from "~/components/ui/sidebar"
 import type { Route } from "../_user/+types/route";
 import Breadcrumb from "~/components/navigation/breadcrumb";
-import client from "~/http/client";
 import { CalendarCheck, Heart, Home, ShoppingCart, Square, User } from "lucide-react";
 import React from "react";
 import DefaultError from "~/components/errors/default-error";
 
 export async function clientLoader() {
-    const { getUser, validateSession } = useSession();
+    const { validateSession } = useSession();
     const { intendedRoute } = useRoute();
-
-    async function getSpaces() {
-        const user = getUser();
-        const isOrganiser = user && (await user).organiserProfile;
-
-        if (!isOrganiser) return [];
-
-        const spaces = await client.get('api/spaces');
-        return spaces.data;
-    }
-
-    async function getInvitedSpaces() {
-        const spaces = await client.get('api/spaces/invited');
-        return spaces.data;
-    }
 
     try {
         const user = await validateSession();
-        const spaces = getSpaces();
-        const invitedSpaces = getInvitedSpaces();
 
-        return { user, spaces, invitedSpaces };
+        return { user };
     } catch ({ response }: any) {
         if (response?.status === 401) {
             intendedRoute(window.location.pathname);
@@ -49,8 +31,8 @@ export async function clientLoader() {
             toast.warning("Your session has expired!", {
                 description: "Login to continue using OwenaHub",
             });
-            
-            return redirect('/login');
+
+            window.location.href = '/login'
         } else {
             toast.error("Something went wrong", {
                 action: {
@@ -93,9 +75,7 @@ const app_menu = [
 ];
 
 export default function ProtectedLayout({ loaderData }: Route.ComponentProps) {
-    const { user, spaces, invitedSpaces }: {
-        user: User, spaces: Promise<OrganiserEvent[]>, invitedSpaces: Promise<OrganiserEvent[]>
-    } = loaderData;
+    const { user }: { user: User } = loaderData;
 
     return (
         <SidebarProvider>

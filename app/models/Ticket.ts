@@ -7,4 +7,7 @@ interface Ticket extends Model {
     quantityAvailable: number,
     ticketPurchases: number,
     purchases?: TicketPurchase[];
+    event: Pick<OrganiserEvent,
+        'id' | 'slug' | 'title' | 'startTime' | 'venueAddress' | 'venueName' | 'city' | 'country' | 'bannerUrl'
+    >
 }

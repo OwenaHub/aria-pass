@@ -1,8 +1,7 @@
-import { ArrowRight, Calendar, Ellipsis, Heart, MapPin, Share } from "lucide-react";
+import { Calendar, Ellipsis, Heart, MapPin, Share, Ticket } from "lucide-react";
 import { STORAGE_URL } from "~/config/defaults";
 import dayjs from "dayjs";
 import { Link } from 'react-router';
-import TicketCard from "~/components/cards/ticket-card";
 import Placeholder from "~/components/utility/placeholder";
 import RedirectOrFetcher from "~/components/navigation/like-event";
 import FormatPrice from "~/components/utility/format-price";
@@ -33,7 +32,7 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
             <div className="z-10 fixed w-full bg-linear-to-t from-gray-400 to-transparent bottom-0 right-0 left-0 h-20 p-4 pb-20">
                 <CheckoutButton event={event} />
             </div>
-            
+
             <div className="bg-slate-100 h-120 w-full aspect-square group-hover:opacity-75 relative overflow-hidden">
                 <img
                     src={banner}
@@ -159,7 +158,7 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                     </fieldset>
 
                     <div className="bg-white border border-gray-100 p-4 rounded-2xl mt-5 w-full relative">
-                        <h2 className="font-semibold tracking-tighter text-lg text-primary mb-2">About Event</h2>
+                        <h2 className="font-bold tracking-tighter text-lg text-primary mb-2">About Event</h2>
                         <div className="text-sm">
                             <FormatLineBreak input={event.description} />
                         </div>
@@ -168,13 +167,13 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
 
                         <div>
                             <div className="flex justify-between items-center mb-4">
-                                <h2 className="font-semibold tracking-tighter text-lg text-primary">Venue & Address</h2>
+                                <h2 className="font-bold tracking-tighter text-lg text-primary">Venue & Address</h2>
                                 <div className="p-2 rounded-full text-primary-theme border border-primary-bg tracking-tighter">
                                     <MapPin size={20} />
                                 </div>
                             </div>
                             <div className="mb-3">
-                                <h3 className="text-sm text-gray-400">Venue & Hall name</h3>
+                                <h3 className="text-sm text-gray-400">Venue/Hall name</h3>
                                 <span className="leading-5">
                                     {event.venueName}
                                 </span>
@@ -196,26 +195,28 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                         {/* The main change is on this line: `overflow-x-auto` becomes `overflow-hidden` */}
                         <div className="relative max-w-full mb-3">
                             <div className="flex items-center justify-between">
-                                <h3 className="font-semibold text-lg">Event Tickets</h3>
+                                <h3 className="font-medium text-xl tracking-tighter flex items-center gap-2">
+                                    <Ticket className="-rotate-45" />
+                                    <span className="font-bold tracking-tighter text-lg text-primar">Available tickets</span>
+                                </h3>
                                 <Ellipsis />
                             </div>
 
-                            {/* This div handles the scrolling of the cards correctly */}
-                            <div className="flex items-stretch gap-7 mt-8 overflow-x-auto pb-5">
+                            <div className="mt-8 overflow-x-auto pb-5 flex flex-col gap-6">
                                 {event.tickets.length
-                                    ? event.tickets.map(ticket =>
-                                        <TicketCard ticket={ticket} user="user" key={ticket.id} />
-                                    )
+                                    ? event.tickets.map(ticket => (
+                                        <div className="flex items-center justify-between">
+                                            <div className="font-light text-lg tracking-tighter">
+                                                {ticket.name}
+                                            </div>
+                                            <div className="font-light text-lg tracking-tighter">
+                                                <FormatPrice price={ticket.price} />
+                                            </div>
+                                        </div>
+                                    ))
                                     : <span className="text-gray-400">No tickets yet</span>
                                 }
                             </div>
-
-                            {/* This arrow will now be visually clipped instead of causing a page scroll */}
-                            {event.tickets.length > 1 && (
-                                <div className="rounded-full p-3 shadow-lg absolute top-1/2 -right-0 bg-gray-100">
-                                    <ArrowRight />
-                                </div>
-                            )}
                         </div>
                     </div>
 

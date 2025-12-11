@@ -1,5 +1,5 @@
 interface Model {
     id: string,
-    createdAt?: Date,
+    createdAt?: Date | string,
     updatedAt?: Date,
 }

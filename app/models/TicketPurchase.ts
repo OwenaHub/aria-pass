@@ -1,6 +1,5 @@
+
 interface TicketPurchase extends Model {
-  userId: string;
-  ticketId: string;
   user: Pick<User, 'id' | 'name' | 'email'>;
   reference: string | null;
   amount: string;
@@ -8,5 +7,5 @@ interface TicketPurchase extends Model {
   code: string;
   currency: 'NGN' | 'USD' | 'EUR' | 'GBP';
   payment_method: 'paystack' | 'stripe' | 'paypal';
-  ticket: Ticket
+  ticket: Ticket;
 }

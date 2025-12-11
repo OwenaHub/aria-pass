@@ -93,11 +93,11 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                         tickets: form.tickets,
                     });
 
+                      resolve('Congratulations! Ticket purchased');
+
                     if (user && Object.keys(user).length > 2 && user.email.length > 8) {
                         return navigate(`/purchases/?reference=${e.reference}&message=${e.message}`);
                     }
-
-                    resolve('Congratulations! Ticket purchased');
 
                     return navigate(`/login?redirect=/purchases`);
                 } catch (error: any) {

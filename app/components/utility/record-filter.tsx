@@ -42,7 +42,7 @@ export default function RecordFilter({ data }: { data?: any[] }) {
                 }}
                 className={`
                         ${!searchParams.get('status') && 'bg-primary text-white'}
-                        rounded-full text-nowrap  ps-1.5 pe-2.5 py-1 bg-gray-200 flex items-center gap-1 text-xs hover:bg-gray-300 transition cursor-pointer`
+                        rounded-full text-nowrap ps-1.5 pe-2.5 py-1 bg-gray-200 flex items-center gap-1 text-xs hover:bg-gray-300 transition cursor-pointer`
                 }
             >
                 <ArrowDownNarrowWide size={16} strokeWidth={1.3} /> <span className="font-medium">All</span>
