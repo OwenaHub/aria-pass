@@ -174,8 +174,6 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
         });
 
         const groupedPurchases = Array.from(groupsMap.values());
-        console.log(groupedPurchases);
-
         return groupedPurchases;
     }
 

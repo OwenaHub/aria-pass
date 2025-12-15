@@ -9,11 +9,8 @@ import client from "~/http/client";
 import { MinusIcon, PlusIcon } from "lucide-react"
 import { Button } from "~/components/ui/button"
 import { ButtonGroup } from "~/components/ui/button-group"
-import useRoute from "~/hooks/use-route";
 
 export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticket, user?: User | undefined }) {
-    const { intendedRoute, getIntentedRoute } = useRoute()
-
     const publicKey = PAYSTACK_PUBK;
 
     const [form, setForm] = useState({
@@ -31,7 +28,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
 
     const UNIT_PRICE = parseInt(ticket.price);
 
-    const PROCESSING_FEE = (UNIT_PRICE * form.quantity) * 0.026;
+    const PROCESSING_FEE = (UNIT_PRICE * form.quantity) * 0.030;
     const TOTAL_AMOUNT = (UNIT_PRICE * form.quantity) + PROCESSING_FEE;
 
     const navigate = useNavigate();
@@ -84,7 +81,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
 
                     await client.post(`/api/tickets/purchases/${ticket.id}`, {
                         reference: e.reference,
-                        // amount: TOTAL_AMOUNT / 100,
+                        //! amount: TOTAL_AMOUNT / 100, Gotten and calculated on the backend for security
                         currency: "NGN",
                         payment_method: "paystack",
                         purchaser_name: form.name,
@@ -93,7 +90,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                         tickets: form.tickets,
                     });
 
-                      resolve('Congratulations! Ticket purchased');
+                    resolve('Congratulations! Ticket purchased');
 
                     if (user && Object.keys(user).length > 2 && user.email.length > 8) {
                         return navigate(`/purchases/?reference=${e.reference}&message=${e.message}`);

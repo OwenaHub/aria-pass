@@ -95,8 +95,6 @@ export default function Purchases({ loaderData }: Route.ComponentProps) {
         });
 
         const groupedPurchases = Array.from(groupsMap.values());
-        console.log(groupedPurchases);
-
         return groupedPurchases;
     }
 
