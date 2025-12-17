@@ -357,10 +357,12 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                                     <Calendar
                                         mode="single"
                                         selected={date}
-                                        captionLayout="dropdown"
+                                        className="rounded [--cell-size:--spacing(11)] md:[--cell-size:--spacing(10)]"
+                                        // captionLayout=""
+                                        buttonVariant="ghost"
                                         onSelect={(date) => {
                                             setDate(date)
-                                            setOpenDate(false)
+                                            // setOpenDate(false)
                                         }}
                                     />
                                 </PopoverContent>

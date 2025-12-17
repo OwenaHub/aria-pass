@@ -257,7 +257,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                                         ...i, banner_url: file
                                                     }));
                                                     setBannerPreview(URL.createObjectURL(file))
-                                                }   
+                                                }
                                             }}
                                                 id="file-upload" type="file" accept="image/*" name="banner_url" className="sr-only"
                                             />
@@ -371,10 +371,12 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                     <Calendar
                                         mode="single"
                                         selected={date}
-                                        captionLayout="dropdown"
+                                        className="rounded [--cell-size:--spacing(11)] md:[--cell-size:--spacing(10)]"
+                                        // captionLayout=""
+                                        buttonVariant="ghost"
                                         onSelect={(date) => {
                                             setDate(date)
-                                            setOpenDate(false)
+                                            //* setOpenDate(false)
                                         }}
                                     />
                                 </PopoverContent>

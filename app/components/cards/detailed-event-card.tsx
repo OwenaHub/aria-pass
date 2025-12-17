@@ -8,7 +8,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu"
-import { EllipsisVertical, LoaderCircle } from 'lucide-react';
+import { EllipsisVertical, Eye, LoaderCircle, Pen, Share, Trash } from 'lucide-react';
 import { Form, Link, useNavigation } from 'react-router';
 import EventStatus from '../utility/event-status';
 
@@ -89,12 +89,13 @@ function Actions({ event }: { event: OrganiserEvent }) {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-max relative md:right-[40%]">
                 <Link to={`${event.slug}`}>
-                    <DropdownMenuItem className='cursor-pointer'>
-                        View
+                    <DropdownMenuItem className='cursor-pointer flex items-center gap-2'>
+                        <Eye size={16} strokeWidth={1.5} />
+                        <span>View</span>
                     </DropdownMenuItem>
                 </Link>
 
-                <DropdownMenuItem className='cursor-pointer' onClick={() => {
+                <DropdownMenuItem className='cursor-pointer flex items-center gap-2' onClick={() => {
                     const shareData = {
                         title: event.title,
                         text: event.description,
@@ -102,12 +103,14 @@ function Actions({ event }: { event: OrganiserEvent }) {
                     };
                     navigator.share(shareData);
                 }}>
-                    Share
+                    <Share size={16} strokeWidth={1.5} />
+                    <span>Share</span>
                 </DropdownMenuItem>
 
                 <Link to={`${event.slug}/edit`}>
-                    <DropdownMenuItem>
-                        Edit
+                    <DropdownMenuItem className='cursor-pointer flex items-center gap-2'>
+                        <Pen size={16} strokeWidth={1.5} />
+                        <span>Edit</span>
                     </DropdownMenuItem>
                 </Link>
 
@@ -116,9 +119,10 @@ function Actions({ event }: { event: OrganiserEvent }) {
                         <DialogTrigger asChild>
                             <Button
                                 variant="ghost"
-                                className='rounded-sm w-full h-8 py-0 px-2 border-0 text-start block text-destructive hover:bg-red-50 hover:text-destructive'
+                                className='rounded-sm w-full h-8 py-0 border-0 text-start text-destructive hover:bg-red-50 hover:text-destructive cursor-pointer flex items-center justify-start gap-2'
                             >
-                                Delete
+                                <Trash size={16} strokeWidth={1.5} />
+                                <span>Delete</span>
                             </Button>
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-[425px]">
