@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { Await, Link, redirect, type MetaFunction } from 'react-router';
+import { Await, Link, redirect, useSearchParams, type MetaFunction } from 'react-router';
 import type { Route } from '../_guest.events/+types/route';
 import client from '~/http/client';
 import EventCardSkeleton from '~/components/skeletons/events-card-skeleton';
@@ -17,15 +17,29 @@ export const meta: MetaFunction = (args) => {
     ];
 }
 
-export async function clientLoader(_: Route.ClientLoaderArgs) {
+export async function clientLoader({ request }: Route.ClientLoaderArgs) {
+    const url = new URL(request.url);
+    const category = url.searchParams.get("category");
+    const filter = url.searchParams.get("filter");
+
     try {
-        const getEvents = async (): Promise<OrganiserEvent[]> => {
-            const response = await client.get('/api/events');
-            return response.data
+        const getEvents = async (
+            eventType: string | null,
+            timeFilter: string | null
+        ): Promise<OrganiserEvent[]> => {
+            const response = await client.get('/api/events', {
+                params: {
+                    category: eventType,
+                    filter: timeFilter
+                }
+            });
+            return response.data;
         }
 
-        const events = getEvents();
-        return { events }
+        const events = getEvents(category, filter);
+
+        return { events };
+
     } catch ({ response }: any) {
         return redirect('/');
     }
@@ -33,6 +47,7 @@ export async function clientLoader(_: Route.ClientLoaderArgs) {
 
 export default function Events({ loaderData }: Route.ComponentProps) {
     const { events }: { events: Promise<OrganiserEvent[]> } = loaderData;
+    const [searchParams] = useSearchParams();
 
     return (
         <main>
@@ -44,8 +59,21 @@ export default function Events({ loaderData }: Route.ComponentProps) {
             <div className="hidden container lg:flex items-center justify-between mb-8">
                 <FeedFilter />
                 <div className="flex gap-4 items-center">
-                    {["Choral", "Ensemble", "Church Music", "Recitals", "Classical Band", "Chamber"].map((item) => (
-                        <Link to={""} key={item} className="rounded-full py-2 px-4 hover:bg-stone-100 text-sm font-semibold tracking-tight">{item}</Link>
+                    <Link
+                        preventScrollReset
+                        to={`?category=`}
+                        className={`rounded-full py-2 px-4 hover:bg-stone-100 text-sm font-medium tracking-tight ${!searchParams.get('category') && 'bg-stone-100 outline'}`}
+                    >
+                        All
+                    </Link>
+                    {["Opera", "Recital", "Workshop", "Carol", "Concert"].map((item) => (
+                        <Link
+                            preventScrollReset
+                            to={`?category=${item.toLowerCase()}`}
+                            className={`${searchParams.get('category') === item.toLowerCase() && 'bg-stone-100 outline'} rounded-full py-2 px-4 hover:bg-stone-100 text-sm font-medium tracking-tight`}
+                        >
+                            {item}
+                        </Link>
                     ))}
                 </div>
                 <Button variant={"secondary"} className="rounded-full flex justify-between gap-2 px-5">
@@ -65,16 +93,29 @@ export default function Events({ loaderData }: Route.ComponentProps) {
 
                 <hr className="mt-5 mb-2" />
 
-                <div className="container flex gap-4 items-center overflow-x-auto">
-                    {["Choral", "Ensemble", "Church Music", "Recitals", "Classical Band", "Chamber"].map((item) => (
-                        <Link to={`?`} key={item} className="text-nowrap rounded-full py-2 px-4 hover:bg-stone-100 text-sm tracking-tight">{item}</Link>
+                <div className="container py-2 flex gap-4 items-center overflow-x-auto">
+                    <Link
+                        preventScrollReset
+                        to={`?category=`}
+                        className={`text-nowrap rounded-full py-2 px-4 hover:bg-stone-100 text-sm tracking-tight ${!searchParams.get('category') && 'bg-stone-100 outline'}`}
+                    >
+                        All
+                    </Link>
+                    {["Opera", "Recital", "Workshop", "Carol", "Concert"].map((item) => (
+                        <Link
+                            to={`?category=${item.toLowerCase()}`}
+                            key={item}
+                            preventScrollReset
+                            className={`${searchParams.get('category') === item.toLowerCase() && 'bg-stone-100 outline'} text-nowrap rounded-full py-2 px-4 hover:bg-stone-100 text-sm tracking-tight`}>
+                            {item}
+                        </Link>
                     ))}
                 </div>
             </div>
 
             {/* Events ---------------------------------------------- */}
             <div className=" container block">
-                <Suspense fallback={<EventCardSkeleton type='user' />}>
+                <Suspense fallback={<EventCardSkeleton />}>
                     <Await resolve={events}>
                         {(events) => <EventsMapper events={events} />}
                     </Await>
@@ -109,5 +150,5 @@ export default function Events({ loaderData }: Route.ComponentProps) {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  return <DefaultError error={error} />
+    return <DefaultError error={error} />
 }

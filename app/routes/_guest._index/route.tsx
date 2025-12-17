@@ -1,4 +1,4 @@
-import { Await, Link, redirect } from "react-router";
+import { Await, Link, redirect, useSearchParams } from "react-router";
 import { BrMd } from "~/components/utility/line-break";
 import { ArrowRight, ChevronLeft, ChevronRight, Crown, Piano, Stars, UsersRound, UserStar } from "lucide-react";
 import SearchBar from "~/components/utility/search-bar";
@@ -13,15 +13,29 @@ import EventsMapper from "~/components/mappers/event-mapper";
 import { STORAGE_URL } from "~/config/defaults";
 import DefaultError from "~/components/errors/default-error";
 
-export async function clientLoader(_: Route.ClientLoaderArgs) {
+export async function clientLoader({ request }: Route.ClientLoaderArgs) {
+    const url = new URL(request.url);
+    const category = url.searchParams.get("category");
+    const filter = url.searchParams.get("filter");
+
     try {
-        const getEvents = async (): Promise<OrganiserEvent[]> => {
-            const response = await client.get('/api/events');
-            return response.data
+        const getEvents = async (
+            eventType: string | null,
+            timeFilter: string | null
+        ): Promise<OrganiserEvent[]> => {
+            const response = await client.get('/api/events', {
+                params: {
+                    category: eventType,
+                    filter: timeFilter
+                }
+            });
+            return response.data;
         }
 
-        const events = getEvents();
-        return { events }
+        const events = getEvents(category, filter);
+
+        return { events };
+
     } catch ({ response }: any) {
         return redirect('/');
     }
@@ -36,10 +50,11 @@ export async function clientLoader(_: Route.ClientLoaderArgs) {
 
 export default function Home({ loaderData }: Route.ComponentProps) {
     const { events }: { events: Promise<OrganiserEvent[]> } = loaderData;
+    const [searchParams] = useSearchParams();
 
     return (
         <div className="fadeIn animated">
-            {/* <div className="relative isolate px-6 pt-5 lg:px-8 -z-10">
+            <div className="relative isolate px-6 pt-5 lg:px-8 -z-10">
                 <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
                     <div style={{
                         clipPath:
@@ -47,14 +62,14 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                     }} className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-indigo-100 to-indigo-500 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     />
                 </div>
-            </div> */}
+            </div>
             <header className="flex flex-col gap-5 lg:min-h-[65vh]">
-                <section className="container flex justify-between gap-20 items-center my-16">
+                <section className="container flex justify-between gap-20 items-center mt-10 mb-16">
                     <div className="lg:basis-7/12 text-center md:text-start overflow-auto">
 
-                        <div className="border border-gray-200 text-xs md:text-xs rounded-full px-4 py-1.5 w-max mb-4 tracking-tight flex items-center gap-0 mx-auto md:mx-0">
+                        <div className="bg-white border  shadow-lg text-xs md:text-xs rounded-full px-4 py-2 w-max mb-5 tracking-tight flex items-center gap-0 mx-auto md:mx-0">
                             <span className="text-primary-theme font-semibold flex items-center gap-1.5">
-                                <span>Commission-free</span> <Stars className="text-pink-300 fill-pink-300" strokeWidth={1} size={16}/>
+                                <span>Commission-free</span> <Stars className="text-pink-300 fill-pink-300" strokeWidth={1} size={16} />
                             </span>
                             <span className="h-4 border-r mx-3" />
                             <span className="text-muted-foreground flex items-center gap-1">
@@ -63,8 +78,8 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                             </span>
                         </div>
 
-                        <h1 className="text-4xl md:text-6xl font-medium md:leading-16 text-primary tracking-[-0.07em]">
-                            Experience the Community <BrMd /> Behind the Concerts
+                        <h1 className="text-5xl md:text-6xl font-medium md:leading-16 text-primary -tracking-[0.07em]">
+                            Promoting Live <br /> Musical <span className="px-1 bg-indigo-100 border font-serif text-indigo-800 font-light border-primary-theme rounded-xl -rotate-6 inline-block">Concerts</span>
                         </h1>
                         <p className="tracking-tight  font-medium text-gray-500 text-md md:text-base mt-5 leading-6">
                             Discover events, buy tickets, and connect with fellow <BrMd /> music enthusiasts on AriaPass.
@@ -101,8 +116,8 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                     </div>
 
                     {/* Event Banners */}
-                    <div className="hidden lg:block lg:basis-5/12">
-                        <div className="h-100 w-full bg-gray-50 rounded-3xl border overflow-hidden relative">
+                    <div className="hidden lg:block lg:basis-6/12">
+                        <div className="h-110 w-full bg-gray-50 rounded-3xl border overflow-hidden relative">
                             <Suspense fallback={<div className="h-100 w-full bg-gray-200 animate-pulse" />}>
                                 <Await resolve={events}>
                                     {(events) => {
@@ -159,14 +174,22 @@ export default function Home({ loaderData }: Route.ComponentProps) {
             </header>
 
             <main>
+                {/* Desktop */}
                 <div className="hidden container lg:flex items-center justify-between mb-8">
                     <FeedFilter />
                     <div className="flex gap-4 items-center">
-                        {["All", "Choral", "Ensemble", "Church Music", "Recitals", "Chamber"].map((item) => (
+                        <Link
+                            preventScrollReset
+                            to={`?category=`}
+                            className={`rounded-full py-2 px-4 hover:bg-stone-100 text-sm font-medium tracking-tight ${!searchParams.get('category') && 'bg-stone-100 outline'}`}
+                        >
+                            All
+                        </Link>
+                        {["Opera", "Recital", "Workshop", "Carol", "Concert"].map((item) => (
                             <Link
-                                to={""}
-                                key={item}
-                                className={`rounded-full py-2 px-4 hover:bg-stone-100 text-sm font-medium tracking-tight ${item === "All" && "bg-[#F8F7F4] text-primary"}`}
+                                preventScrollReset
+                                to={`?category=${item.toLowerCase()}`}
+                                className={`${searchParams.get('category') === item.toLowerCase() && 'bg-stone-100 outline'} rounded-full py-2 px-4 hover:bg-stone-100 text-sm font-medium tracking-tight`}
                             >
                                 {item}
                             </Link>
@@ -180,6 +203,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                     </Link>
                 </div>
 
+                {/* Mobile */}
                 <div className="lg:hidden mb-4">
                     <div className="container flex justify-between items-center">
                         <FeedFilter />
@@ -193,9 +217,22 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
                     <hr className="mt-5 mb-2" />
 
-                    <div className="container flex gap-4 items-center overflow-x-auto">
-                        {["Choral", "Ensemble", "Church Music", "Recitals", "Classical Band", "Chamber"].map((item) => (
-                            <Link to={`?`} key={item} className="text-nowrap rounded-full py-2 px-4 hover:bg-stone-100 text-sm tracking-tight">{item}</Link>
+                    <div className="container py-2 flex gap-4 items-center overflow-x-auto">
+                        <Link
+                            preventScrollReset
+                            to={`?category=`}
+                            className={`text-nowrap rounded-full py-2 px-4 hover:bg-stone-100 text-sm tracking-tight ${!searchParams.get('category') && 'bg-stone-100 outline'}`}
+                        >
+                            All
+                        </Link>
+                        {["Opera", "Recital", "Workshop", "Carol", "Concert"].map((item) => (
+                            <Link
+                                to={`?category=${item.toLowerCase()}`}
+                                key={item}
+                                preventScrollReset
+                                className={`${searchParams.get('category') === item.toLowerCase() && 'bg-stone-100 outline'} text-nowrap rounded-full py-2 px-4 hover:bg-stone-100 text-sm tracking-tight`}>
+                                {item}
+                            </Link>
                         ))}
                     </div>
                 </div>
@@ -257,5 +294,5 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  return <DefaultError error={error} />
+    return <DefaultError error={error} />
 }
