@@ -1,8 +1,7 @@
-import { Bookmark, Eye, Heart, MapPin, Verified } from 'lucide-react';
+import { Eye, Heart, MapPin, Verified } from 'lucide-react';
 import dayjs from 'dayjs';
 import { STORAGE_URL } from '~/config/defaults';
 import { Link } from 'react-router';
-import RedirectOrFetcher from '../navigation/like-event';
 import CustomAvatar from '../custom/custom-avatar';
 import { isPastEventDate } from '~/lib/utils';
 
@@ -13,7 +12,7 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
     return (
         <div key={index} className="bg-white border-gray-100 flex flex-col gap-1 group">
             {/* event banner */}
-            <div className="relative bg-gray-100 rounded-md group-hover:opacity-85 overflow-hidden transition h-90">
+            <div className="relative bg-gray-100 rounded-xl group-hover:opacity-85 overflow-hidden transition h-90">
                 <Link to={`/events/${event.slug}`}>
                     <span aria-hidden="true" className="z-10 absolute inset-0" />
                 </Link>
@@ -32,13 +31,13 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
 
                 {/* Upperside of the card */}
                 <div className="absolute flex items-start justify-between top-2 w-[100%] left-0 right-0 py-0.5 px-2.5">
-                    <div className='bg-white w-max py-1 px-2 rounded'>
+                    <div className='bg-white w-max py-1 px-2 rounded-lg'>
                         <div className='flex flex-col justify-start items-center'>
-                            <p className="text-xl md:text-2xl tracking-tighter font-bold">{formattedDate.split(' ')[1]}</p>
-                            <p className="-mt-1.5 tracking-tighter text-sm md:text-sm font-light uppercase">{formattedDate.split(' ')[0]}</p>
+                            <p className="text-xl md:text-2xl tracking-tighter font-extrabold">{formattedDate.split(' ')[1]}</p>
+                            <p className="-mt-1.5 tracking-tighter text-sm md:text-base font-light uppercase">{formattedDate.split(' ')[0]}</p>
                         </div>
                     </div>
-                    <div className='z-10'>
+                    {/* <div className='z-10'>
                         <RedirectOrFetcher route={`/events/toggle-like/${event.slug}`}>
                             <button title="Add to favourites" className='bg-white/70 w-max py-4 px-2 rounded hover:scale-110  hover:bg-white transition'>
                                 <Bookmark
@@ -47,7 +46,7 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
                                 />
                             </button>
                         </RedirectOrFetcher>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Added top-0 and left-0 to position the overlay */}
@@ -57,9 +56,9 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
                             {isPastEventDate(event.date, event.startTime) ? 'EVENT ENDED' : 'SOLD OUT'}
                         </div>
                     )}
-                    <div className="flex items-center gap-1 mb-1">
-                        <MapPin strokeWidth={2} size={14} />
-                        <span className='font-light text-xs md:text-sm capitalize'>
+                    <div className="flex items-center gap-1 mb-2">
+                        <MapPin strokeWidth={3} size={14} />
+                        <span className='text-xs md:text-sm capitalize'>
                             {event.city}, {event.country}
                         </span>
                     </div>

@@ -268,7 +268,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                     <div
                         className="h-80 rounded-4xl py-6 px-8 my-10 flex flex-col justify-center"
                         style={{
-                            backgroundImage: `linear-gradient(90deg, #FAF9FB, #FAF9FB00), url('/images/ensemble-banner.png')`,
+                            backgroundImage: `linear-gradient(90deg, #cccccc, #cccccc00), url('/images/ensemble-banner.png')`,
                             backgroundSize: 'cover, cover',
                             backgroundPosition: 'center, center',
                         }}

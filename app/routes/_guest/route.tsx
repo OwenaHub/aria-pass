@@ -41,14 +41,14 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
 
     return (
         <>
-            <div className={`sticky top-0 z-10 bg-white/10 backdrop-blur-sm ${scrolled && 'border-b border-gray-100'}`}>
-                <nav className={`bg-white/50 backdrop-blur-md py-3 container flex items-center justify-between transition-all`}>
+            <div className={`sticky top-0 z-10 ${scrolled && 'bg-white/10 backdrop-blur-sm shadow-md transition'}`}>
+                <nav className={`py-3 container flex items-center justify-between transition-all`}>
                     <div className='flex items-center justify-between gap-20'>
                         <Link to="/" className='flex items-center gap-2'>
                             <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-8 w-8 object-contain" />
                             <div className='text-base md:text-xl tracking-tighter flex flex-col items-start'>
                                 <span className='font-extralight text-[10px] md:text-xs inline-block'>OwenaHub</span>
-                                <span className='text-indigo-800 font-semibold tracking-tighter -mt-1'>
+                                <span className='text-indigo-800 italic font-medium font-serif tracking-tighter -mt-1'>
                                     AriaPass
                                 </span>
                             </div>
@@ -163,53 +163,40 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
 
             <Outlet context={user} />
 
-            <footer className="bg-white text-muted-foreground pt-20">
-                <div className="container grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div>
-                        <h2 className="text-lg font-semibold text-foreground mb-5">
-                            <div className=" relative top-[3px] flex flex-col leading-tight">
-                                <span className="text-sm font-light">OwenaHub</span>
-                                <span className="text-2xl -mt-1 font-bold">AriaPass</span>
-                            </div>
-                        </h2>
-                        <p className="mt-2 mb-6 text-xs max-w-sm">
-                            A space for classical musicians to connect, share, and explore the world of music.
-                        </p>
+            <footer className="bg-white text-muted-foreground pt-5">
+                <div className="flex justify-between items-center container pb-4">
+                    <h5 className='font-light text-lg tracking-tighter'>AriaPass</h5>
 
-
+                    <div className="flex flex-col items-center space-y-3">
+                        <a
+                            href="https://www.facebook.com/people/AriaPass/61580661771119/"
+                            rel='noreferrer'
+                            target='_blank'
+                            aria-label="Facebook"
+                            className="hover:text-foreground text-xs flex gap-2 items-center"
+                        >
+                            <span className="rounded-full bg-primary p-1 text-white">
+                                <Facebook className="h-4 w-4 fill-white" strokeWidth={0} />
+                            </span>
+                            <span className='font-semibold'>Facebook</span>
+                        </a>
                     </div>
 
-                    {/* Navigation */}
-                    <div>
-                        <h5 className="font-medium text-foreground mb-5 text-md">Quick Links</h5>
-                        <div className="flex flex-col space-y-3 text-xs">
-                            <Link to="/events" className="hover:text-foreground">Events</Link>
-                            <Link to="/organisers" className="hover:text-foreground">Organisers</Link>
-                            <Link to="/artists" className="hover:text-foreground">Artists</Link>
-                        </div>
-                    </div>
-
-                    {/* Social / Legal */}
-
-                    <div>
-                        <h5 className="font-medium text-foreground mb-5 text-md">Follow our updates</h5>
-                        <div className="flex flex-col justify-between text-xs">
-                            <div className="flex flex-col items-start space-y-3 mb-8">
-                                <a href="#" aria-label="Facebook" className="hover:text-foreground flex gap-2 items-center">
-                                    <Facebook className="h-4 w-4" /> <span>Facebook</span>
-                                </a>
-                            </div>
-                            <div className="space-x-4">
-                                <Link to="/terms" className="hover:text-foreground">Terms of Use.</Link>
-                                <Link to="/privacy" className="hover:text-foreground">Privacy Policy.</Link>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 {/* Bottom note */}
-                <div className="mt-10 border-t text-xs text-center text-muted-foreground py-5">
-                    &copy; {new Date().getFullYear()} AriaPass. Built for the music community.
+                <div className="container text-xs text-muted-foreground py-5 flex justify-center gap-3 items-center">
+                    <span>
+                        &copy;{new Date().getFullYear()} AriaPass.
+                    </span>
+
+                    <span>
+                        Terms
+                    </span>
+
+                    <span>
+                        Policy
+                    </span>
                 </div>
             </footer>
         </>

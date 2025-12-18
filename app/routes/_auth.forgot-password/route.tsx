@@ -91,7 +91,7 @@ export default function Login({ actionData }: Route.ComponentProps) {
                                     <div className="mb-5">
                                         <Label className="text-xs pb-1">Email address</Label>
                                         <Input
-                                            className="bg-white/10 backdrop-blur-3xl py-6 rounded-xl text-sm placeholder:text-sm border border-gray-200"
+                                            className="bg-white/10 backdrop-blur-3xl py-6 rounded-lg text-sm placeholder:text-sm border border-gray-200"
                                             id="email"
                                             type="email"
                                             name="email"

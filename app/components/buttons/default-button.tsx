@@ -9,7 +9,7 @@ export default function DefaultButton({ text, allowed = true }: { text: string, 
     return (
         <Button
             disabled={busy || !allowed}
-            className="bg-primary rounded-full text-white text-xs hover:bg-gray-600 font-light cursor-pointer w-full tracking-wide py-6 uppercase disabled:bg-gray-500 disabled:text-gray-200 disabled:cursor-not-allowed disabled:border-gray-500 "
+            className="bg-primary rounded-full text-white text-sm hover:bg-gray-600 font-medium cursor-pointer w-full tracking-tight py-6 disabled:bg-gray-500 disabled:text-gray-200 disabled:cursor-not-allowed disabled:border-gray-500 "
         >
             {busy ? (<LoaderCircle className="animate-spin" />) : text}
         </Button>
