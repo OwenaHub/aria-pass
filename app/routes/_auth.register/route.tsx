@@ -1,4 +1,4 @@
-import { CheckCheck, ChevronLeft, Eye, EyeClosed } from "lucide-react";
+import { ChevronLeft, Eye, EyeClosed } from "lucide-react";
 import { Form, Link, redirect, useSearchParams, type MetaFunction } from "react-router";
 import { Input } from "~/components/ui/input";
 import { toast } from "sonner";
@@ -14,6 +14,7 @@ import { defaultMeta } from '~/lib/meta';
 import { Button } from "~/components/ui/button";
 import { Label } from "~/components/ui/label";
 import { BrMd, BrSm } from "~/components/utility/line-break";
+import SlideShow from "~/components/cards/slide-show";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -43,43 +44,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
 
     return (
         <section className="flex items-stretch h-screen p-3 animated fadeIn">
-
-            {/* <div className="flex-1 hidden md:block z-10 mt-8">
-                    <h1 className="text-2xl text-primary font-bold tracking-tighter my-5 pb-5">
-                        Sign up for free, <br className="hidden md:block" />
-                        Join the <span className="text-primary-theme px-1.5 rounded-md bg-primary-bg border border-primary-theme">communtiy!</span>
-                    </h1>
-                    <div className="flex flex-col gap-7">
-                        <div className="flex gap-3 items-center">
-                            <div className="bg-transparent">
-                                <CheckCheck size="25" strokeWidth={"2"} className="text-primary-theme" />
-                            </div>
-                            <p className="text-sm text-gray-600">
-                                Unlimited access to events
-                            </p>
-                        </div>
-                        <div className="flex gap-3 items-center">
-                            <div className="bg-transparent">
-                                <CheckCheck size="25" strokeWidth={"2"} className="text-primary-theme" />
-                            </div>
-                            <p className="text-sm text-gray-600">
-                                Instant purchases and bookings
-                            </p>
-                        </div>
-                        <div className="flex gap-3 items-center">
-                            <div className="bg-transparent">
-                                <CheckCheck size="25" strokeWidth={"2"} className="text-primary-theme" />
-                            </div>
-                            <p className="text-sm text-gray-600">
-                                Expert support 24/7
-                            </p>
-                        </div>
-                    </div>
-                </div> */}
-
-            <div className="basis-3/8 hidden md:block bg-gray-100 rounded-tr-4xl rounded-bl-4xl border">
-
-            </div>
+           <SlideShow />
 
             <div className="container md:px-24 lg:px-28 flex-1 justify-center gap-10 items-center md:flex mx-auto overflow-y-auto">
                 {/* Clip path */}

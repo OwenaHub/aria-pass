@@ -41,7 +41,7 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
 
     return (
         <>
-            <div className={`sticky top-0 z-10 ${scrolled && 'bg-white/10 backdrop-blur-sm shadow-md transition'}`}>
+            <div className={`sticky top-0 z-10 ${scrolled && 'bg-white/50 backdrop-blur-lg shadow-md transition'}`}>
                 <nav className={`py-3 container flex items-center justify-between transition-all`}>
                     <div className='flex items-center justify-between gap-20'>
                         <Link to="/" className='flex items-center gap-2'>
@@ -80,12 +80,12 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                         : (
                             <div className='hidden md:flex items-center gap-2'>
                                 <Link to={"register"}>
-                                    <Button size={'sm'} variant={'ghost'} className='px-6 py-6 rounded-full cursor-pointer'>
+                                    <Button size={'sm'} variant={'ghost'} className='px-6 py-5 rounded-full cursor-pointer'>
                                         Register
                                     </Button>
                                 </Link>
                                 <Link to={"/login"}>
-                                    <Button size={'sm'} className='px-6 py-6 bg-[#3A3546] rounded-full cursor-pointer'>
+                                    <Button size={'sm'} className='px-6 py-5 bg-[#3A3546] rounded-full cursor-pointer'>
                                         Log in
                                     </Button>
                                 </Link>

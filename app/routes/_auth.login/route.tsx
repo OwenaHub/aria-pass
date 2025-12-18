@@ -13,6 +13,7 @@ import GoogleAuthButton from "~/components/buttons/google-auth-button";
 import type { Route } from "../_auth.login/+types/route";
 import { defaultMeta } from '~/lib/meta';
 import HrWithText from "~/components/utility/hr-with-text";
+import SlideShow from "~/components/cards/slide-show";
 
 export const meta: MetaFunction = (args) => {
   return [
@@ -48,12 +49,10 @@ export default function Login({ actionData }: Route.ComponentProps) {
   return (
     <section className="flex items-stretch h-screen p-3 animated fadeIn">
       {/* Left side */}
-      <div className="basis-3/8 hidden md:block bg-gray-100 rounded-tr-4xl rounded-bl-4xl border">
-
-      </div>
+      <SlideShow />
 
       {/* Right side */}
-      <div className="container md:px-24 lg:px-28 flex-1 justify-center gap-10 items-center md:flex mx-auto py-10">
+      <div className="container md:px-24 lg:px-28 flex-1 justify-center gap-10 items-center md:flex mx-auto py-10 overflow-y-auto">
         <div className="md:absolute isolate px-6 pt-5 lg:px-8 -z-10">
           <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
             <div style={{

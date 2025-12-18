@@ -28,7 +28,7 @@ export async function clientLoader() {
         if (response?.status === 401) {
             intendedRoute(window.location.pathname);
 
-            toast.warning("Your session has expired!", {
+            toast.warning("Not authenticated", {
                 description: "Login to continue using OwenaHub",
             });
 
