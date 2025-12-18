@@ -11,7 +11,7 @@ export default function GoogleAuthButton({ text }: { text: string }) {
         <Button
             variant={"outline"}
             onClick={handleGoogleSignIn}
-            className="bg-white border-0 border-primary-theme hover:shadow rounded-full flex p-5 w-full gap-2 items-center cursor-pointer">
+            className="bg-white border hover:bg-gray-50 shadow-none rounded-full flex px-5 py-6 w-full gap-2 items-center cursor-pointer">
             <img src="/images/logos/google.png" alt="..." width="18" />
             <span className="text-black font-medium">{text} with Google</span>
         </Button>
