@@ -192,13 +192,13 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                         &copy;{new Date().getFullYear()} AriaPass.
                     </span>
 
-                    <span>
+                    <Link to="/terms-of-use">
                         Terms
-                    </span>
+                    </Link>
 
-                    <span>
+                    <Link to="/privacy-policy">
                         Policy
-                    </span>
+                    </Link>
                 </div>
             </footer>
         </>
