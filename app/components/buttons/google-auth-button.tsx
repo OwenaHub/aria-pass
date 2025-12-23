@@ -16,4 +16,4 @@ export default function GoogleAuthButton({ text }: { text: string }) {
             <span className="text-black font-medium">{text} with Google</span>
         </Button>
     )
-}
+};

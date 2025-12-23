@@ -67,7 +67,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                 <section className="container flex justify-between gap-20 items-center mt-10 mb-16">
                     <div className="lg:basis-7/12 text-center md:text-start overflow-auto">
 
-                        <div className="bg-white border  shadow-lg text-xs md:text-xs rounded-full px-4 py-2 w-max mb-5 tracking-tight flex items-center gap-0 mx-auto md:mx-0">
+                        <div className="bg-white shadow-md text-xs md:text-xs rounded-full px-4 py-2 w-max mb-5 tracking-tight flex items-center gap-0 mx-auto md:mx-0">
                             <span className="text-primary-theme font-semibold flex items-center gap-1.5">
                                 <span>Commission-free</span> <Stars className="text-pink-300 fill-pink-300" strokeWidth={1} size={16} />
                             </span>
@@ -78,7 +78,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                             </span>
                         </div>
 
-                        <h1 className="text-5xl md:text-6xl font-medium md:leading-16 text-primary -tracking-[0.07em]">
+                        <h1 className="text-5xl md:text-6xl font-semibold md:leading-16 text-primary -tracking-[0.07em]">
                             Promoting Live <br /> Musical <span className="px-1 bg-indigo-100 border font-serif text-indigo-800 font-light border-primary-theme rounded-xl -rotate-6 inline-block">Concerts</span>
                         </h1>
                         <p className="tracking-tight  font-medium text-gray-500 text-md md:text-base mt-5 leading-6">

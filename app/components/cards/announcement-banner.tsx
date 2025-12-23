@@ -7,10 +7,10 @@ export default function AnnouncementBanner() {
     return (
         <>
             {open && (
-                <section className="bg-[#F1F2F9] py-2 relative">
+                <section className="bg-indigo-100 py-2 relative">
                     <div className="container mx-auto font-normal md:w-max text-xs flex gap-2 items-center">
-                        <Megaphone size={18} className='fill-pink-300' strokeWidth={0}/>
-                        <span>Over 1.2 million ticket sales processed 🎉</span>
+                        <span className=''>🎉</span>
+                        <span className='font-mono text-primary-theme font-semibold'>Over 1.2 million ticket sales processed</span>
                     </div>
 
                     <X size={14} className="absolute top-2 md:right-18 right-2" onClick={() => setOpen(false)} />

@@ -114,8 +114,8 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
             return;
         },
         onClose: () => {
-            toast.warning('Got cold feet? 🤔', {
-                description: "You can complete your purchase anytime from your purchases page."
+            toast.warning('Abandoning purchase, why?', {
+                description: "Email ernest@owenahub.com"
             });
         },
     }

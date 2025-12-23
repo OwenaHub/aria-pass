@@ -1,4 +1,4 @@
-import { ChevronRight, Facebook, Menu, X } from 'lucide-react'
+import { ChevronRight, Equal, Facebook, Menu, X } from 'lucide-react'
 import { Suspense, useEffect, useState } from 'react';
 import { Await, Link, NavLink, Outlet } from 'react-router'
 import { Button } from '~/components/ui/button'
@@ -41,14 +41,14 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
 
     return (
         <>
-            <div className={`sticky top-0 z-10 ${scrolled && 'bg-white/50 backdrop-blur-lg shadow-md transition'}`}>
+            <div className={`rounded-xl mx-5 my-3 sticky top-3 z-10 ${scrolled && 'bg-white/70 backdrop-blur-lg border border-gray-300 shadow-md transition'}`}>
                 <nav className={`py-3 container flex items-center justify-between transition-all`}>
                     <div className='flex items-center justify-between gap-20'>
                         <Link to="/" className='flex items-center gap-2'>
                             <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-8 w-8 object-contain" />
                             <div className='text-base md:text-xl tracking-tighter flex flex-col items-start'>
                                 <span className='font-extralight text-[10px] md:text-xs inline-block'>OwenaHub</span>
-                                <span className='text-indigo-800 italic font-medium font-serif tracking-tighter -mt-1'>
+                                <span className='text-indigo-800 font-serif tracking-[-1.5px] -mt-1.5'>
                                     AriaPass
                                 </span>
                             </div>
@@ -58,7 +58,7 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
 
                     <ul className='hidden md:flex gap-8'>
                         {NAV.map((item) => (
-                            <li key={item} className='hover:text-gray-400 text-xs font-normal tracking-tight transition-all'>
+                            <li key={item} className='hover:text-gray-400 text-sm font-normal tracking-tight transition-all'>
                                 <Link to={item.toLowerCase()}>{item}</Link>
                             </li>
                         ))}
@@ -71,7 +71,7 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                                 </Link>
 
                                 <Link to={'dashboard'} className='hover:text-gray-400'>
-                                    <Menu />
+                                    <Equal />
                                 </Link>
 
                                 <CustomAvatar name={user.name} styles='h-12 w-12 text-xs' />
@@ -95,7 +95,7 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                     }
                     <button aria-label="Menu" className="block md:hidden" type="button" onClick={() => setMenu(!menu)}>
                         {!menu
-                            ? <Menu />
+                            ? <Equal />
                             : <X />
                         }
                     </button>
@@ -158,6 +158,8 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                         </div>
                     </div>
                 )}
+            </div>
+            <div className='sticky top-20 md:top-24 z-10 mx-5 overflow-hidden rounded-lg'>
                 <AnnouncementBanner />
             </div>
 
