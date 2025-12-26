@@ -1,7 +1,5 @@
 import * as React from "react"
-
 import { cn } from "~/lib/utils"
-import { Button } from "~/components/ui/button"
 import {
     Dialog,
     DialogContent,
@@ -23,10 +21,16 @@ import { useMediaQuery } from "~/hooks/user-media-query"
 import { Textarea } from "~/components/ui/textarea"
 import DefaultButton from "~/components/buttons/default-button"
 import { Link, useFetcher, useNavigation } from "react-router";
-import { ChevronRight, Pen } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 import { Switch } from "~/components/ui/switch"
 
-export default function PostReview({ event, user }: { event: OrganiserEvent, user: User }) {
+interface PostReviewProps {
+    event: OrganiserEvent;
+    user: User;
+    children: React.ReactNode; // This allows you to wrap any button
+}
+
+export default function PostReviewWrapper({ event, user, children }: PostReviewProps) {
     const [open, setOpen] = React.useState(false)
     const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -34,51 +38,44 @@ export default function PostReview({ event, user }: { event: OrganiserEvent, use
     const formRef = React.useRef<HTMLFormElement>(null);
 
     React.useEffect(() => {
-        // We only want to close the dialog if the form submission is successful
-        // and the state is returning to "idle" from a "submitting" state.]
         if (navigation.state === "idle") {
             setOpen(false);
-
             formRef.current?.reset();
         }
-    }, [navigation.state, navigation.formData]);
+    }, [navigation.state]);
+
+    // Shared content to avoid repetition
+    const renderContent = () => (
+        <>
+            {!user.email ? (
+                <div className="text-start pb-5 px-4 md:px-0">
+                    <p className="text-sm text-gray-500">
+                        You need to log in before posting a review.
+                    </p>
+                    <Link
+                        to={`/login?redirect=/events/${event.slug}/review`}
+                        className="text-center text-sm pt-4 inline-block underline underline-offset-2"
+                    >
+                        <span>Continue</span>
+                        <ChevronRight className="inline-block ms-1" size={14} strokeWidth={2.5} />
+                    </Link>
+                </div>
+            ) : <ProfileForm event={event} ref={formRef} className="px-4 md:px-0" />}
+        </>
+    );
 
     if (isDesktop) {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button
-                        size={'sm'}
-                        variant={'secondary'}
-                        className="rounded-md px-0 text-primary text-sm font-light cursor-pointer tracking-tight"
-                    >
-                        <span className="border-e border-primary pe-2">
-                            Write a review
-                        </span>
-                        <Pen size={14} strokeWidth={2.5} />
-                    </Button>
+                    {children}
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
                         <DialogTitle>Review</DialogTitle>
-                        <DialogDescription>
-                            {/*  */}
-                        </DialogDescription>
+                        <DialogDescription>Share your thoughts about this event.</DialogDescription>
                     </DialogHeader>
-                    {!user.email ? (
-                        <div className="text-start pb-5">
-                            <p className="text-sm text-gray-500">
-                                You need to log in before posting a review.
-                            </p>
-                            <Link
-                                to={`/login?redirect=/events/${event.slug}/review`}
-                                className="text-center text-sm pt-4 inline-block underline underline-offset-2"
-                            >
-                                <span>Continue</span>
-                                <ChevronRight className="inline-block ms-1" size={14} strokeWidth={2.5} />
-                            </Link>
-                        </div>
-                    ) : <ProfileForm event={event} ref={formRef} />}
+                    {renderContent()}
                 </DialogContent>
             </Dialog>
         )
@@ -87,53 +84,19 @@ export default function PostReview({ event, user }: { event: OrganiserEvent, use
     return (
         <Drawer open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button
-                    size={'sm'}
-                    variant={'secondary'}
-                    className="rounded-md px-0 text-primary text-sm font-light cursor-pointer tracking-tight"
-                >
-                    <span className="border-e border-primary pe-2">
-                        Write a review
-                    </span>
-                    <Pen size={14} strokeWidth={2.5} />
-                </Button>
+                {children}
             </DialogTrigger>
             <DrawerContent>
                 <DrawerHeader className="text-left">
                     <DrawerTitle>Review</DrawerTitle>
-                    <DrawerDescription>
-                        {/*  */}
-                    </DrawerDescription>
+                    <DrawerDescription>Share your thoughts about this event.</DrawerDescription>
                 </DrawerHeader>
-                {!user.email ? (
-                    <div className="text-center container pb-5">
-                        <p className="text-sm text-gray-500">
-                            You need to log in before posting a review.
-                        </p>
-                        <Link
-                            to={`/login?redirect=/events/${event.slug}/review`}
-                            className="text-center text-sm pt-4 inline-block underline underline-offset-2"
-                        >
-                            <span>Continue</span>
-                            <ChevronRight className="inline-block ms-1" size={14} strokeWidth={2.5} />
-                        </Link>
-                    </div>
-                ) : <ProfileForm event={event} className="px-4" ref={formRef} />}
-                <DrawerFooter className="pt-2">
-                    {/* <DrawerClose asChild>
-                        <Button
-                            variant="outline"
-                            className="rounded-full text-primary text-xs hover:bg-gray-600 font-light cursor-pointer w-full tracking-wide py-5 uppercase"
-                        >
-                            Cancel
-                        </Button>
-                    </DrawerClose> */}
-                </DrawerFooter>
+                {renderContent()}
+                <DrawerFooter className="pt-2" />
             </DrawerContent>
         </Drawer>
     )
 }
-
 type ProfileFormProps = {
     event: OrganiserEvent;
 } & React.ComponentProps<"form">;
@@ -155,12 +118,13 @@ const ProfileForm = React.forwardRef<HTMLFormElement, ProfileFormProps>(
             >
                 {/* <input type="hidden" name="type" value={'ticket.edit'} required /> */}
                 <div className="grid gap-2">
-                    <Label htmlFor="comment">Content</Label>
                     <Textarea
                         className="placeholder:text-gray-300 rounded-lg min-h-[140px]"
                         id="comment"
                         name="comment"
                         rows={6}
+                        required
+                        placeholder="Write your review here..."
                     />
                 </div>
 

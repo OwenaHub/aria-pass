@@ -1,4 +1,4 @@
-import { Calendar, Ellipsis, Heart, MapPin, Share, Ticket } from "lucide-react";
+import { Calendar, Ellipsis, Heart, MapPin, MessageSquareMore, Pen, Share, Ticket } from "lucide-react";
 import { STORAGE_URL } from "~/config/defaults";
 import dayjs from "dayjs";
 import Placeholder from "~/components/utility/placeholder";
@@ -12,7 +12,7 @@ import { isPastEventDate, to12HourFormat } from "~/lib/utils";
 import CheckoutButton from "./checkout-button";
 import { TERMS_AND_CONDITIONS } from "./terms-and-conditions";
 import Countdown from "~/components/utility/countdown";
-import PostReview from "../_guest.events_.$slug.review/post-review";
+import PostReviewWrapper from "~/components/custom/post-review-wrapper";
 
 export default function DesktopView({ event }: { event: OrganiserEvent }) {
     const user: User = useOutletContext();
@@ -65,7 +65,7 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                                     {event.title}
                                 </h1>
 
-                                <div className="flex items-center gap-6">
+                                <div className="flex items-center gap-4">
                                     <RedirectOrFetcher route={`/events/toggle-like/${event.slug}`}>
                                         <button title="Add to favourites" className='relative border p-3 border-gray-200 rounded-full hover:bg-gray-100 cursor-pointer transition'>
                                             <span className="absolute -top-2 -right-2 bg-muted text-muted-foreground border text-xs w-6 h-6 rounded-full flex items-center justify-center">
@@ -81,6 +81,11 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                                             <Share />
                                         </div>
                                     </SharePage>
+                                    <PostReviewWrapper event={event} user={user}>
+                                        <div className='border p-3 border-gray-200 rounded-full hover:bg-gray-100 cursor-pointer transition'>
+                                            <MessageSquareMore />
+                                        </div>
+                                    </PostReviewWrapper>
                                 </div>
                             </div>
 
@@ -248,7 +253,18 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                         </div>
 
                         <div className="my-6">
-                            <PostReview event={event} user={user} />
+                            <PostReviewWrapper event={event} user={user}>
+                                <Button
+                                    size={'sm'}
+                                    variant={'secondary'}
+                                    className="rounded-md px-0 text-primary text-sm font-light cursor-pointer tracking-tight"
+                                >
+                                    <span className="border-e border-primary pe-2">
+                                        Write a review
+                                    </span>
+                                    <Pen size={14} strokeWidth={2.5} />
+                                </Button>
+                            </PostReviewWrapper>
                         </div>
 
                     </div>

@@ -2,6 +2,7 @@ import client from "~/http/client";
 import type { Route } from "../_guest.events_.$slug.review/+types/route";
 import { toast } from "sonner";
 import { parseForm } from "~/lib/utils";
+import { redirect } from "react-router";
 
 export async function clientAction({ params, request }: Route.ClientActionArgs) {
     const credentials = await parseForm(request);
@@ -17,5 +18,5 @@ export async function clientAction({ params, request }: Route.ClientActionArgs) 
         error: 'Failed to post review. Please try again.',
     });
 
-    return promise;
+    return redirect(`/events/${params.slug}`);
 }

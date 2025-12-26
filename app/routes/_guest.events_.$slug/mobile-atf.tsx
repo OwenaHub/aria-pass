@@ -1,4 +1,4 @@
-import { Calendar, Ellipsis, Heart, MapPin, Share, Ticket } from "lucide-react";
+import { Calendar, Ellipsis, Heart, MapPin, MessageSquareMore, Pen, Share, Ticket } from "lucide-react";
 import { STORAGE_URL } from "~/config/defaults";
 import dayjs from "dayjs";
 import { Link, useOutletContext } from 'react-router';
@@ -10,11 +10,12 @@ import { FormatLineBreak } from "~/components/utility/format-line-break";
 import CheckoutButton from "./checkout-button";
 import { TERMS_AND_CONDITIONS } from "./terms-and-conditions";
 import Countdown from "~/components/utility/countdown";
-import PostReview from "../_guest.events_.$slug.review/post-review";
+import PostReviewWrapper from "~/components/custom/post-review-wrapper";
+import { Button } from "~/components/ui/button";
 
 export default function MobileView({ event }: { event: OrganiserEvent }) {
     const user: User = useOutletContext();
-    
+
     let banner = event.bannerUrl
         ? `${STORAGE_URL}/${event.bannerUrl}`
         : "/images/banners/default-course-img.png";
@@ -82,7 +83,7 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                                 </div>
                                 {event.liked
                                     ? (<span className="">Saved</span>)
-                                    : (<span className="">Save to favorites</span>)
+                                    : (<span className="">Save event</span>)
                                 }
                             </button>
                         </RedirectOrFetcher>
@@ -102,6 +103,16 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                             </div>
                             <span>Share</span>
                         </div>
+                        <PostReviewWrapper event={event} user={user}>
+                            <div
+                                className="flex items-center gap-2 px-3 py-3 text-xs text-primary font-medium border bg-white shadow rounded-full hover:bg-gray-100 cursor-pointer transition"
+                            >
+                                <div>
+                                    <MessageSquareMore size={18} />
+                                </div>
+                                <span>Reviews</span>
+                            </div>
+                        </PostReviewWrapper>
                     </div>
 
                     <div className="flex flex-col gap-10 w-full">
@@ -241,7 +252,18 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                         </div>
 
                         <div className="my-6">
-                            <PostReview event={event} user={user} />
+                            <PostReviewWrapper event={event} user={user}>
+                                <Button
+                                    size={'sm'}
+                                    variant={'secondary'}
+                                    className="rounded-md px-0 text-primary text-sm font-light cursor-pointer tracking-tight"
+                                >
+                                    <span className="border-e border-primary pe-2">
+                                        Write a review
+                                    </span>
+                                    <Pen size={14} strokeWidth={2.5} />
+                                </Button>
+                            </PostReviewWrapper>
                         </div>
                     </div>
 
