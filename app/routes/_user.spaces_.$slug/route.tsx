@@ -17,6 +17,7 @@ import {
 import CustomAvatar from "~/components/custom/custom-avatar";
 import { Printer } from "lucide-react";
 import { extractNames } from "~/lib/utils";
+import EventReview from "./event-reviews";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     try {
@@ -54,7 +55,7 @@ export default function EventSpaces({ loaderData }: Route.ComponentProps) {
                                         {space.members?.length} <span className=""> member{space?.members.length > 1 && 's'}</span>
                                     </span>
                                 </DialogTrigger>
-                                
+
                                 <DialogContent className="sm:max-w-[425px]">
                                     <DialogHeader>
                                         <DialogTitle>Members in this space</DialogTitle>
@@ -80,13 +81,18 @@ export default function EventSpaces({ loaderData }: Route.ComponentProps) {
                         </Dialog>
                     </div>
 
-                    <Button
-                        variant={"outline"}
-                        className="rounded-xl"
-                        onClick={() => window.print()}
-                    >
-                        <Printer /> Print
-                    </Button>
+                    <div className="flex items-center gap-3">
+                        <EventReview event={space} />
+                        <Button
+                            variant={"outline"}
+                            size={'sm'}
+                            className="rounded-md"
+                            onClick={() => window.print()}
+                        >
+                            <Printer /> Print
+                        </Button>
+                    </div>
+
                 </div>
             </section>
 

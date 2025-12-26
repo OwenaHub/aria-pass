@@ -13,7 +13,7 @@ import type { Route } from "../_auth.register/+types/route";
 import { defaultMeta } from '~/lib/meta';
 import { Button } from "~/components/ui/button";
 import { Label } from "~/components/ui/label";
-import { BrMd, BrSm } from "~/components/utility/line-break";
+import { BrSm } from "~/components/utility/line-break";
 import SlideShow from "~/components/cards/slide-show";
 
 export const meta: MetaFunction = (args) => {
@@ -64,7 +64,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                         <Link to={'/'}>
                             <img width="60" className="inline-block" src="/images/logos/app_logo.png" title="OwenaHub" />
                         </Link>
-                        <Link to={'/login'} className="text-primary font-medium hover:bg-gray-200 transition text-sm tracking-tighter px-4 py-3 rounded-full bg-accent">
+                        <Link to={'/login'} className="z-5 text-primary font-medium hover:bg-gray-200 transition text-sm tracking-tighter px-4 py-3 rounded-full bg-accent">
                             Already a member? Log in
                         </Link>
                     </header>

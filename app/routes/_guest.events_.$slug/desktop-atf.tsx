@@ -13,6 +13,7 @@ import CheckoutButton from "./checkout-button";
 import { TERMS_AND_CONDITIONS } from "./terms-and-conditions";
 import Countdown from "~/components/utility/countdown";
 import PostReviewWrapper from "~/components/custom/post-review-wrapper";
+import ReviewCard from "~/components/cards/review-card";
 
 export default function DesktopView({ event }: { event: OrganiserEvent }) {
     const user: User = useOutletContext();
@@ -60,7 +61,7 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                                     {event.organiser.organiserName}
                                 </Link>
                             </div>
-                            <div className="flex items-center gap-10 justify-between mb-6">
+                            <div className="flex items-start gap-10 justify-between mb-6">
                                 <h1 className="text-xl md:text-3xl font-medium tracking-tighter leading-10">
                                     {event.title}
                                 </h1>
@@ -82,7 +83,13 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                                         </div>
                                     </SharePage>
                                     <PostReviewWrapper event={event} user={user}>
-                                        <div className='border p-3 border-gray-200 rounded-full hover:bg-gray-100 cursor-pointer transition'>
+                                        <div className='border p-3 border-gray-200 rounded-full hover:bg-gray-100 cursor-pointer relative transition'>
+                                            <span className="absolute -top-2 -right-2 bg-muted text-muted-foreground border text-xs w-6 h-6 rounded-full flex items-center justify-center">
+                                                {(event.reviews.length ?? 0) > 0 && "+"}{event.reviews.length === 0 ? '👀' : event.reviews.length}
+                                            </span>
+                                            <span className="absolute text-[10px] -top-2 right-5 bg-destructive px-4 text-white font-bold tracking-tighter text-xs w-6 h-5 rounded flex items-center justify-center">
+                                                NEW
+                                            </span>
                                             <MessageSquareMore />
                                         </div>
                                     </PostReviewWrapper>
@@ -247,9 +254,23 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                     <div className="bg-white px-8 py-6 rounded-3xl border border-gray-100 mb-8">
                         <div className="flex items-center justify-between">
                             <h3 className="font-semibold text-xl">
-                                Comments <span className="font-light text-sm">(0)</span>
+                                Comments <span className="font-light text-sm">({event.reviews.length})</span>
                             </h3>
                             <Ellipsis />
+                        </div>
+
+                        <div className="my-6">
+                            {event.reviews && event.reviews.length > 0 ? (
+                                event.reviews.map((review) => {
+                                    if (review.isPublic) {
+                                        return (
+                                            <ReviewCard key={review.id} review={review} user={user} />
+                                        )
+                                    }
+                                })
+                            ) : (
+                                <div className="text-gray-500 text-sm tracking-tight">No reviews yet. Be the first to review this event!</div>
+                            )}
                         </div>
 
                         <div className="my-6">

@@ -68,7 +68,7 @@ export default function Login({ actionData }: Route.ComponentProps) {
             <Link to={'/'}>
               <img width="60" className="inline-block" src="/images/logos/app_logo.png" title="OwenaHub" />
             </Link>
-            <Link to={'/register'} className="text-primary font-medium hover:bg-gray-200 transition text-sm tracking-tighter px-4 py-3 rounded-full bg-accent">
+            <Link to={'/register'} className="z-5 text-primary font-medium hover:bg-gray-200 transition text-sm tracking-tighter px-4 py-3 rounded-full bg-accent">
               Not a member? Register now
             </Link>
           </header>

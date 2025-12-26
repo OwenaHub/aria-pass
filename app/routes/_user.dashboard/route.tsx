@@ -10,9 +10,9 @@ import { extractNames } from '~/lib/utils';
 
 import { Button } from '~/components/ui/button';
 import DetailedEventCard from '~/components/cards/detailed-event-card';
-import CustomAvatar from '~/components/custom/custom-avatar';
 import AvatarGroup from '~/components/custom/avatar-group';
 import LoaderWithText from '~/components/skeletons/loader-with-text';
+import { BrSm } from '~/components/utility/line-break';
 
 // --- Reusable Sub-Components ---
 const QuickAction = ({ to, icon: Icon, label }: { to: string, icon: any, label: string }) => (
@@ -138,32 +138,35 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
         <div>
             {/* Header Section */}
             <section className="mb-5">
-                <div className="flex flex-row items-center gap-1 mb-8">
+                {/* <div className="flex flex-row items-center gap-1 mb-8">
                     <CustomAvatar name={user.name} styles='size-10 md:size-14 md:text-2xl rounded-lg' />
                     <p className="text-2xl md:text-4xl font-medium md:font-bold tracking-tighter">
                         Hello, {user.name.split(' ')[0]}!
                     </p>
-                </div>
+                </div> */}
 
-                <div className="bg-primary-bg px-4 py-10 rounded-2xl">
-                    <h1 className="tracking-tighter text-xl md:text-3xl font-light text-center text-primary-theme mb-8">
-                        What would you like to do today?
+                <div className="bg-primary-bg px-4 py-14 rounded-2xl">
+                    <h1 className="tracking-tighter font-serif text-3xl md:text-4xl font-medium text-center text-primary-theme mb-8">
+                        What would you like <BrSm />  to do today?
                     </h1>
                     <div className='w-full overflow-x-auto'>
                         <div className='flex flex-wrap gap-3 items-center pb-3 w-max mx-auto'>
                             <QuickAction to='/my-events/new' icon={Calendar} label='Create event' />
                             <QuickAction to='/purchases' icon={ShoppingBag} label='See purchases' />
-                            {/* <QuickAction to='/purchases' icon={UserCog} label='Add Teammember' /> */}
+                            <QuickAction to='/events/?filter=all' icon={Calendar} label='See all events' />
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Collaborations Grid (Unified) */}
+            <h2 className='text-primary text-lg font-semibold tracking-tighter flex items-center gap-3 mb-3 mt-6'>
+                <span>Collaborations</span>
+            </h2>
             <Suspense fallback={<LoaderWithText text='Fetching your collaborations...' />}>
                 <Await resolve={collaborations}>
                     {([invitedSpaces, ownedSpaces]) => (
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 pb-5 my-8">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 pb-5 mb-8">
                             {/* Render Invited Spaces */}
                             {invitedSpaces?.map((space: any) => (
                                 <SpaceCard key={`invited-${space.id}`} space={space} user={user} type="invited" />

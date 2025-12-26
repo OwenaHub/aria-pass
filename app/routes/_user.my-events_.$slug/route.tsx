@@ -16,6 +16,7 @@ import { categorizeDevices } from "./analytics";
 import { defaultMeta } from '~/lib/meta';
 import MembersTable from "./members-table";
 import FormatPrice from "~/components/utility/format-price";
+import EventReview from "./event-reviews";
 
 export const meta: MetaFunction = (args: any) => {
     if (!args.data.event) {
@@ -133,16 +134,21 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                                 status={event.status}
                                 startTime={event.startTime}
                             />
-                            <Button variant={"outline"} size={"icon-sm"} onClick={() => {
-                                const shareData = {
-                                    title: event.title,
-                                    text: event.description,
-                                    url: window.location.href
-                                };
-                                navigator.share(shareData);
-                            }}>
-                                <Share />
-                            </Button>
+
+                            <div className="flex items-center gap-2">
+                                <EventReview event={event} />
+
+                                <Button variant={"outline"} size={"icon-sm"} onClick={() => {
+                                    const shareData = {
+                                        title: event.title,
+                                        text: event.description,
+                                        url: window.location.href
+                                    };
+                                    navigator.share(shareData);
+                                }}>
+                                    <Share />
+                                </Button>
+                            </div>
                         </div>
                         <h4 className='text-xl font-semibold'>{event.title}</h4>
                         <p className='text-gray-700 text-sm'>
@@ -211,7 +217,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
 
                     <p className="flex items-stretch gap-4">
                         <p className="font-bold text-2xl">
-                            0 <span className="text-xs text-muted-foreground font-medium">comments</span>
+                            {event.reviews.length} <span className="text-xs text-muted-foreground font-medium">comments</span>
                         </p>
                         <div className="border-s" />
                         <p className="font-bold text-2xl">

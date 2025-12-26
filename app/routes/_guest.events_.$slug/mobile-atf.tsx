@@ -12,6 +12,7 @@ import { TERMS_AND_CONDITIONS } from "./terms-and-conditions";
 import Countdown from "~/components/utility/countdown";
 import PostReviewWrapper from "~/components/custom/post-review-wrapper";
 import { Button } from "~/components/ui/button";
+import ReviewCard from "~/components/cards/review-card";
 
 export default function MobileView({ event }: { event: OrganiserEvent }) {
     const user: User = useOutletContext();
@@ -105,8 +106,14 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                         </div>
                         <PostReviewWrapper event={event} user={user}>
                             <div
-                                className="flex items-center gap-2 px-3 py-3 text-xs text-primary font-medium border bg-white shadow rounded-full hover:bg-gray-100 cursor-pointer transition"
+                                className="flex items-center gap-2 px-3 py-3 text-xs text-primary font-medium border bg-white shadow rounded-full hover:bg-gray-100 cursor-pointer relative transition"
                             >
+                                <span className="absolute -top-2 -right-2 bg-muted text-muted-foreground border text-xs w-6 h-6 rounded-full flex items-center justify-center">
+                                    {(event.reviews.length ?? 0) > 0 && "+"}{event.reviews.length === 0 ? '👀' : event.reviews.length}
+                                </span>
+                                <span className="absolute text-[10px] -top-2 right-5 bg-destructive px-4 text-white font-bold tracking-tighter text-xs w-6 h-5 rounded flex items-center justify-center">
+                                    NEW
+                                </span>
                                 <div>
                                     <MessageSquareMore size={18} />
                                 </div>
@@ -246,9 +253,23 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                     <div className="bg-white border border-gray-100 p-4 rounded-3xl  w-full">
                         <div className="flex items-center justify-between">
                             <h3 className="font-semibold text-lg">
-                                Comments <span className="font-light text-sm">(0)</span>
+                                Comments <span className="font-light text-sm">({event.reviews.length})</span>
                             </h3>
                             <Ellipsis />
+                        </div>
+
+                        <div className="my-6">
+                            {event.reviews && event.reviews.length > 0 ? (
+                                event.reviews.map((review) => {
+                                    if (review.isPublic) {
+                                        return (
+                                            <ReviewCard key={review.id} review={review} user={user} />
+                                        )
+                                    }
+                                })
+                            ) : (
+                                <div className="text-gray-500 text-sm tracking-tight">No reviews yet. Be the first to review this event!</div>
+                            )}
                         </div>
 
                         <div className="my-6">

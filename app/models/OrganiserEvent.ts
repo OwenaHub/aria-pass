@@ -20,6 +20,7 @@ interface OrganiserEvent extends Model {
     venueName: string;
 
     organiser: Pick<OrganiseProfile, "id" | "organiserName">;
+    reviews: EventReviews[];
     liked?: boolean
     likes?: number;
     members: EventMember[];
