@@ -178,7 +178,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
 
                     <p className="p-6 font-light text-center text-pretty text-xs">
                         By continuing, you agree to our {" "}
-                        <Link to="/terms-of-service">Terms</Link>
+                        <Link to="/terms-of-use">Terms</Link>
                         {" "}and{" "}
                         <Link to="/privacy-policy">Privacy Policy</Link>.
                     </p>

@@ -138,7 +138,7 @@ export default function Login({ actionData }: Route.ComponentProps) {
           <div className="flex flex-col gap-3">
             <p className="p-5 text-center text-pretty text-xs font-light">
               By continuing, you agree to our {" "}
-              <Link to="/terms-of-service">Terms</Link>
+              <Link to="/terms-of-use">Terms</Link>
               {" "}and{" "}
               <Link to="/privacy-policy">Privacy Policy</Link>.
             </p>

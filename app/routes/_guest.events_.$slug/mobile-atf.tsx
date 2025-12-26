@@ -1,7 +1,7 @@
 import { Calendar, Ellipsis, Heart, MapPin, Share, Ticket } from "lucide-react";
 import { STORAGE_URL } from "~/config/defaults";
 import dayjs from "dayjs";
-import { Link } from 'react-router';
+import { Link, useOutletContext } from 'react-router';
 import Placeholder from "~/components/utility/placeholder";
 import RedirectOrFetcher from "~/components/navigation/like-event";
 import FormatPrice from "~/components/utility/format-price";
@@ -10,8 +10,11 @@ import { FormatLineBreak } from "~/components/utility/format-line-break";
 import CheckoutButton from "./checkout-button";
 import { TERMS_AND_CONDITIONS } from "./terms-and-conditions";
 import Countdown from "~/components/utility/countdown";
+import PostReview from "../_guest.events_.$slug.review/post-review";
 
 export default function MobileView({ event }: { event: OrganiserEvent }) {
+    const user: User = useOutletContext();
+    
     let banner = event.bannerUrl
         ? `${STORAGE_URL}/${event.bannerUrl}`
         : "/images/banners/default-course-img.png";
@@ -235,6 +238,10 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                                 Comments <span className="font-light text-sm">(0)</span>
                             </h3>
                             <Ellipsis />
+                        </div>
+
+                        <div className="my-6">
+                            <PostReview event={event} user={user} />
                         </div>
                     </div>
 

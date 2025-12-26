@@ -1,7 +1,6 @@
-import { ArrowRight, Calendar, Ellipsis, Heart, MapPin, Share, Ticket } from "lucide-react";
+import { Calendar, Ellipsis, Heart, MapPin, Share, Ticket } from "lucide-react";
 import { STORAGE_URL } from "~/config/defaults";
 import dayjs from "dayjs";
-import TicketCard from "~/components/cards/ticket-card";
 import Placeholder from "~/components/utility/placeholder";
 import { Button } from "~/components/ui/button";
 import { Link, useOutletContext } from "react-router";
@@ -13,6 +12,7 @@ import { isPastEventDate, to12HourFormat } from "~/lib/utils";
 import CheckoutButton from "./checkout-button";
 import { TERMS_AND_CONDITIONS } from "./terms-and-conditions";
 import Countdown from "~/components/utility/countdown";
+import PostReview from "../_guest.events_.$slug.review/post-review";
 
 export default function DesktopView({ event }: { event: OrganiserEvent }) {
     const user: User = useOutletContext();
@@ -164,10 +164,23 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
 
                     <section className="rounded-3xl border border-gray-100 bg-white px-8 py-6">
                         <div className="flex items-center justify-between">
-                            <h3 className="font-semibold text-xl">
-                                Comments <span className="font-light text-sm">(0)</span>
+                            <h3 className="font-semibold tracking-tighter text-xl text-indigo-800">
+                                Terms and Conditions
                             </h3>
                             <Ellipsis />
+                        </div>
+
+                        <div className="my-6">
+                            {TERMS_AND_CONDITIONS.map(term => (
+                                <div key={term.id} className="term-section">
+                                    <h4 className="text-xs font-semibold mt-4 mb-2">{term.title}</h4>
+                                    <ul className="list-disc list-inside text-xs text-gray-600">
+                                        {term.details.map((item, index) => (
+                                            <li key={index}>{item}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
                         </div>
 
                     </section>
@@ -181,6 +194,7 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                                     <Ticket className="-rotate-45" />
                                     <span>Available tickets</span>
                                 </h3>
+
                                 <Ellipsis />
                             </div>
                             <div className="mt-8 overflow-x-auto pb-5 flex flex-col gap-6">
@@ -228,22 +242,13 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                     <div className="bg-white px-8 py-6 rounded-3xl border border-gray-100 mb-8">
                         <div className="flex items-center justify-between">
                             <h3 className="font-semibold text-xl">
-                                Terms & Conditions
+                                Comments <span className="font-light text-sm">(0)</span>
                             </h3>
                             <Ellipsis />
                         </div>
 
                         <div className="my-6">
-                            {TERMS_AND_CONDITIONS.map(term => (
-                                <div key={term.id} className="term-section">
-                                    <h4 className="text-xs font-semibold mt-4 mb-2">{term.title}</h4>
-                                    <ul className="list-disc list-inside text-xs text-gray-600">
-                                        {term.details.map((item, index) => (
-                                            <li key={index}>{item}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))}
+                            <PostReview event={event} user={user} />
                         </div>
 
                     </div>
