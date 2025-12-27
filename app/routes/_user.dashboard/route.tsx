@@ -145,7 +145,7 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
                     </p>
                 </div> */}
 
-                <div className="bg-primary-bg px-4 py-14 rounded-2xl">
+                <div className="bg-linear-to-b from-primary-bg to-indigo-50 px-4 py-14 rounded-2xl">
                     <h1 className="tracking-tighter font-serif text-3xl md:text-4xl font-medium text-center text-primary-theme mb-8">
                         What would you like <BrSm />  to do today?
                     </h1>
@@ -191,7 +191,7 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
             {/* Recent Events Section */}
             {isOrganiser && (
                 <section className='mb-10'>
-                    <h2 className='text-primary text-lg font-medium tracking-tight flex items-center gap-3'>
+                    <h2 className='text-primary text-lg font-semibold tracking-tighter flex items-center gap-3'>
                         <span>Recently posted</span>
                         <Link to={"/my-events"} className='hover:bg-gray-100 rounded-lg p-2 transition-colors'>
                             <ChevronRight size={16} />
@@ -204,7 +204,7 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
                     </p>
 
                     {(myEvents && myEvents.length > 0) ? (
-                        <div className="grid grid-cols-1 gap-4">
+                        <div className="grid grid-cols-1">
                             {myEvents.slice(0, 2).map((event: any) => (
                                 <DetailedEventCard key={event.id} event={event} />
                             ))}

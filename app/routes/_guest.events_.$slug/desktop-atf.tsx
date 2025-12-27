@@ -87,7 +87,7 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                                             <span className="absolute -top-2 -right-2 bg-muted text-muted-foreground border text-xs w-6 h-6 rounded-full flex items-center justify-center">
                                                 {(event.reviews.length ?? 0) > 0 && "+"}{event.reviews.length === 0 ? '👀' : event.reviews.length}
                                             </span>
-                                            <span className="absolute text-[10px] -top-2 right-5 bg-destructive px-4 text-white font-bold tracking-tighter text-xs w-6 h-5 rounded flex items-center justify-center">
+                                            <span className="absolute text-[9px] -top-2 right-5 bg-pink-500 px-4 text-white font-bold tracking-tighter text-xs w-5 h-4 rounded flex items-center justify-center">
                                                 NEW
                                             </span>
                                             <MessageSquareMore />
@@ -212,7 +212,7 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                             <div className="mt-8 overflow-x-auto pb-5 flex flex-col gap-6">
                                 {event.tickets.length
                                     ? event.tickets.map(ticket => (
-                                        <div className="flex items-center justify-between">
+                                        <div key={ticket.id} className="flex items-center justify-between">
                                             <div className="font-light text-lg tracking-tighter">
                                                 {ticket.name}
                                             </div>

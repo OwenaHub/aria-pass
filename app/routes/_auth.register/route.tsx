@@ -62,7 +62,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                 <div className="flex-1 z-10 md:px-8">
                     <header className="flex items-center justify-between mb-10 pt-10 md:pt-16">
                         <Link to={'/'}>
-                            <img width="60" className="inline-block" src="/images/logos/app_logo.png" title="OwenaHub" />
+                            <img width="60" className="z-10 inline-block" src="/images/logos/app_logo.png" title="AriaPass" />
                         </Link>
                         <Link to={'/login'} className="z-5 text-primary font-medium hover:bg-gray-200 transition text-sm tracking-tighter px-4 py-3 rounded-full bg-accent">
                             Already a member? Log in

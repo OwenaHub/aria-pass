@@ -17,11 +17,11 @@ import React from "react";
 import DefaultError from "~/components/errors/default-error";
 
 export async function clientLoader() {
-    const { validateSession } = useSession();
+    const { getUser } = useSession();
     const { intendedRoute } = useRoute();
 
     try {
-        const user = await validateSession();
+        const user = await getUser();       
 
         return { user };
     } catch ({ response }: any) {

@@ -5,7 +5,7 @@ import client from "~/http/client";
 export default function useSession() {
     async function validateSession(): Promise<User> {
         try {
-            const response = await client.get(`api/user`);
+            const response = await client.get(`api/user`);            
             storeUser(response?.data);
             return response?.data;
         } catch (error) {
@@ -18,7 +18,7 @@ export default function useSession() {
         try {
             const user: User = await getUser();
 
-            if (!user)
+            if (!user.email)
                 return null;
 
             return user.accountType;

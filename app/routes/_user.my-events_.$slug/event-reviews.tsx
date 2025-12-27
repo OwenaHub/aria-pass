@@ -25,15 +25,15 @@ export default function EventReview({ event }: { event: OrganiserEvent }) {
                         <MessageSquare />
                     </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="sm:max-w-[625px]">
                     <DialogHeader>
                         <DialogTitle>All Comments</DialogTitle>
                     </DialogHeader>
                     <div>
                         {event.reviews.map((review) => (
-                            <div className="bg-gray-100 rounded-md mb-2 px-2 py-1">
-                                <div className="flex items-center gap-2">
-                                    <div className="font-medium text-sm tracking-tight">
+                            <div className="bg-gray-100 rounded-md mb-2 px-2 py-2">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <div className="font-medium text-xs tracking-tight">
                                         {review.isAnonymous
                                             ? <div className="flex items-center gap-0.5" title="This review is anonymous">
                                                 <span className="text-gray-500">
@@ -49,9 +49,14 @@ export default function EventReview({ event }: { event: OrganiserEvent }) {
                                     <div className="text-xs text-gray-500 italic  tracking-tight">
                                         {dayjs(review.createdAt).fromNow()}
                                     </div>
+                                    {!review.isPublic ? (
+                                        <div className="rounded-full text-[9px] font-medium text-white px-1 bg-destructive">
+                                            private
+                                        </div>
+                                    ) : null}
                                 </div>
 
-                                <div className="text-gray-700 text-sm tracking-tight">
+                                <div className="text-gray-700 text-xs tracking-tight">
                                     <FormatLineBreak input={review.comment} />
                                 </div>
                             </div>

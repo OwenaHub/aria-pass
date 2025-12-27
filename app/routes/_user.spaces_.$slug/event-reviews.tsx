@@ -33,9 +33,9 @@ export default function EventReview({ event }: { event: OrganiserEvent }) {
                     </DialogHeader>
                     <div>
                         {event.reviews.map((review) => (
-                            <div className="bg-gray-100 rounded-md mb-2 px-2 py-1">
-                                <div className="flex items-center gap-2">
-                                    <div className="font-medium text-sm tracking-tight">
+                            <div className="bg-gray-100 rounded-md mb-2 p-2">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <div className="font-medium text-xs tracking-tight">
                                         {review.isAnonymous
                                             ? <div className="flex items-center gap-0.5" title="This review is anonymous">
                                                 <span className="text-gray-500">
@@ -58,7 +58,7 @@ export default function EventReview({ event }: { event: OrganiserEvent }) {
                                     ) : null}
                                 </div>
 
-                                <div className="text-gray-700 text-sm tracking-tight">
+                                <div className="text-gray-700 text-xs tracking-tight">
                                     <FormatLineBreak input={review.comment} />
                                 </div>
                             </div>
