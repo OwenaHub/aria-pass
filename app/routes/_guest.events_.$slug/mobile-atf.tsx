@@ -69,7 +69,7 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                         {event.title}
                     </h1>
 
-                    <div className="flex items-center gap-4 mb-3">
+                    <div className="flex items-center gap-4 mb-5">
                         {/* /api/events/${params.slug}/interested */}
                         <RedirectOrFetcher route={`/events/toggle-like/${event.slug}`}>
                             <button className="relative flex items-center gap-2 px-3 py-3 text-xs text-primary font-medium border bg-white shadow rounded-full hover:bg-gray-100 cursor-pointer transition">
@@ -84,7 +84,7 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                                 </div>
                                 {event.liked
                                     ? (<span className="">Saved</span>)
-                                    : (<span className="">Save event</span>)
+                                    : (<span className="">Save</span>)
                                 }
                             </button>
                         </RedirectOrFetcher>
@@ -117,7 +117,7 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                                 <div>
                                     <MessageSquareMore size={18} />
                                 </div>
-                                <span>Reviews</span>
+                                <span>Review</span>
                             </div>
                         </PostReviewWrapper>
                     </div>
@@ -137,48 +137,92 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                             </div>
                         </div>
 
-                        <div className='flex items-end gap-14 justify-start'>
-                            <div className='text-gray-500 flex flex-col items-start gap-1'>
-                                <span className="text-sm">Starts from</span>
-                                <span>
-                                    <span className="text-2xl font-bold text-primary-theme">
-                                        {event.tickets.length
-                                            ? <FormatPrice price={Math.min(...event.tickets.map(ticket => Number(ticket.price)))} />
-                                            : 'No tickets available'
-                                        }
-                                    </span>
-                                </span>
-                            </div>
-
-                            {event.engagementVisible ? (
+                        {!isPastEventDate(event.date, event.startTime) && (
+                            <div className='flex items-end gap-14 justify-start'>
                                 <div className='text-gray-500 flex flex-col items-start gap-1'>
-                                    <span className="text-sm">Tickets Sold</span>
+                                    <span className="text-sm">Starts from</span>
                                     <span>
-                                        <span className="text-2xl font-bold text-primary">
-                                            {TOTAL_TICKETS_SALES}
+                                        <span className="text-2xl font-bold text-primary-theme">
+                                            {event.tickets.length
+                                                ? <FormatPrice price={Math.min(...event.tickets.map(ticket => Number(ticket.price)))} />
+                                                : 'No tickets available'
+                                            }
                                         </span>
-                                        <span>/{TOTAL_TICKETS}</span>
                                     </span>
                                 </div>
-                            ) : ""}
-                        </div>
+
+                                {event.engagementVisible ? (
+                                    <div className='text-gray-500 flex flex-col items-start gap-1'>
+                                        <span className="text-sm">Tickets Sold</span>
+                                        <span>
+                                            <span className="text-2xl font-bold text-primary">
+                                                {TOTAL_TICKETS_SALES}
+                                            </span>
+                                            <span>/{TOTAL_TICKETS}</span>
+                                        </span>
+                                    </div>
+                                ) : ""}
+                            </div>
+                        )}
                     </div>
 
-                    <fieldset className="p-2 border text-center mx-auto mt-6 w-full rounded-lg bg-white">
-                        <legend className="rounded-full text-xs font-serif font-semibold tracking-tighter px-2 py-1 bg-primary-bg text-primary-theme">
-                            Count Down
-                        </legend>
-                        <Countdown
-                            eventDate={event.date}
-                            startTime={event.startTime}
-                            // separator=':'
-                            // showLabels={false}
-                            onComplete={() => console.log("Event has started!")}
-                            className="text-gray-600 flex items-start gap-1 mx-auto"
-                        />
-                    </fieldset>
+                    {!isPastEventDate(event.date, event.startTime) && (
+                        <fieldset className="p-2 border text-center mx-auto mt-3 w-full rounded-lg bg-white">
+                            <legend className="rounded-full text-xs font-serif font-semibold tracking-tighter px-2 py-1 bg-primary-bg text-primary-theme">
+                                Count Down
+                            </legend>
+                            <Countdown
+                                eventDate={event.date}
+                                startTime={event.startTime}
+                                // separator=':'
+                                // showLabels={false}
+                                onComplete={() => console.log("Event has started!")}
+                                className="text-gray-600 flex items-start gap-1 mx-auto"
+                            />
+                        </fieldset>
+                    )}
 
-                    <div className="bg-white border border-gray-100 p-4 rounded-2xl mt-5 w-full relative">
+                    {isPastEventDate(event.date, event.startTime) && (
+                        <div className="bg-white border border-gray-100 p-4 mt-5 rounded-3xl w-full">
+                            <div className="flex items-center justify-between">
+                                <h3 className="font-semibold text-lg">
+                                    Comments <span className="font-light text-sm">({event.reviews.length})</span>
+                                </h3>
+                                <Ellipsis />
+                            </div>
+
+                            <div className="my-6">
+                                {event.reviews && event.reviews.length > 0 ? (
+                                    event.reviews.map((review) => {
+                                        if (review.isPublic) {
+                                            return (
+                                                <ReviewCard key={review.id} review={review} user={user} />
+                                            )
+                                        }
+                                    })
+                                ) : (
+                                    <div className="text-gray-500 text-sm tracking-tight">No reviews yet. Be the first to review this event!</div>
+                                )}
+                            </div>
+
+                            <div className="my-6">
+                                <PostReviewWrapper event={event} user={user}>
+                                    <Button
+                                        size={'sm'}
+                                        variant={'secondary'}
+                                        className="rounded-md px-0 text-primary text-sm font-light cursor-pointer tracking-tight"
+                                    >
+                                        <span className="border-e border-primary pe-2">
+                                            Write a review
+                                        </span>
+                                        <Pen size={14} strokeWidth={2.5} />
+                                    </Button>
+                                </PostReviewWrapper>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="bg-white border border-gray-100 p-4 rounded-2xl w-full relative">
                         <h2 className="font-bold tracking-tighter text-lg text-primary mb-2">About Event</h2>
                         <div className="text-sm">
                             <FormatLineBreak input={event.description} />
@@ -193,15 +237,15 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                                     <MapPin size={20} />
                                 </div>
                             </div>
-                            <div className="mb-3">
-                                <h3 className="text-sm text-gray-400">Venue/Hall name</h3>
+                            <div className="mb-3 text-sm">
+                                <h3 className="text-gray-400">Venue/Hall name</h3>
                                 <span className="leading-5">
                                     {event.venueName}
                                 </span>
                             </div>
 
-                            <div className="mb-5">
-                                <h3 className="text-sm text-gray-400">Address</h3>
+                            <div className="mb-5 text-sm">
+                                <h3 className="text-gray-400">Address</h3>
                                 <div className="leading-5">
                                     {event.venueAddress}, {" "}
                                     <span className="capitalize">
@@ -227,10 +271,10 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                                 {event.tickets.length
                                     ? event.tickets.map(ticket => (
                                         <div key={ticket.id} className="flex items-center justify-between">
-                                            <div className="font-light text-lg tracking-tighter">
+                                            <div className="font-light text-sm tracking-tighter">
                                                 {ticket.name}
                                             </div>
-                                            <div className="font-light text-lg tracking-tighter">
+                                            <div className="font-light text-sm tracking-tighter">
                                                 <FormatPrice price={ticket.price} />
                                             </div>
                                         </div>
@@ -250,43 +294,46 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                             <p>{event.extraInfo || <Placeholder text="No notes created by organiser" />}</p>
                         </div>
                     </div>
-                    <div className="bg-white border border-gray-100 p-4 rounded-3xl  w-full">
-                        <div className="flex items-center justify-between">
-                            <h3 className="font-semibold text-lg">
-                                Comments <span className="font-light text-sm">({event.reviews.length})</span>
-                            </h3>
-                            <Ellipsis />
-                        </div>
 
-                        <div className="my-6">
-                            {event.reviews && event.reviews.length > 0 ? (
-                                event.reviews.map((review) => {
-                                    if (review.isPublic) {
-                                        return (
-                                            <ReviewCard key={review.id} review={review} user={user} />
-                                        )
-                                    }
-                                })
-                            ) : (
-                                <div className="text-gray-500 text-sm tracking-tight">No reviews yet. Be the first to review this event!</div>
-                            )}
-                        </div>
+                    {!isPastEventDate(event.date, event.startTime) && (
+                        <div className="bg-white border border-gray-100 p-4 rounded-3xl w-full">
+                            <div className="flex items-center justify-between">
+                                <h3 className="font-semibold text-lg">
+                                    Comments <span className="font-light text-sm">({event.reviews.length})</span>
+                                </h3>
+                                <Ellipsis />
+                            </div>
 
-                        <div className="my-6">
-                            <PostReviewWrapper event={event} user={user}>
-                                <Button
-                                    size={'sm'}
-                                    variant={'secondary'}
-                                    className="rounded-md px-0 text-primary text-sm font-light cursor-pointer tracking-tight"
-                                >
-                                    <span className="border-e border-primary pe-2">
-                                        Write a review
-                                    </span>
-                                    <Pen size={14} strokeWidth={2.5} />
-                                </Button>
-                            </PostReviewWrapper>
+                            <div className="my-6">
+                                {event.reviews && event.reviews.length > 0 ? (
+                                    event.reviews.map((review) => {
+                                        if (review.isPublic) {
+                                            return (
+                                                <ReviewCard key={review.id} review={review} user={user} />
+                                            )
+                                        }
+                                    })
+                                ) : (
+                                    <div className="text-gray-500 text-sm tracking-tight">No reviews yet. Be the first to review this event!</div>
+                                )}
+                            </div>
+
+                            <div className="my-6">
+                                <PostReviewWrapper event={event} user={user}>
+                                    <Button
+                                        size={'sm'}
+                                        variant={'secondary'}
+                                        className="rounded-md px-0 text-primary text-sm font-light cursor-pointer tracking-tight"
+                                    >
+                                        <span className="border-e border-primary pe-2">
+                                            Write a review
+                                        </span>
+                                        <Pen size={14} strokeWidth={2.5} />
+                                    </Button>
+                                </PostReviewWrapper>
+                            </div>
                         </div>
-                    </div>
+                    )}
 
                     <div className="bg-white border border-gray-100 p-4 rounded-3xl w-full">
                         <div className="flex items-center justify-between">

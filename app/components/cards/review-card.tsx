@@ -31,7 +31,7 @@ export default function ReviewCard({ review, user }: {
                         method="patch"
                         action={`reviews/${review.id}/edit`}
                     >
-                        <Textarea name="comment" defaultValue={review.comment} />
+                        <Textarea name="comment"className="text-sm"  defaultValue={review.comment} />
 
                         <div className="flex items-center gap-2 mt-2">
                             <Button
@@ -54,7 +54,7 @@ export default function ReviewCard({ review, user }: {
                 </div>
             ) : (
                 <>
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-center gap-2">
                         <div className="font-medium text-sm tracking-tight">
                             {review.isAnonymous
                                 ? <div className="flex items-center gap-0.5" title="This review is anonymous">
@@ -79,7 +79,7 @@ export default function ReviewCard({ review, user }: {
                 </>
             )}
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 mt-2">
                 {(user.id === review.user.id && !isEditing) &&
                     <>
                         <button

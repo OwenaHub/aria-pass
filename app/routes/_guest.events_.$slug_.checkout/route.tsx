@@ -13,6 +13,14 @@ import { isPastEventDate } from '~/lib/utils';
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     try {
         const { data } = await client.get(`api/events/${params.slug}`);
+        
+        if (isPastEventDate(data.date, data.startTime)) {
+            toast.info("Expired link", {
+                description: "This event is is past"
+            });
+            return redirect('/');
+        }
+
         return { event: data }
     } catch (error: any) {
         toast.error("Something went wrong", {

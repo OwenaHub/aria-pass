@@ -235,18 +235,19 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                             </div>
                             <p>{event.extraInfo || <Placeholder text="No notes created by organiser" />}</p>
                         </div>
-
-                        <fieldset className="p-2 mb-6 text-center shadow border mx-auto rounded-lg bg-white">
-                            <legend className="rounded-full text-xs font-serif font-semibold px-2 py-1 bg-primary-bg text-primary-theme">
-                                Count Down
-                            </legend>
-                            <Countdown
-                                eventDate={event.date}
-                                startTime={event.startTime}
-                                onComplete={() => console.log("Event has started!")}
-                                className="text-gray-500 flex items-start gap-1 mx-auto"
-                            />
-                        </fieldset>
+                        {!isPastEventDate(event.date, event.startTime) && (
+                            <fieldset className="p-2 mb-6 text-center shadow border mx-auto rounded-lg bg-white">
+                                <legend className="rounded-full text-xs font-serif font-semibold px-2 py-1 bg-primary-bg text-primary-theme">
+                                    Count Down
+                                </legend>
+                                <Countdown
+                                    eventDate={event.date}
+                                    startTime={event.startTime}
+                                    onComplete={() => console.log("Event has started!")}
+                                    className="text-gray-500 flex items-start gap-1 mx-auto"
+                                />
+                            </fieldset>
+                        )}
 
                         <CheckoutButton event={event} />
                     </aside>
