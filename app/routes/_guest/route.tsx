@@ -1,4 +1,4 @@
-import { ChevronRight, Equal, Facebook, Menu, X } from 'lucide-react'
+import { ChevronRight, Equal, Facebook, X } from 'lucide-react'
 import { Suspense, useEffect, useState } from 'react';
 import { Await, Link, NavLink, Outlet } from 'react-router'
 import { Button } from '~/components/ui/button'
@@ -46,12 +46,6 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                     <div className='flex items-center justify-between gap-20'>
                         <Link to="/" className='flex items-center gap-2'>
                             <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-8 w-8 object-contain" />
-                            <div className='text-base md:text-xl tracking-tighter flex flex-col items-start'>
-                                <span className='font-extralight text-[10px] md:text-xs inline-block'>OwenaHub</span>
-                                <span className='text-indigo-800 font-serif tracking-[-1.5px] -mt-1.5'>
-                                    AriaPass
-                                </span>
-                            </div>
                         </Link>
 
                     </div>
