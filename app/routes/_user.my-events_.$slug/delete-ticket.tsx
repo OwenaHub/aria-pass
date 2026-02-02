@@ -27,7 +27,7 @@ export function DeleteTicket({ ticket }: { ticket: Ticket }) {
                     <Trash size={20} strokeWidth={1} />
                 </DialogTrigger>
 
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="sm:max-w-106.25">
                     <DialogHeader>
                         <DialogTitle className="text-destructive">Delete the {ticket.name} ticket ?</DialogTitle>
                         <DialogDescription>

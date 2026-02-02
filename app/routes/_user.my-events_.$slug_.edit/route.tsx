@@ -395,7 +395,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                 </div>
             </section>
 
-            <aside className="flex flex-col gap-4 lg:min-w-[400px] max-w-[400px] w-full">
+            <aside className="flex flex-col gap-4 lg:min-w-100 max-w-100 w-full">
                 <h2 className="font-light text-lg flex items-center gap-2 tracking-tight">
                     Event preview <Eye strokeWidth={1} size={20} />
                 </h2>
