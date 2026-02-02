@@ -46,7 +46,7 @@ export async function clientLoader() {
     }
 }
 
-const app_menu = [
+const APP_MENU = [
     {
         icon: <Home size={20} strokeWidth={2.2} />,
         label: "Dashboard",
@@ -89,14 +89,14 @@ export default function ProtectedLayout({ loaderData }: Route.ComponentProps) {
                     />
                     <Breadcrumb />
                 </header>
-                <div className="flex flex-1 flex-col gap-4 px-6 py-10 max-w-[94rem] w-full b mx-auto">
+                <div className="flex flex-1 flex-col gap-4 px-6 py-10 max-w-376 w-full b mx-auto">
                     <Outlet context={user} />
 
                     <div className="h-20 w-full" />
 
-                    <div className="border p-1 border-gray-100 shadow bg-white/35 backdrop-blur-xs rounded-full w-max fixed bottom-10 z-50 left-1/2 -translate-x-1/2">
+                    <div className="border p-1 border-gray-100 shadow-lg  bg-white/35 backdrop-blur-xs rounded-full w-max fixed bottom-10 z-50 left-1/2 -translate-x-1/2">
                         <section className="flex items-center gap-2">
-                            {app_menu.map((menu, index) => (
+                            {APP_MENU.map((menu, index) => (
                                 <NavLink
                                     key={index + menu.href}
                                     to={menu.href}

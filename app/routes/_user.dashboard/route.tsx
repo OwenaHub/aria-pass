@@ -28,10 +28,10 @@ const SpaceCard = ({ space, user, type }: { space: any, user: User, type: 'invit
 
     return (
         <div className="border p-2.5 rounded-lg hover:bg-gray-50 transition relative h-full flex flex-col overflow-hidden">
-            <p className='text-xs text-gray-500 tracking-tight'>
+            <p className='text-xs text-gray-500 tracking-tight mb-1'>
                 {isInvited ? 'You were invited to' : 'Your Space'}
             </p>
-            <p className="tracking-tighter text-sm font-medium flex-grow">
+            <p className="tracking-tighter text-sm font-medium grow">
                 {space.title}
             </p>
 
@@ -45,7 +45,7 @@ const SpaceCard = ({ space, user, type }: { space: any, user: User, type: 'invit
             </div>
             <Link to={`/spaces/${space.slug}`} className="absolute inset-0" />
 
-            <div className={`rounded -rotate-[30deg] h-20 w-12 absolute -right-2 -bottom-10 ${isInvited ? 'bg-green-500' : 'bg-pink-500'} opacity-50`} />
+            <div className={`rounded -rotate-30 h-20 w-12 absolute -right-2 -bottom-10 ${isInvited ? 'bg-green-500' : 'bg-pink-500'} opacity-50`} />
         </div>
     );
 };

@@ -2,22 +2,13 @@ import client from "~/http/client";
 import type { Route } from "../_user.spaces_.$slug/+types/route";
 import { toast } from "sonner";
 import { redirect } from "react-router";
-import AvatarGroup from "~/components/custom/avatar-group";
 import PurchasesTable from "./purchase-table";
 import { Button } from "~/components/ui/button"
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "~/components/ui/dialog"
-import CustomAvatar from "~/components/custom/custom-avatar";
 import { Printer } from "lucide-react";
-import { extractNames } from "~/lib/utils";
+import { getEventRevenue } from "~/lib/utils";
 import EventReview from "./event-reviews";
+import FormatPrice from "~/components/utility/format-price";
+import SpaceUsers from "./space-users";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     try {
@@ -44,49 +35,35 @@ export default function EventSpaces({ loaderData }: Route.ComponentProps) {
                 </h1>
             </section>
 
-            <section className="border-b pb-4">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1">
-                        <AvatarGroup names={extractNames(space.members)} max={3} />
-                        <Dialog>
-                            <div>
-                                <DialogTrigger asChild>
-                                    <span className="font-medium tracking-tighter underline underline-offset-2 underline-2 cursor-pointer">
-                                        {space.members?.length} <span className=""> member{space?.members.length > 1 && 's'}</span>
-                                    </span>
-                                </DialogTrigger>
+            <section className="flex gap-4 items-stretch">
+                <div className="border flex flex-col gap-5 rounded-lg p-4 flex-1">
+                    <p className="text-xs text-gray-500">Total Revenue</p>
 
-                                <DialogContent className="sm:max-w-[425px]">
-                                    <DialogHeader>
-                                        <DialogTitle>Members in this space</DialogTitle>
-                                    </DialogHeader>
-                                    <div className="flex flex-col gap-3">
-                                        {space.members.map((mem) => (
-                                            <div className="flex gap-1 items-center">
-                                                <CustomAvatar name={mem.name} styles="w-10 h-10" />
-                                                <div className="flex flex-col gap-1">
-                                                    <span>{mem.name}</span>
-                                                    <span className="text-xs text-gray-400 font-light -mt-1">{mem.email}</span>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <DialogFooter>
-                                        <DialogClose asChild>
-                                            <Button variant="outline">Close</Button>
-                                        </DialogClose>
-                                    </DialogFooter>
-                                </DialogContent>
-                            </div>
-                        </Dialog>
-                    </div>
+                    <h2 className="text-lg font-medium tracking-tight">
+                        <FormatPrice price={getEventRevenue(space)} />
+                    </h2>
+                </div>
 
-                    <div className="flex items-center gap-3">
+                <div className="border flex flex-col gap-5 rounded-lg p-4 flex-1">
+                    <p className="text-xs text-gray-500">Collaborators</p>
+
+                    <SpaceUsers space={space} />
+                </div>
+
+                <div className="border flex flex-col gap-5 rounded-lg p-4 flex-1">
+                    <p className="text-xs text-gray-500">Reviews</p>
+
+                    <h2 className="text-lg font-medium tracking-tight">
                         <EventReview event={space} />
+                    </h2>
+                </div>
+            </section>
+
+            <section className="border-b py-4">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
                         <Button
-                            variant={"outline"}
-                            size={'sm'}
-                            className="rounded-md"
+                            className="rounded-lg shadow-none"
                             onClick={() => window.print()}
                         >
                             <Printer /> Print

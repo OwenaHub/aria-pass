@@ -45,3 +45,52 @@ export function extractNames(members: OrganiserEvent['members']) {
   if (!Array.isArray(members)) return [];
   return members.map(member => member.name);
 }
+
+export function getEventRevenue(event: OrganiserEvent) {
+  const getPurchases = (args: Ticket[]): TicketPurchase[] => {
+    return args.flatMap(ticket =>
+      (ticket.purchases ?? []).map(item => ({
+        ...item,
+        ticket: {
+          id: ticket.id,
+          eventId: ticket.eventId,
+          name: ticket.name,
+          description: ticket.description,
+          price: ticket.price,
+          theme: ticket.theme,
+          quantityAvailable: ticket.quantityAvailable,
+          ticketPurchases: ticket.ticketPurchases,
+          event: ticket.event,
+        },
+      }))
+    );
+  }
+
+  function sumPrices(purchases: TicketPurchase[]) {
+    return purchases.reduce((total, item) => {
+      const amount = parseFloat(item.amount) || 0;
+      return total + amount;
+    }, 0);
+  }
+
+  return sumPrices(getPurchases(event.tickets));
+}
+
+export function eventTicketPurchases(args: Ticket[]): TicketPurchase[] {
+  return args.flatMap(ticket =>
+    (ticket.purchases ?? []).map(item => ({
+      ...item,
+      ticket: {
+        id: ticket.id,
+        eventId: ticket.eventId,
+        name: ticket.name,
+        description: ticket.description,
+        price: ticket.price,
+        theme: ticket.theme,
+        quantityAvailable: ticket.quantityAvailable,
+        ticketPurchases: ticket.ticketPurchases,
+        event: ticket.event,
+      },
+    }))
+  );
+}

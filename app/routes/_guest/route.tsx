@@ -45,7 +45,7 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                 <nav className={`py-3 container flex items-center justify-between transition-all`}>
                     <div className='flex items-center justify-between gap-20'>
                         <Link to="/" className='flex items-center gap-2'>
-                            <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-8 w-8 object-contain" />
+                            <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-24 object-contain" />
                         </Link>
 
                     </div>
@@ -161,7 +161,11 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
 
             <footer className="bg-white text-muted-foreground pt-5">
                 <div className="flex justify-between items-center container pb-4">
-                    <h5 className='font-light text-lg tracking-tighter'>AriaPass</h5>
+                    <h5 className='font-light text-lg tracking-tighter'>
+                        <Link to="/" className='flex items-center gap-2'>
+                            <img src="/images/logos/alt_logo.png" alt="AriaPass" className="h-auto w-18 object-contain" />
+                        </Link>
+                    </h5>
 
                     <div className="flex flex-col items-center space-y-3">
                         <a

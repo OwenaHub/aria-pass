@@ -55,7 +55,7 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                             )}
                         </div>
                         <div className='px-8 py-8'>
-                            <div className='text-sm'>
+                            <div className='text-sm mb-2'>
                                 Curated by {" "}
                                 <Link to="#creator" className="font-bold text-primary-theme underline underline-offset-2">
                                     {event.organiser.organiserName}

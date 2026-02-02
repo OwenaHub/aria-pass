@@ -14,8 +14,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
 export default function EventReview({ event }: { event: OrganiserEvent }) {
-    console.log(event);
-
     return (
         <Dialog>
             <form>
@@ -27,7 +25,7 @@ export default function EventReview({ event }: { event: OrganiserEvent }) {
                         <MessageSquare />
                     </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[625px]">
+                <DialogContent className="sm:max-w-156.25">
                     <DialogHeader>
                         <DialogTitle>All Comments</DialogTitle>
                     </DialogHeader>

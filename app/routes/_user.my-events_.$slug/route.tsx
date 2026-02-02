@@ -64,9 +64,18 @@ export async function clientAction({ request, params }: Route.ClientActionArgs) 
                 return;
             case 'ticket.delete':
                 await client.delete(`/api/organiser/events/${params.slug}/tickets/${credentials.ticket_id}`)
-                toast.warning("Ticket Delete!", {
+                toast.warning("Ticket delete!", {
                     description: 'Ticket has been deleted with its related records'
                 });
+                return;
+            case 'member.delete':
+                let permission = confirm('Are you sure');
+                if (permission) {
+                    await client.delete(`/api/organiser/events/${params.slug}/members/${credentials.memberId}`)
+                    toast.warning("Member removed!", {
+                        description: 'Member has been removed from the event'
+                    });
+                }
                 return;
             default:
                 toast.warning('No form action specified', {

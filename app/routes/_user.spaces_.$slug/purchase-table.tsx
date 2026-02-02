@@ -13,36 +13,10 @@ import {
 } from "~/components/ui/table";
 import FormatPrice from "~/components/utility/format-price";
 import TransactionStatus from "~/components/utility/transaction-status";
+import { eventTicketPurchases } from "~/lib/utils";
 
 export default function PurchasesTable({ event }: { event: OrganiserEvent }) {
-
-    function getPurchases(args: Ticket[]): TicketPurchase[] {
-        return args.flatMap(ticket =>
-            (ticket.purchases ?? []).map(item => ({
-                ...item,
-                ticket: {
-                    id: ticket.id,
-                    eventId: ticket.eventId,
-                    name: ticket.name,
-                    description: ticket.description,
-                    price: ticket.price,
-                    theme: ticket.theme,
-                    quantityAvailable: ticket.quantityAvailable,
-                    ticketPurchases: ticket.ticketPurchases,
-                },
-            }))
-        );
-    }
-
-    function sumPrices(purchases: TicketPurchase[]) {
-        return purchases.reduce((total, item) => {
-            const amount = parseFloat(item.amount) || 0;
-            return total + amount;
-        }, 0);
-    }
-
-    const PURCHASES = getPurchases(event.tickets);
-    const SUM_AMOUNT = sumPrices(PURCHASES);
+    const PURCHASES = eventTicketPurchases(event.tickets);
 
     return (
         <div>
@@ -121,13 +95,6 @@ export default function PurchasesTable({ event }: { event: OrganiserEvent }) {
                 </TableBody>
                 <TableFooter>
                     <TableRow className="w-full">
-                        <TableCell colSpan={3}>Total Revenue</TableCell>
-                        <TableCell colSpan={2} className="text-left">
-                            {parseInt(SUM_AMOUNT as any) === 0
-                                ? (<>₦0</>)
-                                : (<>₦{parseInt(SUM_AMOUNT as any).toLocaleString()}</>)
-                            }
-                        </TableCell>
                     </TableRow>
                 </TableFooter>
             </Table>
