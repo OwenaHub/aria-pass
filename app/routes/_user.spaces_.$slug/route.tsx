@@ -8,6 +8,7 @@ import EventReview from "./event-reviews";
 import FormatPrice from "~/components/utility/format-price";
 import SpaceUsers from "./space-users";
 import { Banknote, ChartArea, Star, Users } from "lucide-react";
+import EventProgram from "./event-program";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     try {
@@ -74,6 +75,10 @@ export default function EventSpaces({ loaderData }: Route.ComponentProps) {
                     />
                 </div>
             </section>
+
+            <div className="pt-5">
+                <EventProgram />
+            </div>
 
             <section>
                 <PurchasesTable event={space} />
