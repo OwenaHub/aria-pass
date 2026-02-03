@@ -41,14 +41,11 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
 
     return (
         <>
-            <div className={`rounded-xl mx-5 my-3 sticky top-3 z-10 ${scrolled && 'bg-white/70 backdrop-blur-lg border border-gray-300 shadow-md transition'}`}>
+            <div className={`rounded-lg mx-5 my-3 sticky top-3 z-10 ${scrolled && 'bg-white/70 backdrop-blur-lg shadow-md transition'}`}>
                 <nav className={`py-3 container flex items-center justify-between transition-all`}>
-                    <div className='flex items-center justify-between gap-20'>
-                        <Link to="/" className='flex items-center gap-2'>
-                            <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-24 object-contain" />
-                        </Link>
-
-                    </div>
+                    <Link to="/" className='flex items-center gap-2'>
+                        <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-18 object-contain" />
+                    </Link>
 
                     <ul className='hidden md:flex gap-8'>
                         {NAV.map((item) => (
@@ -153,7 +150,7 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                     </div>
                 )}
             </div>
-            <div className='sticky top-20 md:top-24 z-10 mx-5 overflow-hidden rounded-lg'>
+            <div className='sticky top-22 md:top-24 z-10 mx-5 overflow-hidden rounded-lg'>
                 <AnnouncementBanner />
             </div>
 

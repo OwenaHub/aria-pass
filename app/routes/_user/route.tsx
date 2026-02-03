@@ -81,7 +81,7 @@ export default function ProtectedLayout({ loaderData }: Route.ComponentProps) {
         <SidebarProvider>
             <AppSidebar user={user} />
             <SidebarInset>
-                <header className="z-50 bg-background sticky top-0 flex h-16 shrink-0 items-center gap-2 border-y px-4">
+                <header className="z-50 bg-background sticky top-0 flex h-16 shrink-0 items-center gap-2 border-b border-gray-50  px-4">
                     <SidebarTrigger className="-ml-1" />
                     <Separator
                         orientation="vertical"

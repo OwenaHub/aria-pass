@@ -109,31 +109,6 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
 
     const user: User = useOutletContext();
 
-
-    function sortPurchases(records: any[]) {
-        const groupsMap = new Map();
-
-        records.forEach(record => {
-            const eventId = record.ticket.event.id;
-
-            if (!groupsMap.has(eventId)) {
-                groupsMap.set(eventId, {
-                    eventId: eventId,
-                    eventTitle: record.ticket.event.title,
-                    tickets: [{ ...record }]
-                });
-            } else {
-                // IF EXISTS: Get the reference and push the new ticket
-                // Since objects are references, this updates the entry inside the Map immediately
-                groupsMap.get(eventId)
-                    .tickets.push({ ...record });
-            }
-        });
-
-        const groupedPurchases = Array.from(groupsMap.values());
-        return groupedPurchases;
-    }
-
     return (
         <div>
             {/* Header Section */}

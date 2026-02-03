@@ -36,7 +36,7 @@ export function NavUser({ user }: { user: User }) {
             <div
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:bg-gray-100 rounded-lg py-2 px-2 flex items-center gap-2"
             >
-              <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-20 object-contain" />
+              <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-14 object-contain" />
               <ChevronRight className="ml-auto size-5" />
             </div>
           </DropdownMenuTrigger>

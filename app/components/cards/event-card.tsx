@@ -1,8 +1,7 @@
-import { Eye, Heart, MapPin, Verified } from 'lucide-react';
+import { Eye, Heart, MapPin } from 'lucide-react';
 import dayjs from 'dayjs';
 import { STORAGE_URL } from '~/config/defaults';
 import { Link } from 'react-router';
-import CustomAvatar from '../custom/custom-avatar';
 import { isPastEventDate } from '~/lib/utils';
 
 
@@ -27,11 +26,11 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
                 )}
 
                 {/* Overlay background */}
-                <div className='absolute top-0 left-0 w-full min-h-full bg-gradient-to-t from-black/60 to-black/20' />
+                <div className='absolute top-0 left-0 w-full min-h-full bg-linear-to-t from-black/60 to-black/20' />
 
                 {/* Upperside of the card */}
-                <div className="absolute flex items-start justify-between top-2 w-[100%] left-0 right-0 py-0.5 px-2.5">
-                    <div className='bg-white w-max py-1 px-2 rounded-lg'>
+                <div className="absolute flex items-start justify-between top-2 w-full left-0 right-0 py-0.5 px-2.5">
+                    <div className='bg-white w-max py-0.5 px-2 rounded-md'>
                         <div className='flex flex-col justify-start items-center'>
                             <p className="text-xl md:text-2xl tracking-tighter font-extrabold">{formattedDate.split(' ')[1]}</p>
                             <p className="-mt-1.5 tracking-tighter text-sm md:text-base font-light uppercase">{formattedDate.split(' ')[0]}</p>
@@ -69,30 +68,26 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
                 </div>
             </div>
 
-            <div className='flex items-center justify-between w-full max-w-full overflow-hidden'>
+            <div className='flex items-center justify-between px-1 py-1 w-full max-w-full overflow-hidden'>
                 <div className="flex items-center text-xs min-w-0">
-                    <CustomAvatar
-                        name={event.organiser.organiserName || ""}
-                        styles='size-8'
-                    />
-                    <span className='font-medium text-xs tracking-tight text-nowrap truncate max-w-[8rem]'>
+                    {/* <span className='font-medium text-xs tracking-tight text-nowrap truncate max-w-32'>
                         {event.organiser.organiserName}
-                    </span>
-                    <span title='Verified Partner' className='ms-0.5'>
+                    </span> */}
+                    {/* <span title='Verified Partner' className='ms-'>
                         <Verified className='text-white fill-amber-500 size-4' />
-                    </span>
-                    <span className='hidden md:inline-block font-bold tracking-tight bg-gray-200 text-gray-600 uppercase px-1 py-0.5 rounded text-[9px] mx-1 outline'>
+                    </span> */}
+                    <span className='border-s border-b border-gray-400 md:inline-block font-bold tracking-tight bg-gray-200 text-gray-600 uppercase px-1.5 py-1 rounded text-[9px] mx-1'>
                         {event.eventType}
                     </span>
                 </div>
 
                 <div className='flex items-center gap-3 shrink-0'>
-                    <div className="flex items-center gap-0.5 text-xs">
-                        <Heart className='size-4 fill-gray-400 text-gray-400' />
+                    <div className="flex items-center gap-0.5 text-xs font-semibold">
+                        <Heart className='size-5 fill-gray-400 text-gray-400' />
                         <span className='text-gray-700'>{event.likes}</span>
                     </div>
-                    <div className="flex items-center gap-0.5 text-xs">
-                        <Eye className='size-4 text-gray-400' />
+                    <div className="flex items-center gap-0.5 text-xs font-semibold">
+                        <Eye className='size-5 text-gray-400' />
                         <span className='text-gray-700'>{event.views}</span>
                     </div>
                 </div>

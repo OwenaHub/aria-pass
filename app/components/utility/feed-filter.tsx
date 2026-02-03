@@ -34,7 +34,7 @@ export function FeedFilter() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="flex gap-2 w-40 px-10 py-5 items-center justify-between rounded-full">
+                <Button variant="outline" className="shadow-none flex gap-2 w-40 px-10 py-5 items-center justify-between rounded-full">
                     <span>{getLabel(currentFilter)}</span>
                     <ChevronDown size={14} />
                 </Button>

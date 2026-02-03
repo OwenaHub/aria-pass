@@ -69,7 +69,7 @@ export async function clientAction({ request, params }: Route.ClientActionArgs) 
                 });
                 return;
             case 'member.delete':
-                let permission = confirm('Are you sure');
+                let permission = confirm('Do you want to delete this member?');
                 if (permission) {
                     await client.delete(`/api/organiser/events/${params.slug}/members/${credentials.memberId}`)
                     toast.warning("Member removed!", {
