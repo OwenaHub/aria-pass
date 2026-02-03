@@ -17,6 +17,7 @@ import { defaultMeta } from '~/lib/meta';
 import MembersTable from "./members-table";
 import FormatPrice from "~/components/utility/format-price";
 import EventReview from "./event-reviews";
+import NewTeammate from "~/components/custom/new-teammate";
 
 export const meta: MetaFunction = (args: any) => {
     if (!args.data.event) {
@@ -261,7 +262,10 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
             </div>
 
             <div className="mt-10 text-sm relative">
-                <h3 className="font-semibold">Staff/Performers</h3>
+                <div className="flex items-center justify-between mb-5">
+                    <h3 className="font-semibold">Staff/Performers</h3>
+                    <NewTeammate events={[event]} />
+                </div>
 
                 <div className="flex items-stretch gap-7 mt-5 overflow-x-auto pb-10 border-b ">
                     {event.members?.length

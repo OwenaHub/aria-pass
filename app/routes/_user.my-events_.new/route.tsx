@@ -1,5 +1,5 @@
 import { Eye, MapPinHouse, MapPlus, Scroll } from "lucide-react";
-import { Form, redirect, type MetaFunction } from "react-router";
+import { Form, redirect, unstable_usePrompt, type MetaFunction } from "react-router";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
@@ -160,6 +160,12 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
         city: '',
         country: '',
         start_time: date,
+    });
+
+    unstable_usePrompt({
+        message: "Your progress will be lost if you leave this page",
+        when: ({ currentLocation, nextLocation }) =>
+            form.title !== "" && currentLocation.pathname !== nextLocation.pathname,
     });
 
     return (

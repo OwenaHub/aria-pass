@@ -10,8 +10,8 @@ import { Plus } from 'lucide-react';
 import RecordFilter from '~/components/utility/record-filter';
 import { useEffect, useState } from 'react';
 import { defaultMeta } from '~/lib/meta';
-import NewTeammate from './new-teammate';
 import DefaultError from '~/components/errors/default-error';
+import NewTeammate from '~/components/custom/new-teammate';
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -94,7 +94,7 @@ export default function MyEvents({ loaderData }: Route.ComponentProps) {
                         <Link to={'new'} className=''>
                             <Button
                                 variant={'default'}
-                                className='bg-primary cursor-pointer text-xs px-20 flex items-center gap-2'
+                                className='bg-primary cursor-pointer text-xs px-20 flex items-center gap-2 rounded-lg'
                             >
                                 <span>Create Event</span> <Plus size={10} />
                             </Button>
@@ -128,7 +128,6 @@ export default function MyEvents({ loaderData }: Route.ComponentProps) {
         </div>
     )
 }
-
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   return <DefaultError error={error} />

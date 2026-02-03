@@ -15,7 +15,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 
 export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
     const fetcher = useFetcher();
-    
+
     return (
         <div>
             <Dialog>
@@ -24,16 +24,16 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                         <Button
                             disabled={events.length === 0}
                             variant={'outline'}
-                            className='cursor-pointer text-xs px-20 flex items-center gap-2'
+                            className='cursor-pointer text-xs px-20 flex items-center gap-2 rounded-lg'
                         >
                             <span>Add Teammate</span> <Plus size={10} />
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px]">
-                        <fetcher.Form method='POST' action='members'>
+                    <DialogContent className="sm:max-w-200 rounded-2xl">
+                        <fetcher.Form method='POST' action='/my-events/members'>
                             <DialogHeader>
                                 <DialogTitle>Add a teammate</DialogTitle>
-                                <DialogDescription className='text-xs text-amber-800 bg-amber-50 p-2.5 rounded-md'>
+                                <DialogDescription className='text-xs text-amber-800 bg-amber-50 p-2.5 rounded-md w-max'>
                                     Ensure to reach out to new teammates as emails maybe redirected to spam/junk folder
                                 </DialogDescription>
                             </DialogHeader>
@@ -42,9 +42,9 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
 
                             <div className="grid gap-4">
                                 <div className="grid gap-1">
-                                    <Label className='font-light text-sm' htmlFor="role">Assigned Event</Label>
+                                    <Label className=' text-sm' htmlFor="role">Assigned Event</Label>
                                     <Select name='event_slug' required>
-                                        <SelectTrigger className="w-full" id="role">
+                                        <SelectTrigger className="w-full shadow-none py-5 rounded-xl" id="role">
                                             <SelectValue placeholder="Select event" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -59,18 +59,21 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                                         </SelectContent>
                                     </Select>
                                 </div>
-                                <div className="grid gap-1">
-                                    <Label className='font-light text-sm' htmlFor="email">Email Address</Label>
-                                    <Input id="email" name="email" placeholder="user@email.com" required />
+
+                                <div className="grid gap-4 md:grid-cols-2">
+                                    <div>
+                                        <Label className=' text-sm' htmlFor="email">Email Address</Label>
+                                        <Input className='shadow-none py-5 rounded-xl' id="email" name="email" placeholder="user@email.com" required />
+                                    </div>
+                                    <div>
+                                        <Label className=' text-sm' htmlFor="name">Full name</Label>
+                                        <Input className='shadow-none py-5 rounded-xl' id="name" name="full_name" placeholder="Wolfgang Peter" required />
+                                    </div>
                                 </div>
                                 <div className="grid gap-1">
-                                    <Label className='font-light text-sm' htmlFor="name">Full name</Label>
-                                    <Input id="name" name="full_name" placeholder="Wolfgang Peter" required />
-                                </div>
-                                <div className="grid gap-1">
-                                    <Label className='font-light text-sm' htmlFor="role">Role at event</Label>
+                                    <Label className=' ext-sm' htmlFor="role">Role at event</Label>
                                     <Select name='role_type' required>
-                                        <SelectTrigger className="w-full" id="role">
+                                        <SelectTrigger className="w-full shadow-none py-5 rounded-xl" id="role">
                                             <SelectValue placeholder="Select teammate role" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -83,9 +86,9 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                                     </Select>
                                 </div>
 
-                                <div className="grid gap-1">
-                                    <Button type="submit">Add member</Button>
-                                </div>
+                                <Button type="submit" className='w-max rounded-xl py-5 mt-4'>
+                                    Add member
+                                </Button>
                             </div>
                         </fetcher.Form>
                     </DialogContent>

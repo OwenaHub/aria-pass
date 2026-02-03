@@ -13,7 +13,6 @@ import {
 } from "~/components/ui/table"
 
 export default function MembersTable({ members }: { members: EventMember[] }) {
-    console.log(members);
 
     return (
         <Table className="border">
