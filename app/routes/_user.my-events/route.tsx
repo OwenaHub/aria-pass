@@ -96,7 +96,7 @@ export default function MyEvents({ loaderData }: Route.ComponentProps) {
                                 variant={'default'}
                                 className='bg-primary cursor-pointer text-xs px-20 flex items-center gap-2 rounded-lg'
                             >
-                                <span>Create Event</span> <Plus size={10} />
+                                <span>New Event</span> <Plus size={10} />
                             </Button>
                         </Link>
 

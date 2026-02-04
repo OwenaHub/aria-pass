@@ -1,4 +1,5 @@
-import { Plus } from 'lucide-react';
+import { User } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useFetcher } from 'react-router';
 import { Button } from '~/components/ui/button';
 import {
@@ -15,25 +16,34 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 
 export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
     const fetcher = useFetcher();
+    const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        if (fetcher.state === 'idle' || fetcher.data) {
+            setOpen(false);
+        }
+    }, [fetcher.state, fetcher.data]);
 
     return (
         <div>
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <>
                     <DialogTrigger asChild>
                         <Button
                             disabled={events.length === 0}
                             variant={'outline'}
-                            className='cursor-pointer text-xs px-20 flex items-center gap-2 rounded-lg'
+                            className='cursor-pointer text-xs flex items-center gap-2 rounded-lg'
                         >
-                            <span>Add Teammate</span> <Plus size={10} />
+                            <User size={10} />
+                            <span>Add Teammate</span>
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-200 rounded-2xl">
+
+                    <DialogContent className="sm:max-w-125 rounded-2xl">
                         <fetcher.Form method='POST' action='/my-events/members'>
                             <DialogHeader>
                                 <DialogTitle>Add a teammate</DialogTitle>
-                                <DialogDescription className='text-xs text-amber-800 bg-amber-50 p-2.5 rounded-md w-max'>
+                                <DialogDescription className='text-xs text-amber-800 bg-amber-50 p-2.5 rounded-md'>
                                     Ensure to reach out to new teammates as emails maybe redirected to spam/junk folder
                                 </DialogDescription>
                             </DialogHeader>
@@ -41,7 +51,7 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                             <hr className='my-4' />
 
                             <div className="grid gap-4">
-                                <div className="grid gap-1">
+                                <div className=" gap-1">
                                     <Label className=' text-sm' htmlFor="role">Assigned Event</Label>
                                     <Select name='event_slug' required>
                                         <SelectTrigger className="w-full shadow-none py-5 rounded-xl" id="role">
@@ -70,6 +80,7 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                                         <Input className='shadow-none py-5 rounded-xl' id="name" name="full_name" placeholder="Wolfgang Peter" required />
                                     </div>
                                 </div>
+
                                 <div className="grid gap-1">
                                     <Label className=' ext-sm' htmlFor="role">Role at event</Label>
                                     <Select name='role_type' required>

@@ -12,6 +12,7 @@ import client from "~/http/client";
 import EventsMapper from "~/components/mappers/event-mapper";
 import { STORAGE_URL } from "~/config/defaults";
 import DefaultError from "~/components/errors/default-error";
+import { eventCategory } from "~/lib/d.store";
 
 export async function clientLoader({ request }: Route.ClientLoaderArgs) {
     const url = new URL(request.url);
@@ -185,7 +186,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                         >
                             All
                         </Link>
-                        {["Opera", "Recital", "Workshop", "Carol", "Concert"].map((item) => (
+                        {eventCategory.map((item) => (
                             <Link
                                 preventScrollReset
                                 to={`?category=${item.toLowerCase()}`}
@@ -225,7 +226,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                         >
                             All
                         </Link>
-                        {["Opera", "Recital", "Workshop", "Carol", "Concert"].map((item) => (
+                        {eventCategory.map((item) => (
                             <Link
                                 to={`?category=${item.toLowerCase()}`}
                                 key={item}

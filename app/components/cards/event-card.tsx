@@ -62,7 +62,7 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
                         </span>
                     </div>
 
-                    <div className="text-sm md:text-xl font-semibold leading-4 tracking-tighter mb-1 truncate max-w-full">
+                    <div className="text-base md:text-lg font-extrabold leading-4.5 tracking-tighter mb-1  max-w-full">
                         {event.title}
                     </div>
                 </div>

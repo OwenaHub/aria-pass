@@ -34,6 +34,7 @@ import useSession from "~/hooks/use-session";
 import client from "~/http/client";
 
 import { defaultMeta } from '~/lib/meta';
+import { eventCategory } from "~/lib/d.store";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -182,19 +183,18 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             What type of event are you hosting?
                         </Label>
                         <div className="flex flex-wrap gap-2 items-stretch">
-                            {['Opera', 'Recital', 'Workshop', 'Cantata', "Carol", "Concert", "Other"]
-                                .map((item) => (
-                                    <Button
-                                        key={item}
-                                        type="button"
-                                        size={"sm"} variant={"outline"}
-                                        className={`rounded-full shadow-none text-xs font-light 
-                                            ${form.event_type === item && 'bg-primary-theme text-white font-medium'}`}
-                                        onClick={() => setForm((i) => ({ ...i, event_type: item }))}
-                                    >
-                                        {item}
-                                    </Button>
-                                ))
+                            {eventCategory.map((item) => (
+                                <Button
+                                    key={item}
+                                    type="button"
+                                    size={"sm"} variant={"outline"}
+                                    className={`rounded-full shadow-none text-xs font-light 
+                                            ${form.event_type === item && 'bg-primary-theme text-white font-medium hover:bg-primary-bg'}`}
+                                    onClick={() => setForm((i) => ({ ...i, event_type: item }))}
+                                >
+                                    {item}
+                                </Button>
+                            ))
                             }
                         </div>
                         <input type="hidden" name="event_type" value={form.event_type} />
@@ -423,6 +423,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             <MapPinHouse size={16} /> Hall name
                         </Label>
                         <Input
+                            required
                             name="venue_name"
                             className="py-5 rounded-full placeholder:text-gray-300"
                             placeholder="Merit Hall"
@@ -435,6 +436,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             <MapPlus size={16} /> Address
                         </Label>
                         <Input
+                            required
                             name="venue_address"
                             className="py-5 rounded-full placeholder:text-gray-300"
                             placeholder="5th Crescent Ave, Gaduwa close"

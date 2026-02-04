@@ -24,4 +24,5 @@ interface OrganiserEvent extends Model {
     liked?: boolean
     likes?: number;
     members: EventMember[];
+    eventProgram?: EventProgram[];
 }

@@ -18,6 +18,7 @@ import MembersTable from "./members-table";
 import FormatPrice from "~/components/utility/format-price";
 import EventReview from "./event-reviews";
 import NewTeammate from "~/components/custom/new-teammate";
+import EventProgram from "../_user.spaces_.$slug/event-program";
 
 export const meta: MetaFunction = (args: any) => {
     if (!args.data.event) {
@@ -78,6 +79,20 @@ export async function clientAction({ request, params }: Route.ClientActionArgs) 
                     });
                 }
                 return;
+            case 'program.create':
+                console.log(credentials);
+                await formRequest(credentials, `organiser/events/${params.slug}/programs`, 'POST');
+                toast.success("Program added!", {
+                    description: 'Feel free to edit the content of your event program'
+                });
+                return;
+            case 'program.edit':
+                console.log(credentials);
+                await formRequest(credentials, `organiser/events/${params.slug}/programs/${credentials.program_id}`, 'PATCH');
+                toast.success("Program updated!", {
+                    description: 'Feel free to edit the content of your event program'
+                });
+                return;
             default:
                 toast.warning('No form action specified', {
                     description: 'Contact support concerning this'
@@ -96,6 +111,7 @@ export async function clientAction({ request, params }: Route.ClientActionArgs) 
 
 export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
     const { event }: { event: OrganiserEvent } = loaderData;
+    console.log(event);
 
     const FORMATTED_DATE = dayjs(event.date).format('MMMM D, YYYY');
 
@@ -237,10 +253,20 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                 </section>
             </div>
 
+            <div className="rounded-xl p-4 flex flex-col gap-3 items-start bg-gray-100">
+                <p className="text-sm font-bold tracking-tight text-md">
+                    Manage your event schedule <span className="inline-block px-1 py-0.5 text-xs font-bold bg-pink-500 text-white rounded">NEW!</span>
+                </p>
+                <p className="text-sm tracking-tight mb-3">
+                    Your event program is sharable with the public and can be managed by others collaborating with you.
+                </p>
+                <EventProgram event={event} />
+            </div>
+
             <div className="mt-10 text-sm relative">
                 <h3 className="font-semibold">Event Tickets</h3>
 
-                <div className="flex items-stretch gap-7 mt-5 overflow-x-auto pb-10 border-b ">
+                <div className="flex items-stretch gap-7 mt-5 overflow-x-auto pb-10">
                     {event.tickets.length
                         ? event.tickets.map(ticket =>
                             <TicketCard ticket={ticket} user="organiser" key={ticket.id} />
@@ -261,7 +287,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                 )}
             </div>
 
-            <div className="mt-10 text-sm relative">
+            <div className="mt-5 text-sm relative">
                 <div className="flex items-center justify-between mb-5">
                     <h3 className="font-semibold">Staff/Performers</h3>
                     <NewTeammate events={[event]} />
@@ -277,7 +303,6 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                             </span>
                         </span>
                     }
-
                 </div>
             </div>
         </div>

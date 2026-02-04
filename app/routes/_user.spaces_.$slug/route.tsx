@@ -77,7 +77,7 @@ export default function EventSpaces({ loaderData }: Route.ComponentProps) {
             </section>
 
             <div className="pt-5">
-                <EventProgram />
+                <EventProgram event={space} />
             </div>
 
             <section>

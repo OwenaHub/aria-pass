@@ -9,6 +9,7 @@ import { Button } from '~/components/ui/button';
 import { FeedFilter } from '~/components/utility/feed-filter';
 import { defaultMeta } from '~/lib/meta';
 import DefaultError from '~/components/errors/default-error';
+import { eventCategory } from '~/lib/d.store';
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -66,7 +67,7 @@ export default function Events({ loaderData }: Route.ComponentProps) {
                     >
                         All
                     </Link>
-                    {["Opera", "Recital", "Workshop", "Carol", "Concert"].map((item) => (
+                    {eventCategory.map((item) => ( 
                         <Link
                             preventScrollReset
                             to={`?category=${item.toLowerCase()}`}
@@ -101,7 +102,7 @@ export default function Events({ loaderData }: Route.ComponentProps) {
                     >
                         All
                     </Link>
-                    {["Opera", "Recital", "Workshop", "Carol", "Concert"].map((item) => (
+                    {eventCategory.map((item) => (
                         <Link
                             to={`?category=${item.toLowerCase()}`}
                             key={item}

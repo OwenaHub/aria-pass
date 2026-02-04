@@ -20,5 +20,5 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
         },
     });
 
-    return redirect(`/my-events/${credentials.event_slug}?success=true`);
+    return redirect(`/my-events/${credentials.event_slug}`);
 }
