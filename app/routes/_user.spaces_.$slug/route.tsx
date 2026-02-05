@@ -76,13 +76,19 @@ export default function EventSpaces({ loaderData }: Route.ComponentProps) {
                 </div>
             </section>
 
-            <div className="pt-5">
+            <div className="rounded-xl p-4 flex flex-col gap-3 items-start bg-gray-100 mt-5">
+                <p className="text-sm font-bold tracking-tight text-md">
+                    Manage your event schedule <span className="inline-block px-1 py-0.5 text-[9px] font-bold bg-pink-500 text-white rounded">NEW!</span>
+                </p>
+                <p className="text-sm tracking-tight mb-3">
+                    Your event program is sharable with the public and can be managed by others collaborating with you.
+                </p>
                 <EventProgram event={space} />
             </div>
 
             <section>
                 <PurchasesTable event={space} />
             </section>
-        </div>
+        </div >
     )
 }
