@@ -7,8 +7,8 @@ import { getEventRevenue } from "~/lib/utils";
 import EventReview from "./event-reviews";
 import FormatPrice from "~/components/utility/format-price";
 import SpaceUsers from "./space-users";
-import { Banknote, ChartArea, Star, Users } from "lucide-react";
-import EventProgram from "./event-program";
+import { Banknote, Star, Users } from "lucide-react";
+import EventProgram from "~/components/custom/event-program";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     try {

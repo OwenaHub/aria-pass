@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Await, Link, redirect, useOutletContext, type MetaFunction } from 'react-router';
-import { ArrowRight, Calendar, ChevronRight, ShoppingBag } from 'lucide-react';
+import { ArrowRight, CalendarDays, ChevronRight, ShoppingBag, Tickets } from 'lucide-react';
 import type { Route } from '../_user.dashboard/+types/route';
 
 import client from '~/http/client';
@@ -17,8 +17,8 @@ import { BrSm } from '~/components/utility/line-break';
 // --- Reusable Sub-Components ---
 const QuickAction = ({ to, icon: Icon, label }: { to: string, icon: any, label: string }) => (
     <Link to={to} className='bg-white border border-primary-theme hover:shadow-md rounded-full px-3 py-2 flex items-center gap-1.5 transition-shadow'>
-        <Icon strokeWidth={1} className='size-3 md:size-4' />
-        <span className='text-xs font-light'>{label}</span>
+        <Icon strokeWidth={2} className='size-3.5 md:size-4.5' />
+        <span className='text-sm font-medium tracking-tight'>{label}</span>
     </Link>
 );
 
@@ -126,9 +126,9 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
                     </h1>
                     <div className='w-full overflow-x-auto'>
                         <div className='flex flex-wrap gap-3 items-center pb-3 w-max mx-auto'>
-                            <QuickAction to='/my-events/new' icon={Calendar} label='Create event' />
+                            <QuickAction to='/my-events/new' icon={CalendarDays} label='Create event' />
                             <QuickAction to='/purchases' icon={ShoppingBag} label='See purchases' />
-                            <QuickAction to='/events/?filter=all' icon={Calendar} label='See all events' />
+                            <QuickAction to='/events/?filter=all' icon={Tickets} label='See all events' />
                         </div>
                     </div>
                 </div>
