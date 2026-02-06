@@ -1,6 +1,6 @@
 import { Await, Link, redirect, useSearchParams } from "react-router";
 import { BrMd } from "~/components/utility/line-break";
-import { ArrowRight, ChevronLeft, ChevronRight, Crown, Piano, Stars, UsersRound, UserStar } from "lucide-react";
+import { ArrowRight, CheckCircle, ChevronLeft, ChevronRight, Crown, Piano, Smartphone, Stars, Users, UsersRound, UserStar, Zap } from "lucide-react";
 import SearchBar from "~/components/utility/search-bar";
 import { FeedFilter } from "~/components/utility/feed-filter";
 import { Button } from "~/components/ui/button";
@@ -67,21 +67,23 @@ export default function Home({ loaderData }: Route.ComponentProps) {
             <header className="flex flex-col gap-5 lg:min-h-[65vh]">
                 <section className="container flex justify-between gap-20 items-center mt-10 mb-16">
                     <div className="lg:basis-7/12 text-center md:text-start overflow-auto">
-
-                        <div className="bg-white shadow-md text-xs md:text-xs rounded-full px-4 py-2 w-max mb-5 tracking-tight flex items-center gap-0 mx-auto md:mx-0">
+                        <div className="bg-white border text-xs md:text-xs rounded-full px-4 py-2 w-max mb-8 tracking-tight flex items-center gap-0 mx-auto md:mx-0">
                             <span className="text-primary-theme font-semibold flex items-center gap-1.5">
                                 <span>Commission-free</span> <Stars className="text-pink-300 fill-pink-300" strokeWidth={1} size={16} />
                             </span>
                             <span className="h-4 border-r mx-3" />
-                            <span className="text-muted-foreground flex items-center gap-1">
+                            <Link to={'/my-events/new'} className="text-muted-foreground flex items-center gap-1">
                                 <span>Sell tickets</span>
                                 <ChevronRight strokeWidth={1} size={16} />
-                            </span>
+                            </Link>
                         </div>
-
-                        <h1 className="text-5xl md:text-6xl font-semibold md:leading-16 text-primary -tracking-[0.07em]">
-                            Promoting Live <br /> Musical <span className="px-1 bg-indigo-100 border font-serif text-indigo-800 font-light border-primary-theme rounded-xl -rotate-6 inline-block">Concerts</span>
+                        <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6 text-slate-900">
+                            Promoting Live <br className="hidden md:block" />
+                            Musical <span className="text-transparent bg-clip-text bg-linear-to-r from-primary-theme to-pink-500">Concerts</span>
                         </h1>
+                        {/* <h1 className="text-5xl md:text-6xl font-semibold md:leading-16 text-primary -tracking-[0.07em]">
+                            <br />  <span className="px-1 bg-indigo-100 border font-serif text-indigo-800 font-light border-primary-theme rounded-xl -rotate-6 inline-block">Concerts</span>
+                        </h1> */}
                         <p className="tracking-tight  font-medium text-gray-500 text-md md:text-base mt-5 leading-6">
                             Discover events, buy tickets, and connect with fellow <BrMd /> music enthusiasts on AriaPass.
                         </p>
@@ -267,27 +269,32 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
                 <div className="container mt-10">
                     <div
-                        className="h-80 rounded-4xl py-6 px-8 my-10 flex flex-col justify-center"
+                        className="h-100 rounded-3xl py-6 px-6 my-10 flex flex-col justify-between"
                         style={{
-                            backgroundImage: `linear-gradient(90deg, #cccccc, #cccccc00), url('/images/ensemble-banner.png')`,
+                            backgroundImage: `linear-gradient(90deg, #000000, #cccccc00), url('/images/ensemble-banner.png')`,
                             backgroundSize: 'cover, cover',
                             backgroundPosition: 'center, center',
                         }}
                     >
-                        <div className="">
-                            <h2 className="text-3xl font-semibold tracking-tighter mb-4">
-                                Get more leads, <br className="md:hidden" />  Pay no fees
-                            </h2>
-                            <p className="font-light text-sm mb-10">Rank higher, skip the fees, and level up your profile — all <BrMd /> for $0/month.</p>
+                        <div />
+                        <div className="text-white">
+                            <div className="mb-10 tracking-tighter">
+                                <h2 className="text-3xl font-bold tracking-tighter mb-4">
+                                    Get more leads, <br className="md:hidden" /> Pay no fees
+                                </h2>
+                                <p className="font-light text-sm">Rank higher, skip the fees, and level up your profile — all <BrMd /> for $0/month.</p>
+                            </div>
 
                             <Link to={"/organiser-request"}>
-                                <Button className="w-full md:w-max rounded-full px-10 py-6">
+                                <Button className="w-full md:w-max rounded-full px-10 py-6 bg-white/20">
                                     Become an Organiser
                                 </Button>
                             </Link>
                         </div>
                     </div>
                 </div>
+
+                {/* ///////////////////////////////////////////////////////// */}
             </main>
 
         </div >

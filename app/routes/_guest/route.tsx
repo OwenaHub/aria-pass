@@ -41,15 +41,15 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
 
     return (
         <>
-            <div className={`rounded-lg mx-5 my-3 sticky top-3 z-10 ${scrolled && 'bg-white/70 backdrop-blur-lg shadow-md transition'}`}>
-                <nav className={`py-3 container flex items-center justify-between transition-all`}>
+            <div className={`rounded-full mx-5 mt-2 sticky top-2 z-10 ${scrolled && 'bg-white/70 backdrop-blur-lg shadow-md transition'}`}>
+                <nav className={`p-4 md:p-2 ps-3 md:ps-8 flex items-center justify-between transition-all`}>
                     <Link to="/" className='flex items-center gap-2'>
-                        <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-18 object-contain" />
+                        <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-10 md:w-14 object-contain" />
                     </Link>
 
                     <ul className='hidden md:flex gap-8'>
                         {NAV.map((item) => (
-                            <li key={item} className='hover:text-gray-400 text-sm font-normal tracking-tight transition-all'>
+                            <li key={item} className='hover:text-gray-400 text-xs font-normal tracking-tight transition-all'>
                                 <Link to={item.toLowerCase()}>{item}</Link>
                             </li>
                         ))}
@@ -71,12 +71,12 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                         : (
                             <div className='hidden md:flex items-center gap-2'>
                                 <Link to={"register"}>
-                                    <Button size={'sm'} variant={'ghost'} className='px-6 py-5 rounded-full cursor-pointer'>
+                                    <Button size={'sm'} variant={'ghost'} className='p-6 rounded-full cursor-pointer'>
                                         Register
                                     </Button>
                                 </Link>
                                 <Link to={"/login"}>
-                                    <Button size={'sm'} className='px-6 py-5 bg-[#3A3546] rounded-full cursor-pointer'>
+                                    <Button size={'sm'} className='p-6 bg-[#3A3546] rounded-full cursor-pointer'>
                                         Log in
                                     </Button>
                                 </Link>
