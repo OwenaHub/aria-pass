@@ -17,7 +17,7 @@ export default function SpaceUsers({ space }: { space: OrganiserEvent }) {
 
                     <DialogContent className="sm:max-w-106.25">
                         <DialogHeader className="mb-2">
-                            <DialogTitle>Event members</DialogTitle>
+                            <DialogTitle className='text-start'>Event members</DialogTitle>
                             <DialogDescription className='text-xs flex items-center gap-1'>
                                 <Info size={16}/>
                                 <span>

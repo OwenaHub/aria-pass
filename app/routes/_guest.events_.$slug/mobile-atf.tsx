@@ -13,6 +13,7 @@ import Countdown from "~/components/utility/countdown";
 import PostReviewWrapper from "~/components/custom/post-review-wrapper";
 import { Button } from "~/components/ui/button";
 import ReviewCard from "~/components/cards/review-card";
+import ViewEventProgram from "~/components/cards/view-event-program";
 
 export default function MobileView({ event }: { event: OrganiserEvent }) {
     const user: User = useOutletContext();
@@ -332,6 +333,12 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                                     </Button>
                                 </PostReviewWrapper>
                             </div>
+                        </div>
+                    )}
+
+                    {(event.eventProgram && event.eventProgram?.length > 0) && (
+                        <div>
+                            <ViewEventProgram event={event} />
                         </div>
                     )}
 

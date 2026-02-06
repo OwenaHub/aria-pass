@@ -19,6 +19,7 @@ import PreviewCard from './preview-card';
 import { STORAGE_URL } from '~/config/defaults';
 import formRequest from '~/http/form.request';
 import { defaultMeta } from '~/lib/meta'
+import { eventCategory } from '~/lib/d.store';
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -155,20 +156,19 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                             What type of event are you hosting?
                         </Label>
                         <div className="flex flex-wrap gap-2 items-stretch">
-                            {['Opera', 'Recital', 'Workshop', 'Cantata', "Carol", "Concert", "Other"]
-                                .map((item) => (
-                                    <Button
-                                        key={item}
-                                        type="button"
-                                        size={"sm"} variant={"outline"}
-                                        className={`rounded-full shadow-none text-xs font-light 
+                            {eventCategory.map((item) => (
+                                <Button
+                                    key={item}
+                                    type="button"
+                                    size={"sm"} variant={"outline"}
+                                    className={`rounded-full shadow-none text-xs font-light 
                                             ${form.event_type === item && 'bg-primary-theme text-white font-medium'}`
-                                        }
-                                        onClick={() => setForm((i) => ({ ...i, event_type: item }))}
-                                    >
-                                        {item}
-                                    </Button>
-                                ))
+                                    }
+                                    onClick={() => setForm((i) => ({ ...i, event_type: item }))}
+                                >
+                                    {item}
+                                </Button>
+                            ))
                             }
                         </div>
                         <input type="hidden" name="event_type" value={form.event_type} />

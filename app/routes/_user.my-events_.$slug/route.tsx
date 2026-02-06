@@ -9,7 +9,7 @@ import type { Route } from "../_user.my-events_.$slug/+types/route";
 import { Link, redirect, type MetaFunction } from "react-router";
 import { parseForm } from "~/lib/utils";
 import formRequest from "~/http/form.request";
-import { ArrowLeft, ArrowRight, ChevronDown, Laptop, Share, Smartphone } from "lucide-react";
+import { ArrowLeft, ArrowRight, Laptop, Share, Smartphone } from "lucide-react";
 import TicketCard from "~/components/cards/ticket-card";
 import UpdateEventStatus from "./update-event-status";
 import { categorizeDevices } from "./analytics";
@@ -97,7 +97,6 @@ export async function clientAction({ request, params }: Route.ClientActionArgs) 
 
 export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
     const { event }: { event: OrganiserEvent } = loaderData;
-    console.log(event);
 
     const FORMATTED_DATE = dayjs(event.date).format('MMMM D, YYYY');
 
@@ -181,34 +180,33 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                 </div>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-3 lg:gap-10 items-stretch">
-                <section className="flex flex-col gap-4 flex-1 border-t py-5">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <section className="flex flex-col gap-4 flex-1 bg-gray-100 p-4 rounded-xl">
                     <p className="text-sm">Total revenue</p>
                     <p className="font-bold text-2xl">
                         <span className="text-xs text-muted-foreground">NGN</span>{' '}
                         <FormatPrice withSymbol={false} price={SUM_AMOUNT.toFixed(2)} />
                     </p>
                 </section>
-                <section className="flex flex-col gap-4 flex-1 border-t py-5">
+                <section className="flex flex-col gap-4 flex-1 bg-gray-100 p-4 rounded-xl">
                     <p className="text-sm">Tickets sold</p>
                     <div className="flex justify-between">
                         <p className="font-bold text-2xl">
                             {TOTAL_TICKET_SOLD}/{TOTAL_TICKETS}
                         </p>
-                        <Button variant={"secondary"} size={"sm"} className="text-xs p-0">
+                        <div className="bg-white text-xs p-2 rounded-md hidden md:block">
                             <span>{event.tickets.length} categories</span>
-                            <ChevronDown size={16} />
-                        </Button>
+                        </div>
                     </div>
                 </section>
-                <section className="flex flex-col gap-4 flex-1 border-t py-5">
+                <section className="flex flex-col gap-4 flex-1 bg-gray-100 p-4 rounded-xl">
                     <p className="text-sm">Page views</p>
                     <div className="flex justify-between">
                         <p className="font-bold text-2xl">
                             {typeof event.views === 'object' && (event.views.length)}
                         </p>
 
-                        <div className="flex items-end text-primary gap-4 bg-accent px-2 rounded-md">
+                        <div className="flex items-end text-primary gap-4 bg-white px-2 rounded-md">
                             <div className="flex gap-1 items-center">
                                 <span className="font-medium text-lg">
                                     {categorizeDevices(event.views as any[]).phone}
@@ -224,7 +222,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                         </div>
                     </div>
                 </section>
-                <section className="flex flex-col gap-4 flex-1 border-t py-5">
+                <section className="flex flex-col gap-4 flex-1 bg-gray-100 p-4 rounded-xl">
                     <p className="text-sm">User Engagements</p>
 
                     <p className="flex items-stretch gap-4">
@@ -233,7 +231,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                         </p>
                         <div className="border-s" />
                         <p className="font-bold text-2xl">
-                            {event.likes || "0"} <span className="text-xs text-muted-foreground font-medium">user(s) saved event</span>
+                            {event.likes || "0"} <span className="text-xs text-muted-foreground font-medium">likes</span>
                         </p>
                     </p>
                 </section>

@@ -23,7 +23,6 @@ client.interceptors.response.use((response) => response, async (error: AxiosErro
 
     const status = error.response?.status;
 
-    // Handle specific Axios error codes first
     if (error.code === "ERR_NETWORK") {
         toast.warning("No internet connection", {
             description: "Please check your connection and try again",

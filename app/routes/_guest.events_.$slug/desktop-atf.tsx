@@ -14,6 +14,7 @@ import { TERMS_AND_CONDITIONS } from "./terms-and-conditions";
 import Countdown from "~/components/utility/countdown";
 import PostReviewWrapper from "~/components/custom/post-review-wrapper";
 import ReviewCard from "~/components/cards/review-card";
+import ViewEventProgram from "~/components/cards/view-event-program";
 
 export default function DesktopView({ event }: { event: OrganiserEvent }) {
     const user: User = useOutletContext();
@@ -198,8 +199,8 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                     </section>
                 </div>
 
-                <div className="basis-4/10 min-w-0">
-                    <aside className="bg-white px-8 py-6 rounded-3xl border border-gray-100 mb-8">
+                <aside className="basis-4/10 min-w-0">
+                    <div className="bg-white px-8 py-6 rounded-3xl border border-gray-100 mb-8">
                         <div className="text-sm relative">
                             <div className="flex items-center justify-between">
                                 <h3 className="font-medium text-xl tracking-tighter flex items-center gap-2">
@@ -250,7 +251,7 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                         )}
 
                         <CheckoutButton event={event} />
-                    </aside>
+                    </div>
 
                     <div className="bg-white px-8 py-6 rounded-3xl border border-gray-100 mb-8">
                         <div className="flex items-center justify-between">
@@ -288,9 +289,13 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                                 </Button>
                             </PostReviewWrapper>
                         </div>
-
                     </div>
-                </div>
+                    {(event.eventProgram && event.eventProgram?.length > 0) && (
+                        <div>
+                            <ViewEventProgram event={event} />
+                        </div>
+                    )}
+                </aside>
             </div>
         </div>
     )

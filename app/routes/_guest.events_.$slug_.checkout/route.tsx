@@ -9,11 +9,12 @@ import FormatPrice from '~/components/utility/format-price';
 import { ArrowLeft, ArrowRight, Dot } from 'lucide-react';
 import { STORAGE_URL } from '~/config/defaults';
 import { isPastEventDate } from '~/lib/utils';
+import ViewEventProgram from '~/components/cards/view-event-program';
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     try {
         const { data } = await client.get(`api/events/${params.slug}`);
-        
+
         if (isPastEventDate(data.date, data.startTime)) {
             toast.info("Expired link", {
                 description: "This event is is past"
@@ -123,6 +124,14 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                         <PaystackPurchaseButton user={user} ticket={ticket} />
                     )}
                 </div>
+            </section>
+
+            <section className='container my-8'>
+                {(event.eventProgram && event.eventProgram?.length > 0) && (
+                    <div>
+                        <ViewEventProgram event={event} />
+                    </div>
+                )}
             </section>
         </div>
     )
