@@ -53,7 +53,6 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 
 export default function ViewEvent({ loaderData }: Route.ComponentProps) {
   const { event }: { event: OrganiserEvent } = loaderData;
-console.log(event);
 
   return (
     <div className='bg-gray-50'>
