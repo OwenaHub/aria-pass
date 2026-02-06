@@ -1,6 +1,6 @@
 import { Await, Link, redirect, useSearchParams } from "react-router";
 import { BrMd } from "~/components/utility/line-break";
-import { ArrowRight, CheckCircle, ChevronLeft, ChevronRight, Crown, Piano, Smartphone, Stars, Users, UsersRound, UserStar, Zap } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Crown, Piano, Stars, UsersRound, UserStar } from "lucide-react";
 import SearchBar from "~/components/utility/search-bar";
 import { FeedFilter } from "~/components/utility/feed-filter";
 import { Button } from "~/components/ui/button";
@@ -77,13 +77,10 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                                 <ChevronRight strokeWidth={1} size={16} />
                             </Link>
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6 text-slate-900">
-                            Promoting Live <br className="hidden md:block" />
+                        <h1 className="font-serif text-4xl md:text-6xl text-primary-theme tracking-tighter mb-6">
+                            Promoting Live <br />
                             Musical <span className="text-transparent bg-clip-text bg-linear-to-r from-primary-theme to-pink-500">Concerts</span>
                         </h1>
-                        {/* <h1 className="text-5xl md:text-6xl font-semibold md:leading-16 text-primary -tracking-[0.07em]">
-                            <br />  <span className="px-1 bg-indigo-100 border font-serif text-indigo-800 font-light border-primary-theme rounded-xl -rotate-6 inline-block">Concerts</span>
-                        </h1> */}
                         <p className="tracking-tight  font-medium text-gray-500 text-md md:text-base mt-5 leading-6">
                             Discover events, buy tickets, and connect with fellow <BrMd /> music enthusiasts on AriaPass.
                         </p>
@@ -285,7 +282,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                                 <p className="font-light text-sm">Rank higher, skip the fees, and level up your profile — all <BrMd /> for $0/month.</p>
                             </div>
 
-                            <Link to={"/organiser-request"}>
+                            <Link to={"/organisers"}>
                                 <Button className="w-full md:w-max rounded-full px-10 py-6 bg-white/20">
                                     Become an Organiser
                                 </Button>

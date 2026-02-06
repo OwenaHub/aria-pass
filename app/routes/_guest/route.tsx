@@ -1,11 +1,12 @@
-import { ChevronRight, Equal, Facebook, X } from 'lucide-react'
-import { Suspense, useEffect, useState } from 'react';
-import { Await, Link, NavLink, Outlet } from 'react-router'
+import { Equal, Facebook, X } from 'lucide-react'
+import { useEffect, useState } from 'react';
+import { Link, Outlet } from 'react-router'
 import { Button } from '~/components/ui/button'
 import AnnouncementBanner from '~/components/cards/announcement-banner';
 import type { Route } from '../_guest/+types/route';
 import useSession from '~/hooks/use-session';
 import CustomAvatar from '~/components/custom/custom-avatar';
+import MobileNav from './mobile-nav';
 
 export async function clientLoader(_: Route.ClientLoaderArgs) {
     const { getUser } = useSession();
@@ -84,71 +85,11 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                         )
 
                     }
-                    <button aria-label="Menu" className="block md:hidden" type="button" onClick={() => setMenu(!menu)}>
-                        {!menu
-                            ? <Equal />
-                            : <X />
-                        }
-                    </button>
-                </nav>
-                {menu && (
-                    <div className="bg-white animated fadeIn rounded-lg block md:hidden mx-auto px-4 py-4 z-50">
-                        <div>
-                            <div className="mb-3">
-                                {NAV.map((link) => (
-                                    <div key={link} className="border-b py-4">
-                                        <NavLink
-                                            onClick={() => setMenu(!menu)}
-                                            to={link}
-                                            className={({ isActive }) => isActive ? "text-primary font-bold" : "text-gray-500"}
-                                        >
-                                            {link}
-                                        </NavLink>
-                                    </div>
-                                ))}
-                                <div className="py-4">
-                                    <a href="tel:+2348026658956" className="flex text-foreground text-sm font-light gap-2 items-center">
-                                        <span>Contact support</span> <ChevronRight size={12} />
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="flex flex-col gap-4">
-                                <Suspense fallback={<div className="h-10 w-full rounded bg-gray-100 animate-pulse" />}>
-                                    <Await resolve={session}>
-                                        {(session: boolean) =>
-                                            session ? (
-                                                <Link
-                                                    onClick={() => setMenu(!menu)}
-                                                    to="/dashboard"
-                                                    className="bg-secondary rounded-[6px] text-secondary-foreground text-xs font-medium hover:shadow-lg py-3 text-center uppercase"
-                                                >
-                                                    Dashboard
-                                                </Link>
-                                            ) : (
-                                                <>
-                                                    <Link
-                                                        onClick={() => setMenu(!menu)}
-                                                        to="/login"
-                                                        className="bg-white border border-gray-100 rounded-full text-center text-gray-600 text-sm w-full block font-bold hover:shadow-lg py-3"
-                                                    >
-                                                        Log in
-                                                    </Link>
-                                                    <Link
-                                                        onClick={() => setMenu(!menu)}
-                                                        to="/register"
-                                                        className="rounded-full text-white text-center text-sm w-full block font-bold bg-[#3A3546] py-3"
-                                                    >
-                                                        Sign up
-                                                    </Link>
-                                                </>
-                                            )
-                                        }
-                                    </Await>
-                                </Suspense>
-                            </div>
-                        </div>
+                    <div aria-label="Menu" className="block md:hidden" onClick={() => setMenu(!menu)}>
+                        <MobileNav />
                     </div>
-                )}
+                </nav>
+               
             </div>
             <div className='sticky top-22 md:top-24 z-10 mx-5 overflow-hidden rounded-lg'>
                 <AnnouncementBanner />
