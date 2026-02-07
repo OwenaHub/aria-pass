@@ -26,8 +26,8 @@ export const meta: MetaFunction = ({ data }: any) => {
     // Open Graph (Facebook, LinkedIn)
     { property: "og:title", content: `${event.title} | AriaPass` },
     { property: "og:description", content: event.description || "Discover the community behind the concerts" },
-    { property: "og:image", content: "https://ariapass.owenahub.com/images/banners/app_banner.png" },
-    { property: "og:url", content: "https://ariapass.owenahub.com" },
+    { property: "og:image", content: "https://ariapass.africa/images/banners/app_banner.png" },
+    { property: "og:url", content: "https://ariapass.africa" },
     { property: "og:type", content: "website" },
 
     // Twitter
@@ -35,7 +35,7 @@ export const meta: MetaFunction = ({ data }: any) => {
     { name: "twitter:site", content: "@owenahub" }, // Optional: Add your Twitter handle
     { name: "twitter:title", content: `${event.title} | AriaPass` },
     { name: "twitter:description", content: event.description || "Discover the community behind the concerts" },
-    { name: "twitter:image", content: "https://ariapass.owenahub.com/images/banners/app_banner.png" },
+    { name: "twitter:image", content: "https://ariapass.africa/images/banners/app_banner.png" },
   ];
 };
 

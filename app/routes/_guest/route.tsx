@@ -86,12 +86,12 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
 
                     }
                     <div aria-label="Menu" className="block md:hidden" onClick={() => setMenu(!menu)}>
-                        <MobileNav />
+                        <MobileNav user={user} />
                     </div>
                 </nav>
                
             </div>
-            <div className='sticky top-22 md:top-24 z-10 mx-5 overflow-hidden rounded-lg'>
+            <div className='sticky top-22 md:top-20 z-10 mx-5 overflow-hidden rounded-lg'>
                 <AnnouncementBanner />
             </div>
 

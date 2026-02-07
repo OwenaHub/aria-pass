@@ -115,7 +115,6 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
         }, 0);
     }
 
-    // const PURCHASES = getPurchases(event.tickets);
     const SUM_AMOUNT = sumPrices(event.tickets.flatMap(ticket => ticket.purchases || []));
 
     return (
@@ -181,24 +180,28 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
             </div>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <section className="flex flex-col gap-4 flex-1 bg-gray-100 p-4 rounded-xl">
-                    <p className="text-sm">Total revenue</p>
-                    <p className="font-bold text-2xl">
-                        <span className="text-xs text-muted-foreground">NGN</span>{' '}
-                        <FormatPrice withSymbol={false} price={SUM_AMOUNT.toFixed(2)} />
-                    </p>
-                </section>
-                <section className="flex flex-col gap-4 flex-1 bg-gray-100 p-4 rounded-xl">
-                    <p className="text-sm">Tickets sold</p>
-                    <div className="flex justify-between">
-                        <p className="font-bold text-2xl">
-                            {TOTAL_TICKET_SOLD}/{TOTAL_TICKETS}
-                        </p>
-                        <div className="bg-white text-xs p-2 rounded-md hidden md:block">
-                            <span>{event.tickets.length} categories</span>
-                        </div>
-                    </div>
-                </section>
+                {(event.tickets.length > 1 || event.tickets[0].price !== '0.00') && (
+                    <>
+                        <section className="flex flex-col gap-4 flex-1 bg-gray-100 p-4 rounded-xl">
+                            <p className="text-sm">Total revenue</p>
+                            <p className="font-bold text-2xl">
+                                <span className="text-xs text-muted-foreground">NGN</span>{' '}
+                                <FormatPrice withSymbol={false} price={SUM_AMOUNT.toFixed(2)} />
+                            </p>
+                        </section>
+                        <section className="flex flex-col gap-4 flex-1 bg-gray-100 p-4 rounded-xl">
+                            <p className="text-sm">Tickets sold</p>
+                            <div className="flex justify-between flex-wrap">
+                                <p className="font-bold text-2xl">
+                                    {TOTAL_TICKET_SOLD}/{TOTAL_TICKETS}
+                                </p>
+                                <div className="bg-white text-xs p-2 rounded-md hidden md:block">
+                                    <span>{event.tickets.length} categories</span>
+                                </div>
+                            </div>
+                        </section>
+                    </>
+                )}
                 <section className="flex flex-col gap-4 flex-1 bg-gray-100 p-4 rounded-xl">
                     <p className="text-sm">Page views</p>
                     <div className="flex justify-between">

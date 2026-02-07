@@ -43,8 +43,8 @@ export const meta: MetaFunction = () => {
     // Open Graph (Facebook, LinkedIn)
     { property: "og:title", content: "AriaPass - Promoting Live Musical Concerts" },
     { property: "og:description", content: "Discover events, buy tickets, and connect with fellow music enthusiasts on AriaPass" },
-    { property: "og:image", content: "https://ariapass.owenahub.com/images/banners/app_banner.png" },
-    { property: "og:url", content: "https://ariapass.owenahub.com" },
+    { property: "og:image", content: "https://ariapass.africa/images/banners/app_banner.png" },
+    { property: "og:url", content: "https://ariapass.africa" },
     { property: "og:type", content: "website" },
 
     // Twitter
@@ -52,7 +52,7 @@ export const meta: MetaFunction = () => {
     { name: "twitter:site", content: "@owenahub" }, // Optional: Add your Twitter handle
     { name: "twitter:title", content: "AriaPass - Promoting Live Musical Concerts" },
     { name: "twitter:description", content: "Discover events, buy tickets, and connect with fellow music enthusiasts on AriaPass" },
-    { name: "twitter:image", content: "https://ariapass.owenahub.com/images/banners/app_banner.png" },
+    { name: "twitter:image", content: "https://ariapass.africa/images/banners/app_banner.png" },
   ];
 };
 

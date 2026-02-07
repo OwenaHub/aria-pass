@@ -5,10 +5,10 @@ import {
     DrawerContent,
     DrawerTrigger,
 } from "~/components/ui/drawer"
-import { Calendar1, Users } from "lucide-react"
+import { Calendar1, ChevronRight, Home, Users, UserStar } from "lucide-react"
 import { Link } from "react-router"
 
-export default function MobileNav() {
+export default function MobileNav({ user }: { user: User }) {
     // 1. Create state to control the drawer
     const [open, setOpen] = React.useState(false)
 
@@ -59,12 +59,42 @@ export default function MobileNav() {
                             className="flex items-center gap-3"
                         >
                             <div className="rounded-full p-4 bg-gray-100">
-                                <Calendar1 strokeWidth={2} className="size-6" />
+                                <UserStar strokeWidth={2} className="size-6" />
                             </div>
                             <span className="tracking-tighter text-lg">
                                 Artists
                             </span>
                         </Link>
+
+                        <hr className="my-4"/>
+
+                        {(user && user.name) ? (
+                            <Link
+                                to={'/dashboard'}
+                                onClick={() => setOpen(false)}
+                                className="flex items-center gap-3 border bg-gray-100 rounded-full"
+                            >
+                                <div className="rounded-full p-4 bg-gray-700 text-white">
+                                    <Home strokeWidth={2} className="size-6" />
+                                </div>
+                                <span className="tracking-tighter text-lg">
+                                    Dashboard
+                                </span>
+                            </Link>
+                        ) : (
+                            <Link
+                                to={'/login'}
+                                onClick={() => setOpen(false)}
+                                className="flex rounded-full border items-center gap-3 bg-gray-100"
+                            >
+                                <div className="rounded-full p-4 bg-gray-700 text-white">
+                                    <ChevronRight strokeWidth={2} className="size-6" />
+                                </div>
+                                <span className="tracking-tighter text-lg">
+                                    Login
+                                </span>
+                            </Link>
+                        )}
                     </div>
 
                 </div>

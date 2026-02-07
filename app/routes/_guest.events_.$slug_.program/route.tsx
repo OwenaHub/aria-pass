@@ -1,7 +1,7 @@
 import client from "~/http/client";
 import type { Route } from "../_guest.events_.$slug/+types/route";
 import { toast } from "sonner";
-import { Link, redirect } from "react-router";
+import { redirect } from "react-router";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/components/ui/accordion";
 import { FormatLineBreak } from "~/components/utility/format-line-break";
 import { Calendar, Share } from "lucide-react";
@@ -12,8 +12,16 @@ import { Button } from "~/components/ui/button";
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     try {
         const { data } = await client.get(`api/events/${params.slug}/program`);
+        const event = data as OrganiserEvent;
 
-        return { event: data }
+        if (!event.eventProgram || event.eventProgram.length === 0) {
+            toast.warning('No event program found', {
+                description: 'It may have been deleted or never existed.'
+            });
+
+            return redirect(`/events/${params.slug}`);
+        }
+        return { event }
     } catch (error: any) {
         toast.error("Something went wrong", {
             description: `Status code ${error.status} - Unable to load resource`
@@ -80,22 +88,22 @@ export default function EventProgram({ loaderData }: Route.ComponentProps) {
                 </Accordion>
             </section>
 
+            {/* Navigation Menu */}
             <div className="border p-1.5 border-gray-100 shadow-lg  bg-white/35 backdrop-blur-xs rounded-full w-max fixed bottom-10 z-50 left-1/2 -translate-x-1/2">
                 <section className="flex items-center gap-2">
-                    <Link to={`/events/${event.slug}/checkout`}>
+                    {/* <Link to={`/events/${event.slug}/checkout`}>
                         <Button
                             variant={'secondary'}
-                            className="rounded-full flex gap-2 items-center text-xs font-bold tracking-tight"
+                            className="rounded-full flex gap-2 items-center text-sm font-bold tracking-tight"
                         >
-                            {/* <Share className="w-4 h-4 text-primary" /> */}
                             <span className="font-medium">
                                 Buy Ticket
                             </span>
                         </Button>
-                    </Link>
+                    </Link> */}
                     <Button
                         variant={'outline'}
-                        className="rounded-full flex gap-2 items-center text-xs font-bold tracking-tight"
+                        className="rounded-full flex gap-2 items-center text-sm font-bold tracking-tight"
                         onClick={() => {
                             const shareData = {
                                 title: event.title,

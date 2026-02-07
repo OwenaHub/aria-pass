@@ -10,6 +10,7 @@ import { FeedFilter } from '~/components/utility/feed-filter';
 import { defaultMeta } from '~/lib/meta';
 import DefaultError from '~/components/errors/default-error';
 import { eventCategory } from '~/lib/d.store';
+import { BrMd } from '~/components/utility/line-break';
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -67,7 +68,7 @@ export default function Events({ loaderData }: Route.ComponentProps) {
                     >
                         All
                     </Link>
-                    {eventCategory.map((item) => ( 
+                    {eventCategory.map((item) => (
                         <Link
                             preventScrollReset
                             to={`?category=${item.toLowerCase()}`}
@@ -126,23 +127,29 @@ export default function Events({ loaderData }: Route.ComponentProps) {
 
             <hr className="mt-10" />
 
-            <div className="container mt-20">
+            <div className="container mt-10">
                 <div
-                    className="h-80 rounded py-6 px-8 my-10 flex flex-col justify-center"
+                    className="h-100 rounded-3xl py-6 px-6 my-10 flex flex-col justify-between"
                     style={{
-                        backgroundImage: `linear-gradient(90deg, #FAF9FB, #FAF9FB00), url('/images/ensemble-banner.png')`,
+                        backgroundImage: `linear-gradient(90deg, #000000, #cccccc00), url('/images/ensemble-banner.png')`,
                         backgroundSize: 'cover, cover',
                         backgroundPosition: 'center, center',
                     }}
                 >
-                    <div className="">
-                        <div className="h-10 w-10 rounded-full bg-[#F6A700] mb-3" />
-                        <h2 className="text-xl font-bold mb-2">Get more leads, pay no fees</h2>
-                        <p className="font-light text-xs mb-10">Rank higher, skip the fees, and level up your profile — all <br /> for $8/month.</p>
+                    <div />
+                    <div className="text-white">
+                        <div className="mb-10 tracking-tighter">
+                            <h2 className="text-3xl font-bold tracking-tighter mb-4">
+                                Get more leads, <br className="md:hidden" /> Pay no fees
+                            </h2>
+                            <p className="font-light text-sm">Rank higher, skip the fees, and level up your profile — all <BrMd /> for $0/month.</p>
+                        </div>
 
-                        <Button className="rounded-full px-10">
-                            Become an Organiser
-                        </Button>
+                        <Link to={"/organisers"}>
+                            <Button className="w-full md:w-max rounded-full px-10 py-6 bg-white/20">
+                                Become an Organiser
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>

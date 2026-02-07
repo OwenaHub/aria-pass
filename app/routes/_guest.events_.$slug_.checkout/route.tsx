@@ -17,9 +17,9 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 
         if (isPastEventDate(data.date, data.startTime)) {
             toast.info("Expired link", {
-                description: "This event is is past"
+                description: "This event is past"
             });
-            return redirect('/');
+            return redirect(`/events/${params.slug}`);
         }
 
         return { event: data }
