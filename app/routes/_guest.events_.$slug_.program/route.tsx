@@ -4,10 +4,12 @@ import { toast } from "sonner";
 import { redirect } from "react-router";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/components/ui/accordion";
 import { FormatLineBreak } from "~/components/utility/format-line-break";
-import { Calendar, Share } from "lucide-react";
+import { Calendar, QrCode, Share } from "lucide-react";
 import dayjs from "dayjs";
 import { to12HourFormat } from "~/lib/utils";
 import { Button } from "~/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "~/components/ui/dialog";
+import QRCode from "react-qr-code";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     try {
@@ -91,16 +93,7 @@ export default function EventProgram({ loaderData }: Route.ComponentProps) {
             {/* Navigation Menu */}
             <div className="border p-1.5 border-gray-100 shadow-lg  bg-white/35 backdrop-blur-xs rounded-full w-max fixed bottom-10 z-50 left-1/2 -translate-x-1/2">
                 <section className="flex items-center gap-2">
-                    {/* <Link to={`/events/${event.slug}/checkout`}>
-                        <Button
-                            variant={'secondary'}
-                            className="rounded-full flex gap-2 items-center text-sm font-bold tracking-tight"
-                        >
-                            <span className="font-medium">
-                                Buy Ticket
-                            </span>
-                        </Button>
-                    </Link> */}
+                    <QRCodeModal event={event} />
                     <Button
                         variant={'outline'}
                         className="rounded-full flex gap-2 items-center text-sm font-bold tracking-tight"
@@ -123,3 +116,39 @@ export default function EventProgram({ loaderData }: Route.ComponentProps) {
         </div>
     )
 }
+
+export function QRCodeModal({ event }: { event: OrganiserEvent }) {
+    return (
+        <Dialog>
+            <form>
+                <DialogTrigger asChild>
+                    <Button
+                        size={'icon-sm'}
+                        variant={'secondary'}
+                        className="rounded-full p-4 flex items-center gap-1 cursor-pointer border"
+                    >
+                        <QrCode className='size-5' />
+                    </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-sm pb-20 rounded-3xl">
+                    <DialogHeader className='pb-7'>
+                        <DialogTitle className='tracking-tighter'>Scan QR</DialogTitle>
+                        <DialogDescription className='tracking-tighter'>
+                            Scan with your camera to access the event program.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <div style={{ height: "auto", margin: "0 auto", maxWidth: 250, width: "100%" }}>
+                        <QRCode
+                            size={256}
+                            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                            value={`https://ariapass.africa/events/${event.slug}/program`}
+                            viewBox={`0 0 256 256`}
+                        />
+                    </div>
+                </DialogContent>
+            </form>
+        </Dialog>
+    )
+}
+

@@ -5,7 +5,7 @@ import {
     DrawerContent,
     DrawerTrigger,
 } from "~/components/ui/drawer"
-import { Calendar1, ChevronRight, Home, Users, UserStar } from "lucide-react"
+import { Calendar1, ChevronDown, ChevronRight, Home, Users, UserStar } from "lucide-react"
 import { Link } from "react-router"
 
 export default function MobileNav({ user }: { user: User }) {
@@ -17,10 +17,10 @@ export default function MobileNav({ user }: { user: User }) {
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
                 <Button
-                    className="tracking-tighter rounded-full border-0 bg-indigo-50 text-primary-theme"
+                    className="tracking-tighter px-10 rounded-full border-0 bg-indigo-50 text-primary-theme flex items-center"
                     variant="outline"
                 >
-                    Menu
+                    <span>Menu</span> <ChevronDown strokeWidth={3} />
                 </Button>
             </DrawerTrigger>
             <DrawerContent>
@@ -66,7 +66,7 @@ export default function MobileNav({ user }: { user: User }) {
                             </span>
                         </Link>
 
-                        <hr className="my-4"/>
+                        <hr className="my-4" />
 
                         {(user && user.name) ? (
                             <Link

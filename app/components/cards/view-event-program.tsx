@@ -1,5 +1,15 @@
 import { Link } from 'react-router'
 import { Button } from '../ui/button'
+import { QrCode } from 'lucide-react'
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "~/components/ui/dialog"
+import QRCode from 'react-qr-code'
 
 export default function ViewEventProgram({ event }: { event: OrganiserEvent }) {
     return (
@@ -26,14 +36,50 @@ export default function ViewEventProgram({ event }: { event: OrganiserEvent }) {
                             </p>
                         </div>
 
-                        <Link to={`/events/${event.slug}/program`}>
-                            <Button className="w-full md:w-max rounded-full py-5 flex items-center gap-1 bg-white/20 cursor-pointer">
-                                <span className='tracking-tighter text-sm'>View Program</span>
-                            </Button>
-                        </Link>
+                        <div className='flex gap-3 items-center'>
+                            <QRCodeModal event={event} />
+                            <div>
+                                <Link to={`/events/${event.slug}/program`}>
+                                    <Button className="w-full md:w-max rounded-full py-5 flex items-center gap-1 bg-white/20 cursor-pointer">
+                                        <span className='tracking-tighter text-sm'>View Program</span>
+                                    </Button>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    )
+}
+
+export function QRCodeModal({ event }: { event: OrganiserEvent }) {
+    return (
+        <Dialog>
+            <form>
+                <DialogTrigger asChild>
+                    <Button size={'icon'} className=" rounded-full p-5 flex items-center gap-1 bg-white/20 cursor-pointer">
+                        <QrCode className='size-5' />
+                    </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-sm pb-20 rounded-3xl">
+                    <DialogHeader className='pb-7'>
+                        <DialogTitle className='tracking-tighter'>Scan QR</DialogTitle>
+                        <DialogDescription className='tracking-tighter'>
+                            Scan with your camera to access the event program.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <div style={{ height: "auto", margin: "0 auto", maxWidth: 250, width: "100%" }}>
+                        <QRCode
+                            size={256}
+                            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                            value={`https://ariapass.africa/events/${event.slug}/program`}
+                            viewBox={`0 0 256 256`}
+                        />
+                    </div>
+                </DialogContent>
+            </form>
+        </Dialog>
     )
 }
