@@ -44,12 +44,12 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
 
     return (
         <div className='lg:px-14'>
-            <section className='container flex flex-col md:flex-row py-10 md:gap-20 gap-10'>
-                <div className="bg-white hidden md:block flex-1 overflow-hidden relative">
+            <section className='container flex flex-col md:flex-row items-start py-10 md:gap-20 gap-10'>
+                <div className="bg-white block flex-1 overflow-hidden rounded-2xl relative">
                     <img
                         src={banner}
                         alt={event.title}
-                        className="h-120 w-full object-cover shadow-xl border"
+                        className="h-full w-full object-cover shadow-xl border rounded-2xl"
                     />
 
                     <div className="bg-white/60 border px-4 py-2 text-sm font-semibold rounded-md absolute top-5 left-5">
@@ -63,7 +63,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                     )}
                 </div>
 
-                <div className='border flex-1 py-5 px-5 bg-gray-50 rounded-2xl'>
+                <div className='flex-1 py-5 px-5 bg-gray-100 rounded-2xl'>
                     <div className="mb-5">
                         <p className='text-gray-500 text-sm tracking-tighter'>Ticket checkout</p>
                         <h1 className='font-bold text-xl tracking-tighter'>
@@ -111,7 +111,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                             <br />
 
                             <Button
-                                className="py-6 rounded-xl text-center w-full text-xs uppercase font-light"
+                                className="py-6 rounded-xl text-center w-full text-xs uppercase font-bold tracking-tighter"
                                 disabled={!ticket || (ticket.quantityAvailable - ticket.ticketPurchases <= 0)}
                                 onClick={() => setNext(!next)}
                             >

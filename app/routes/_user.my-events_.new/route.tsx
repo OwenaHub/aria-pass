@@ -408,9 +408,10 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                 </div>
             </section>
 
-            <aside className="sticky top-0 flex flex-col gap-4 lg:min-w-[400px] max-w-[400px] w-full">
-                <h2 className="font-light text-lg flex items-center gap-2 tracking-tight">
-                    Event preview <Eye strokeWidth={1} size={20} />
+            <aside className="sticky top-0 flex flex-col gap-4 lg:min-w-100 max-w-100 w-full">
+                <h2 className="font-medium text-lg flex justify-between items-center gap-2 tracking-tight">
+                   <span> Event preview </span>
+                   <Eye strokeWidth={1} size={20} />
                 </h2>
 
                 <PreviewCard event={form} bannerImage={bannerPreview} />

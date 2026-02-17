@@ -21,7 +21,7 @@ export async function clientLoader() {
     const { intendedRoute } = useRoute();
 
     try {
-        const user = await getUser();       
+        const user = await getUser();
 
         return { user };
     } catch ({ response }: any) {
@@ -113,8 +113,7 @@ export default function ProtectedLayout({ loaderData }: Route.ComponentProps) {
                                             <div className="flex items-center">
                                                 <span className={`
                                                     inline-block p-1.5 ${isActive ? "text-primary-theme rounded" : ""}
-                                                    ${menu.href === 'my-events' && !user.organiserProfile?.id ? ' opacity-30' : ''}
-                                                    `}>
+                                                    ${menu.href === 'my-events' && !user.organiserProfile?.id ? ' opacity-30' : ''}`}>
                                                     {menu.icon ? (React.cloneElement(menu.icon))
                                                         : (<span>
                                                             <Square size={16} />
@@ -135,8 +134,7 @@ export default function ProtectedLayout({ loaderData }: Route.ComponentProps) {
                                         </div>
                                     )}
                                 </NavLink>
-                            ))
-                            }
+                            ))}
                         </section>
                     </div>
                 </div>

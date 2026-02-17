@@ -15,7 +15,7 @@ export default function CompanyContact({ profile }: { profile: OrganiseProfile }
                         <Label className='mb-1 text-sm font-light ms-2' htmlFor='website'>Website</Label>
                         <Input
                             className='py-5 rounded-full shadow-none'
-                            placeholder='www.acme.org'
+                            placeholder='https://acme.org'
                             name='website_url'
                             defaultValue={profile?.webisteUrl || ''}
                             id='website'

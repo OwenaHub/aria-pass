@@ -29,10 +29,13 @@ export async function clientLoader() {
 
         if (!isOrganiser) {
             toast.warning("Unauthorized page", {
-                description: 'No active orgainiser profile'
+                description: 'No active orgainiser profile',
+                action: {
+                    label: "Become an organiser",
+                    onClick: () => window.location.href = '/organiser-request'
+                }
             });
             return redirect('/dashboard')
-
         }
         const { data } = await client.get('/api/organiser/events');
 
@@ -130,5 +133,5 @@ export default function MyEvents({ loaderData }: Route.ComponentProps) {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  return <DefaultError error={error} />
+    return <DefaultError error={error} />
 }

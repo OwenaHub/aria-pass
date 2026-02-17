@@ -144,9 +144,6 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
             <section className="basis-3/6">
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-2xl font-medium tracking-tighter ">Edit Event</h1>
-                    <Button type="button" className="rounded-full font-normal" variant={"secondary"} size={"sm"}>
-                        <span className="text-xs"> Save as draft</span> <Save size={18} />
-                    </Button>
                 </div>
 
                 <div className="flex flex-col gap-5">
@@ -396,13 +393,14 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
             </section>
 
             <aside className="flex flex-col gap-4 lg:min-w-100 max-w-100 w-full">
-                <h2 className="font-light text-lg flex items-center gap-2 tracking-tight">
-                    Event preview <Eye strokeWidth={1} size={20} />
+                <h2 className="font-medium text-lg flex justify-between items-center gap-2 tracking-tight">
+                    <span> Event preview </span>
+                    <Eye strokeWidth={1} size={20} />
                 </h2>
 
                 <PreviewCard event={form} bannerImage={bannerPreview} />
 
-                <hr className="mt-7 pb-3" />
+                <hr className="mt-2 pb-3" />
 
                 <section className="flex flex-col gap-5 mb-5">
                     <div className="flex flex-col gap-2">

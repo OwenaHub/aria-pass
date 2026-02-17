@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Await, Link, redirect, useOutletContext, type MetaFunction } from 'react-router';
-import { ArrowRight, CalendarDays, ChevronRight, ShoppingBag, Tickets } from 'lucide-react';
+import { ArrowRight, CalendarDays, ChevronRight, Clock, ShoppingBag, Tickets } from 'lucide-react';
 import type { Route } from '../_user.dashboard/+types/route';
 
 import client from '~/http/client';
@@ -84,7 +84,6 @@ export async function clientLoader() {
         ]);
 
         return {
-            // events: eventsRes.data,
             myEvents: myEventsRes.data,
             isOrganiser,
             collaborations: collaborations,
@@ -101,25 +100,18 @@ export async function clientLoader() {
 
 export default function Dashboard({ loaderData }: Route.ComponentProps) {
     const {
-        // events,
         myEvents,
         isOrganiser,
         collaborations,
     } = loaderData;
 
     const user: User = useOutletContext();
+    console.log(user);
+
 
     return (
         <div>
-            {/* Header Section */}
             <section className="mb-5">
-                {/* <div className="flex flex-row items-center gap-1 mb-8">
-                    <CustomAvatar name={user.name} styles='size-10 md:size-14 md:text-2xl rounded-lg' />
-                    <p className="text-2xl md:text-4xl font-medium md:font-bold tracking-tighter">
-                        Hello, {user.name.split(' ')[0]}!
-                    </p>
-                </div> */}
-
                 <div className="bg-linear-to-b from-primary-bg to-indigo-50 px-4 py-14 rounded-2xl">
                     <h1 className="tracking-tighter font-serif text-3xl md:text-4xl font-medium text-center text-primary-theme mb-8">
                         What would you like <BrSm />  to do today?
@@ -132,10 +124,44 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
                         </div>
                     </div>
                 </div>
+
+                {!isOrganiser && (
+                    <div className="mt-3 rounded-full bg-slate-100 flex justify-between items-center gap-2 px-4 py-3 text-sm">
+                        <div className='text-primary'>
+                            <h2 className='font-bold tracking-tighter text-sm'>
+                                Become an organiser
+                            </h2>
+                            <p className='text-xs'>No active organiser profile</p>
+                        </div>
+                        <Link to="/organiser-request" className="py-1.5 px-3 tracking-tighter text-xs bg-primary text-white rounded-full">
+                            Become an organiser
+                        </Link>
+                    </div>
+                )}
+
+                {isOrganiser && (
+                    <>
+                        {user.organiserProfile?.status === 'pending' && (
+                            <div className="mt-3 rounded-full bg-amber-100 flex justify-between items-center gap-2 px-4 py-3 text-sm">
+                                <div className='text-primary'>
+                                    <h2 className='font-bold tracking-tighter text-sm'>
+                                        Under reveiw
+                                    </h2>
+                                    <p className='text-xs'>
+                                        Your request is currently under review.
+                                    </p>
+                                </div>
+                                <Clock />
+                            </div>
+                        )}
+                    </>
+                )}
+
+
             </section>
 
             {/* Collaborations Grid (Unified) */}
-            <h2 className='text-primary text-lg font-semibold tracking-tighter flex items-center gap-3 mb-3 mt-6'>
+            <h2 className='text-primary text-lg font-semibold tracking-tighter flex items-center gap-3 mb-5 mt-6'>
                 <span>Collaborations</span>
             </h2>
             <Suspense fallback={<LoaderWithText text='Fetching your collaborations...' />}>

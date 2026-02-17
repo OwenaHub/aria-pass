@@ -12,6 +12,7 @@ import type { Route } from "../_user.organiser-request/+types/route";
 import { defaultMeta } from "~/lib/meta";
 import client from "~/http/client";
 import InputError from "~/components/utility/input-error";
+import useSession from "~/hooks/use-session";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -22,7 +23,7 @@ export const meta: MetaFunction = (args) => {
 
 export async function clientLoader({ request }: Route.ClientLoaderArgs) {
     const { data } = await client.get('api/organiser-profile');
-    
+
     const url = new URL(request.url);
     const step = url.searchParams.get("step") || "1";
     return { step, profile: data };
@@ -30,6 +31,7 @@ export async function clientLoader({ request }: Route.ClientLoaderArgs) {
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
     const credentials = await parseForm(request);
+    const { validateSession } = useSession();
 
     const url = new URL(request.url);
     const step = url.searchParams.get("step") || "1";
@@ -56,6 +58,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
             description: "We will give you a response in 2 business days"
         });
 
+        await validateSession();
         return redirect('/dashboard')
     } catch ({ response }: any) {
         toast.error('Oops, something went wrong');

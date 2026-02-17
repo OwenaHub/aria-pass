@@ -124,18 +124,18 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
         <div className="animated fadeIn">
             <div className="mt-0">
                 <form className="mb-5">
-                    <div className="bg-indigo-100 rounded-lg mb-6 flex items-stretch border border-primary-theme shadow">
+                    <div className="bg-white rounded-lg mb-6 flex items-stretch  shadow">
                         <div className="flex-1 p-3">
                             <div className="text-xs uppercase text-primary mb-1">
                                 {ticket.name} ticket @ <span className="font-bold">₦{(UNIT_PRICE).toLocaleString()}</span>
                             </div>
 
-                            <hr className="my-3 border-t border-primary-theme" />
+                            <hr className="my-3 border-t" />
 
                             <div className="">
-                                <div className="flex flex-row items-end gap-1 mb-5">
+                                <div className="flex flex-row items-end gap-2 mb-5">
                                     {/* Ticket Qunatity */}
-                                    <div className="flex-1 text-xs items-center bg-white border border-gray-300 text-primary p-2 rounded">
+                                    <div className="flex-1 text-xs items-center bg-white border text-primary p-2 rounded-md">
                                         <div className="text-[8px] text-gray-500 uppercase">quantity</div>
                                         <div className="font-medium">
                                             {/* Covers for Paystack's fees */}
@@ -143,7 +143,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                                         </div>
                                     </div>
 
-                                    <div className="flex-1 text-xs items-center bg-white border border-gray-300 text-primary p-2 rounded">
+                                    <div className="flex-1 text-xs items-center bg-white border text-primary p-2 rounded-md">
                                         {/* Processing Fee */}
                                         <div className="text-[8px] text-gray-500 uppercase">processing fee</div>
                                         <div className="font-medium">
@@ -162,12 +162,28 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
 
                                     <div>
                                         <ButtonGroup
-                                            orientation="horizontal"
+                                            orientation="vertical"
                                             aria-label="Media controls"
                                             className="h-fit"
                                         >
                                             <Button
-                                                className="px-8 py-5"
+                                                className="px-4 py-5 w-full bg-white text-xs flex items-center justify-between border-2"
+                                                onClick={() => {
+                                                    setForm((i) => (
+                                                        {
+                                                            ...i,
+                                                            quantity: i.quantity + 1,
+                                                            tickets: i.tickets.map(t => ({ ...t, quantity: t.quantity + 1 }))
+                                                        }
+                                                    ))
+                                                }}
+                                                type="button"
+                                                variant="outline" size="icon"
+                                            >
+                                                <span>Add ticket</span>  <PlusIcon />
+                                            </Button>
+                                            <Button
+                                                className="px-4 py-5 w-full bg-white text-xs flex items-center justify-between border-2"
                                                 onClick={() => {
                                                     if (form.quantity === 1) return;
                                                     setForm((i) => (
@@ -181,23 +197,7 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                                                 type='button'
                                                 variant="outline" size="icon"
                                             >
-                                                <MinusIcon />
-                                            </Button>
-                                            <Button
-                                                className="px-8 py-5"
-                                                onClick={() => {
-                                                    setForm((i) => (
-                                                        {
-                                                            ...i,
-                                                            quantity: i.quantity + 1,
-                                                            tickets: i.tickets.map(t => ({ ...t, quantity: t.quantity + 1 }))
-                                                        }
-                                                    ))
-                                                }}
-                                                type="button"
-                                                variant="outline" size="icon"
-                                            >
-                                                <PlusIcon />
+                                                <span>Remove ticket</span> <MinusIcon />
                                             </Button>
                                         </ButtonGroup>
                                     </div>
