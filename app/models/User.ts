@@ -7,5 +7,5 @@ interface User extends Model {
     emailVerifiedAt: string;
     accountType: 'user' | 'admin';
     organiserProfile?: OrganiseProfile;
-    avatarUrl: string
+    avatarUrl: string;
 }

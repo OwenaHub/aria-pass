@@ -17,7 +17,6 @@ client.interceptors.request.use((config) => {
     return config;
 });
 
-
 client.interceptors.response.use((response) => response, async (error: AxiosError) => {
     if (import.meta.env.DEV) console.log(error);
 

@@ -246,9 +246,9 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                     </Suspense>
                 </div>
 
-                <Link to={"events"} className="block mx-auto w-max mt-3">
-                    <Button variant={"outline"} className="py-5 px-10 rounded-full">
-                        See more <ArrowRight />
+                <Link to={"events?filter=all"} className="block mx-auto w-max mt-3">
+                    <Button variant={"outline"} className="py-5 px-10 rounded-full tracking-tighter">
+                        All Events <ArrowRight />
                     </Button>
                 </Link>
 

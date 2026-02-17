@@ -17,7 +17,7 @@ export default function CompanyContact({ profile }: { profile: OrganiseProfile }
                             className='py-5 rounded-full shadow-none'
                             placeholder='https://acme.org'
                             name='website_url'
-                            defaultValue={profile?.webisteUrl || ''}
+                            defaultValue={profile?.websiteUrl || ''}
                             id='website'
                             type='url'
                         />

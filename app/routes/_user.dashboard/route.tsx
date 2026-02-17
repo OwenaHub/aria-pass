@@ -106,9 +106,6 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
     } = loaderData;
 
     const user: User = useOutletContext();
-    console.log(user);
-
-
     return (
         <div>
             <section className="mb-5">
@@ -142,16 +139,21 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
                 {isOrganiser && (
                     <>
                         {user.organiserProfile?.status === 'pending' && (
-                            <div className="mt-3 rounded-full bg-amber-100 flex justify-between items-center gap-2 px-4 py-3 text-sm">
+                            <div className="mt-3 rounded-md bg-amber-100 flex flex-col md:flex-row md:justify-between md:items-center gap-8 px-4 py-3 text-sm">
                                 <div className='text-primary'>
                                     <h2 className='font-bold tracking-tighter text-sm'>
-                                        Under reveiw
+                                        Under review
                                     </h2>
                                     <p className='text-xs'>
                                         Your request is currently under review.
                                     </p>
                                 </div>
-                                <Clock />
+
+                                <div className='pb-3 md:pb-0'>
+                                    <Link to={'/account/payouts'} className='bg-amber-900 text-white tracking-tighter text-xs font-semibold p-2.5 rounded-full'>
+                                        Setup payout account
+                                    </Link>
+                                </div>
                             </div>
                         )}
                     </>
