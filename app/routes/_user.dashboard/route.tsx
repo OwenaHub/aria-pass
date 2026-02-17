@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Await, Link, redirect, useOutletContext, type MetaFunction } from 'react-router';
-import { ArrowRight, CalendarDays, ChevronRight, Clock, ShoppingBag, Tickets } from 'lucide-react';
+import { ArrowRight, CalendarDays, ChevronRight, Clock, Recycle, RefreshCw, ShieldAlert, ShoppingBag, Tickets } from 'lucide-react';
 import type { Route } from '../_user.dashboard/+types/route';
 
 import client from '~/http/client';
@@ -13,6 +13,7 @@ import DetailedEventCard from '~/components/cards/detailed-event-card';
 import AvatarGroup from '~/components/custom/avatar-group';
 import LoaderWithText from '~/components/skeletons/loader-with-text';
 import { BrSm } from '~/components/utility/line-break';
+import OrganiserProfileStatus from './organiser-profile-status';
 
 // --- Reusable Sub-Components ---
 const QuickAction = ({ to, icon: Icon, label }: { to: string, icon: any, label: string }) => (
@@ -61,7 +62,7 @@ export async function clientLoader() {
 
     try {
         const user = await getUser(); // Ensure we have the user
-        const isOrganiser = user && user.organiserProfile;
+        const isOrganiser = Boolean(user && user.organiserProfile);
 
         //* Critical Data
         const organiserEventsPromise = isOrganiser ? client.get('/api/organiser/events') : Promise.resolve({ data: [] });
@@ -106,6 +107,7 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
     } = loaderData;
 
     const user: User = useOutletContext();
+    const { validateSession } = useSession()
     return (
         <div>
             <section className="mb-5">
@@ -122,43 +124,7 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
                     </div>
                 </div>
 
-                {!isOrganiser && (
-                    <div className="mt-3 rounded-full bg-slate-100 flex justify-between items-center gap-2 px-4 py-3 text-sm">
-                        <div className='text-primary'>
-                            <h2 className='font-bold tracking-tighter text-sm'>
-                                Become an organiser
-                            </h2>
-                            <p className='text-xs'>No active organiser profile</p>
-                        </div>
-                        <Link to="/organiser-request" className="py-1.5 px-3 tracking-tighter text-xs bg-primary text-white rounded-full">
-                            Become an organiser
-                        </Link>
-                    </div>
-                )}
-
-                {isOrganiser && (
-                    <>
-                        {user.organiserProfile?.status === 'pending' && (
-                            <div className="mt-3 rounded-md bg-amber-100 flex flex-col md:flex-row md:justify-between md:items-center gap-8 px-4 py-3 text-sm">
-                                <div className='text-primary'>
-                                    <h2 className='font-bold tracking-tighter text-sm'>
-                                        Under review
-                                    </h2>
-                                    <p className='text-xs'>
-                                        Your request is currently under review.
-                                    </p>
-                                </div>
-
-                                <div className='pb-3 md:pb-0'>
-                                    <Link to={'/account/payouts'} className='bg-amber-900 text-white tracking-tighter text-xs font-semibold p-2.5 rounded-full'>
-                                        Setup payout account
-                                    </Link>
-                                </div>
-                            </div>
-                        )}
-                    </>
-                )}
-
+                <OrganiserProfileStatus isOrganiser={isOrganiser} user={user} />
 
             </section>
 
