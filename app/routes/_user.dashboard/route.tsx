@@ -125,7 +125,6 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
                 </div>
 
                 <OrganiserProfileStatus isOrganiser={isOrganiser} user={user} />
-
             </section>
 
             {/* Collaborations Grid (Unified) */}

@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { RefreshCw, ShieldAlert } from 'lucide-react';
 import useSession from '~/hooks/use-session';
+import RevalidateButton from '~/components/utility/revalidate-button';
 
 interface OrganiserProfileStatusProps {
     isOrganiser: boolean;
@@ -39,11 +40,7 @@ export default function OrganiserProfileStatus({ isOrganiser, user }: OrganiserP
                 <div className='text-primary'>
                     <h2 className='font-bold tracking-tighter text-sm flex items-center gap-1'>
                         <span>Under review</span>
-                        <RefreshCw
-                            size={18}
-                            onClick={handleRefresh}
-                            className='cursor-pointer'
-                        />
+                        <RevalidateButton />
                     </h2>
                     <p className='text-xs'>
                         Your request is currently under review.
