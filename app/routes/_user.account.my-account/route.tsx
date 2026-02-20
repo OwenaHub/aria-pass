@@ -12,6 +12,7 @@ import DefaultButton from '~/components/buttons/default-button'
 import { Info } from 'lucide-react'
 import ProfileStatus from '~/components/utility/profile-status'
 import InputError from '~/components/utility/input-error'
+import RevalidateButton from '~/components/utility/revalidate-button'
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
     const credentials = await parseForm(request);
@@ -69,8 +70,10 @@ export default function MyAccount({ actionData }: Route.ComponentProps) {
                     <div className='mb-5 mt-16 flex items-center gap-3'>
                         <h2 className='tracking-tighter font-medium text-lg'>Organiser profile</h2>
                         <ProfileStatus status={user?.organiserProfile?.status!} />
+                        <RevalidateButton />
                     </div>
-                    <div className='bg-gray-50  border p-5 rounded-lg flex flex-col gap-4'>
+
+                    <div className='bg-gray-50  p-5 rounded-xl flex flex-col gap-4'>
                         <div className='flex flex-col md:flex-row md:items-center gap-3 mb-5'>
                             <div className='flex-1'>
                                 <Label className='mb-1 text-sm tracking-tight'>Business name</Label>
