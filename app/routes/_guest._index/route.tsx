@@ -77,7 +77,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                                 <ChevronRight strokeWidth={1} size={16} />
                             </Link>
                         </div>
-                        <h1 className="font-serif text-4xl md:text-6xl text-primary-theme tracking-tighter mb-6">
+                        <h1 className="font-semibold font-erif text-4xl md:text-6xl text-primary tracking-tighter mb-6">
                             Promoting Live <br />
                             Musical <span className="text-transparent bg-clip-text bg-linear-to-r from-primary-theme to-pink-500">Concerts</span>
                         </h1>

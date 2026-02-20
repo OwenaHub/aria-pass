@@ -12,5 +12,6 @@ interface OrganiseProfile extends Model {
     bankName?: string;
     accountName?: string;
     accountNumber?: string;
-    commissionRate: number;
+    commissionRate: string;
+    processingFeeStrategy: 'buyer_pays' | 'organiser_pays' | 'split_fee';
 }

@@ -78,9 +78,11 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
             return redirect(`/my-events/${res.slug}`);
         })
         .catch(({ response }) => {
-            toast.error("Something went wrong", {
-                description: `Status code ${response.status}`
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            toast.error("Failed to create event", {
+                description: response?.data?.message || "Review your input and try again"
             });
+
             return response.data.errors
         })
 }
@@ -179,7 +181,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                 <div className="flex flex-col gap-5">
                     {/* Event type selection */}
                     <div className="flex flex-col gap-2">
-                        <Label className="text-muted-foreground text-sm font-light">
+                        <Label className="text-gray-500 text-sm tracking-tight">
                             What type of event are you hosting?
                         </Label>
                         <div className="flex flex-wrap gap-2 items-stretch">
@@ -197,7 +199,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             ))
                             }
                         </div>
-                        <input type="hidden" name="event_type" value={form.event_type} />
+                        <input type="hidden" name="event_type" value={form.event_type} required />
                         {form.event_type === "Other" && (
                             <Input
                                 onChange={(e) => setForm((i) => (
@@ -213,7 +215,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <Label className="text-muted-foreground text-sm font-light">
+                        <Label className="text-gray-500 text-sm tracking-tight">
                             Event title
                         </Label>
                         <Input
@@ -229,7 +231,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <Label className="text-muted-foreground text-sm font-light">
+                        <Label className="text-gray-500 text-sm tracking-tight">
                             Add a description
                         </Label>
                         <Textarea
@@ -256,16 +258,18 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                     <div className="mt-4 flex text-sm/6 text-gray-400">
                                         <label htmlFor="file-upload" className="relative cursor-pointer rounded-md bg-transparent font-semibold text-primary-theme focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-indigo-500 hover:text-indigo-300">
                                             <span>Change file</span>
-                                            <Input onChange={(e) => {
-                                                const file = e.target.files![0];
-                                                if (file) {
-                                                    setForm((i) => ({
-                                                        ...i, banner_url: file
-                                                    }));
-                                                    setBannerPreview(URL.createObjectURL(file))
-                                                }
-                                            }}
+                                            <Input
                                                 id="file-upload" type="file" accept="image/*" name="banner_url" className="sr-only"
+                                                required
+                                                onChange={(e) => {
+                                                    const file = e.target.files![0];
+                                                    if (file) {
+                                                        setForm((i) => ({
+                                                            ...i, banner_url: file
+                                                        }));
+                                                        setBannerPreview(URL.createObjectURL(file))
+                                                    }
+                                                }}
                                             />
                                         </label>
                                         <p className="pl-1">or drag and drop</p>
@@ -306,10 +310,10 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                         </div>)
                     }
 
-
                     <div className="flex flex-row gap-4">
                         <div className="flex-1">
                             <Select
+                                required
                                 name='city'
                                 onValueChange={(value) =>
                                     setForm((prev) => ({
@@ -336,6 +340,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
 
                         <div className="flex-1">
                             <Select
+                                required
                                 name='country'
                                 onValueChange={(value) =>
                                     setForm((prev) => ({
@@ -359,7 +364,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
 
                     <div className="flex gap-4">
                         <div className="flex flex-1 flex-col gap-2">
-                            <Label htmlFor="date-picker" className="text-muted-foreground text-sm font-light">
+                            <Label htmlFor="date-picker" className="text-gray-500 text-sm tracking-tight">
                                 Date
                             </Label>
                             <Popover open={openDate} onOpenChange={setOpenDate}>
@@ -391,7 +396,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             <InputError for="date" error={errors} />
                         </div>
                         <div className="flex flex-1 flex-col gap-2">
-                            <Label htmlFor="time-picker" className="text-muted-foreground text-sm font-light">
+                            <Label htmlFor="time-picker" className="text-gray-500 text-sm tracking-tight">
                                 Start time
                             </Label>
                             <Input
@@ -410,8 +415,8 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
 
             <aside className="sticky top-0 flex flex-col gap-4 lg:min-w-100 max-w-100 w-full">
                 <h2 className="font-medium text-lg flex justify-between items-center gap-2 tracking-tight">
-                   <span> Event preview </span>
-                   <Eye strokeWidth={1} size={20} />
+                    <span> Event preview </span>
+                    <Eye strokeWidth={1} size={20} />
                 </h2>
 
                 <PreviewCard event={form} bannerImage={bannerPreview} />
@@ -420,7 +425,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
 
                 <section className="flex flex-col gap-5 mb-5">
                     <div className="flex flex-col gap-2">
-                        <Label className="text-muted-foreground text-sm font-light">
+                        <Label className="text-gray-500 text-sm tracking-tight">
                             <MapPinHouse size={16} /> Hall name
                         </Label>
                         <Input
@@ -433,7 +438,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <Label className="text-muted-foreground text-sm font-light">
+                        <Label className="text-gray-500 text-sm tracking-tight">
                             <MapPlus size={16} /> Address
                         </Label>
                         <Input
@@ -446,7 +451,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <Label className="text-muted-foreground text-sm font-light">
+                        <Label className="text-gray-500 text-sm tracking-tight">
                             <Scroll size={16} /> Extra notes
                         </Label>
                         <Textarea

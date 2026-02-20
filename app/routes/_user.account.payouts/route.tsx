@@ -139,7 +139,7 @@ export default function Payouts({ loaderData }: Route.ComponentProps) {
                             Your Payout Account
                         </h2>
                         <p className='text-xs'>
-                            Reach out to hello@ariapass.africa to change this account
+                            Reach out to <span className='text-blue-500'>hello@ariapass.africa</span> to change this account
                         </p>
                     </div>
 

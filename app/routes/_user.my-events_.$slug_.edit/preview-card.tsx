@@ -8,7 +8,7 @@ export default function PreviewCard({ event, bannerImage }: { event?: any, banne
     return (
         <div className="grid bo grid-cols-2 gap-3 md:gap-4 pb-5">
             <div className="bg-white border-gray-100 flex flex-col gap-1 group">
-                <div className="relative bg-gray-100 rounded-lg w-full aspect-video h-60 lg:h-70 overflow-hidden">
+                <div className="relative bg-gray-100 rounded-lg w-full aspect-video h-70 overflow-hidden">
                     {bannerImage && (
                         <img
                             src={bannerImage}
@@ -66,7 +66,7 @@ export default function PreviewCard({ event, bannerImage }: { event?: any, banne
             {/* SOME OTHER EVENT */}
 
             <div className="bg-white border-gray-100 flex flex-col gap-1 group">
-                <div className="relative bg-gray-100 rounded-lg w-full aspect-video h-60 lg:h-70 overflow-hidden">
+                <div className="relative bg-gray-100 rounded-lg w-full aspect-video h-70 overflow-hidden">
                     <img
                         src={'/images/banners/app_banner.png'}
                         alt={'some other event'}

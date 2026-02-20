@@ -102,7 +102,7 @@ export default function Login({ actionData }: Route.ComponentProps) {
             <div className="mb-5">
               <div className="flex justify-between items-center pb-1">
                 <Label className="text-xs">Password</Label>
-                <Link to="/forgot-password" className="!text-primary text-xs underline underline-offset-2">
+                <Link to="/forgot-password" className="text-primary text-xs underline underline-offset-2">
                   Forgot password?
                 </Link>
               </div>

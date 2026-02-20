@@ -44,7 +44,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
 
     return (
         <div className='lg:px-14'>
-            <section className='container flex flex-col md:flex-row items-start py-10 md:gap-20 gap-10'>
+            <section className='container flex flex-col md:flex-row md:items-start py-10 md:gap-20 gap-10'>
                 <div className="bg-white block flex-1 overflow-hidden rounded-2xl relative">
                     <img
                         src={banner}
@@ -86,7 +86,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                                 <div
                                     key={item.id}
                                     onClick={() => setTicket(item)}
-                                    className={`border bg-white relative px-4 py-6 mb-5 flex items-center justify-between rounded-xl 
+                                    className={`border bg-white relativ px-4 py-6 mb-5 flex items-center justify-between rounded-xl 
                                     ${item.id === ticket?.id && 'outline-2 outline-primary-theme outline-offset-2 text-primary-theme'} relative
                                     `}
                                 >
@@ -111,7 +111,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                             <br />
 
                             <Button
-                                className="py-6 rounded-xl text-center w-full text-xs uppercase font-bold tracking-tighter"
+                                className="py-6 rounded-xl text-center w-full text-xs font-semibold tracking-tight"
                                 disabled={!ticket || (ticket.quantityAvailable - ticket.ticketPurchases <= 0)}
                                 onClick={() => setNext(!next)}
                             >
@@ -121,7 +121,10 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                     )}
 
                     {next && (
-                        <PaystackPurchaseButton user={user} ticket={ticket} />
+                        <PaystackPurchaseButton 
+                        user={user} 
+                        organiser={event.organiser as OrganiseProfile}
+                        ticket={ticket} />
                     )}
                 </div>
             </section>

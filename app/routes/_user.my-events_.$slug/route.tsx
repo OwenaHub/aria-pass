@@ -258,10 +258,11 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                         ? event.tickets.map(ticket =>
                             <TicketCard ticket={ticket} user="organiser" key={ticket.id} />
                         )
-                        : <span className="text-gray-400 text-xs max-w-xs inline-block">
-                            No tickets yet <br />
-                            <span className="text-amber-800 bg-amber-100 px-2 py-1 rounded-md mt-2 inline-block">
-                                If this is a <b>Free Event</b>, create a ticket with zero price named "Free Entry"
+                        : <span className="text-xs border border-amber-800  bg-amber-50 p-3 rounded-lg inline-block">
+                            <span className="font-bold">No tickets yet</span>
+                            <br />
+                            <span className="mt-2 inline-block">
+                                If this is a Free Event, create a ticket with zero price named "Free Entry"
                             </span>
                         </span>
                     }
@@ -284,10 +285,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                     {event.members?.length
                         ? <MembersTable members={event.members} />
                         : <span className="text-gray-400 text-xs max-w-xs inline-block">
-                            No members yet <br />
-                            <span className="text-amber-800 bg-amber-100 px-2 py-1 rounded-md mt-2 inline-block">
-                                Add event members that can help manage this event
-                            </span>
+                            No members added
                         </span>
                     }
                 </div>

@@ -149,7 +149,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                 <div className="flex flex-col gap-5">
                     {/* Event type selection */}
                     <div className="flex flex-col gap-2">
-                        <Label className="text-muted-foreground text-sm font-light">
+                        <Label className="text-gray-500 text-sm tracking-tight">
                             What type of event are you hosting?
                         </Label>
                         <div className="flex flex-wrap gap-2 items-stretch">
@@ -184,7 +184,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <Label className="text-muted-foreground text-sm font-light">
+                        <Label className="text-gray-500 text-sm tracking-tight">
                             Event title
                         </Label>
                         <Input
@@ -201,7 +201,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <Label className="text-muted-foreground text-sm font-light">
+                        <Label className="text-gray-500 text-sm tracking-tight">
                             Add a description
                         </Label>
                         <Textarea
@@ -336,7 +336,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
 
                     <div className="flex gap-4">
                         <div className="flex flex-1 flex-col gap-2">
-                            <Label htmlFor="date-picker" className="text-muted-foreground text-sm font-light">
+                            <Label htmlFor="date-picker" className="text-gray-500 text-sm tracking-tight">
                                 Date
                             </Label>
                             <Popover open={openDate} onOpenChange={setOpenDate}>
@@ -369,7 +369,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                         </div>
 
                         <div className="flex flex-1 flex-col gap-2">
-                            <Label htmlFor="time-picker" className="text-muted-foreground text-sm font-light">
+                            <Label htmlFor="time-picker" className="text-gray-500 text-sm tracking-tight">
                                 Start time
                             </Label>
                             <Input
@@ -404,7 +404,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
 
                 <section className="flex flex-col gap-5 mb-5">
                     <div className="flex flex-col gap-2">
-                        <Label className="text-muted-foreground text-sm font-light">
+                        <Label className="text-gray-500 text-sm tracking-tight">
                             <MapPinHouse size={16} /> Hall name
                         </Label>
                         <Input
@@ -417,7 +417,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <Label className="text-muted-foreground text-sm font-light">
+                        <Label className="text-gray-500 text-sm tracking-tight">
                             <MapPlus size={16} /> Address
                         </Label>
                         <Input
@@ -430,7 +430,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <Label className="text-muted-foreground text-sm font-light">
+                        <Label className="text-gray-500 text-sm tracking-tight">
                             <Scroll size={16} /> Extra notes
                         </Label>
                         <Textarea

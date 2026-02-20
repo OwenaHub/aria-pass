@@ -8,7 +8,7 @@ export default function PreviewCard({ event, bannerImage }: { event?: any, banne
     return (
         <div className="grid bo grid-cols-2 gap-3 md:gap-4 pb-5">
             <div className="bg-white border-gray-100 flex flex-col gap-1 group">
-                <div className="relative bg-gray-100 rounded-lg w-full aspect-video h-60 lg:h-70 overflow-hidden">
+                <div className="relative bg-gray-100 rounded-lg w-full aspect-video h-70 overflow-hidden">
                     {bannerImage && (
                         <img
                             src={bannerImage}
@@ -19,7 +19,7 @@ export default function PreviewCard({ event, bannerImage }: { event?: any, banne
                     )}
 
                     {/* Overlay background */}
-                    <div className='absolute top-0 left-0 w-full min-h-full bg-gradient-to-t from-black/70 to-black/30' />
+                    <div className='absolute top-0 left-0 w-full min-h-full bg-linear-to-t from-black/70 to-black/30' />
 
                     {/* Upperside of the card */}
                     <div className="absolute flex items-center justify-between top-2 w-[97%] left-2 py-0.5 px-1">
@@ -53,11 +53,11 @@ export default function PreviewCard({ event, bannerImage }: { event?: any, banne
                     <div className='flex items-center gap-3'>
                         <div className="flex items-center gap-1 text-xs">
                             <Heart className='size-4 fill-gray-400 text-gray-400' />
-                            <span className='text-gray-700'>{100}</span>
+                            <span className='text-gray-700'>{0}</span>
                         </div>
                         <div className="flex items-center gap-1 text-xs">
                             <Eye className='size-4 text-gray-400' />
-                            <span className='text-gray-700'>{100}</span>
+                            <span className='text-gray-700'>{0}</span>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@ export default function PreviewCard({ event, bannerImage }: { event?: any, banne
             {/* SOME OTHER EVENT */}
 
             <div className="bg-white border-gray-100 flex flex-col gap-1 group">
-                <div className="relative bg-gray-100 rounded-lg w-full aspect-video h-60 lg:h-70 overflow-hidden">
+                <div className="relative bg-gray-100 rounded-lg w-full aspect-video h-70 overflow-hidden">
                     <img
                         src={'/images/banners/app_banner.png'}
                         alt={'some other event'}

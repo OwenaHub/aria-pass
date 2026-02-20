@@ -10,7 +10,11 @@ import { MinusIcon, PlusIcon } from "lucide-react"
 import { Button } from "~/components/ui/button"
 import { ButtonGroup } from "~/components/ui/button-group"
 
-export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticket, user?: User | undefined }) {
+export default function PaystackPurchaseButton({ ticket, user, organiser }: {
+    ticket: Ticket,
+    user?: User | undefined,
+    organiser: OrganiseProfile | undefined
+}) {
     const publicKey = PAYSTACK_PUBK;
 
     const [form, setForm] = useState({
@@ -27,15 +31,35 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
     });
 
     const UNIT_PRICE = parseInt(ticket.price);
+    const QTY = form.quantity;
 
-    const PROCESSING_FEE = (UNIT_PRICE * form.quantity) * 0.030;
-    const TOTAL_AMOUNT = (UNIT_PRICE * form.quantity) + PROCESSING_FEE;
+    const SUBTOTAL = UNIT_PRICE * QTY;
+
+    const PROCESSING_FEE = Math.ceil(SUBTOTAL * 0.03); // Paystack Fees
+    const COMMISSION_PERCENT = parseInt(organiser?.commissionRate || "0");
+
+    const COMMISSION_CHARGE = Math.floor(
+        (SUBTOTAL * COMMISSION_PERCENT) / 100
+    );
+
+    const TOTAL_AMOUNT = (() => {
+        switch (organiser?.processingFeeStrategy) {
+            case "buyer_pays":
+                return SUBTOTAL + PROCESSING_FEE;
+            case "split_fee":
+                return SUBTOTAL + (PROCESSING_FEE / 2);
+            default:
+                return SUBTOTAL;
+        }
+    })();
 
     const navigate = useNavigate();
 
     const componentProps = {
         email: form.email,
         amount: TOTAL_AMOUNT * 100,
+        subaccount: organiser?.paystackSubaccountCode,
+        transaction_charge: COMMISSION_CHARGE,
         metadata: {
             custom_fields: [
                 {
@@ -126,31 +150,75 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                 <form className="mb-5">
                     <div className="bg-white rounded-lg mb-6 flex items-stretch  shadow">
                         <div className="flex-1 p-3">
-                            <div className="text-xs uppercase text-primary mb-1">
+                            <div className="text-xs text-primary mb-3">
                                 {ticket.name} ticket @ <span className="font-bold">₦{(UNIT_PRICE).toLocaleString()}</span>
                             </div>
 
-                            <hr className="my-3 border-t" />
-
                             <div className="">
-                                <div className="flex flex-row items-end gap-2 mb-5">
+                                <div className="flex flex-col items- gap-2 mb-5">
                                     {/* Ticket Qunatity */}
-                                    <div className="flex-1 text-xs items-center bg-white border text-primary p-2 rounded-md">
-                                        <div className="text-[8px] text-gray-500 uppercase">quantity</div>
-                                        <div className="font-medium">
-                                            {/* Covers for Paystack's fees */}
-                                            {form.quantity} ticket{form.quantity > 1 && 's'}
+                                    <div className="flex-1 flex items-center text-xs justify-between bg-gray-50 text-primary p-2 rounded-md">
+                                        <div>
+                                            <div className="text-[8px] text-gray-500 uppercase">quantity</div>
+                                            <div className="font-medium tracking-tighter">
+                                                {/* Covers for Paystack's fees */}
+                                                {form.quantity} ticket{form.quantity > 1 && 's'}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <ButtonGroup
+                                                orientation="horizontal"
+                                                aria-label="Media controls"
+                                                className="h-fit"
+                                            >
+                                                <Button
+                                                    disabled={form.quantity === 1}
+                                                    className="px-2 py-5 bg-white text-xs"
+                                                    onClick={() => {
+                                                        if (form.quantity === 1) return;
+                                                        setForm((i) => (
+                                                            {
+                                                                ...i,
+                                                                quantity: i.quantity - 1,
+                                                                tickets: i.tickets.map(t => ({ ...t, quantity: t.quantity - 1 }))
+                                                            }
+                                                        ))
+                                                    }}
+                                                    type='button'
+                                                    variant="outline" size="icon"
+                                                >
+                                                    <MinusIcon />
+                                                </Button>
+                                                <Button
+                                                    className="px-2 py-5 bg-white text-xs"
+                                                    onClick={() => {
+                                                        setForm((i) => (
+                                                            {
+                                                                ...i,
+                                                                quantity: i.quantity + 1,
+                                                                tickets: i.tickets.map(t => ({ ...t, quantity: t.quantity + 1 }))
+                                                            }
+                                                        ))
+                                                    }}
+                                                    type="button"
+                                                    variant="outline" size="icon"
+                                                >
+                                                    <PlusIcon />
+                                                </Button>
+                                            </ButtonGroup>
                                         </div>
                                     </div>
 
-                                    <div className="flex-1 text-xs items-center bg-white border text-primary p-2 rounded-md">
-                                        {/* Processing Fee */}
-                                        <div className="text-[8px] text-gray-500 uppercase">processing fee</div>
-                                        <div className="font-medium">
-                                            {/* Covers for Paystack's fees */}
-                                            ₦{PROCESSING_FEE.toLocaleString()}
+                                    {organiser?.processingFeeStrategy !== "organiser_pays" && (
+                                        <div className="flex-1 text-xs items-center bg-gray-50 text-primary p-2 rounded-md">
+                                            {/* Processing Fee */}
+                                            <div className="text-[8px] text-gray-500 uppercase">processing fee</div>
+                                            <div className="font-medium">
+                                                {/* Covers for Paystack's fees */}
+                                                ₦{PROCESSING_FEE.toLocaleString()}
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="leading-2">
@@ -158,48 +226,6 @@ export default function PaystackPurchaseButton({ ticket, user }: { ticket: Ticke
                                         <div className='text-lg font-bold tracking-tighter'>
                                             ₦{TOTAL_AMOUNT.toLocaleString()}
                                         </div>
-                                    </div>
-
-                                    <div>
-                                        <ButtonGroup
-                                            orientation="vertical"
-                                            aria-label="Media controls"
-                                            className="h-fit"
-                                        >
-                                            <Button
-                                                className="px-4 py-5 w-full bg-white text-xs flex items-center justify-between border-2"
-                                                onClick={() => {
-                                                    setForm((i) => (
-                                                        {
-                                                            ...i,
-                                                            quantity: i.quantity + 1,
-                                                            tickets: i.tickets.map(t => ({ ...t, quantity: t.quantity + 1 }))
-                                                        }
-                                                    ))
-                                                }}
-                                                type="button"
-                                                variant="outline" size="icon"
-                                            >
-                                                <span>Add ticket</span>  <PlusIcon />
-                                            </Button>
-                                            <Button
-                                                className="px-4 py-5 w-full bg-white text-xs flex items-center justify-between border-2"
-                                                onClick={() => {
-                                                    if (form.quantity === 1) return;
-                                                    setForm((i) => (
-                                                        {
-                                                            ...i,
-                                                            quantity: i.quantity - 1,
-                                                            tickets: i.tickets.map(t => ({ ...t, quantity: t.quantity - 1 }))
-                                                        }
-                                                    ))
-                                                }}
-                                                type='button'
-                                                variant="outline" size="icon"
-                                            >
-                                                <span>Remove ticket</span> <MinusIcon />
-                                            </Button>
-                                        </ButtonGroup>
                                     </div>
                                 </div>
                             </div>
