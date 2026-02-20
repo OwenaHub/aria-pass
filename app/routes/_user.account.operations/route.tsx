@@ -6,9 +6,10 @@ import { useFetcher } from "react-router";
 
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
-import { Check, X } from "lucide-react";
+import { Building2, CalendarClock, Check, Globe, Info, Landmark, Mail, Percent, Phone, Settings2, User, WalletCards, X } from "lucide-react";
 
 dayjs.extend(relativeTime);
+
 
 export async function clientLoader() {
     try {
@@ -23,7 +24,23 @@ export async function clientLoader() {
 export default function Administrator({ loaderData }: Route.ComponentProps) {
     const { profiles }: { profiles: OrganiseProfile[] } = loaderData;
     const fetcher = useFetcher();
-   
+
+    const getStatusStyles = (status: 'active' | 'suspended' | 'pending') => {
+        switch (status) {
+            case 'active':
+                return 'bg-green-100 text-green-700 border-green-200';
+            case 'suspended':
+                return 'bg-red-100 text-red-700 border-red-200';
+            case 'pending':
+            default:
+                return 'bg-amber-100 text-amber-700 border-amber-200';
+        }
+    };
+
+    const formatStrategy = (strategy: string) => {
+        return strategy.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    };
+
     return (
         <div>
             <section>
@@ -31,50 +48,160 @@ export default function Administrator({ loaderData }: Route.ComponentProps) {
                     Profile requests <div className="border-t w-20 inline-block" />
                 </h2>
 
-                <section>
-                    {(profiles && profiles.length)
-                        ? profiles.map((profile) => (
-                            <div key={profile.id} className="rounded-lg border border-gray-100 flex flex-col md:flex-row gap-5 justify-between items-between py-3 px-3 mb-5">
-                                <div className="flex flex-col gap-1 flex-1">
-                                    <p className="text-sm text-gray-500">{profile.user} - {profile.contactEmail ?? "N/A"} </p>
-                                    <p className="text-md tracking-tighter">{profile.organiserName}</p>
-                                </div>
-
-                                <div className="flex items-center justify-between gap-5 text-sm">
-                                    <div className="text-xs text-muted-foreground">
-                                        {dayjs(profile.createdAt).fromNow()}
+                <section className="space-y-6">
+                    {profiles && profiles.length ? (
+                        profiles.map((profile) => (
+                            <div
+                                key={profile.id}
+                                className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden transition-all hover:shadow-md"
+                            >
+                                {/* --- HEADER --- */}
+                                <div className="bg-gray-50 border-b border-gray-100 p-5 flex flex-col md:flex-row justify-between md:items-center gap-4">
+                                    <div className="flex md:items-center gap-4">
+                                        <div className="h-12 w-12 rounded-full bg-primary-bg flex items-center justify-center text-primary-theme shrink-0">
+                                            <Building2 size={24} />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-md font-bold text-gray-900 tracking-tight flex items-center gap-2">
+                                                {profile.organiserName}
+                                                <span className={`text-[10px] px-1.5 py-0.5 rounded-full border font-medium uppercase tracking-wider ${getStatusStyles(profile.status)}`}>
+                                                    {profile.status}
+                                                </span>
+                                            </h3>
+                                            <div className="flex flex-col md:flex-row tracking-tighter md:items-center gap-2 text-sm text-gray-500 mt-1">
+                                                <div className="flex items-center gap-1">
+                                                    <User size={14} className="inline-block" />
+                                                    <span>{profile.user}</span>
+                                                </div>
+                                                <span className="text-gray-300 hidden md:inline-block">•</span>
+                                                <span className="text-xs font-mono bg-gray-100 px-1.5 py-0.5 rounded">ID: {profile.id}</span>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <>
-                                        {(profile.status === 'pending' || profile.status === "suspended") && (
-                                            <fetcher.Form method="POST" action={`profile-request/${profile.id}`}>
-                                                <input type="hidden" name="status" value="active" />
-                                                <Button
-                                                    size={"sm"}
-                                                    variant={"secondary"}
-                                                    className="rounded-full">
-                                                    Approve <Check strokeWidth={3} className="text-green-500" />
-                                                </Button>
-                                            </fetcher.Form>
-                                        )}
+                                    <div className="flex items-center gap-1.5 text-xs text-gray-500 bg-white px-3 py-1.5 rounded-full border border-gray-200">
+                                        <CalendarClock size={16} />
+                                        <span>Applied {dayjs(profile.createdAt).fromNow()}</span>
+                                    </div>
+                                </div>
 
-                                        {profile.status === 'active' && (
-                                            <fetcher.Form method="POST" action={`profile-request/${profile.id}`}>
-                                                <input type="hidden" name="status" value="suspended" />
-                                                <Button
-                                                    size={"sm"}
-                                                    variant={"secondary"}
-                                                    className="rounded-full">
-                                                    Suspend <X strokeWidth={3} className="text-destructive"/>
-                                                </Button>
-                                            </fetcher.Form>
-                                        )}
-                                    </>
+                                {/* --- BODY DATA GRID --- */}
+                                <div className="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
+                                    {/* Column 1: Profile & Contact */}
+                                    <div className="space-y-4">
+                                        <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                                            <Info size={14} /> Profile & Contact
+                                        </h4>
+                                        <div className="space-y-3 text-sm">
+                                            {profile.bio && (
+                                                <p className="text-gray-600 italic">"{profile.bio}"</p>
+                                            )}
+                                            <div className="flex items-center gap-2 text-gray-700">
+                                                <Mail size={16} className="text-gray-400" />
+                                                <a href={`mailto:${profile.contactEmail}`} className="hover:text-blue-600 hover:underline">{profile.contactEmail}</a>
+                                            </div>
+                                            <div className="flex items-center gap-2 text-gray-700">
+                                                <Phone size={16} className="text-gray-400" />
+                                                <span>{profile.contactPhone}</span>
+                                            </div>
+                                            {profile.websiteUrl && (
+                                                <div className="flex items-center gap-2 text-gray-700">
+                                                    <Globe size={16} className="text-gray-400" />
+                                                    <a href={profile.websiteUrl} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline truncate">
+                                                        {profile.websiteUrl.replace(/^https?:\/\//, '')}
+                                                    </a>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Column 2: Financial/Payout Details */}
+                                    <div className="space-y-4">
+                                        <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                                            <Landmark size={14} /> Payout Details
+                                        </h4>
+                                        <div className="bg-gray-50 rounded-lg p-3 space-y-2 border border-gray-100 text-sm">
+                                            <div className="flex justify-between items-center pb-2 border-b border-gray-200">
+                                                <span className="text-gray-500 font-medium">Bank</span>
+                                                <span className="font-semibold text-gray-900 text-right">{profile.bankName}</span>
+                                            </div>
+                                            <div className="flex justify-between items-center pb-2 border-b border-gray-200">
+                                                <span className="text-gray-500 font-medium">Account No.</span>
+                                                <span className="font-mono font-semibold text-gray-900">{profile.accountNumber}</span>
+                                            </div>
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-gray-500 font-medium">Account Name</span>
+                                                <span className="font-medium text-gray-900 text-right truncate max-w-[150px]" title={profile.accountName}>
+                                                    {profile.accountName}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-xs text-gray-500">
+                                            <WalletCards size={14} />
+                                            <span>Subaccount: <span className="font-mono text-gray-700">{profile.paystackSubaccountCode}</span></span>
+                                        </div>
+                                    </div>
+
+                                    {/* Column 3: Platform Settings */}
+                                    <div className="space-y-4">
+                                        <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                                            <Settings2 size={14} /> Platform Settings
+                                        </h4>
+                                        <div className="space-y-3 text-sm">
+                                            <div className="flex items-center justify-between bg-blue-50/50 p-2.5 rounded-md border border-blue-100">
+                                                <div className="flex items-center gap-2 text-blue-800">
+                                                    <Percent size={16} className="text-blue-600" />
+                                                    <span className="font-medium">Commission Rate</span>
+                                                </div>
+                                                <span className="font-bold text-blue-700">{profile.commissionRate}%</span>
+                                            </div>
+
+                                            <div className="flex flex-col gap-1 mt-2">
+                                                <span className="text-gray-500 text-xs font-medium">Fee Strategy</span>
+                                                <span className="inline-flex w-max items-center px-2.5 py-1 rounded bg-gray-100 text-gray-800 font-medium">
+                                                    {formatStrategy(profile.processingFeeStrategy)}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                {/* --- FOOTER ACTIONS --- */}
+                                <div className="bg-gray-50 px-5 py-4 border-t border-gray-100 flex justify-end gap-3">
+                                    {(profile.status === 'pending' || profile.status === 'suspended') && (
+                                        <fetcher.Form method="POST" action={`profile-request/${profile.id}`}>
+                                            <input type="hidden" name="status" value="active" />
+                                            <Button
+                                                size="sm"
+                                                className="bg-green-600 hover:bg-green-700 text-white rounded-md shadow-sm flex items-center gap-2 transition-colors"
+                                            >
+                                                <Check strokeWidth={2.5} size={16} /> Approve Organiser
+                                            </Button>
+                                        </fetcher.Form>
+                                    )}
+
+                                    {profile.status === 'active' && (
+                                        <fetcher.Form method="POST" action={`profile-request/${profile.id}`}>
+                                            <input type="hidden" name="status" value="suspended" />
+                                            <Button
+                                                size="sm"
+                                                variant="destructive"
+                                                className="rounded-md shadow-sm flex items-center gap-2 transition-colors"
+                                            >
+                                                <X strokeWidth={2.5} size={16} /> Suspend Organiser
+                                            </Button>
+                                        </fetcher.Form>
+                                    )}
                                 </div>
                             </div>
                         ))
-                        : ("Nothing yet")}
+                    ) : (
+                        <div className="text-center py-12 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+                            <p className="text-gray-500 font-medium">No organiser profiles found.</p>
+                        </div>
+                    )}
                 </section>
             </section>
         </div>

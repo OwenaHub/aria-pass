@@ -48,9 +48,9 @@ export async function clientLoader() {
     const user = await getUser();
 
     try {
-        if (user.organiserProfile?.paystackSubaccountCode) 
+        if (user.organiserProfile?.paystackSubaccountCode)
             return { banks: [defaultBank] };
-        
+
         const response = await getBankList({ country: 'nigeria' });
         return { banks: response.data || [defaultBank] };
     } catch (error) {
@@ -162,6 +162,10 @@ export default function Payouts({ loaderData }: Route.ComponentProps) {
                                 {user.organiserProfile?.accountName || "N/A"}
                             </p>
                         </div>
+                    </div>
+
+                    <div className='mt-4 text-xs tracking-tighter text-gray-600'>
+                        You pay <span className='font-bold tracking-tight'>{user.organiserProfile.commissionRate}%</span> from your earnings
                     </div>
                 </div>
             ) : (

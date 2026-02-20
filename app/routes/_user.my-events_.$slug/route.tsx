@@ -119,7 +119,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
 
     return (
         <div>
-            <Link to={"/my-events"} className="flex items-center gap-2 text-sm">
+            <Link to={"/my-events"} className="flex items-center gap-2 text-sm tracking-tighter">
                 <ArrowLeft size={16} />
                 <span>My Events</span>
             </Link>
@@ -160,8 +160,8 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                                 </Button>
                             </div>
                         </div>
-                        <h4 className='text-xl font-semibold'>{event.title}</h4>
-                        <p className='text-gray-700 text-sm'>
+                        <h4 className='text-xl font-semibold tracking-tighter'>{event.title}</h4>
+                        <p className='text-gray-700 text-sm tracking-tighter'>
                             {FORMATTED_DATE} at {event.startTime.split(":")[0]}:{event.startTime.split(":")[1]} ∙ {event.venueName}, <span className="capitalize">{event.city}, {event.country}</span>
                         </p>
                     </div>

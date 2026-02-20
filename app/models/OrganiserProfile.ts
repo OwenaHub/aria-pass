@@ -5,7 +5,7 @@ interface OrganiseProfile extends Model {
     organiserName: null | string
     websiteUrl: null | string
     user: string
-    status: 'active' | 'suspended' | 'pending' | 'draft'
+    status: 'active' | 'suspended' | 'pending';
 
     paystackSubaccountCode?: string;
     bankCode?: string;
