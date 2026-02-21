@@ -98,7 +98,7 @@ export default function PaystackPurchaseButton({ ticket, user, organiser }: {
                 try {
                     if (e.status !== "success") {
                         toast.error("Payment failed", {
-                            description: "Please try again later, contact support——support@owenahub.com"
+                            description: "Please try again later, contact support——support@ariapass.africa"
                         });
                         throw new Error("Payment failed");
                     }
@@ -132,14 +132,14 @@ export default function PaystackPurchaseButton({ ticket, user, organiser }: {
             toast.promise(promise, {
                 loading: 'Processing purchase...',
                 success: (message) => message as string,
-                error: 'Error occured!, contact support——support@owenahub.com',
+                error: 'Error occured!, contact support——support@ariapass.africa',
             });
 
             return;
         },
         onClose: () => {
             toast.warning('Abandoning purchase, why?', {
-                description: "Email ernest@owenahub.com"
+                description: "Email ticketmaster@ariapass.africa"
             });
         },
     }

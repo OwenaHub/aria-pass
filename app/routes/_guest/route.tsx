@@ -1,4 +1,4 @@
-import { Equal, Facebook, Twitter, Instagram } from 'lucide-react'
+import { Equal, Facebook, Twitter, Instagram, Heart } from 'lucide-react'
 import { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router'
 import { Button } from '~/components/ui/button'
@@ -8,6 +8,7 @@ import useSession from '~/hooks/use-session';
 import CustomAvatar from '~/components/custom/custom-avatar';
 import MobileNav from './mobile-nav';
 import { Separator } from '~/components/ui/separator';
+import { toast } from 'sonner';
 
 export async function clientLoader(_: Route.ClientLoaderArgs) {
     const { getUser } = useSession();
@@ -117,6 +118,13 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                             <p className="text-muted-foreground tracking-tight max-w-sm text-xs">
                                 Your premier destination for discovering and booking the best live events, concerts, and experiences around you.
                             </p>
+
+                            <p className='text-xs tracking-tighter'>
+                                Built by <a href='https://owenahub.com' target='_blank' className="font-semibold">
+                                    <span className="text-amber-600">OwenaHub</span> Collective
+                                </a>
+                            </p>
+
                             <div className="flex items-center space-x-4" id='social'>
                                 <a
                                     href="https://www.facebook.com/share/1DpDAHh6zf/"
@@ -152,7 +160,7 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                             <ul className="flex flex-col text-xs space-y-3 text-muted-foreground">
                                 <li><Link to="/events" className="hover:text-foreground transition-colors">Discover Events</Link></li>
                                 <li><Link to="/pricing" className="hover:text-foreground transition-colors">Pricing</Link></li>
-                                <li><a href="mailto:hello@ariapass.africa" className="hover:text-foreground transition-colors">Help Center</a></li>
+                                <li><a href="mailto:ticketmaster@ariapass.africa" className="hover:text-foreground transition-colors">Help Center</a></li>
                                 <li><Link to="/purchases" className="hover:text-foreground transition-colors">Track Your Ticket</Link></li>
                             </ul>
                         </div>
@@ -163,8 +171,20 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                             <ul className="flex flex-col space-y-3 text-xs text-muted-foreground">
                                 <li><Link to="/my-events/new" className="hover:text-foreground transition-colors">Create an Event</Link></li>
                                 <li><Link to="/dashboard" className="hover:text-foreground transition-colors">Organizer Dashboard</Link></li>
-                                <li><Link to="/organisers" className="hover:text-foreground transition-colors">Resources</Link></li>
-                                <li><a href="mailto:hello@ariapass.africa" className="hover:text-foreground transition-colors">Contact Sales</a></li>
+                                <li>
+                                    <a
+                                        onClick={() => toast('Organiser guide downloaded', {
+                                            description: 'Check your downloads folder'
+                                        })}
+                                        href="/resources/ariapass-guide.pdf"
+                                        download="ariapass-organiser-guide.pdf"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        Resources: <span className="italic text-gray-400">Organiser guide</span>
+                                    </a>
+                                </li>
+                                <li><a href="mailto:ticketmaster@ariapass.africa" className="hover:text-foreground transition-colors">Contact Sales</a></li>
                             </ul>
                         </div>
                     </div>

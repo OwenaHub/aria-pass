@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, Database, Eye, Share2, Cookie, Lock, UserCheck, Mail } from 'lucide-react';
 import { Link } from 'react-router';
 
@@ -218,8 +218,8 @@ const PrivacyPolicy = () => {
                   If you have privacy concerns, please contact our Data Protection Officer at:
                 </p>
                 <div className="mt-4">
-                    <a href="mailto:privacy@example.com" className="text-indigo-600 font-medium hover:underline text-sm">
-                        hello@owenahub.com
+                    <a href="mailto:ticketmaster@ariapass.africa" className="text-indigo-600 font-medium hover:underline text-sm">
+                        ticketmaster@ariapass.africa
                     </a>
                 </div>
               </section>

@@ -15,6 +15,7 @@ import Countdown from "~/components/utility/countdown";
 import PostReviewWrapper from "~/components/custom/post-review-wrapper";
 import ReviewCard from "~/components/cards/review-card";
 import ViewEventProgram from "~/components/cards/view-event-program";
+import { DynamicQR } from "~/components/buttons/dynamic-qr";
 
 export default function DesktopView({ event }: { event: OrganiserEvent }) {
     const user: User = useOutletContext();
@@ -45,8 +46,8 @@ export default function DesktopView({ event }: { event: OrganiserEvent }) {
                                 className="h-120 w-full object-cover"
                             />
 
-                            <div className="bg-white/60 border px-4 py-2 text-sm font-semibold rounded-md absolute top-5 left-5">
-                                {event.eventType}
+                            <div className="absolute top-5 left-5">
+                                <DynamicQR qrValue={`https://ariapass.africa/events/${event.slug}/checkout`} />
                             </div>
 
                             {event.status === 'completed' && (

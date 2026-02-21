@@ -14,6 +14,7 @@ import PostReviewWrapper from "~/components/custom/post-review-wrapper";
 import { Button } from "~/components/ui/button";
 import ReviewCard from "~/components/cards/review-card";
 import ViewEventProgram from "~/components/cards/view-event-program";
+import { DynamicQR } from "~/components/buttons/dynamic-qr";
 
 export default function MobileView({ event }: { event: OrganiserEvent }) {
     const user: User = useOutletContext();
@@ -45,8 +46,8 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                     alt={event.title}
                     className="h-full w-full object-cover"
                 />
-                <div className="bg-white/60 border px-3 py-1.5 text-xs font-semibold rounded-lg absolute top-5 left-5">
-                    {event.eventType}
+                <div className="absolute top-5 left-5">
+                    <DynamicQR qrValue={`https://ariapass.africa/events/${event.slug}/checkout`} />
                 </div>
 
                 {event.status === 'completed' && (

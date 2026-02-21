@@ -1,5 +1,7 @@
 import { CheckCircle, Smartphone, Users, Zap } from 'lucide-react'
 import { Link, type MetaFunction } from 'react-router'
+import { toast } from 'sonner';
+import HrWithText from '~/components/utility/hr-with-text';
 import { defaultMeta } from '~/lib/meta'
 
 export const meta: MetaFunction = (args) => {
@@ -33,11 +35,18 @@ export default function Organisers() {
                                 Get Started
                             </Link>
                         </button>
-                        <button className="tracking-tighter w-full sm:w-auto px-12 py-3 bg-white border hover:bg-primary-bg text-primary font-semibold rounded-full text-lg shadow-indigo-200 transition-all transform hover:-translate-y-1">
-                            <Link to="/events">
-                                Explore events
-                            </Link>
-                        </button>
+                        <a
+                            onClick={() => toast('Organiser guide downloaded', {
+                                description: 'Check your downloads folder'
+                            })}
+                            href="/resources/ariapass-guide.pdf"
+                            download="ariapass-organiser-guide.pdf"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="tracking-tighter w-full sm:w-auto px-12 py-3 bg-white border hover:bg-gray-100 text-primary font-semibold rounded-full text-lg shadow-indigo-200 transition-all transform hover:-translate-y-1"
+                        >
+                            <span>Download Guide</span>
+                        </a>
                     </div>
 
                     {/* Abstract Dashboard Visual */}
@@ -95,8 +104,8 @@ export default function Organisers() {
                             <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-6">
                                 <CheckCircle className="w-6 h-6 text-green-600" />
                             </div>
-                            <h3 className="text-xl font-bold mb-3">Zero Commission Fees</h3>
-                            <p className="text-slate-600 leading-relaxed">
+                            <h3 className="text-xl font-bold tracking-tighter mb-3">Zero Commission Fees</h3>
+                            <p className="text-slate-600 leading-relaxed tracking-tighter">
                                 Why pay for your own success? We don't take a cut of your ticket sales. You keep every penny you earn, instantly.
                             </p>
                         </div>
@@ -106,8 +115,8 @@ export default function Organisers() {
                             <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
                                 <Users className="w-6 h-6 text-blue-600" />
                             </div>
-                            <h3 className="text-xl font-bold mb-3">Team Collaboration</h3>
-                            <p className="text-slate-600 leading-relaxed">
+                            <h3 className="text-xl font-bold tracking-tighter mb-3">Team Collaboration</h3>
+                            <p className="text-slate-600 leading-relaxed tracking-tighter">
                                 Don't run the show alone. Invite your team to the dashboard, assign roles, and manage attendees together in real-time.
                             </p>
                         </div>
@@ -117,8 +126,8 @@ export default function Organisers() {
                             <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
                                 <Smartphone className="w-6 h-6 text-purple-600" />
                             </div>
-                            <h3 className="text-xl font-bold mb-3">Digital Programs</h3>
-                            <p className="text-slate-600 leading-relaxed">
+                            <h3 className="text-xl font-bold tracking-tighter mb-3">Digital Programs</h3>
+                            <p className="text-slate-600 leading-relaxed tracking-tighter">
                                 Ditch the paper. Create interactive digital brochures and schedules that attendees can access directly from their phones.
                             </p>
                         </div>
@@ -132,11 +141,19 @@ export default function Organisers() {
                 <div className="max-w-4xl mx-auto px-4 text-center">
                     <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tighter">Ready to launch your next event?</h2>
                     <p className="text-slate-600 mb-8">Join our community of organizers saving money and working smarter.</p>
-                    <Link to={'/register'} className='cursor-pointer'>
-                        <button className="px-8 py-4 bg-primary hover:bg-slate-800 text-white font-semibold rounded-full text-base transition-colors">
-                            Get Started for Free
-                        </button>
-                    </Link>
+                    <div className="flex flex-col items-stretch gap-2">
+                        <Link to={'/register'} className='cursor-pointer flex-1'>
+                            <button className="px-8 py-4 bg-primary hover:bg-slate-800 text-white font-semibold rounded-full text-base transition-colors">
+                                Get Started for Free
+                            </button>
+                        </Link>
+                        <HrWithText text="or" />
+                        <Link to={'/'} className='cursor-pointer flex-1'>
+                            <button className="px-12 tracking-tight py-4 bg-gray-100 hover:bg-gray-200 text-primary font-semibold rounded-full text-base transition-colors">
+                                See Events
+                            </button>
+                        </Link>
+                    </div>
                 </div>
             </section>
         </main>

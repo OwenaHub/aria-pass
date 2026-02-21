@@ -19,7 +19,7 @@ import PreviewCard from './preview-card';
 import { STORAGE_URL } from '~/config/defaults';
 import formRequest from '~/http/form.request';
 import { defaultMeta } from '~/lib/meta'
-import { eventCategory } from '~/lib/d.store';
+import { eventCategory, nigerianStates } from '~/lib/d.store';
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -300,10 +300,16 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                                 <SelectContent>
                                     <SelectGroup>
                                         <SelectLabel>Cities we support</SelectLabel>
-                                        <SelectItem value="abuja">Abuja</SelectItem>
-                                        <SelectItem value="lagos">Lagos</SelectItem>
-                                        <SelectItem value="imo">Imo</SelectItem>
-                                        <SelectItem value="kaduna">Kaduna</SelectItem>
+                                        <SelectGroup>
+                                            <SelectLabel>Cities we support</SelectLabel>
+                                            {nigerianStates.map((state) => (
+                                                <SelectItem
+                                                    key={state}
+                                                    value={state}>
+                                                    {state.charAt(0).toUpperCase() + state.slice(1)}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectGroup>
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>

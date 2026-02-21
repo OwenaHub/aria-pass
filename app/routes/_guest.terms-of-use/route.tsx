@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, FileText, Shield, Ticket, Users, AlertTriangle, Copyright, Scale } from 'lucide-react';
 import { Link } from 'react-router';
 
@@ -208,7 +208,7 @@ const TermsOfUse = () => {
                             <div className="mt-10 pt-10 border-t border-gray-200">
                                 <h3 className="text-lg font-bold text-gray-900">Questions?</h3>
                                 <p className="text-gray-600 text-sm mt-2">
-                                    Contact us at <a href="mailto:legal@example.com" className="text-indigo-600 hover:underline">hello@owenahub.com</a>
+                                    Contact us at <a href="mailto:ticketmaster@ariapass.africa" className="text-indigo-600 hover:underline">ticketmaster@ariapass.africa</a>
                                 </p>
                             </div>
 

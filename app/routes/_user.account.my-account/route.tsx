@@ -13,6 +13,7 @@ import { Info } from 'lucide-react'
 import ProfileStatus from '~/components/utility/profile-status'
 import InputError from '~/components/utility/input-error'
 import RevalidateButton from '~/components/utility/revalidate-button'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '~/components/ui/select'
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
     const credentials = await parseForm(request);
@@ -36,6 +37,9 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
 export default function MyAccount({ actionData }: Route.ComponentProps) {
     const errors = actionData;
     const user: User = useOutletContext();
+
+    console.log(user);
+
 
     return (
         <div>
@@ -187,6 +191,44 @@ export default function MyAccount({ actionData }: Route.ComponentProps) {
                             See your payout bank details <Link className='text-blue-500' to={'/account/payouts'}>here</Link>
                         </span>
                     </p>
+
+                    <div className='bg-gray-50 p-5 rounded-xl'>
+                        <Label className='mb-1 text-sm tracking-tight' htmlFor='processing_fee_strategy'>
+                            Processing fee strategy
+                        </Label>
+                        <p className="font-light tracking-tight text-xs mb-5 flex items-center gap-1">
+                            <Info className='size-4' strokeWidth={1} />
+                            <span>
+                                Choose how you want to handle ticket processing fees. This will determine whether the ticket buyers or you, the organiser, will bear the cost of processing fees for each ticket sold.
+                            </span>
+                        </p>
+                        <Select
+                            required
+                            name='processing_fee_strategy'
+                            defaultValue={user.organiserProfile?.processingFeeStrategy || undefined}
+                        >
+                            <SelectTrigger className="w-full rounded-full py-5 max-w-lg">
+                                <SelectValue placeholder="Select strategy" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectLabel>How to handle processing fees</SelectLabel>
+                                    {[
+                                        'buyer_pays',
+                                        'organiser_pays',
+                                        'split_fee'
+                                    ].map((state) => (
+                                        <SelectItem
+                                            key={state}
+                                            value={state}
+                                        >
+                                            {state.charAt(0).toUpperCase() + state.slice(1).split('_').join(' ')}
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
 
                     <div className='max-w-sm mt-8 text-sm'>
                         <DefaultButton text='Update profile' />

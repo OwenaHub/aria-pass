@@ -34,7 +34,7 @@ import useSession from "~/hooks/use-session";
 import client from "~/http/client";
 
 import { defaultMeta } from '~/lib/meta';
-import { eventCategory } from "~/lib/d.store";
+import { eventCategory, nigerianStates } from "~/lib/d.store";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -328,10 +328,13 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 <SelectContent>
                                     <SelectGroup>
                                         <SelectLabel>Cities we support</SelectLabel>
-                                        <SelectItem value="abuja">Abuja</SelectItem>
-                                        <SelectItem value="lagos">Lagos</SelectItem>
-                                        <SelectItem value="imo">Imo</SelectItem>
-                                        <SelectItem value="kaduna">Kaduna</SelectItem>
+                                        {nigerianStates.map((state) => (
+                                            <SelectItem
+                                                key={state}
+                                                value={state}>
+                                                {state.charAt(0).toUpperCase() + state.slice(1)}
+                                            </SelectItem>
+                                        ))}
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
