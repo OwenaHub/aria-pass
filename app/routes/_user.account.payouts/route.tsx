@@ -233,6 +233,10 @@ export default function Payouts({ loaderData }: Route.ComponentProps) {
                                 placeholder="Account Number"
                                 maxLength={10}
                                 minLength={10}
+                                autoComplete="off"
+                                autoCorrect="off"
+                                autoCapitalize="none"
+                                spellCheck="false"
                                 className='py-5 rounded-md w-full md:w-74 bg-white text-sm'
                                 onInput={(e) => {
                                     const input = e.target as HTMLInputElement;
