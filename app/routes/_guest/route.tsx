@@ -1,6 +1,6 @@
-import { Equal, Facebook, Twitter, Instagram, Heart, Phone } from 'lucide-react'
+import { Facebook, Instagram, Phone } from 'lucide-react'
 import { useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router'
+import { Link, NavLink, Outlet } from 'react-router'
 import { Button } from '~/components/ui/button'
 import AnnouncementBanner from '~/components/cards/announcement-banner';
 import type { Route } from '../_guest/+types/route';
@@ -32,7 +32,7 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
     const [menu, setMenu] = useState<boolean>(false);
     const [scrolled, setScrolled] = useState<boolean>(false);
 
-    const NAV = ['Events', 'Organisers', 'Artists']
+    const NAV = ['Events', 'Organisers', 'Pricing']
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -51,10 +51,18 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                             <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-10 md:w-14 object-contain" />
                         </Link>
 
-                        <ul className='hidden md:flex gap-8'>
+                        <ul className='hidden md:flex gap-8 items-center'>
                             {NAV.map((item) => (
-                                <li key={item} className='hover:text-gray-400 text-xs font-normal tracking-tight transition-all'>
-                                    <Link to={item.toLowerCase()}>{item}</Link>
+                                <li key={item}>
+                                    <NavLink
+                                        to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                                        className={({ isActive }) => `text-sm font-medium tracking-tight transition-all ${isActive
+                                            ? 'text-primary-theme font-bold underline underline-offset-2 ' // Styles when active
+                                            : 'text-slate-600 hover:text-indigo-400' // Styles when inactive
+                                            }`}
+                                    >
+                                        {item}
+                                    </NavLink>
                                 </li>
                             ))}
                         </ul>
@@ -62,8 +70,8 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                     {(user && user.name)
                         ? (
                             <div className='hidden md:flex gap-2 items-center'>
-                                <Link to={"/my-events/new"} className='bg-gray-100 text-primary rounded-full px-6 py-2.5 text-xs font-medium'>
-                                   Dashboard
+                                <Link to={"/dashboard"} className='bg-gray-100 text-primary rounded-full px-6 py-2.5 text-xs font-medium'>
+                                    Dashboard
                                 </Link>
 
                                 <CustomAvatar name={user.name} styles='h-12 w-12 text-xs' />

@@ -25,4 +25,5 @@ interface OrganiserEvent extends Model {
     likes?: number;
     members: EventMember[];
     eventProgram?: EventProgram[];
+    eventPlan?: EventPlan;
 }

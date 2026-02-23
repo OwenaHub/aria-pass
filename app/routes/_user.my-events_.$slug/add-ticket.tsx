@@ -27,13 +27,17 @@ import { Textarea } from "~/components/ui/textarea"
 import DefaultButton from "~/components/buttons/default-button"
 import { Check } from "lucide-react"
 import { Form, useNavigation } from "react-router"
+import { getUpgradeTarget } from "~/lib/d.store"
+import UpgradePlan from "~/components/cards/upgrade-plan"
 
-export default function AddTicket() {
+export default function AddTicket({ event }: { event: OrganiserEvent }) {
     const [open, setOpen] = React.useState(false)
     const isDesktop = useMediaQuery("(min-width: 768px)");
 
     const navigation = useNavigation();
     const formRef = React.useRef<HTMLFormElement>(null);
+
+    const ticketUpgrade = getUpgradeTarget(event, 'ticketTierCount');
 
     React.useEffect(() => {
         // We only want to close the dialog if the form submission is successful
@@ -58,7 +62,10 @@ export default function AddTicket() {
                             {/*  */}
                         </DialogDescription>
                     </DialogHeader>
-                    <ProfileForm ref={formRef} />
+                    {ticketUpgrade
+                        ? ( <UpgradePlan targetTier={ticketUpgrade} featureName="Ticket Tiers" />)
+                        : (<ProfileForm ref={formRef} />)
+                    }
                 </DialogContent>
             </Dialog>
         )
@@ -76,7 +83,11 @@ export default function AddTicket() {
                         {/*  */}
                     </DrawerDescription>
                 </DrawerHeader>
-                <ProfileForm className="px-4" ref={formRef} />
+                {ticketUpgrade
+                    ? ( <UpgradePlan targetTier={ticketUpgrade} featureName="Ticket Tiers" />)
+                    : (<ProfileForm className="px-4" ref={formRef} />)
+                }
+
                 <DrawerFooter className="pt-2">
                     <DrawerClose asChild>
                         <Button

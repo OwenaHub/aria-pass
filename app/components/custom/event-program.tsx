@@ -22,10 +22,14 @@ import {
     AccordionTrigger,
 } from "~/components/ui/accordion"
 import { FormatLineBreak } from "~/components/utility/format-line-break"
+import UpgradePlan from "../cards/upgrade-plan"
+import { getUpgradeTarget } from "~/lib/d.store"
 
 export default function EventProgram({ event }: { event: OrganiserEvent }) {
     const fetcher = useFetcher();
     const revalidate = useRevalidator();
+
+    const eventProgramUpgrade = getUpgradeTarget(event, 'hasEventProgram');
 
     const [newProgram, setNewProgram] = useState<boolean>(false);
     const [editProgram, setEditedProgram] = useState<boolean>(false);
@@ -48,7 +52,9 @@ export default function EventProgram({ event }: { event: OrganiserEvent }) {
         <Sheet>
             <SheetTrigger asChild>
                 <Button variant="outline" className="flex items-center gap-1 shadow-none rounded-lg">
-                    <span className="tracking-tighter text-sm">Event program</span>
+                    <span className="tracking-tighter text-sm">
+                        {event?.eventProgram && event.eventProgram.length > 0 ? "Edit program" : "Add program"}
+                    </span>
                     <ChevronRight />
                 </Button>
             </SheetTrigger>
@@ -286,16 +292,22 @@ export default function EventProgram({ event }: { event: OrganiserEvent }) {
                                     <DefaultButton text="Add program" />
                                 </fetcher.Form>)
                                 : (<>
-                                    <EmptyState resource="programs" />
-                                    <div className="mx-auto w-max">
-                                        <Button
-                                            variant="outline"
-                                            className="shadow-none text-sm py-5 rounded-lg cursor-pointer"
-                                            onClick={() => setNewProgram(true)}
-                                        >
-                                            Add program
-                                        </Button>
-                                    </div>
+                                    {eventProgramUpgrade ? (
+                                        <UpgradePlan targetTier={eventProgramUpgrade} featureName="Event program" />
+                                    ) : (
+                                        <>
+                                            <EmptyState resource="programs" />
+                                            <div className="mx-auto w-max">
+                                                <Button
+                                                    variant="outline"
+                                                    className="shadow-none text-sm py-5 rounded-lg cursor-pointer"
+                                                    onClick={() => setNewProgram(true)}
+                                                >
+                                                    Add program
+                                                </Button>
+                                            </div>
+                                        </>
+                                    )}
                                 </>)}
                         </div>
                     }

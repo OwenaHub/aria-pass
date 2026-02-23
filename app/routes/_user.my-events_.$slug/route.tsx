@@ -174,7 +174,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                             Edit
                         </Button>
                     </Link>
-                    <AddTicket />
+                    <AddTicket event={event} />
                     <UpdateEventStatus event={event} />
                 </div>
             </div>

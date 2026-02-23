@@ -5,7 +5,7 @@ import {
     DrawerContent,
     DrawerTrigger,
 } from "~/components/ui/drawer"
-import { Calendar1, ChevronDown, ChevronRight, Home, Users, UserStar } from "lucide-react"
+import { Calendar1, ChevronDown, ChevronRight, Coins, Home, Users, UserStar } from "lucide-react"
 import { Link } from "react-router"
 
 export default function MobileNav({ user }: { user: User }) {
@@ -63,6 +63,19 @@ export default function MobileNav({ user }: { user: User }) {
                             </div>
                             <span className="tracking-tighter text-lg">
                                 Artists
+                            </span>
+                        </Link>
+
+                        <Link
+                            to={'/pricing'}
+                            onClick={() => setOpen(false)}
+                            className="flex items-center gap-3"
+                        >
+                            <div className="rounded-full p-4 bg-gray-100">
+                                <Coins strokeWidth={2} className="size-6" />
+                            </div>
+                            <span className="tracking-tighter text-lg">
+                                Pricing
                             </span>
                         </Link>
 

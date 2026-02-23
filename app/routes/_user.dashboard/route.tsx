@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Await, Link, redirect, useOutletContext, type MetaFunction } from 'react-router';
-import { ArrowRight, CalendarDays, ChevronRight, Clock, Recycle, RefreshCw, ShieldAlert, ShoppingBag, Tickets } from 'lucide-react';
+import { ArrowRight, CalendarDays, ChevronRight, ShoppingBag, Tickets } from 'lucide-react';
 import type { Route } from '../_user.dashboard/+types/route';
 
 import client from '~/http/client';
@@ -106,8 +106,8 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
         collaborations,
     } = loaderData;
 
-    const user: User = useOutletContext();
-    const { validateSession } = useSession()
+    const user: User = useOutletContext();    
+
     return (
         <div>
             <section className="mb-5">
