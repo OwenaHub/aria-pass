@@ -1,6 +1,6 @@
 import { ChevronRight, Pencil, Plus, Trash, X } from "lucide-react"
 import { useEffect, useState } from "react"
-import { useFetcher, useRevalidator } from "react-router"
+import { useFetcher } from "react-router"
 import DefaultButton from "~/components/buttons/default-button"
 import EmptyState from "~/components/skeletons/empty-state"
 import { Button } from "~/components/ui/button"
@@ -27,7 +27,6 @@ import { getUpgradeTarget } from "~/lib/d.store"
 
 export default function EventProgram({ event }: { event: OrganiserEvent }) {
     const fetcher = useFetcher();
-    const revalidate = useRevalidator();
 
     const eventProgramUpgrade = getUpgradeTarget(event, 'hasEventProgram');
 
@@ -41,10 +40,7 @@ export default function EventProgram({ event }: { event: OrganiserEvent }) {
         setEditedProgram(false);
         setNewItem(false);
         setItemToEdit(null);
-
-        revalidate.revalidate()
-
-    }, [fetcher.state]);
+    }, [fetcher.state, fetcher]);
 
     //! READ THE COMMENTS
 

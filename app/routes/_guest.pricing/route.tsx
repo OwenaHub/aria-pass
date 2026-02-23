@@ -185,8 +185,8 @@ const PricingPage = () => {
                                 When do I receive my ticket payouts?
                             </h3>
                             <p className="text-slate-600 leading-relaxed">
-                                Standard payouts occur 48 hours after the event has successfully ended.
-                                Premium users can request "Express Payouts" to receive funds as tickets are sold.
+                                Standard payouts occur immediately your fans make purchase using your link.
+                                Payments made in the weekends (Friday 5pm GMT - Sunday 11pm GMT) will be processed on Monday morning.
                             </p>
                         </div>
                     </div>
