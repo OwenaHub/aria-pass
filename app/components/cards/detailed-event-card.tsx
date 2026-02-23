@@ -40,7 +40,7 @@ export default function DetailedEventCard({ event }: { event: OrganiserEvent }) 
         <div className="flex items-center justify-between py-5 border-b border-gray-100">
             {/* Left side */}
             <div className="flex gap-3 items-start w-full relative">
-                <div className="bg-gray-100 rounded border group-hover:opacity-85 aspect-auto h-30 min-w-15 max-w-15 md:max-w-full overflow-hidden transition">
+                <div className="bg-gray-100 rounded border group-hover:opacity-85 aspect-auto h-30 min-w-18 max-w-18 md:max-w-full overflow-hidden transition">
                     {event.bannerUrl && (
                         <img
                             src={event.bannerUrl && `${STORAGE_URL}/${event.bannerUrl}`}
@@ -50,7 +50,7 @@ export default function DetailedEventCard({ event }: { event: OrganiserEvent }) 
                         />
                     )}
                 </div>
-                <div className='flex flex-col gap-2 pt-2'>
+                <div className='flex flex-col gap-2'>
                     <h4 className='text-md font-medium tracking-tight md:font-medium leading-5'>{event.title}</h4>
                     <p className='text-gray-700 text-xs'>
                         {formattedDate} at {event.startTime.split(":")[0]}:{event.startTime.split(":")[1]} ∙ {event.venueName}, <span className="capitalize">{event.city}, {event.country}</span>

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import {
-    Check, HelpCircle, Zap, Star, ShieldCheck,
-    ArrowRight, Globe
+    Check, HelpCircle, Zap, Star, ShieldCheck, Globe,
+    ArrowRight,
 } from 'lucide-react';
+import { Link } from 'react-router';
+import { BrSm } from '~/components/utility/line-break';
 
 const PricingPage = () => {
     const [isPartner, setIsPartner] = useState(true);
@@ -53,15 +55,15 @@ const PricingPage = () => {
                 <div className="inline-flex items-center p-1 bg-white border border-slate-200 rounded-2xl shadow-sm mb-12">
                     <button
                         onClick={() => setIsPartner(true)}
-                        className={`px-6 py-3 rounded-xl text-sm font-bold transition-all ${isPartner ? 'bg-primary-theme text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
+                        className={`px-10 py-3 rounded-xl text-sm font-bold transition-all ${isPartner ? 'bg-primary-theme text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
                     >
-                        Partner (0% Fee)
+                        Partner <BrSm /> (0% Fee)
                     </button>
                     <button
                         onClick={() => setIsPartner(false)}
-                        className={`px-6 py-3 rounded-xl text-sm font-bold transition-all ${!isPartner ? 'bg-primary-theme text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
+                        className={`px-10 py-3 rounded-xl text-sm font-bold transition-all ${!isPartner ? 'bg-primary-theme text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
                     >
-                        Independent (5% Fee)
+                        Independent <BrSm /> (5% Fee)
                     </button>
                 </div>
 
@@ -78,9 +80,9 @@ const PricingPage = () => {
             </header>
 
             {/* 3. Pricing Cards */}
-            <section className="px-6 pb-24 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <section className="container pb-24 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
                 {tiers.map((tier, idx) => (
-                    <article key={idx} className={`relative bg-white rounded-[2.5rem] p-8 border-2 transition-all hover:translate-y-[-8px] ${tier.highlight ? 'border-primary-theme shadow-2xl z-10' : 'border-slate-100 shadow-xl'}`}>
+                    <article key={idx} className={`relative bg-white rounded-[2.5rem] p-8 border-2 transition-all hover:-translate-y-2 ${tier.highlight ? 'border-primary-theme shadow-2xl z-10' : 'border-slate-100 shadow-xl'}`}>
                         {tier.highlight && (
                             <span className="absolute top-0 right-12 translate-y-[-50%] bg-primary-theme text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
                                 Most Popular
@@ -107,18 +109,27 @@ const PricingPage = () => {
                             ))}
                         </ul>
 
-                        <button className={`w-full py-4 rounded-2xl font-black transition-all flex items-center justify-center gap-2 ${tier.highlight ? 'bg-primary-theme text-white hover:bg-indigo-700 shadow-lg shadow-indigo-200' : 'bg-slate-100 text-slate-900 hover:bg-slate-200'}`}>
+                        {/* <button className={`w-full py-4 rounded-2xl font-black transition-all flex items-center justify-center gap-2 ${tier.highlight ? 'bg-primary-theme text-white hover:bg-indigo-700 shadow-lg shadow-indigo-200' : 'bg-slate-100 text-slate-900 hover:bg-slate-200'}`}>
                             {tier.cta}
                             <ArrowRight className="h-4 w-4" />
-                        </button>
+                        </button> */}
                     </article>
+
                 ))}
             </section>
+            <div className='mx-auto max-w-md pb-20 px-4'>
+                    <Link to={"/my-events/new"} className="w-full py-4 rounded-2xl font-black transition-all flex items-center justify-center gap-2 bg-primary-theme text-white hover:bg-indigo-700 shadow-lg shadow-indigo-200">
+                        Get Started
+                        <ArrowRight className="h-4 w-4" />
+                    </Link>
+            </div>
+
+            <hr className='mb-20'/>
 
             {/* 4. Comparison Table (Critical for SEO & Detail) */}
             <section className="max-w-5xl mx-auto px-6 pb-24 hidden md:block">
                 <h2 className="text-3xl font-black text-center mb-12 text-slate-900">Compare Features</h2>
-                <div className="bg-white rounded-[2rem] shadow-xl border border-slate-100 overflow-hidden">
+                <div className="bg-white rounded-4xl shadow-xl border border-slate-100 overflow-hidden">
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-slate-50 border-b border-slate-100">
