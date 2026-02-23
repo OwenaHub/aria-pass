@@ -99,7 +99,6 @@ export default function EventUpgrade({ loaderData }: Route.ComponentProps) {
         text: "Upgrade Now",
 
         onSuccess: async (e: any) => {
-            console.log(e);
             const promise = new Promise(async (resolve, reject) => {
                 try {
                     if (e.status !== "success") {

@@ -38,9 +38,6 @@ export default function MyAccount({ actionData }: Route.ComponentProps) {
     const errors = actionData;
     const user: User = useOutletContext();
 
-    console.log(user);
-
-
     return (
         <div>
             <section>

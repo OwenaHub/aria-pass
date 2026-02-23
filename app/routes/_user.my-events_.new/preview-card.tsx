@@ -74,7 +74,7 @@ export default function PreviewCard({ event, bannerImage }: { event?: any, banne
                         loading="lazy"
                     />
                     {/* Overlay background */}
-                    <div className='absolute top-0 left-0 w-full min-h-full bg-gradient-to-t from-black/70 to-black/30' />
+                    <div className='absolute top-0 left-0 w-full min-h-full bg-linear-to-t from-black/70 to-black/30' />
 
                     {/* Upperside of the card */}
                     <div className="absolute flex items-center justify-between top-2 w-[97%] left-2 py-0.5 px-1">

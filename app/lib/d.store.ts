@@ -89,43 +89,56 @@ const FEATURE_MAP: Record<string, keyof OrganiserEvent> = {
     allowsReviews: 'reviews',
 };
 
-export const getUpgradeTarget = (event: OrganiserEvent, featureKey: TFeatureKey) => {
+export const getUpgradeTarget = (event: OrganiserEvent | null | undefined, featureKey: TFeatureKey) => {
+    // 1. Guard Clause: If there's no event yet (loading state), don't even try.
+    if (!event) return null;
+
+    // 2. Defensive Tier Check
     const currentTier = (event?.eventPlan?.tier?.toUpperCase() || "BASIC") as keyof typeof TIER_LIMITS;
-    const limit = TIER_LIMITS[currentTier][featureKey];
+
+    // Ensure the tier exists in our TIER_LIMITS constant to prevent "limit is undefined"
+    const tierConfig = TIER_LIMITS[currentTier];
+    if (!tierConfig) return null;
+
+    const limit = tierConfig[featureKey];
     const modelKey = FEATURE_MAP[featureKey] || featureKey;
 
     let isLocked = false;
 
-    // Logic A: Numeric Limits (Collaborators, Tickets)
+    // Logic A: Numeric Limits
     if (typeof limit === 'number') {
-        const data = event[modelKey as keyof OrganiserEvent];
-        const currentUsage = Array.isArray(data) ? data.length : 0;
+        // Use type assertion safely and check for existence
+        const data = (event as any)[modelKey];
+
+        // If data is null/undefined, usage is 0. If it's an array, get length. 
+        // If it's a number (like views), use the number itself.
+        const currentUsage = Array.isArray(data)
+            ? data.length
+            : (typeof data === 'number' ? data : 0);
+
         isLocked = currentUsage >= limit;
     }
-    // Logic B: Boolean Permissions (Program, Reviews, Promotion)
+    // Logic B: Boolean Permissions
     else if (typeof limit === 'boolean') {
-        // If the limit is false, it means this tier doesn't allow the feature at all
         isLocked = limit === false;
     }
 
+    // ... (rest of your tier-looping logic remains the same)
     if (isLocked) {
         const currentIndex = TIER_ORDER.indexOf(currentTier);
 
-        // Loop through higher tiers to find the first one that unlocks this
         for (let i = currentIndex + 1; i < TIER_ORDER.length; i++) {
             const nextTierName = TIER_ORDER[i];
             const nextTierLimit = TIER_LIMITS[nextTierName][featureKey];
 
-            // If it's a number, check if it's higher than the current limit
             if (typeof nextTierLimit === 'number' && nextTierLimit > (limit as number)) {
                 return nextTierName;
             }
-            // If it's a boolean, check if it's true (unlocked)
             if (typeof nextTierLimit === 'boolean' && nextTierLimit === true) {
                 return nextTierName;
             }
         }
     }
 
-    return null; // Feature is available or no higher tier unlocks it
+    return null;
 };
