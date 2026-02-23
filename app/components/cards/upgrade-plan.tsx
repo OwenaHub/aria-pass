@@ -8,7 +8,7 @@ interface UpgradePlanProps {
 
 export default function UpgradePlan({ targetTier, featureName }: UpgradePlanProps) {
     // Ensuring we match the casing of your TIER_LIMITS keys
-    const tierData: Record<'STANDARD' | 'PREMIUM', { price: string; perks: string[] }> = {
+    const tierData: Record<'STANDARD' | 'PREMIUM' | 'BASIC', { price: string; perks: string[] }> = {
         STANDARD: {
             price: "₦14,250",
             perks: ["5 Collaborators", "Digital Event Program", "Event Reviews", "3 Ticket Tiers"]
@@ -16,13 +16,17 @@ export default function UpgradePlan({ targetTier, featureName }: UpgradePlanProp
         PREMIUM: {
             price: "₦53,500",
             perks: ["Unlimited Collaborators", "5 Ticket Tiers", "5 Social Promo Posts", "Priority Support"]
+        },
+        BASIC: {
+            price: "₦0",
+            perks: ["1 Collaborator", "Basic Event Program", "Event Reviews", "1 Ticket Tier"]
         }
     };
 
     const data = tierData[targetTier];
 
     return (
-        <div className="relative w-full overflow-hidden bg-white border border-slate-200 rounded-3xl animate-in fade-in zoom-in duration-300">
+        <div className="relative w-full overflow-hidden bg-white border border-slate-200 rounded-xl animate-in fade-in zoom-in duration-300">
             {/* Header with Gradient */}
             <div className="bg-linear-to-br from-primary-theme to-violet-700 p-6 flex flex-row items-center gap-4 justify-between text-white">
                 <div className="relative">
@@ -44,7 +48,7 @@ export default function UpgradePlan({ targetTier, featureName }: UpgradePlanProp
                         ) : (
                             "You've reached the limit for your current plan."
                         )}
-                        <br />
+                        {" "}
                         Upgrade to keep building your event.
                     </p>
                 </div>

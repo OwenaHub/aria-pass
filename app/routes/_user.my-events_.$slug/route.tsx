@@ -19,6 +19,7 @@ import FormatPrice from "~/components/utility/format-price";
 import EventReview from "./event-reviews";
 import NewTeammate from "~/components/custom/new-teammate";
 import EventProgram from "~/components/custom/event-program";
+import EventPlanBadge from "~/components/utility/event-plan-badge";
 
 export const meta: MetaFunction = (args: any) => {
     if (!args.data.event) {
@@ -126,8 +127,8 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
 
             <div className="flex flex-col lg:flex-row lg:items-center gap-5 justify-between pt-5 pb-10">
                 {/* Left side */}
-                <div className="flex gap-6 flex-col lg:flex-row lg:items-center w-full md:pe-5 lg:border-e">
-                    <div className="bg-gray-100 border rounded-md group-hover:opacity-85 aspect-video h:50 lg:h-25 overflow-hidden transition">
+                <div className="flex gap-6 flex-col lg:flex-row lg:items-start w-full md:pe-5 lg:border-e">
+                    <div className="bg-gray-100 border rounded-md group-hover:opacity-85 aspect-auto h-40 min-w-30 max-w-30 overflow-hidden transition">
                         {event.bannerUrl && (
                             <img
                                 src={event.bannerUrl && `${STORAGE_URL}/${event.bannerUrl}`}
@@ -137,7 +138,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                             />
                         )}
                     </div>
-                    <div className='flex  flex-col gap-2'>
+                    <div className='flex flex-col gap-2'>
                         <div className="flex justify-between  gap-2 items-center">
                             <EventStatus
                                 date={event.date}
@@ -161,9 +162,10 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                             </div>
                         </div>
                         <h4 className='text-xl font-semibold tracking-tighter'>{event.title}</h4>
-                        <p className='text-gray-700 text-sm tracking-tighter'>
+                        <p className='text-gray-700 text-sm tracking-tighter mb-5'>
                             {FORMATTED_DATE} at {event.startTime.split(":")[0]}:{event.startTime.split(":")[1]} ∙ {event.venueName}, <span className="capitalize">{event.city}, {event.country}</span>
                         </p>
+                        <EventPlanBadge tier={event.eventPlan?.tier} />
                     </div>
                 </div>
 
@@ -183,7 +185,12 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                 {Array.isArray(event.tickets) && (event.tickets.length > 1 || event.tickets[0]?.price !== '0.00') && (
                     <>
                         <section className="flex flex-col gap-4 flex-1 bg-gray-100 p-4 rounded-xl">
-                            <p className="text-sm">Total revenue</p>
+                            <p className="text-sm flex items-center justify-between">
+                                <span>Total revenue</span>
+                                <Link to={`/spaces/${event.slug}`} className="bg-white rounded-full p-1">
+                                    <ArrowRight className="size-4" />
+                                </Link>
+                            </p>
                             <p className="font-bold text-2xl">
                                 <span className="text-xs text-muted-foreground">NGN</span>{' '}
                                 <FormatPrice withSymbol={false} price={SUM_AMOUNT.toFixed(2)} />
