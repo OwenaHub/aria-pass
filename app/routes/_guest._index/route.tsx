@@ -1,6 +1,6 @@
 import { Await, Link, redirect, useSearchParams } from "react-router";
 import { BrMd } from "~/components/utility/line-break";
-import { ArrowRight, ChevronLeft, ChevronRight, Crown, Piano, Stars, UsersRound, UserStar } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Crown, HelpCircle, Music, Piano, ShieldCheck, Stars, Ticket, UsersRound, UserStar } from "lucide-react";
 import SearchBar from "~/components/utility/search-bar";
 import { FeedFilter } from "~/components/utility/feed-filter";
 import { Button } from "~/components/ui/button";
@@ -262,7 +262,128 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                 </div> */}
                 {/* Events End ---------------------------------------------- */}
 
-                <hr className="mt-10" />
+                {/* <hr className="mt-10" /> */}
+
+                <section className="container py-20">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-4">
+                            Your Backstage Pass to Live Music
+                        </h2>
+                        <p className="text-gray-500 max-w-2xl mx-auto">
+                            Whether you're looking to discover underground classical ensembles or buy tickets to the biggest Christmas Carols, AriaPass makes it effortless.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8 text-center">
+                        <div className="p-6 rounded-2xl bg-gray-50 hover:bg-stone-100 transition-colors">
+                            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-xs text-primary-theme">
+                                <Music size={24} />
+                            </div>
+                            <h3 className="font-semibold text-lg mb-2">1. Discover Events</h3>
+                            <p className="text-sm text-gray-500 leading-relaxed">
+                                Browse hundreds of live musical concerts, from intimate gigs to massive arena shows tailored to your taste.
+                            </p>
+                        </div>
+                        <div className="p-6 rounded-2xl bg-gray-50 hover:bg-stone-100 transition-colors">
+                            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-xs text-primary-theme">
+                                <Ticket size={24} />
+                            </div>
+                            <h3 className="font-semibold text-lg mb-2">2. Secure Your Tickets</h3>
+                            <p className="text-sm text-gray-500 leading-relaxed">
+                                Purchase tickets instantly with our secure checkout. No hidden fees, no stress—just your pass to the show.
+                            </p>
+                        </div>
+                        <div className="p-6 rounded-2xl bg-gray-50 hover:bg-stone-100 transition-colors">
+                            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-xs text-primary-theme">
+                                <ShieldCheck size={24} />
+                            </div>
+                            <h3 className="font-semibold text-lg mb-2">3. Enjoy the Music</h3>
+                            <p className="text-sm text-gray-500 leading-relaxed">
+                                Scan your digital ticket at the door and immerse yourself in the live music experience with fellow fans.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="bg-[#3A3546] text-white py-20 mt-10">
+                    <div className="container flex flex-col lg:flex-row gap-12 items-center">
+                        <div className="lg:basis-1/2">
+                            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+                                The Commission-Free Ticketing Platform for Organisers & Fans
+                            </h2>
+                            <p className="text-gray-300 mb-6 leading-relaxed">
+                                AriaPass is redefining how live music events are promoted. We bridge the gap between talented artists, dedicated organisers, and passionate music enthusiasts without taking a cut of your hard-earned ticket sales.
+                            </p>
+                            <ul className="space-y-4">
+                                {[
+                                    "Zero commission fees on ticket sales",
+                                    "Direct payouts for event organisers",
+                                    "Real-time analytics and audience insights",
+                                    "Seamless QR code ticket scanning"
+                                ].map((feature, idx) => (
+                                    <li key={idx} className="flex items-center gap-3 text-sm font-medium">
+                                        <div className="bg-pink-500/20 p-1 rounded-full text-pink-400">
+                                            <ShieldCheck size={16} />
+                                        </div>
+                                        {feature}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="lg:basis-1/2 w-full">
+                            {/* You can replace this placeholder with an actual dashboard image later */}
+                            <div className="aspect-video bg-white/10 rounded-2xl border border-white/20 flex items-center justify-center">
+                                <span className="text-white/50 flex items-center gap-2">
+                                    <Music /> Platform Preview
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 3. SEO FAQ Section */}
+                <section className="container py-20">
+                    <div className="max-w-3xl mx-auto">
+                        <div className="text-center mb-10">
+                            <h2 className="text-3xl font-bold tracking-tight mb-4 flex items-center justify-center gap-2">
+                                <HelpCircle className="text-primary-theme" /> FAQ
+                            </h2>
+                            <p className="text-gray-500">Everything you need to know about buying and selling tickets on AriaPass.</p>
+                        </div>
+
+                        <div className="space-y-4">
+                            {/* Note: In a real app, you might want to make these functional accordions with state, 
+                                but standard CSS/Details works great for SEO and simplicity */}
+                            <details className="group border border-gray-200 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden">
+                                <summary className="flex cursor-pointer items-center justify-between font-semibold text-gray-900">
+                                    <span>Is AriaPass really commission-free for organisers?</span>
+                                    <ChevronDown className="transition duration-300 group-open:-rotate-180" size={20} />
+                                </summary>
+                                <p className="mt-4 text-gray-500 leading-relaxed text-sm">
+                                    Yes! We believe organisers and artists should keep what they earn. AriaPass charges $0 in commission fees for listing your concerts and selling tickets through our platform.
+                                </p>
+                            </details>
+                            <details className="group border border-gray-200 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden">
+                                <summary className="flex cursor-pointer items-center justify-between font-semibold text-gray-900">
+                                    <span>How do I receive my event tickets?</span>
+                                    <ChevronDown className="transition duration-300 group-open:-rotate-180" size={20} />
+                                </summary>
+                                <p className="mt-4 text-gray-500 leading-relaxed text-sm">
+                                    Once purchased, your tickets are instantly emailed to you and are always accessible via your AriaPass dashboard. Just show the digital QR code at the venue!
+                                </p>
+                            </details>
+                            <details className="group border border-gray-200 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden">
+                                <summary className="flex cursor-pointer items-center justify-between font-semibold text-gray-900">
+                                    <span>What types of events are on AriaPass?</span>
+                                    <ChevronDown className="transition duration-300 group-open:-rotate-180" size={20} />
+                                </summary>
+                                <p className="mt-4 text-gray-500 leading-relaxed text-sm">
+                                    We specialize in live musical events, ranging from classical ensembles, Christmas carols, underground gigs, to massive stadium tours.
+                                </p>
+                            </details>
+                        </div>
+                    </div>
+                </section>
 
                 <div className="container mt-10">
                     <div
@@ -290,11 +411,8 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                         </div>
                     </div>
                 </div>
-
-                {/* ///////////////////////////////////////////////////////// */}
             </main>
-
-        </div >
+        </div>
     );
 }
 

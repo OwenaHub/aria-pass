@@ -1,4 +1,4 @@
-import { Equal, Facebook, Twitter, Instagram, Heart } from 'lucide-react'
+import { Equal, Facebook, Twitter, Instagram, Heart, Phone } from 'lucide-react'
 import { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router'
 import { Button } from '~/components/ui/button'
@@ -44,28 +44,26 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
 
     return (
         <>
-            <div className={`rounded-full mx-5 mt-2 sticky top-2 z-10 ${scrolled && 'bg-white/70 backdrop-blur-lg shadow-md transition'}`}>
-                <nav className={`p-4 md:p-2 ps-3 md:ps-8 flex items-center justify-between transition-all`}>
-                    <Link to="/" className='flex items-center gap-2'>
-                        <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-10 md:w-14 object-contain" />
-                    </Link>
+            <div className={`sticky top-0 z-10 ${scrolled && 'bg-white/50 backdrop-blur-lg transition'}`}>
+                <nav className={`py-3 container flex items-center justify-between transition-all`}>
+                    <div className='flex items-center gap-20'>
+                        <Link to="/" className='flex items-center gap-2'>
+                            <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-10 md:w-14 object-contain" />
+                        </Link>
 
-                    <ul className='hidden md:flex gap-8'>
-                        {NAV.map((item) => (
-                            <li key={item} className='hover:text-gray-400 text-xs font-normal tracking-tight transition-all'>
-                                <Link to={item.toLowerCase()}>{item}</Link>
-                            </li>
-                        ))}
-                    </ul>
+                        <ul className='hidden md:flex gap-8'>
+                            {NAV.map((item) => (
+                                <li key={item} className='hover:text-gray-400 text-xs font-normal tracking-tight transition-all'>
+                                    <Link to={item.toLowerCase()}>{item}</Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                     {(user && user.name)
                         ? (
-                            <div className='hidden md:flex gap-5 items-center'>
-                                <Link to={"/my-events/new"} className='bg-primary rounded-full px-6 py-3 text-xs text-white font-medium'>
-                                    Post an Event
-                                </Link>
-
-                                <Link to={'dashboard'} className='hover:text-gray-400'>
-                                    <Equal />
+                            <div className='hidden md:flex gap-2 items-center'>
+                                <Link to={"/my-events/new"} className='bg-gray-100 text-primary rounded-full px-6 py-2.5 text-xs font-medium'>
+                                   Dashboard
                                 </Link>
 
                                 <CustomAvatar name={user.name} styles='h-12 w-12 text-xs' />
@@ -92,9 +90,9 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                     </div>
                 </nav>
 
-            </div>
-            <div className='sticky top-22 md:top-20 z-10 mx-5 overflow-hidden rounded-lg'>
-                <AnnouncementBanner />
+                <div className='sticky top-22 md:top-20 z-10 overflow-hidden'>
+                    <AnnouncementBanner />
+                </div>
             </div>
 
             <Outlet context={user} />
@@ -120,8 +118,8 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                             </p>
 
                             <p className='text-xs tracking-tighter'>
-                                Built by <a href='https://owenahub.com' target='_blank' className="font-semibold">
-                                    <span className="text-amber-600">OwenaHub</span> Collective
+                                Built by <a href='https://owenahub.com' target='_blank' className="font-bold">
+                                    <span className="text-[#F6A700]">OwenaHub</span> Collective
                                 </a>
                             </p>
 
@@ -135,13 +133,13 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                                     <Facebook className="h-5 w-5" strokeWidth={1} />
                                 </a>
                                 <a
-                                    href="#"
+                                    href="https://whatsapp.com/channel/0029VbBWkeGGU3BImZoq6R0k"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="p-1 rounded-md twitter text-muted-foreground hover:text-primary transition-colors"
+                                    className="p-1 rounded-md whatsapp text-muted-foreground hover:text-primary transition-colors"
                                     aria-label="Twitter"
                                 >
-                                    <Twitter className="h-5 w-5" strokeWidth={1} />
+                                    <Phone className="h-5 w-5" strokeWidth={1} />
                                 </a>
                                 <a href="#"
                                     target="_blank"

@@ -76,7 +76,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
           position="top-center"
           toastOptions={{
             classNames: {
-
               actionButton: '!px-2 !rounded-full !text-white',
             },
           }}

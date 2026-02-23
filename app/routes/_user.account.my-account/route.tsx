@@ -196,8 +196,7 @@ export default function MyAccount({ actionData }: Route.ComponentProps) {
                         <Label className='mb-1 text-sm tracking-tight' htmlFor='processing_fee_strategy'>
                             Processing fee strategy
                         </Label>
-                        <p className="font-light tracking-tight text-xs mb-5 flex items-center gap-1">
-                            <Info className='size-4' strokeWidth={1} />
+                        <p className="font-light tracking-tight text-xs mb-5">
                             <span>
                                 Choose how you want to handle ticket processing fees. This will determine whether the ticket buyers or you, the organiser, will bear the cost of processing fees for each ticket sold.
                             </span>

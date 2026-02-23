@@ -48,9 +48,18 @@ export default function OrganiserProfileStatus({ isOrganiser, user }: OrganiserP
                 </div>
 
                 <div className='pb-3 md:pb-0'>
-                    <Link to={'/account/payouts'} className='bg-amber-900 text-white tracking-tighter text-xs font-semibold p-2.5 rounded-full'>
-                        Setup payout account
-                    </Link>
+                    {user.organiserProfile?.paystackSubaccountCode
+                        ? (<Link to={'/account'} className='bg-amber-900 text-white tracking-tighter text-xs font-semibold p-2.5 rounded-full'>
+                            Go to profile
+                        </Link>)
+                        : (<Link
+                            to={'/account/payouts'}
+                            className='bg-amber-900 text-white tracking-tighter text-xs font-semibold p-2.5 rounded-full'
+                        >
+                            Setup payout account
+                        </Link>
+                        )
+                    }
                 </div>
             </div>
         );
