@@ -55,7 +55,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
         }
 
         toast.info("Request Sent!", {
-            description: "We will give you a response in 2 business days"
+            description: "We will respond within 2 hours"
         });
 
         await validateSession();

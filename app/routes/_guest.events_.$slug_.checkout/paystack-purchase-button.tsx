@@ -9,6 +9,7 @@ import client from "~/http/client";
 import { MinusIcon, PlusIcon } from "lucide-react"
 import { Button } from "~/components/ui/button"
 import { ButtonGroup } from "~/components/ui/button-group"
+import { calculatePaymentBreakdown } from "~/lib/fee-sorting";
 
 export default function PaystackPurchaseButton({ ticket, user, organiser }: {
     ticket: Ticket,
@@ -30,36 +31,26 @@ export default function PaystackPurchaseButton({ ticket, user, organiser }: {
         ]
     });
 
-    const UNIT_PRICE = parseInt(ticket.price);
-    const QTY = form.quantity;
+    const breakdown = calculatePaymentBreakdown({
+        unitPrice: parseInt(ticket.price),
+        quantity: form.quantity,
+        commissionRate: parseInt(organiser?.commissionRate || "0"),
+        processingFeeStrategy: organiser?.processingFeeStrategy,
+    });
 
-    const SUBTOTAL = UNIT_PRICE * QTY;
-
-    const PROCESSING_FEE = Math.ceil(SUBTOTAL * 0.03); // Paystack Fees
-    const COMMISSION_PERCENT = parseInt(organiser?.commissionRate || "0");
-
-    const COMMISSION_CHARGE = Math.floor(
-        (SUBTOTAL * COMMISSION_PERCENT) / 100
-    );
-
-    const TOTAL_AMOUNT = (() => {
-        switch (organiser?.processingFeeStrategy) {
-            case "buyer_pays":
-                return SUBTOTAL + PROCESSING_FEE;
-            case "split_fee":
-                return SUBTOTAL + (PROCESSING_FEE / 2);
-            default:
-                return SUBTOTAL;
-        }
-    })();
+    const {
+        processingFeeChargedToBuyer,
+        commissionCharge,
+        totalAmount,
+    } = breakdown;
 
     const navigate = useNavigate();
 
     const componentProps = {
         email: form.email,
-        amount: TOTAL_AMOUNT * 100,
+        amount: totalAmount * 100,
         subaccount: organiser?.paystackSubaccountCode,
-        transaction_charge: COMMISSION_CHARGE,
+        transaction_charge: commissionCharge,
         metadata: {
             custom_fields: [
                 {
@@ -151,7 +142,7 @@ export default function PaystackPurchaseButton({ ticket, user, organiser }: {
                     <div className="bg-white rounded-lg mb-6 flex items-stretch  shadow">
                         <div className="flex-1 p-3">
                             <div className="text-xs text-primary mb-3">
-                                {ticket.name} ticket @ <span className="font-bold">₦{(UNIT_PRICE).toLocaleString()}</span>
+                                {ticket.name} ticket @ <span className="font-bold">₦{(parseInt(ticket.price)).toLocaleString()}</span>
                             </div>
 
                             <div className="">
@@ -215,7 +206,7 @@ export default function PaystackPurchaseButton({ ticket, user, organiser }: {
                                             <div className="text-[8px] text-gray-500 uppercase">processing fee</div>
                                             <div className="font-medium">
                                                 {/* Covers for Paystack's fees */}
-                                                ₦{PROCESSING_FEE.toLocaleString()}
+                                                ₦{processingFeeChargedToBuyer.toLocaleString()}
                                             </div>
                                         </div>
                                     )}
@@ -224,7 +215,7 @@ export default function PaystackPurchaseButton({ ticket, user, organiser }: {
                                     <div className="leading-2">
                                         <div className="text-[10px] uppercase font-light">Total</div>
                                         <div className='text-lg font-bold tracking-tighter'>
-                                            ₦{TOTAL_AMOUNT.toLocaleString()}
+                                            ₦{totalAmount.toLocaleString()}
                                         </div>
                                     </div>
                                 </div>

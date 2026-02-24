@@ -24,7 +24,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
 
         await validateSession();
         return toast.info("Profile updated!", {
-            description: "We will review your account again within 24 hours"
+            description: "We have updated your profile information"
         });
     } catch ({ response }: any) {
         toast.error('Failed to update', {

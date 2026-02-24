@@ -33,7 +33,7 @@ const PricingPage = () => {
             price: "53,500",
             description: "The ultimate power-up for major concerts and festivals.",
             icon: <ShieldCheck className="h-6 w-6 text-primary-theme" />,
-            features: ["Unlimited Collaborators", "5 Ticket Tiers", "Social Media Promotion (5 posts)", "Priority Phone Support", "Custom Branding"],
+            features: ["30 Collaborators", "5 Ticket Tiers", "Social Media Promotion (5 posts)", "Priority Phone Support", "Custom Branding"],
             cta: "Get Premium",
             highlight: false
         }
