@@ -4,7 +4,7 @@ import {
     ArrowRight,
 } from 'lucide-react';
 import { Link } from 'react-router';
-import { BrSm } from '~/components/utility/line-break';
+import { BrMd, BrSm } from '~/components/utility/line-break';
 
 const PricingPage = () => {
     const [isPartner, setIsPartner] = useState(true);
@@ -44,7 +44,7 @@ const PricingPage = () => {
             {/* 1. SEO Header Section */}
             <header className="py-20 px-6 text-center max-w-4xl mx-auto">
                 <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-                    Simple Pricing for <span className="text-primary-theme">Extraordinary</span> Events
+                    <span className="italic font-serif font-medium text-gray-500 tracking-tighter">Simple Tools</span> for <BrMd /> <span className="text-primary-theme">Extraordinary</span> Events
                 </h1>
                 <p className="text-lg text-slate-600 mb-10 leading-relaxed">
                     Whether you're hosting an intimate lounge session in Lagos or a stadium concert in Nairobi,
@@ -52,16 +52,16 @@ const PricingPage = () => {
                 </p>
 
                 {/* 2. The Partnership Toggle (The Hook) */}
-                <div className="inline-flex items-center p-1 bg-white border border-slate-200 rounded-2xl shadow-sm mb-12">
+                <div className="w-full md:max-w-md inline-flex items-center p-1 bg-white border border-slate-200 rounded-2xl shadow-sm mb-12">
                     <button
                         onClick={() => setIsPartner(true)}
-                        className={`px-10 py-3 rounded-xl text-sm font-bold transition-all ${isPartner ? 'bg-primary-theme text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
+                        className={`flex-1 px-2 py-3 rounded-xl text-sm font-bold transition-all ${isPartner ? 'bg-primary-theme text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
                     >
                         Partner <BrSm /> (0% Fee)
                     </button>
                     <button
                         onClick={() => setIsPartner(false)}
-                        className={`px-10 py-3 rounded-xl text-sm font-bold transition-all ${!isPartner ? 'bg-primary-theme text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
+                        className={`flex-1 px-2 py-3 rounded-xl text-sm font-bold transition-all ${!isPartner ? 'bg-primary-theme text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
                     >
                         Independent <BrSm /> (5% Fee)
                     </button>
@@ -91,7 +91,7 @@ const PricingPage = () => {
 
                         <div className="mb-8">
                             <div className="mb-4">{tier.icon}</div>
-                            <h2 className="text-2xl font-black mb-2">{tier.name}</h2>
+                            <h2 className="text-2xl font-bold mb-2">{tier.name}</h2>
                             <p className="text-slate-500 text-sm leading-relaxed">{tier.description}</p>
                         </div>
 
@@ -118,13 +118,13 @@ const PricingPage = () => {
                 ))}
             </section>
             <div className='mx-auto max-w-md pb-20 px-4'>
-                    <Link to={"/my-events/new"} className="w-full py-4 rounded-2xl font-black transition-all flex items-center justify-center gap-2 bg-primary-theme text-white hover:bg-indigo-700 shadow-lg shadow-indigo-200">
-                        Get Started
-                        <ArrowRight className="h-4 w-4" />
-                    </Link>
+                <Link to={"/my-events/new"} className="w-full py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 bg-primary-theme text-white hover:bg-indigo-700 shadow-lg shadow-indigo-200">
+                    Get started
+                    <ArrowRight className="size-5" strokeWidth={3} />
+                </Link>
             </div>
 
-            <hr className='mb-20'/>
+            <hr className='mb-20' />
 
             {/* 4. Comparison Table (Critical for SEO & Detail) */}
             <section className="max-w-5xl mx-auto px-6 pb-24 hidden md:block">
@@ -142,9 +142,15 @@ const PricingPage = () => {
                         <tbody className="divide-y divide-slate-50">
                             <tr>
                                 <td className="p-6 text-sm font-bold text-slate-700">Ticket Tiers</td>
-                                <td className="p-6 text-sm">Up to 2</td>
-                                <td className="p-6 text-sm">Up to 4</td>
-                                <td className="p-6 text-sm">Unlimited</td>
+                                <td className="p-6 text-sm">1 tier</td>
+                                <td className="p-6 text-sm">2 tiers</td>
+                                <td className="p-6 text-sm">5 tiers</td>
+                            </tr>
+                            <tr>
+                                <td className="p-6 text-sm font-bold text-slate-700">Collaborators</td>
+                                <td className="p-6 text-sm">1 person</td>
+                                <td className="p-6 text-sm">5 people</td>
+                                <td className="p-6 text-sm">30 people</td>
                             </tr>
                             <tr>
                                 <td className="p-6 text-sm font-bold text-slate-700">Social Promotion</td>
@@ -155,6 +161,18 @@ const PricingPage = () => {
                             <tr>
                                 <td className="p-6 text-sm font-bold text-slate-700">Digital Program</td>
                                 <td className="p-6 text-sm text-slate-300">—</td>
+                                <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
+                                <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
+                            </tr>
+                            <tr>
+                                <td className="p-6 text-sm font-bold text-slate-700">Fan Reviews</td>
+                                <td className="p-6 text-sm text-slate-300">—</td>
+                                <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
+                                <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
+                            </tr>
+                            <tr>
+                                <td className="p-6 text-sm font-bold text-slate-700">Event QR Code</td>
+                                <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
                                 <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
                                 <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
                             </tr>

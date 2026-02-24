@@ -102,7 +102,7 @@ export default function ProtectedLayout({ loaderData }: Route.ComponentProps) {
                                     to={menu.href}
                                     className={({ isActive, isPending }) =>
                                         isActive
-                                            ? "block rounded-full p-1 bg-indigo-100/50 border border-primary-theme backdrop-blur-sm transition-all text-primary-theme "
+                                            ? "block rounded-full p-1 bg-linear-to-tr from-primary-theme to-indigo-600 backdrop-blur-sm transition-all text-white "
                                             : isPending
                                                 ? "block rounded-full p-1  hover:bg-gray-100 transition-all text-primary"
                                                 : "block rounded-full p-1 hover:bg-gray-100 transition-all text-primary"
@@ -112,7 +112,7 @@ export default function ProtectedLayout({ loaderData }: Route.ComponentProps) {
                                         <div className="flex items-center justify-between gap-1">
                                             <div className="flex items-center">
                                                 <span className={`
-                                                    inline-block p-1.5 ${isActive ? "text-primary-theme rounded" : ""}
+                                                    inline-block p-1.5 ${isActive ? "text-white rounded" : ""}
                                                     ${menu.href === 'my-events' && !user.organiserProfile?.id ? ' opacity-30' : ''}`}>
                                                     {menu.icon ? (React.cloneElement(menu.icon))
                                                         : (<span>

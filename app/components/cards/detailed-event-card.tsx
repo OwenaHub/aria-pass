@@ -85,8 +85,8 @@ function Actions({ event }: { event: OrganiserEvent }) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost">
-                    <EllipsisVertical size={14} />
+                <Button variant="secondary">
+                    <EllipsisVertical size={14} strokeWidth={3} />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-max relative md:right-[40%]">
@@ -127,7 +127,7 @@ function Actions({ event }: { event: OrganiserEvent }) {
                                 <span>Delete</span>
                             </Button>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[425px]">
+                        <DialogContent className="sm:max-w-106.25">
                             <Form method='POST'>
                                 <input type="hidden" name="event_slug" value={event.slug} />
                                 <DialogHeader>

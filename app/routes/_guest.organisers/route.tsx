@@ -16,11 +16,11 @@ export default function Organisers() {
         <main className='animated fadeIn'>
             <section className="pt-28 pb-16 md:pt- md:pb-24 px-4 overflow-hidden">
                 <div className="max-w-6xl mx-auto text-center">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-semibold tracking-wide mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold tracking-tighter mb-6">
                         <Zap className="w-3 h-3 text-pink-500" /> <span className="font-bold text-pink-500">NEW:</span> <span>Digital Event Programs</span>
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 text-slate-900">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-slate-900">
                         Sell tickets. <br className="hidden md:block" />
                         Keep <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600">100% of the profit.</span>
                     </h1>

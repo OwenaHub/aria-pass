@@ -78,7 +78,7 @@ export const TIER_LIMITS = {
 
 type TFeatureKey = keyof Omit<typeof TIER_LIMITS["BASIC"], "price" | "next">;
 
-// Define the order for automatic escalation
+// Defined order for automatic escalation
 const TIER_ORDER: (keyof typeof TIER_LIMITS)[] = ["BASIC", "STANDARD", "PREMIUM"];
 
 // Map the Limit Key to the Actual Model Property
@@ -90,7 +90,6 @@ const FEATURE_MAP: Record<string, keyof OrganiserEvent> = {
 };
 
 export const getUpgradeTarget = (event: OrganiserEvent | null | undefined, featureKey: TFeatureKey) => {
-    // 1. Guard Clause: If there's no event yet (loading state), don't even try.
     if (!event) return null;
 
     // 2. Defensive Tier Check
