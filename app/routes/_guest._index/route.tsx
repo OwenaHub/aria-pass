@@ -1,11 +1,11 @@
 import { Await, Link, redirect, useSearchParams } from "react-router";
-import { BrMd } from "~/components/utility/line-break";
-import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Crown, HelpCircle, Music, Piano, ShieldCheck, Stars, Ticket, UsersRound, UserStar } from "lucide-react";
-import SearchBar from "~/components/utility/search-bar";
-import { FeedFilter } from "~/components/utility/feed-filter";
+import {
+    ArrowRight, ChevronLeft, ChevronRight, Crown,
+    ShieldCheck, Stars,
+    UsersRound, UserStar, QrCode,
+    Zap, Mic2, Heart, Headphones
+} from "lucide-react";
 import { Button } from "~/components/ui/button";
-// import StackedSwipeDeck from "~/components/cards/stacked-swipe-deck";
-import type { Route } from "../_guest._index/+types/route";
 import { Suspense, useState } from "react";
 import EventCardSkeleton from "~/components/skeletons/events-card-skeleton";
 import client from "~/http/client";
@@ -13,6 +13,7 @@ import EventsMapper from "~/components/mappers/event-mapper";
 import { STORAGE_URL } from "~/config/defaults";
 import DefaultError from "~/components/errors/default-error";
 import { eventCategory } from "~/lib/d.store";
+import type { Route } from "../_guest._index/+types/route";
 
 export async function clientLoader({ request }: Route.ClientLoaderArgs) {
     const url = new URL(request.url);
@@ -42,13 +43,6 @@ export async function clientLoader({ request }: Route.ClientLoaderArgs) {
     }
 }
 
-// const sample = [
-//     { id: 1, title: "Beethoven: Symphony No.5", subtitle: "Royal Hall • London", image: "/images/event-flyer.jpg" },
-//     { id: 2, title: "Verdi: Requiem", subtitle: "Opera House • Milan", image: "/images/event-flyer.jpg" },
-//     { id: 3, title: "Mozart: Piano Recital", subtitle: "Concert Hall • Berlin", image: "/images/event-flyer.jpg" },
-//     { id: 4, title: "Brahms: Chamber Night", subtitle: "Studio • New York", image: "/images/event-flyer.jpg" },
-// ];
-
 export default function Home({ loaderData }: Route.ComponentProps) {
     const { events }: { events: Promise<OrganiserEvent[]> } = loaderData;
     const [searchParams] = useSearchParams();
@@ -65,364 +59,275 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     };
 
     return (
-        <div className="fadeIn animated">
-            <div className="relative isolate px-6 pt-5 lg:px-8 -z-10">
-                <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-                    <div style={{
-                        clipPath:
-                            'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-                    }} className="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-indigo-100 to-indigo-500 opacity-30 sm:left-[calc(50%-30rem)] sm:w-288.75"
-                    />
-                </div>
-            </div>
-            <header className="flex flex-col gap-5 lg:min-h-[65vh]">
-                <section className="container flex justify-between gap-20 items-center mt-10 mb-16">
-                    <div className="lg:basis-7/12 text-center md:text-start overflow-auto">
-                        <div className="bg-white border text-xs md:text-xs rounded-full px-4 py-2 w-max mb-8 tracking-tight flex items-center gap-0 mx-auto md:mx-0">
-                            <span className="text-primary-theme font-semibold flex items-center gap-1.5">
-                                <span>Commission-free</span> <Stars className="text-pink-300 fill-pink-300" strokeWidth={1} size={16} />
-                            </span>
-                            <span className="h-4 border-r mx-3" />
-                            <Link to={'/my-events/new'} className="text-muted-foreground flex items-center gap-1">
-                                <span>Sell tickets</span>
-                                <ChevronRight strokeWidth={1} size={16} />
-                            </Link>
+        <div className="fadeIn animated bg-white overflow-x-hidden">
+            {/* 1. HERO SECTION: The Hook */}
+            <header className="relative pt-10 lg:pt-20 pb-16">
+                <div className="container grid lg:grid-cols-2 gap-12 items-center relative z-10">
+                    <div>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-primary-theme font-semibold text-xs uppercase tracking-tighter mb-8">
+                            <Stars className="size-4 fill-current" />
+                            Music-Only Ecosystem
                         </div>
-                        <h1 className="font-semibold font-erif text-4xl md:text-6xl text-primary tracking-tighter mb-6">
-                            Promoting Live <br />
-                            Musical <span className="text-transparent bg-clip-text bg-linear-to-r from-primary-theme to-pink-500">Concerts</span>
+                        <h1 className="text-6xl md:text-8xl font-black text-slate-900 tracking-tighter leading-[0.85] mb-8">
+                            The Beat <br /> Starts <span className="text-primary-theme">Here.</span>
                         </h1>
-                        <p className="tracking-tight  font-medium text-gray-500 text-md md:text-base mt-5 leading-6">
-                            Discover events, buy tickets, and connect with fellow <BrMd /> music enthusiasts on AriaPass.
+                        <p className="md:text-xl text-slate-500 font-medium leading-relaxed max-w-lg mb-10">
+                            The only niche platform dedicated exclusively to live musical events.
+                            Zero commission for partners. 100% passion for music.
                         </p>
 
-                        <div className="mt-10 flex flex-col items-start gap-3 ">
-                            <div className="flex gap-4 items-stretch mx-auto md:mx-0">
-                                <Link to="/events" className="flex gap-1.5 items-center py-3 px-4 font-medium text-sm rounded-full bg-[#3A3546] text-white ">
-                                    <Piano size={16} /> <span>Events</span>
-                                </Link>
-                                <Link to="/organisers" className="flex gap-1.5 items-center py-3 px-4 font-medium text-sm rounded-full hover:bg-gray-50">
-                                    <UsersRound size={16} /> <span>Organisers</span>
-                                </Link>
-                                <Link to="/artists" className="flex gap-1.5 items-center py-3 px-4 font-medium text-sm rounded-full hover:bg-gray-50">
-                                    <UserStar size={16} /> <span>Artists</span>
-                                </Link>
-                            </div>
-
-                            <div className="w-full ">
-                                <div className="mb-4">
-                                    <SearchBar />
-                                </div>
-
-                                <div className="flex items-center gap-3 overflow-x-auto">
-                                    <span className="font-semibold text-xs">Popular:</span>
-                                    {["Free ticket", "Christmas Carol", "Concert", "Classical"].map((item, index) => (
-                                        <Link to={'?' + item.toLowerCase()} key={item + index} className="text-nowrap px-4 py-1.5 border border-gray-200 text-xs font-light rounded-full hover:bg-gray-50">
-                                            {item.toLowerCase()}
-                                        </Link>
-                                    ))}
-                                </div>
-                            </div>
+                        <div className="flex flex-col md:flex-row gap-4 mb-10">
+                            <Link to="/events" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex justify-center items-center gap-2 hover:bg-black transition-all active:scale-95">
+                                <span>Explore Events</span> <ArrowRight className="size-5" />
+                            </Link>
+                            <Link to="/pricing" className="bg-white border-2 border-slate-100 text-slate-900 px-8 py-4 text-center rounded-2xl font-bold hover:border-indigo-200 transition-all">
+                                See Pricing
+                            </Link>
                         </div>
                     </div>
 
-                    {/* Event Banners */}
-                    <div className="hidden lg:block lg:basis-6/12">
-                        <div className="h-110 w-full bg-gray-50 rounded-3xl border overflow-hidden relative">
-                            <Suspense fallback={<div className="h-100 w-full bg-gray-200 animate-pulse" />}>
+                    <div className="hidden lg:block relative">
+                        <div className="absolute -inset-4 bg-indigo-100/50 rounded-[3rem] blur-2xl -z-10" />
+                        <div className="h-137.5 w-full bg-slate-100 rounded-[3rem] border-8 border-white shadow-2xl overflow-hidden relative group">
+                            <Suspense fallback={<div className="h-full w-full bg-slate-200 animate-pulse" />}>
                                 <Await resolve={events}>
-                                    {(events) => {
+                                    {(resolvedEvents) => {
                                         const [index, setIndex] = useState(0);
-
-                                        const handlePrev = () => {
-                                            setIndex(i => (i - 1 + events.length) % events.length);
-                                        };
-
-                                        const handleNext = () => {
-                                            setIndex(i => (i + 1) % events.length);
-                                        };
-
-                                        return (
+                                        const current = resolvedEvents[index];
+                                        return resolvedEvents.length > 0 ? (
                                             <>
-                                                {events.length > 0 && (
-                                                    <>
-                                                        {/* Overlay background */}
-                                                        <div className='absolute top-0 left-0 w-full min-h-full bg-linear-to-t from-black/50 to-black/10' />
-                                                        <img
-                                                            src={events[index].bannerUrl && `${STORAGE_URL}/${events[index].bannerUrl}`}
-                                                            alt={events[index].title}
-                                                            className="h-full w-full object-cover"
-                                                            loading="lazy"
-                                                        />
-                                                        <button
-                                                            title="Previous"
-                                                            onClick={() => handlePrev()}
-                                                            className="absolute top-1/2 left-4 transform -translate-y-1/2 p-2 bg-white/50 rounded-full text-gray-800 hover:bg-white transition-colors"
-                                                        >
-                                                            <ChevronLeft />
-                                                        </button>
-                                                        <button
-                                                            title="Next"
-                                                            onClick={() => handleNext()}
-                                                            className="absolute top-1/2 right-4 transform -translate-y-1/2 p-2 bg-white/50 rounded-full text-gray-800 hover:bg-white transition-colors"
-                                                        >
-                                                            <ChevronRight />
-                                                        </button>
-                                                        <div className="absolute bottom-5 right-5 py-2 px-3 rounded-full bg-white text-xs shadow-lg flex items-center gap-1">
-                                                            {events[index].organiser.organiserName} <Crown className="inline-block h-4 w-4 fill-amber-500 text-amber-500" />
+                                                <img
+                                                    src={`${STORAGE_URL}/${current.bannerUrl}`}
+                                                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                    alt={current.title}
+                                                />
+                                                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent" />
+                                                <div className="absolute bottom-8 left-8 right-8 text-white">
+                                                    <p className="text-xs font-black uppercase tracking-widest text-indigo-400 mb-2">Featured Event</p>
+                                                    <h3 className="text-3xl font-bold mb-4">{current.title}</h3>
+                                                    <div className="flex items-center justify-between">
+                                                        <span className="flex items-center gap-2 text-sm font-medium bg-white/20 backdrop-blur-md px-4 py-2 rounded-full">
+                                                            {current.organiser.organiserName} <Crown className="size-4 text-amber-400 fill-current" />
+                                                        </span>
+                                                        <div className="flex gap-2">
+                                                            <button onClick={() => setIndex((i) => (i - 1 + resolvedEvents.length) % resolvedEvents.length)} className="p-3 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-md transition-colors"><ChevronLeft /></button>
+                                                            <button onClick={() => setIndex((i) => (i + 1) % resolvedEvents.length)} className="p-3 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-md transition-colors"><ChevronRight /></button>
                                                         </div>
-
-                                                    </>
-                                                )}
+                                                    </div>
+                                                </div>
                                             </>
-                                        )
+                                        ) : null;
                                     }}
                                 </Await>
                             </Suspense>
                         </div>
                     </div>
-                </section>
+                </div>
             </header>
 
-            <main>
-                {/* Desktop */}
-                <div className="hidden container lg:flex items-center justify-between mb-8">
-                    <FeedFilter />
-                    <div className="flex gap-4 items-center">
+            {/* 2. THE DIFFERENTIATOR: Why AriaPass? */}
+            <section className="py-24 bg-slate-50">
+                <div className="container">
+                    <div className="grid lg:grid-cols-3 gap-8">
+                        <div className="lg:col-span-1">
+                            <h2 className="text-4xl font-black tracking-tighter mb-6 leading-none">
+                                Why we’re <br /><span className="text-primary-theme">different.</span>
+                            </h2>
+                            <p className="text-slate-500 font-medium mb-8">
+                                We didn't build just another ticketing app. We built a home for the Nigerian music industry.
+                            </p>
+                            <Link to="/pricing" className="text-primary-theme font-bold flex items-center gap-2 group">
+                                Learn about 0% commission <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                        </div>
+
+                        <div className="lg:col-span-2 grid md:grid-cols-2 gap-6">
+                            <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                                <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6">
+                                    <Zap className="fill-current" />
+                                </div>
+                                <h3 className="text-xl font-bold tracking-tighter mb-3">0% Commission Model</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">
+                                    Choose our <strong>Partner Track</strong>. By giving us a shoutout at your event, you pay ₦0 in platform fees. You keep the gate, we keep the culture alive.
+                                </p>
+                            </div>
+                            <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                                <div className="w-12 h-12 bg-pink-50 text-pink-600 rounded-2xl flex items-center justify-center mb-6">
+                                    <Mic2 className="fill-current" />
+                                </div>
+                                <h3 className="text-xl font-bold tracking-tighter mb-3">Music-Only Niche</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">
+                                    No conferences, no workshops. AriaPass is built strictly for concerts, carols, recitals, and gigs. Your audience is already here.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 3. WHO IS IT FOR? (The Three Identities) */}
+            <section className="py-24 container">
+                <div className="text-center mb-16">
+                    <h2 className="text-4xl font-black tracking-tighter mb-4">Built for the whole ecosystem.</h2>
+                </div>
+                <div className="grid md:grid-cols-3 gap-6">
+                    {[
+                        { title: "For Fans", icon: Headphones, desc: "Discover hidden gems and major arena shows. Manage all your tickets in one sleek dashboard." },
+                        { title: "For Artists", icon: UserStar, desc: "A profile that shines. Direct access to organizers and a community that loves your sound." },
+                        { title: "For Organisers", icon: UsersRound, desc: "Powerful tools to manage collaborators, track real-time sales, and launch digital programs." }
+                    ].map((role, i) => (
+                        <div key={i} className="group p-8 rounded-[2.5rem] border-2 border-slate-50 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all text-center">
+                            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                                <role.icon className="size-8 text-primary-theme" />
+                            </div>
+                            <h3 className="text-2xl font-black mb-4">{role.title}</h3>
+                            <p className="text-slate-500 text-sm leading-relaxed mb-6">{role.desc}</p>
+                            <Link to="/login" className="text-xs font-black uppercase tracking-widest text-primary-theme hover:underline">Get Started</Link>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* 4. DIGITAL PROGRAMS: The "Aha" Moment */}
+            <section className="py-24 bg-slate-900 text-white overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-primary-theme/20 blur-3xl rounded-full translate-x-1/2" />
+                <div className="container grid lg:grid-cols-2 gap-16 items-center relative z-10">
+                    <div>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-[10px] font-black uppercase tracking-[0.2em] mb-8">
+                            Exclusive Feature
+                        </div>
+                        <h2 className="text-5xl md:text-6xl font-black tracking-tighter leading-none mb-8">
+                            Ditch the Paper. <br /> <span className="text-indigo-400">Go Digital.</span>
+                        </h2>
+                        <p className="text-slate-400 text-lg mb-10 leading-relaxed">
+                            AriaPass Digital Programs allow you to create interactive, shareable event booklets.
+                            Add artist bios, setlists, and sponsor logos—all accessible via a single QR code scan.
+                        </p>
+                        <div className="flex flex-col gap-6 mb-12">
+                            <div className="flex gap-4 items-start">
+                                <div className="p-2 bg-indigo-500/20 rounded-lg text-indigo-400"><QrCode /></div>
+                                <div>
+                                    <h4 className="font-bold text-white">Instant QR Access</h4>
+                                    <p className="text-sm text-slate-500">Fans scan at the door to see the full event schedule.</p>
+                                </div>
+                            </div>
+                            <div className="flex gap-4 items-start">
+                                <div className="p-2 bg-indigo-500/20 rounded-lg text-indigo-400"><Heart /></div>
+                                <div>
+                                    <h4 className="font-bold text-white">Interactive Artist Bios</h4>
+                                    <p className="text-sm text-slate-500">Links to Spotify, Apple Music, and social profiles.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <Link to="/event-programs" className="inline-flex items-center gap-2 bg-white text-slate-900 px-8 py-4 rounded-2xl font-bold hover:bg-indigo-50 transition-colors">
+                            Explore Event Programs <ArrowRight className="size-4" />
+                        </Link>
+                    </div>
+                    <div className="relative">
+                        <div className="aspect-4/5 bg-slate-800 rounded-[3rem] border-8 border-slate-700 shadow-2xl relative overflow-hidden group">
+                            <div className="p-8 h-full bg-linear-to-b from-slate-800 to-slate-900">
+                                <div className="w-full h-48 bg-slate-700 rounded-2xl mb-6 animate-pulse" />
+                                <div className="space-y-4">
+                                    <div className="h-4 w-3/4 bg-slate-700 rounded animate-pulse" />
+                                    <div className="h-4 w-1/2 bg-slate-700 rounded animate-pulse" />
+                                    <div className="grid grid-cols-2 gap-4 pt-8">
+                                        <div className="h-20 bg-slate-700/50 rounded-2xl" />
+                                        <div className="h-20 bg-slate-700/50 rounded-2xl" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900/60 backdrop-blur-sm">
+                                <QrCode className="size-32 text-indigo-400" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 5. EVENT EXPLORER: The Action */}
+            <section className="py-24 container" id="explore">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                    <div>
+                        <h2 className="text-4xl font-black tracking-tighter mb-2 italic">Happening Soon</h2>
+                        <p className="text-slate-500 font-medium text-sm tracking-tight">Hand-picked musical experiences near you.</p>
+                    </div>
+                    <div className="flex items-center gap-3 overflow-x-auto pb-2 no-scrollbar">
                         <Link
                             preventScrollReset
-                            to={`?category=`}
-                            className={`rounded-full py-2 px-4 hover:bg-stone-100 text-sm font-medium tracking-tight ${!searchParams.get('category') && 'bg-stone-100 outline'}`}
+                            to="?category="
+                            className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest border transition-all ${!searchParams.get('category') ? 'bg-slate-900 text-white border-slate-900' : 'border-slate-200 text-slate-500'}`}
                         >
                             All
                         </Link>
-                        {eventCategory.map((item) => (
+                        {eventCategory.map((cat) => (
                             <Link
                                 preventScrollReset
-                                to={updateCategoryParam(item.toLowerCase())}
-                                className={`${searchParams.get('category') === item.toLowerCase() && 'bg-stone-100 outline'} rounded-full py-2 px-4 hover:bg-stone-100 text-sm font-medium tracking-tight`}
+                                key={cat}
+                                to={`?category=${cat.toLowerCase()}`}
+                                className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest border transition-all ${searchParams.get('category') === cat.toLowerCase() ? 'bg-slate-900 text-white border-slate-900' : 'border-slate-200 text-slate-500 hover:border-slate-400'}`}
                             >
-                                {item}
+                                {cat}
                             </Link>
                         ))}
                     </div>
-                    <Link to={"/my-events/new"}>
-                        <Button variant={"secondary"} className="cursor-pointer rounded-full flex justify-between gap-2 px-5">
-                            <span>Create Event</span>
-                            <ChevronRight />
+                </div>
+
+                <Suspense fallback={<EventCardSkeleton />}>
+                    <Await resolve={events}>
+                        {(resolvedEvents) => <EventsMapper events={resolvedEvents} />}
+                    </Await>
+                </Suspense>
+
+                <div className="mt-12 text-center">
+                    <Link to="/events?filter=all">
+                        <Button variant="outline" className="rounded-full px-12 py-6 border-2 font-bold group">
+                            <span>Explore All Events</span> <ArrowRight className="ml-2 size-4 group-hover:translate-x-1 transition-transform" />
                         </Button>
                     </Link>
                 </div>
+            </section>
 
-                {/* Mobile */}
-                <div className="lg:hidden mb-4">
-                    <div className="container flex justify-between items-center">
-                        <FeedFilter />
-                        <Link to={"/my-events/new"}>
-                            <Button variant={"secondary"} className="cursor-pointer rounded-full flex justify-between gap-2 h-10">
-                                <span>Create Event</span>
-                                <ChevronRight />
-                            </Button>
-                        </Link>
-                    </div>
-
-                    <hr className="mt-5 mb-2" />
-
-                    <div className="container py-2 flex gap-4 items-center overflow-x-auto">
-                        <Link
-                            preventScrollReset
-                            to={`?category=`}
-                            className={`text-nowrap rounded-full py-2 px-4 hover:bg-stone-100 text-sm tracking-tight ${!searchParams.get('category') && 'bg-stone-100 outline'}`}
-                        >
-                            All
-                        </Link>
-                        {eventCategory.map((item) => (
-                            <Link
-                                to={updateCategoryParam(item.toLowerCase())}
-                                key={item}
-                                preventScrollReset
-                                className={`${searchParams.get('category') === item.toLowerCase() && 'bg-stone-100 outline'} text-nowrap rounded-full py-2 px-4 hover:bg-stone-100 text-sm tracking-tight`}>
-                                {item}
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Events ---------------------------------------------- */}
-                <div className="container block">
-                    <Suspense fallback={<EventCardSkeleton />}>
-                        <Await resolve={events}>
-                            {(events) => <EventsMapper events={events} />}
-                        </Await>
-                    </Suspense>
-                </div>
-
-                <Link to={"events?filter=all"} className="block mx-auto w-max mt-3">
-                    <Button variant={"outline"} className="py-5 px-10 rounded-full tracking-tighter">
-                        All Events <ArrowRight />
-                    </Button>
-                </Link>
-
-                {/* <div className="md:hidden flex items-center justify-center py-10">
-                    <StackedSwipeDeck
-                        initialCards={sample}
-                        width={350}
-                        height={520}
-                        onSwipe={(card, dir) => console.log("swiped", card.title, dir > 0 ? "right" : "left")}
-                    />
-                </div> */}
-                {/* Events End ---------------------------------------------- */}
-
-                {/* <hr className="mt-10" /> */}
-
-                <section className="container py-20">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-4">
-                            Your Backstage Pass to Live Music
-                        </h2>
-                        <p className="text-gray-500 max-w-2xl mx-auto">
-                            Whether you're looking to discover underground classical ensembles or buy tickets to the biggest Christmas Carols, AriaPass makes it effortless.
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-3 gap-8 text-center">
-                        <div className="p-6 rounded-2xl bg-gray-50 hover:bg-stone-100 transition-colors">
-                            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-xs text-primary-theme">
-                                <Music size={24} />
-                            </div>
-                            <h3 className="font-semibold text-lg mb-2">1. Discover Events</h3>
-                            <p className="text-sm text-gray-500 leading-relaxed">
-                                Browse hundreds of live musical concerts, from intimate gigs to massive arena shows tailored to your taste.
-                            </p>
-                        </div>
-                        <div className="p-6 rounded-2xl bg-gray-50 hover:bg-stone-100 transition-colors">
-                            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-xs text-primary-theme">
-                                <Ticket size={24} />
-                            </div>
-                            <h3 className="font-semibold text-lg mb-2">2. Secure Your Tickets</h3>
-                            <p className="text-sm text-gray-500 leading-relaxed">
-                                Purchase tickets instantly with our secure checkout. No hidden fees, no stress—just your pass to the show.
-                            </p>
-                        </div>
-                        <div className="p-6 rounded-2xl bg-gray-50 hover:bg-stone-100 transition-colors">
-                            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-xs text-primary-theme">
-                                <ShieldCheck size={24} />
-                            </div>
-                            <h3 className="font-semibold text-lg mb-2">3. Enjoy the Music</h3>
-                            <p className="text-sm text-gray-500 leading-relaxed">
-                                Scan your digital ticket at the door and immerse yourself in the live music experience with fellow fans.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="bg-[#3A3546] text-white py-20 mt-10">
-                    <div className="container flex flex-col lg:flex-row gap-12 items-center">
-                        <div className="lg:basis-1/2">
-                            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
-                                The Commission-Free Ticketing Platform for Organisers & Fans
+            {/* 6. PARTNERSHIP CTA: The Scale */}
+            <section className="pb-24 container">
+                <div className="bg-primary-theme rounded-[3.5rem] p-12 md:p-20 relative overflow-hidden text-center md:text-left">
+                    <div className="absolute top-0 right-0 w-1/2 h-full bg-white/10 -skew-x-12 translate-x-24" />
+                    <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none mb-6">
+                                Keep 100% of <br /> your gate.
                             </h2>
-                            <p className="text-gray-300 mb-6 leading-relaxed">
-                                AriaPass is redefining how live music events are promoted. We bridge the gap between talented artists, dedicated organisers, and passionate music enthusiasts without taking a cut of your hard-earned ticket sales.
+                            <p className="text-indigo-100 text-lg font-medium mb-10">
+                                AriaPass Partner status gives you 0% platform commission.
+                                We don't take your profit, we just help you fill the seats.
                             </p>
-                            <ul className="space-y-4">
-                                {[
-                                    "Zero commission fees on ticket sales",
-                                    "Direct payouts for event organisers",
-                                    "Real-time analytics and audience insights",
-                                    "Seamless QR code ticket scanning"
-                                ].map((feature, idx) => (
-                                    <li key={idx} className="flex items-center gap-3 text-sm font-medium">
-                                        <div className="bg-pink-500/20 p-1 rounded-full text-pink-400">
-                                            <ShieldCheck size={16} />
+                            <div className="flex flex-col md:flex-row gap-4">
+                                <Link to="/pricing" className="bg-white text-primary-theme px-10 py-5 rounded-2xl font-black text-lg shadow-xl shadow-indigo-900/20 active:scale-95 transition-all">
+                                    Partnership Tiers
+                                </Link>
+                                <Link to="/my-events/new" className="bg-indigo-500 text-white px-10 py-5 rounded-2xl font-black text-lg border border-indigo-400 hover:bg-indigo-400 transition-all">
+                                    Create Event
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="hidden md:flex justify-end">
+                            <div className="p-8 bg-white/10 backdrop-blur-md rounded-[2.5rem] border border-white/20">
+                                <div className="space-y-4">
+                                    {[
+                                        "Instant Paystack Payouts",
+                                        "Digital Program Access",
+                                        "Audience Insights Dashboard",
+                                        "Priority Support"
+                                    ].map((text, i) => (
+                                        <div key={i} className="flex items-center gap-3 text-white font-bold">
+                                            <ShieldCheck className="text-indigo-300" /> {text}
                                         </div>
-                                        {feature}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="lg:basis-1/2 w-full">
-                            {/* You can replace this placeholder with an actual dashboard image later */}
-                            <div className="aspect-video bg-white/10 rounded-2xl border border-white/20 flex items-center justify-center">
-                                <span className="text-white/50 flex items-center gap-2">
-                                    <Music /> Platform Preview
-                                </span>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* 3. SEO FAQ Section */}
-                <section className="container py-20">
-                    <div className="max-w-3xl mx-auto">
-                        <div className="text-center mb-10">
-                            <h2 className="text-3xl font-bold tracking-tight mb-4 flex items-center justify-center gap-2">
-                                <HelpCircle className="text-primary-theme" /> FAQ
-                            </h2>
-                            <p className="text-gray-500">Everything you need to know about buying and selling tickets on AriaPass.</p>
-                        </div>
-
-                        <div className="space-y-4">
-                            {/* Note: In a real app, you might want to make these functional accordions with state, 
-                                but standard CSS/Details works great for SEO and simplicity */}
-                            <details className="group border border-gray-200 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden">
-                                <summary className="flex cursor-pointer items-center justify-between font-semibold text-gray-900">
-                                    <span>Is AriaPass really commission-free for organisers?</span>
-                                    <ChevronDown className="transition duration-300 group-open:-rotate-180" size={20} />
-                                </summary>
-                                <p className="mt-4 text-gray-500 leading-relaxed text-sm">
-                                    Yes! We believe organisers and artists should keep what they earn. AriaPass charges $0 in commission fees for listing your concerts and selling tickets through our platform.
-                                </p>
-                            </details>
-                            <details className="group border border-gray-200 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden">
-                                <summary className="flex cursor-pointer items-center justify-between font-semibold text-gray-900">
-                                    <span>How do I receive my event tickets?</span>
-                                    <ChevronDown className="transition duration-300 group-open:-rotate-180" size={20} />
-                                </summary>
-                                <p className="mt-4 text-gray-500 leading-relaxed text-sm">
-                                    Once purchased, your tickets are instantly emailed to you and are always accessible via your AriaPass dashboard. Just show the digital QR code at the venue!
-                                </p>
-                            </details>
-                            <details className="group border border-gray-200 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden">
-                                <summary className="flex cursor-pointer items-center justify-between font-semibold text-gray-900">
-                                    <span>What types of events are on AriaPass?</span>
-                                    <ChevronDown className="transition duration-300 group-open:-rotate-180" size={20} />
-                                </summary>
-                                <p className="mt-4 text-gray-500 leading-relaxed text-sm">
-                                    We specialize in live musical events, ranging from classical ensembles, Christmas carols, underground gigs, to massive stadium tours.
-                                </p>
-                            </details>
-                        </div>
-                    </div>
-                </section>
-
-                <div className="container mt-10">
-                    <div
-                        className="h-100 rounded-3xl py-6 px-6 my-10 flex flex-col justify-between"
-                        style={{
-                            backgroundImage: `linear-gradient(90deg, #000000, #cccccc00), url('/images/ensemble-banner.png')`,
-                            backgroundSize: 'cover, cover',
-                            backgroundPosition: 'center, center',
-                        }}
-                    >
-                        <div />
-                        <div className="text-white">
-                            <div className="mb-10 tracking-tighter">
-                                <h2 className="text-3xl font-bold tracking-tighter mb-4">
-                                    Get more leads, <br className="md:hidden" /> Pay no fees
-                                </h2>
-                                <p className="font-light text-sm">Rank higher, skip the fees, and level up your profile — all <BrMd /> for $0/month.</p>
-                            </div>
-
-                            <Link to={"/organisers"}>
-                                <Button className="w-full md:w-max rounded-full px-10 py-6 bg-white/20">
-                                    Become an Organiser
-                                </Button>
-                            </Link>
                         </div>
                     </div>
                 </div>
-            </main>
+            </section>
         </div>
     );
 }

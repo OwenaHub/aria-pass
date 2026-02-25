@@ -121,11 +121,14 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                     )}
 
                     {next && (
-                        <PaystackPurchaseButton 
-                        user={user} 
-                        organiser={event.organiser as OrganiseProfile}
-                        ticket={ticket} />
+                        <PaystackPurchaseButton
+                            user={user}
+                            organiser={event.organiser as OrganiseProfile}
+                            ticket={ticket} />
                     )}
+                    <p className="text-[10px] tracking-wide text-gray-400 font-bold text-center mt-5 uppercase justify-center items-center flex">
+                        Secure payment with <img src="/images/logos/paystack.png" alt="Paystack Logo" className="size-3 inline-blockl mx-1" /> Paystack
+                    </p>
                 </div>
             </section>
 

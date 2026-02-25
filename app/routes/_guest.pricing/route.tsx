@@ -21,7 +21,7 @@ const PricingPage = () => {
         },
         {
             name: "Standard",
-            price: "14,250",
+            price: "9,700",
             description: "Designed for growing shows and professional event planners.",
             icon: <Star className="h-6 w-6 text-amber-500" />,
             features: ["5 Collaborators", "3 Ticket Tiers", "Digital Event Program", "Verified Event Reviews", "Historical Analytics"],
@@ -30,8 +30,8 @@ const PricingPage = () => {
         },
         {
             name: "Premium",
-            price: "53,500",
-            description: "The ultimate power-up for major concerts and festivals.",
+            price: "21,500",
+            description: "The ultimate power-up for major concerts, festivals and musical events.",
             icon: <ShieldCheck className="h-6 w-6 text-primary-theme" />,
             features: ["30 Collaborators", "5 Ticket Tiers", "Social Media Promotion (5 posts)", "Priority Phone Support", "Custom Branding"],
             cta: "Get Premium",
@@ -46,7 +46,7 @@ const PricingPage = () => {
                 <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
                     <span className="italic font-serif font-medium text-gray-500 tracking-tighter">Simple Tools</span> for <BrMd /> <span className="text-primary-theme">Extraordinary</span> Events
                 </h1>
-                <p className="text-lg text-slate-600 mb-10 leading-relaxed">
+                <p className="text-sm md:text-lg text-slate-600 mb-10 leading-relaxed">
                     Whether you're hosting an intimate lounge session in Lagos or a stadium concert in Nairobi,
                     our platform scales with you. No hidden fees. Just pure value.
                 </p>
@@ -84,7 +84,7 @@ const PricingPage = () => {
                 {tiers.map((tier, idx) => (
                     <article key={idx} className={`relative bg-white rounded-[2.5rem] p-8 border-2 transition-all hover:-translate-y-2 ${tier.highlight ? 'border-primary-theme shadow-2xl z-10' : 'border-slate-100 shadow-xl'}`}>
                         {tier.highlight && (
-                            <span className="absolute top-0 right-12 translate-y-[-50%] bg-primary-theme text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
+                            <span className="absolute top-0 left-1/2 -translate-x-1/2 translate-y-[-50%] bg-primary-theme text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
                                 Most Popular
                             </span>
                         )}

@@ -63,7 +63,7 @@ export const TIER_LIMITS = {
         isPromoted: true,
         ticketTierCount: 3,
         allowsReviews: true,
-        price: 14250
+        price: 9700
     },
     PREMIUM: {
         collaborators: Infinity,
@@ -72,7 +72,7 @@ export const TIER_LIMITS = {
         isPromoted: true,
         ticketTierCount: 5,
         allowsReviews: true,
-        price: 53500
+        price: 21500
     }
 };
 

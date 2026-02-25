@@ -47,9 +47,9 @@ export default function CheckoutButton({ event }: { event: OrganiserEvent }) {
                         className="w-full block"
                     >
                         <Button
-                            className="bg-primary-theme border-b-4 border-indigo-800 hover:bg-indigo-400 w-full py-6 rounded-lg font-semibold text-xl tracking-tighter transition-all relative"
+                            className="bg-primary-theme border-b-4 border-indigo-800 hover:bg-indigo-400 w-full py-7 rounded-xl font-semibold text-xl tracking-tighter transition-all relative"
                         >
-                            <span className="text-base md:text-lg tracking-tight font-serif font-semibold capitalize">
+                            <span className="text-lg md:text-lg tracking-tighter font-black uppercase">
                                 Buy Ticket
                             </span>
                         </Button>

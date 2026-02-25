@@ -32,7 +32,7 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
     const [menu, setMenu] = useState<boolean>(false);
     const [scrolled, setScrolled] = useState<boolean>(false);
 
-    const NAV = ['Events', 'Organisers', 'Pricing']
+    const NAV = ['Events', 'Organisers', 'Event Programs', 'Pricing', ]
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -46,18 +46,18 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
         <>
             <div className={`sticky top-0 z-10 ${scrolled && 'bg-white/50 backdrop-blur-lg transition'}`}>
                 <nav className={`py-3 container flex items-center justify-between transition-all`}>
-                    <div className='flex items-center gap-20'>
+                    <div className='flex items-center gap-30'>
                         <Link to="/" className='flex items-center gap-2'>
                             <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-10 md:w-14 object-contain" />
                         </Link>
 
-                        <ul className='hidden md:flex gap-8 items-center'>
+                        <ul className='hidden md:flex gap-4 items-center'>
                             {NAV.map((item) => (
                                 <li key={item}>
                                     <NavLink
-                                        to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                                        className={({ isActive }) => `text-sm font-medium tracking-tight transition-all ${isActive
-                                            ? 'text-primary-theme font-bold underline underline-offset-2 ' // Styles when active
+                                        to={item === 'Home' ? '/' : `/${item.toLowerCase().split(' ').join('-')}`}
+                                        className={({ isActive }) => `text-sm font-semibold p-2 tracking-tight transition-all ${isActive
+                                            ? 'text-primary-theme font-semibold p-2 bg-primary-bg rounded-lg ' // Styles when active
                                             : 'text-slate-600 hover:text-indigo-400' // Styles when inactive
                                             }`}
                                     >
@@ -80,12 +80,12 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                         : (
                             <div className='hidden md:flex items-center gap-2'>
                                 <Link to={"register"}>
-                                    <Button size={'sm'} variant={'ghost'} className='p-6 rounded-full cursor-pointer'>
+                                    <Button size={'sm'} variant={'ghost'} className='p-5 tracking-tight rounded-xl cursor-pointer'>
                                         Register
                                     </Button>
                                 </Link>
                                 <Link to={"/login"}>
-                                    <Button size={'sm'} className='p-6 bg-[#3A3546] rounded-full cursor-pointer'>
+                                    <Button size={'sm'} className='p-5 bg-primary tracking-tight rounded-xl cursor-pointer'>
                                         Log in
                                     </Button>
                                 </Link>

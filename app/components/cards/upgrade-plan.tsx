@@ -1,5 +1,6 @@
 import { ArrowRight, CheckCircle2, Lock } from 'lucide-react';
 import { Link } from 'react-router';
+import { plans } from '../custom/pricing';
 
 interface UpgradePlanProps {
     targetTier: 'STANDARD' | 'PREMIUM' | 'BASIC';
@@ -8,25 +9,12 @@ interface UpgradePlanProps {
 
 export default function UpgradePlan({ targetTier, featureName }: UpgradePlanProps) {
     // Ensuring we match the casing of your TIER_LIMITS keys
-    const tierData: Record<'STANDARD' | 'PREMIUM' | 'BASIC', { price: string; perks: string[] }> = {
-        STANDARD: {
-            price: "₦14,250",
-            perks: ["5 Collaborators", "Digital Event Program", "Event Reviews", "3 Ticket Tiers"]
-        },
-        PREMIUM: {
-            price: "₦53,500",
-            perks: ["Unlimited Collaborators", "5 Ticket Tiers", "5 Social Promo Posts", "Priority Support"]
-        },
-        BASIC: {
-            price: "₦0",
-            perks: ["1 Collaborator", "Basic Event Program", "Event Reviews", "1 Ticket Tier"]
-        }
-    };
+    const tierData: Record<'STANDARD' | 'PREMIUM' | 'BASIC', { price: string; perks: string[] }> = plans;
 
     const data = tierData[targetTier];
 
     return (
-        <div className="relative w-full overflow-hidden bg-white border border-slate-200 rounded-xl animate-in fade-in zoom-in duration-300">
+        <div className="max-w-sm mx-auto relative w-full overflow-hidden bg-white border border-slate-200 rounded animate-in fade-in zoom-in duration-300">
             {/* Header with Gradient */}
             <div className="bg-linear-to-br from-primary-theme to-violet-700 p-6 flex flex-row items-center gap-4 justify-between text-white">
                 <div className="relative">

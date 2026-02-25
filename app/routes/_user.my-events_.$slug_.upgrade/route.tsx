@@ -8,6 +8,7 @@ import type { TIER_LIMITS } from "~/lib/d.store";
 import { PaystackButton } from "react-paystack";
 import useSession from "~/hooks/use-session";
 import { PAYSTACK_PUBK } from "~/config/defaults";
+import { plans } from "~/components/custom/pricing";
 
 export const meta: MetaFunction = (args: any) => {
     if (!args.data.event) {
@@ -48,35 +49,6 @@ export default function EventUpgrade({ loaderData }: Route.ComponentProps) {
 
     const currentTier = (event?.eventPlan?.tier?.toUpperCase() || 'BASIC') as keyof typeof TIER_LIMITS;
 
-    const plans = {
-        BASIC: {
-            name: "Basic",
-            icon: <Zap className="h-6 w-6 text-slate-400" />,
-            color: "border-slate-200",
-            bg: "bg-slate-50",
-            price: "Free",
-            amount: 0,
-            perks: ["1 Collaborator", "1 Ticket Tier", "24/7 Support"]
-        },
-        STANDARD: {
-            name: "Standard",
-            icon: <Star className="h-6 w-6 text-amber-500" />,
-            color: "border-indigo-200",
-            bg: "bg-white",
-            price: "₦14,250",
-            amount: 14250,
-            perks: ["5 Collaborators", "Digital Program", "3 Ticket Tiers", "Event Reviews"]
-        },
-        PREMIUM: {
-            name: "Premium",
-            icon: <ShieldCheck className="h-6 w-6 text-primary-theme" />,
-            color: "border-indigo-500",
-            bg: "bg-white",
-            price: "₦53,500",
-            amount: 53500,
-            perks: ["Unlimited Collabs", "Digital Program", "5 Ticket Tiers", "Social Promotion", "Priority Support"]
-        }
-    };
 
     const currentData = plans[currentTier];
     const targetData = plans[targetTier];
