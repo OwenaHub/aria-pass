@@ -25,7 +25,7 @@ import { Label } from "~/components/ui/label"
 import { useMediaQuery } from "~/hooks/user-media-query"
 import { Textarea } from "~/components/ui/textarea"
 import DefaultButton from "~/components/buttons/default-button"
-import { Check } from "lucide-react"
+import { Check, Ticket } from "lucide-react"
 import { Form, useNavigation } from "react-router"
 import { getUpgradeTarget } from "~/lib/d.store"
 import UpgradePlan from "~/components/cards/upgrade-plan"
@@ -53,7 +53,13 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button className="bg-primary-theme text-white" size={"sm"}>Add Ticket</Button>
+                    <Button
+                        variant={'secondary'}
+                        className="text-primary text-xs flex items-center gap-2 tracking-tight rounded-md"
+                    >
+                        <Ticket className="size-4" />
+                        <span>Add Ticket</span>
+                    </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-106.25">
                     <DialogHeader>
@@ -63,7 +69,7 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
                         </DialogDescription>
                     </DialogHeader>
                     {ticketUpgrade
-                        ? ( <UpgradePlan targetTier={ticketUpgrade} featureName="Ticket Tiers" />)
+                        ? (<UpgradePlan targetTier={ticketUpgrade} featureName="Ticket Tiers" />)
                         : (<ProfileForm ref={formRef} />)
                     }
                 </DialogContent>
@@ -74,7 +80,13 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
     return (
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
-                <Button className="bg-primary-theme text-white" size={"sm"}>Add Ticket</Button>
+                <Button
+                    variant={'secondary'}
+                    className="text-primary w-full text-xs flex items-center py-5 gap-2 tracking-tight rounded-md"
+                >
+                    <Ticket className="size-4" />
+                    <span>Add Ticket</span>
+                </Button>
             </DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader className="text-left">
@@ -84,7 +96,7 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
                     </DrawerDescription>
                 </DrawerHeader>
                 {ticketUpgrade
-                    ? ( <UpgradePlan targetTier={ticketUpgrade} featureName="Ticket Tiers" />)
+                    ? (<UpgradePlan targetTier={ticketUpgrade} featureName="Ticket Tiers" />)
                     : (<ProfileForm className="px-4" ref={formRef} />)
                 }
 

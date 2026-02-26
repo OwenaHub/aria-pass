@@ -1,4 +1,4 @@
-import { User } from 'lucide-react';
+import { UserPlus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useFetcher } from 'react-router';
 import { Button } from '~/components/ui/button';
@@ -34,24 +34,22 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                     <DialogTrigger asChild>
                         <Button
                             disabled={events.length === 0}
-                            variant={'outline'}
+                            variant={'secondary'}
                             className='cursor-pointer text-xs flex items-center gap-2 rounded-lg'
                         >
-                            <User size={10} />
+                            <UserPlus size={10} />
                             <span>Add Teammate</span>
                         </Button>
                     </DialogTrigger>
 
                     <DialogContent className="sm:max-w-125 rounded-2xl">
                         <fetcher.Form method='POST' action='/my-events/members'>
-                            <DialogHeader>
+                            <DialogHeader className='mb-5'>
                                 <DialogTitle>Add a teammate</DialogTitle>
                                 <DialogDescription className='text-xs text-amber-800 bg-amber-50 p-2.5 rounded-md'>
                                     Ensure to reach out to new teammates as emails maybe redirected to spam/junk folder
                                 </DialogDescription>
                             </DialogHeader>
-
-                            <hr className='my-4' />
 
                             {memberUpgrade
                                 ? (

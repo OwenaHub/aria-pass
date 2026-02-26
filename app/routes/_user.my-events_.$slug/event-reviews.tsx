@@ -1,5 +1,5 @@
 import dayjs from "dayjs"
-import { MessageSquare, ShieldQuestionMark } from "lucide-react"
+import { ShieldQuestionMark } from "lucide-react"
 import { Button } from "~/components/ui/button"
 import {
     Dialog,
@@ -18,11 +18,11 @@ export default function EventReview({ event }: { event: OrganiserEvent }) {
         <Dialog>
             <form>
                 <DialogTrigger asChild>
-                    <Button variant={"outline"} size={"sm"} className="flex items-center gap- px-4">
-                        <span>
+                    <Button variant={"outline"} size={"sm"} className="flex items-center gap- px-4 shadow-none">
+                        <span className="font-bold text-xl">
                             {event.reviews.length}
                         </span>
-                        <MessageSquare />
+                    <span>Comments</span>
                     </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[625px]">

@@ -18,7 +18,7 @@ export default function EventStatus({
     const classes = statusStyles[status] ?? "bg-gray-50 text-gray-500";
 
     return (
-        <span className={`w-max text-xs text-nowrap font-semibold capitalize tracking-tight px-2 py-1 rounded-md ${classes}`}>
+        <span className={`w-max text-nowrap font-semibold capitalize tracking-tight px-3 py-1.5 rounded-md ${classes}`}>
             {date && startTime
                 ? (
                     <>

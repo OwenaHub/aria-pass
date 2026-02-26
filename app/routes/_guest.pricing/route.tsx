@@ -15,7 +15,7 @@ const PricingPage = () => {
             price: "0",
             description: "Perfect for upcoming artists and small community gatherings.",
             icon: <Zap className="h-6 w-6 text-slate-400" />,
-            features: ["1 Collaborator", "1 Ticket Tier", "Digital Ticket Delivery", "24/7 Chat Support"],
+            features: ["1 Collaborator (You)", "5 Ticket Tiers", "Digital Ticket Delivery", "24/7 Chat Support"],
             cta: "Start for Free",
             highlight: false
         },
@@ -24,7 +24,7 @@ const PricingPage = () => {
             price: "9,700",
             description: "Designed for growing shows and professional event planners.",
             icon: <Star className="h-6 w-6 text-amber-500" />,
-            features: ["5 Collaborators", "3 Ticket Tiers", "Digital Event Program", "Verified Event Reviews", "Historical Analytics"],
+            features: ["5 Collaborators", "5 Ticket Tiers", "Digital Event Program", "Verified Event Reviews", "Historical Analytics"],
             cta: "Go Standard",
             highlight: true
         },
@@ -33,7 +33,7 @@ const PricingPage = () => {
             price: "21,500",
             description: "The ultimate power-up for major concerts, festivals and musical events.",
             icon: <ShieldCheck className="h-6 w-6 text-primary-theme" />,
-            features: ["30 Collaborators", "5 Ticket Tiers", "Social Media Promotion (5 posts)", "Priority Phone Support", "Custom Branding"],
+            features: ["30 Collaborators", "Unlimited Ticket Tiers", "Social Media Promotion (5 posts)", "Priority Phone Support", "Custom Branding"],
             cta: "Get Premium",
             highlight: false
         }
@@ -43,8 +43,8 @@ const PricingPage = () => {
         <div className="bg-slate-50 min-h-screen font-sans text-slate-900 animated fadeIn">
             {/* 1. SEO Header Section */}
             <header className="py-20 px-6 text-center max-w-4xl mx-auto">
-                <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-                    <span className="italic font-serif font-medium text-gray-500 tracking-tighter">Simple Tools</span> for <BrMd /> <span className="text-primary-theme">Extraordinary</span> Events
+                <h1 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-6 leading-[0.9]">
+                    <span className="text-gray-500 tracking-tighter">Simple Tools</span> for <BrMd /> <span className="text-primary-theme">Extraordinary</span> Events
                 </h1>
                 <p className="text-sm md:text-lg text-slate-600 mb-10 leading-relaxed">
                     Whether you're hosting an intimate lounge session in Lagos or a stadium concert in Nairobi,
@@ -124,6 +124,48 @@ const PricingPage = () => {
                 </Link>
             </div>
 
+
+            <section className="pb-24 container">
+                <div className="bg-primary-theme rounded-[3.5rem] p-12 md:p-20 relative overflow-hidden text-center md:text-left">
+                    <div className="absolute top-0 right-0 w-1/2 h-full bg-white/10 -skew-x-12 translate-x-24" />
+                    <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none mb-6">
+                                Keep 100% of <br /> your gate.
+                            </h2>
+                            <p className="text-indigo-100 text-lg font-medium mb-10">
+                                AriaPass is built for the culture. We want to sponsor your event.
+                                We don't take your profit, we just help you fill the seats as you keep 100% of your ticket sales.
+                            </p>
+                            <div className="flex flex-col md:flex-row gap-4">
+                                <a href="mailto:ticketmaster@ariapass.africa" className="bg-white text-primary-theme px-10 py-5 rounded-2xl font-black text-lg shadow-xl shadow-indigo-900/20 active:scale-95 transition-all">
+                                    Contact Us
+                                </a>
+                                <Link to="/my-events/new" className="bg-indigo-500 text-white px-10 py-5 rounded-2xl font-black text-lg border border-indigo-400 hover:bg-indigo-400 transition-all">
+                                    Create Event
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="hidden md:flex justify-end">
+                            <div className="p-8 bg-white/10 backdrop-blur-md rounded-[2.5rem] border border-white/20">
+                                <div className="space-y-4">
+                                    {[
+                                        "Instant Paystack Payouts",
+                                        "Digital Program Access",
+                                        "Audience Insights Dashboard",
+                                        "Priority Support"
+                                    ].map((text, i) => (
+                                        <div key={i} className="flex items-center gap-3 text-white font-bold">
+                                            <ShieldCheck className="text-indigo-300" /> {text}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <hr className='mb-20' />
 
             {/* 4. Comparison Table (Critical for SEO & Detail) */}
@@ -142,15 +184,15 @@ const PricingPage = () => {
                         <tbody className="divide-y divide-slate-50">
                             <tr>
                                 <td className="p-6 text-sm font-bold text-slate-700">Ticket Tiers</td>
-                                <td className="p-6 text-sm">1 tier</td>
-                                <td className="p-6 text-sm">2 tiers</td>
-                                <td className="p-6 text-sm">5 tiers</td>
+                                <td className="p-6 text-sm">5 tickets</td>
+                                <td className="p-6 text-sm">5 tickets</td>
+                                <td className="p-6 text-sm">Unlimited</td>
                             </tr>
                             <tr>
                                 <td className="p-6 text-sm font-bold text-slate-700">Collaborators</td>
-                                <td className="p-6 text-sm">1 person</td>
-                                <td className="p-6 text-sm">5 people</td>
-                                <td className="p-6 text-sm">30 people</td>
+                                <td className="p-6 text-sm">1 (Just you)</td>
+                                <td className="p-6 text-sm">Up to 5</td>
+                                <td className="p-6 text-sm">Up to 30</td>
                             </tr>
                             <tr>
                                 <td className="p-6 text-sm font-bold text-slate-700">Social Promotion</td>
@@ -165,7 +207,7 @@ const PricingPage = () => {
                                 <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
                             </tr>
                             <tr>
-                                <td className="p-6 text-sm font-bold text-slate-700">Fan Reviews</td>
+                                <td className="p-6 text-sm font-bold text-slate-700">Event Reviews</td>
                                 <td className="p-6 text-sm text-slate-300">—</td>
                                 <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
                                 <td className="p-6 text-sm font-bold text-emerald-600">Included</td>

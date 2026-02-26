@@ -20,7 +20,7 @@ export default function Organisers() {
                         <Zap className="w-3 h-3 text-pink-500" /> <span className="font-bold text-pink-500">NEW:</span> <span>Digital Event Programs</span>
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-slate-900">
+                    <h1 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-6 leading-[0.9]">
                         Sell tickets. <br className="hidden md:block" />
                         Keep <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600">100% of the profit.</span>
                     </h1>

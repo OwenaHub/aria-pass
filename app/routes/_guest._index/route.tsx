@@ -297,8 +297,8 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                                 Keep 100% of <br /> your gate.
                             </h2>
                             <p className="text-indigo-100 text-lg font-medium mb-10">
-                                AriaPass Partner status gives you 0% platform commission.
-                                We don't take your profit, we just help you fill the seats.
+                                AriaPass is built for the culture. We want to sponsor your event.
+                                We don't take your profit, we just help you fill the seats as you keep 100% of your ticket sales.
                             </p>
                             <div className="flex flex-col md:flex-row gap-4">
                                 <Link to="/pricing" className="bg-white text-primary-theme px-10 py-5 rounded-2xl font-black text-lg shadow-xl shadow-indigo-900/20 active:scale-95 transition-all">

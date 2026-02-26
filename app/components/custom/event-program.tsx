@@ -47,7 +47,7 @@ export default function EventProgram({ event }: { event: OrganiserEvent }) {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <Button variant="outline" className="flex items-center gap-1 shadow-none rounded-lg">
+                <Button variant="secondary" className="w-full md:w-max flex items-center gap-1 shadow-none rounded-lg py-5 bg-primary-theme text-white">
                     <span className="tracking-tighter text-sm">
                         {event?.eventProgram && event.eventProgram.length > 0 ? "Edit program" : "Add program"}
                     </span>

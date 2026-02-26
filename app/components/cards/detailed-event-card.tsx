@@ -40,7 +40,7 @@ export default function DetailedEventCard({ event }: { event: OrganiserEvent }) 
         <div className="flex items-center justify-between py-5 border-b border-gray-100">
             {/* Left side */}
             <div className="flex gap-3 items-start w-full relative">
-                <div className="bg-gray-100 rounded border group-hover:opacity-85 aspect-auto h-30 min-w-18 max-w-18 md:max-w-full overflow-hidden transition">
+                <div className="bg-gray-100 rounded border group-hover:opacity-85 aspect-auto h-30 min-w-18 max-w-18 overflow-hidden transition">
                     {event.bannerUrl && (
                         <img
                             src={event.bannerUrl && `${STORAGE_URL}/${event.bannerUrl}`}
@@ -65,7 +65,7 @@ export default function DetailedEventCard({ event }: { event: OrganiserEvent }) 
 
             {/* Right side */}
             <div className="flex gap-3 items-center w-max">
-                <div className="hidden md:inline-block">
+                <div className="hidden md:inline-block text-xs">
                     <EventStatus date={event.date} startTime={event.startTime} status={event.status} />
                 </div>
                 {window.location.pathname === '/my-events' && (

@@ -48,11 +48,11 @@ export const nigerianStates = [
 
 export const TIER_LIMITS = {
     BASIC: {
-        collaborators: 1,
+        collaborators: 0,
         hasEventProgram: false,
         isSavedPostEvent: false,
         isPromoted: false,
-        ticketTierCount: 1,
+        ticketTierCount: 5,
         allowsReviews: false,
         price: 0
     },
@@ -61,7 +61,7 @@ export const TIER_LIMITS = {
         hasEventProgram: true,
         isSavedPostEvent: true,
         isPromoted: true,
-        ticketTierCount: 3,
+        ticketTierCount: 5,
         allowsReviews: true,
         price: 9700
     },
@@ -70,7 +70,7 @@ export const TIER_LIMITS = {
         hasEventProgram: true,
         isSavedPostEvent: true,
         isPromoted: true,
-        ticketTierCount: 5,
+        ticketTierCount: Infinity,
         allowsReviews: true,
         price: 21500
     }
