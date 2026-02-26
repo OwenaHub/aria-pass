@@ -16,11 +16,11 @@ interface PaymentBreakdown {
     processingFeeChargedToBuyer: number;
     commissionCharge: number;
     totalAmount: number;
-}
+};
 
 /**
- * Calculates Paystack fee based on Nigerian pricing
- * 1.5% + ₦100 (if >= 2500)
+ * Calculates the exact Paystack fee based on the FINAL amount passed to them
+ * 1.5% + ₦100 (if final amount >= 2500)
  * Capped at ₦2000
  */
 function calculatePaystackFee(amount: number): number {
@@ -29,7 +29,30 @@ function calculatePaystackFee(amount: number): number {
     const fee = percentageFee + flatFee;
 
     return Math.min(Math.ceil(fee), 2000);
-};
+}
+
+/**
+ * Grosses up the target subtotal so that after Paystack takes its fee,
+ * the exact target subtotal remains.
+ */
+function calculateGrossAmount(targetSubtotal: number): number {
+    const percentage = 0.015;
+    
+    // First pass: what the total would be without the flat fee
+    let total = targetSubtotal / (1 - percentage);
+    
+    // Paystack applies the ₦100 flat fee if the FINAL transaction amount is >= 2500
+    if (total >= 2500) {
+        total = (targetSubtotal + 100) / (1 - percentage);
+    }
+    
+    // Paystack fee is capped at ₦2000
+    if (total - targetSubtotal > 2000) {
+        return targetSubtotal + 2000;
+    }
+    
+    return Math.ceil(total);
+}
 
 /**
  * Calculates commission amount from subtotal
@@ -38,8 +61,7 @@ function calculateCommission(
     subtotal: number,
     commissionRate: number
 ): number {
-    let commission = Math.floor((subtotal * commissionRate) / 100);
-    return commission;
+    return Math.floor((subtotal * commissionRate) / 100);
 }
 
 /**
@@ -50,40 +72,49 @@ export function calculatePaymentBreakdown(input: PaymentInput): PaymentBreakdown
         unitPrice,
         quantity,
         commissionRate,
-        processingFeeStrategy,
+        processingFeeStrategy = "buyer_pays", // Fallback if undefined
     } = input;
 
     const subtotal = unitPrice * quantity;
 
-    const paystackFee = calculatePaystackFee(subtotal);
-
+    let totalAmount = subtotal;
     let processingFeeChargedToBuyer = 0;
 
+    // 1. Determine Total Amount based on the strategy FIRST
     switch (processingFeeStrategy) {
         case "buyer_pays":
-            processingFeeChargedToBuyer = paystackFee;
+            totalAmount = calculateGrossAmount(subtotal);
+            processingFeeChargedToBuyer = totalAmount - subtotal;
             break;
 
         case "split_fee":
-            processingFeeChargedToBuyer = Math.ceil(paystackFee / 2);
+            // Buyer pays half of what the fee WOULD be on just the subtotal
+            const estimatedFee = calculatePaystackFee(subtotal);
+            processingFeeChargedToBuyer = Math.ceil(estimatedFee / 2);
+            totalAmount = subtotal + processingFeeChargedToBuyer;
             break;
 
+        case "organiser_pays":
         default:
+            totalAmount = subtotal;
             processingFeeChargedToBuyer = 0;
+            break;
     }
 
+    // 2. Calculate the ACTUAL Paystack fee based on the final total Amount
+    const paystackFee = calculatePaystackFee(totalAmount);
+
+    // 3. Calculate your platform commission based on the subtotal
     let commissionCharge = calculateCommission(
         subtotal,
         commissionRate
     );
 
-    // Add any overcharge (safety guard)
+    // 4. Add any overcharge (safety guard)
     const leftover = processingFeeChargedToBuyer - paystackFee;
     if (leftover > 0) {
         commissionCharge += leftover;
     }
-
-    const totalAmount = subtotal + processingFeeChargedToBuyer;
 
     return {
         subtotal,
