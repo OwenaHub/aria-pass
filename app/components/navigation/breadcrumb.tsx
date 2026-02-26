@@ -11,9 +11,9 @@ export default function Breadcrumb({ to = "back", href }: { to?: string, href?: 
                 to={href ? href : ""}
                 onClick={href ? undefined : () => navigate(-1)}
                 aria-label='Go back'
-                className='flex items-center gap-2 text-xs cursor-pointer tranisition hover:text-primary bg-white border  border-b-2 px-2 py-1 text-gray-500 rounded-full capitalize relative focus:top-[1px] focus:border-b'
+                className='flex items-center gap-1 font-bold text-xs cursor-pointer tranisition hover:bg-gray-600 hover:text-white bg-gray-200 px-2 py-1 text-primary rounded-full capitalize transition relative focus:top-px focus:border-b'
             >
-                <ArrowLeft className='inline-block' size={14} />
+                <ArrowLeft className='inline-block' size={14} strokeWidth={3}/>
                 <span className='text-nowrap'>{href ? (to) : ("Back")}</span>
             </Link>
 
