@@ -24,7 +24,7 @@ interface PaymentBreakdown {
  * Capped at ₦2000
  */
 function calculatePaystackFee(amount: number): number {
-    const percentageFee = amount * 0.015;
+    const percentageFee = amount * 0.015; // 1.5% of the amount
     const flatFee = amount >= 2500 ? 100 : 0;
     const fee = percentageFee + flatFee;
 
@@ -38,15 +38,14 @@ function calculateCommission(
     subtotal: number,
     commissionRate: number
 ): number {
-    return Math.floor((subtotal * commissionRate) / 100);
+    let commission = Math.floor((subtotal * commissionRate) / 100);
+    return commission;
 }
 
 /**
  * Main calculator
  */
-export function calculatePaymentBreakdown(
-    input: PaymentInput
-): PaymentBreakdown {
+export function calculatePaymentBreakdown(input: PaymentInput): PaymentBreakdown {
     const {
         unitPrice,
         quantity,

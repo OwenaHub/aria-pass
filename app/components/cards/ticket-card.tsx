@@ -22,7 +22,7 @@ export default function TicketCard({ ticket, user = 'user' }: { ticket: Ticket, 
                         >
                             {ticket.name}
                         </div>
-                        <h4 className="text-2xl font-black text-slate-900 tracking-tighter">
+                        <h4 className="text-lg font-bold text-slate-900 tracking-tighter">
                             <FormatPrice price={ticket.price} />
                         </h4>
                     </div>

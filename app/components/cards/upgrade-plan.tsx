@@ -14,29 +14,27 @@ export default function UpgradePlan({ targetTier, featureName }: UpgradePlanProp
     const data = tierData[targetTier];
 
     return (
-        <div className="max-w-sm mx-auto relative w-full overflow-hidden bg-white border border-slate-200 rounded animate-in fade-in zoom-in duration-300">
+        <div className="max-w-sm mx-auto relative w-full overflow-hidden bg-white border border-slate-200 rounded-xl animate-in fade-in zoom-in duration-300">
             {/* Header with Gradient */}
             <div className="bg-linear-to-br from-primary-theme to-violet-700 p-6 flex flex-row items-center gap-4 justify-between text-white">
+
+                <h3 className="text-base font-semibold md:text-xl tracking-tighter">
+                    Pay for this feature.
+                </h3>
                 <div className="relative">
                     <div className="absolute -inset-2 rounded-full bg-white/20 animate-pulse" />
                     <div className="relative bg-white p-2 rounded-xl shadow-lg">
                         <Lock className="h-6 w-6 text-primary-theme" />
                     </div>
                 </div>
-                <h3 className="text-base md:text-xl tracking-tighter">
-                    <span className="font-light text-sm">UNLOCK</span> <span className="font-bold">{targetTier}</span>
-                </h3>
             </div>
 
-            <div className="p-6">
-                <div className="text-center mb-6">
-                    <p className="text-slate-600 text-sm leading-relaxed">
+            <div className="p-3">
+                <div className="text-start mb-6">
+                    <p className="text-slate-600 text-sm leading-relaxed tracking-tighter">
                         {featureName ? (
-                            <>You've reached the limit for <span className="font-bold text-slate-900">{featureName}</span>.</>
-                        ) : (
-                            "You've reached the limit for your current plan."
-                        )}
-                        {" "}
+                            <>You need to buy <span className="font-bold text-slate-900">{featureName}</span> feature for this event.</>
+                        ) : ("You've reached the limit for your current plan.")} {" "}
                         Upgrade to keep building your event.
                     </p>
                 </div>
@@ -58,7 +56,7 @@ export default function UpgradePlan({ targetTier, featureName }: UpgradePlanProp
                 <div className="space-y-3">
                     <Link to={`upgrade?tier=${targetTier}`}
                         onClick={() => console.log(`Initialize Paystack for ${targetTier}`)}
-                        className="w-full tracking-tight flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white font-bold py-4 rounded-xl transition-all active:scale-[0.98] shadow-xl shadow-slate-200"
+                        className="w-full tracking-tight flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-full transition-all active:scale-[0.98] shadow-xl shadow-slate-200"
                     >
                         PAY {data.price}
                         <ArrowRight className="h-5 w-5 text-indigo-400" />

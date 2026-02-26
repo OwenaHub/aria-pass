@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import TicketCard from "~/components/cards/ticket-card";
 import UpdateEventStatus from "./update-event-status";
-import { categorizeDevices } from "./analytics";
+// import { categorizeDevices } from "./analytics";
 import { defaultMeta } from '~/lib/meta';
 import MembersTable from "./members-table";
 import FormatPrice from "~/components/utility/format-price";
@@ -89,7 +89,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
 
     return (
         <div className="min-h-screen pb-20">
-            <div className="bg-white border-b border-gray-200 py-6 mb-8 sticky top-14 z-30">
+            <div className="bg-white mb-8 z-30">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-start justify-between gap-6">
                     <div className="flex gap-5 items-start">
                         <div className="h-auto w-20 md:h-auto md:w-24 rounded overflow-hidden bg-gray-100 shrink-0 shadow-sm border border-gray-200">
@@ -102,7 +102,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
 
                         <div>
                             <div className="flex md:flex-row flex-col md:items-center gap-3 mb-3">
-                                <h1 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 leading-6">{event.title}</h1>
+                                <h1 className="text-2xl md:text-3xl font-semibold tracking-tighter text-gray-900 leading-6">{event.title}</h1>
                                 <EventPlanBadge tier={event.eventPlan?.tier} />
                             </div>
                             <p className="text-sm font-medium text-gray-500 flex flex-wrap items-center gap-x-4 gap-y-1 mb-5">
@@ -167,12 +167,12 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                         <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Engagement</p>
                         <div className="flex items-center gap-4">
                             <div>
-                                <p className="text-2xl font-bold text-gray-900 flex items-center gap-2">{event.likes || "0"} <Heart className="size-4 text-pink-500 fill-pink-50" /></p>
+                                <p className="text-3xl font-bold text-gray-900 flex items-center gap-2">{event.likes || "0"} <Heart className="size-4 text-pink-500 fill-pink-50" /></p>
                                 <span className="text-[10px] font-bold text-gray-400 uppercase">Likes</span>
                             </div>
                             <div className="h-8 w-px bg-gray-100" />
                             <div>
-                                <p className="text-2xl font-bold text-gray-900 flex items-center gap-2">{event.reviews?.length || 0} <MessageSquare className="size-4 text-indigo-500 fill-indigo-50" /></p>
+                                <p className="text-3xl font-bold text-gray-900 flex items-center gap-2">{event.reviews?.length || 0} <MessageSquare className="size-4 text-indigo-500 fill-indigo-50" /></p>
                                 <span className="text-[10px] font-bold text-gray-400 uppercase">Comments</span>
                             </div>
                         </div>
@@ -184,8 +184,8 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                         <div className="bg-white rounded-2xl border border-gray-200 p-6">
                             <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-6">
                                 <div>
-                                    <h3 className="text-lg font-black text-gray-900 flex items-center gap-2">
-                                        Event Tickets
+                                    <h3 className="text-xl tracking-tighter font-bold text-gray-900 flex items-center gap-2">
+                                        Event tickets
                                     </h3>
                                     <p className="text-sm text-gray-500 font-medium">Manage tiers, pricing, and availability.</p>
                                 </div>
@@ -214,7 +214,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                         <div className="bg-white rounded-2xl border border-gray-200 p-6">
                             <div className="flex items-center justify-between mb-6">
                                 <div>
-                                    <h3 className="text-lg font-black text-gray-900 flex items-center gap-2">
+                                    <h3 className="text-xl tracking-tighter font-bold text-gray-900 flex items-center gap-2">
                                         Event Staff
                                     </h3>
                                 </div>
