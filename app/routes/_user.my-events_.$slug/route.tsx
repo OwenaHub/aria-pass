@@ -91,7 +91,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
         <div className="min-h-screen pb-20">
             <div className="bg-white mb-8 z-30">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-start justify-between gap-6">
-                    <div className="flex gap-5 items-start">
+                    <div className="flex flex-col md:flex-row gap-5 items-start">
                         <div className="h-auto w-20 md:h-auto md:w-24 rounded overflow-hidden bg-gray-100 shrink-0 shadow-sm border border-gray-200">
                             {event.bannerUrl ? (
                                 <img src={`${STORAGE_URL}/${event.bannerUrl}`} alt={event.title} className="h-full w-full object-cover" />
@@ -102,10 +102,10 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
 
                         <div>
                             <div className="flex md:flex-row flex-col md:items-center gap-3 mb-3">
-                                <h1 className="text-2xl md:text-3xl font-semibold tracking-tighter text-gray-900 leading-6">{event.title}</h1>
+                                <h1 className="text-2xl md:text-2xl font-bold tracking-tighter text-gray-900 leading-6">{event.title}</h1>
                                 <EventPlanBadge tier={event.eventPlan?.tier} />
                             </div>
-                            <p className="text-sm font-medium text-gray-500 flex flex-wrap items-center gap-x-4 gap-y-1 mb-5">
+                            <p className="text-sm font-medium text-gray-500 flex flex-wrap items-start gap-x-4 gap-y-1 mb-5">
                                 <span className="flex items-center gap-1.5">
                                     <Calendar className="size-4" /> {FORMATTED_DATE} at {event.startTime.substring(0, 5)}
                                 </span>

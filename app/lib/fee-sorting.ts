@@ -16,52 +16,57 @@ interface PaymentBreakdown {
     processingFeeChargedToBuyer: number;
     commissionCharge: number;
     totalAmount: number;
-};
+}
 
 /**
- * Calculates the exact Paystack fee based on the FINAL amount passed to them
- * 1.5% + ₦100 (if final amount >= 2500)
+ * Helper function to securely round to exact Kobo (2 decimal places)
+ * This prevents floating-point bugs (e.g., 15.0000000001)
+ */
+function roundToTwoDecimals(num: number): number {
+    return Math.round((num + Number.EPSILON) * 100) / 100;
+}
+
+/**
+ * Calculates the exact Paystack fee based on the FINAL amount
+ * Paystack strictly takes 1.5% + ₦100 (if final amount >= 2500)
  * Capped at ₦2000
  */
 function calculatePaystackFee(amount: number): number {
-    const percentageFee = amount * 0.015; // 1.5% of the amount
+    const percentageFee = amount * 0.015; // Paystack's 1.5%
     const flatFee = amount >= 2500 ? 100 : 0;
     const fee = percentageFee + flatFee;
 
-    return Math.min(Math.ceil(fee), 2000);
+    return Math.min(roundToTwoDecimals(fee), 2000);
 }
 
 /**
- * Grosses up the target subtotal so that after Paystack takes its fee,
- * the exact target subtotal remains.
+ * Grosses up the target subtotal using purely Paystack's 1.5% rate.
+ * Ensures the final amount leaves exactly the target subtotal after Paystack's cut.
  */
 function calculateGrossAmount(targetSubtotal: number): number {
-    const percentage = 0.015;
-    
+    const platformPercentage = 0.015;
+
     // First pass: what the total would be without the flat fee
-    let total = targetSubtotal / (1 - percentage);
-    
-    // Paystack applies the ₦100 flat fee if the FINAL transaction amount is >= 2500
+    let total = targetSubtotal / (1 - platformPercentage);
+
+    // Apply the ₦100 flat fee if the FINAL transaction amount is >= 2500
     if (total >= 2500) {
-        total = (targetSubtotal + 100) / (1 - percentage);
+        total = (targetSubtotal + 100) / (1 - platformPercentage);
     }
-    
-    // Paystack fee is capped at ₦2000
+
+    // CAP RESTORED: Stop charging the buyer extra if the fee exceeds ₦2000.
     if (total - targetSubtotal > 2000) {
         return targetSubtotal + 2000;
     }
-    
-    return Math.ceil(total);
+
+    return roundToTwoDecimals(total);
 }
 
-/**
- * Calculates commission amount from subtotal
- */
 function calculateCommission(
     subtotal: number,
     commissionRate: number
 ): number {
-    return Math.floor((subtotal * commissionRate) / 100);
+    return roundToTwoDecimals((subtotal * commissionRate) / 100);
 }
 
 /**
@@ -80,18 +85,18 @@ export function calculatePaymentBreakdown(input: PaymentInput): PaymentBreakdown
     let totalAmount = subtotal;
     let processingFeeChargedToBuyer = 0;
 
-    // 1. Determine Total Amount based on the strategy FIRST
     switch (processingFeeStrategy) {
         case "buyer_pays":
             totalAmount = calculateGrossAmount(subtotal);
-            processingFeeChargedToBuyer = totalAmount - subtotal;
+            processingFeeChargedToBuyer = roundToTwoDecimals(totalAmount - subtotal);
             break;
 
         case "split_fee":
-            // Buyer pays half of what the fee WOULD be on just the subtotal
-            const estimatedFee = calculatePaystackFee(subtotal);
-            processingFeeChargedToBuyer = Math.ceil(estimatedFee / 2);
-            totalAmount = subtotal + processingFeeChargedToBuyer;
+            // Calculate the exact Paystack fee, then charge the buyer exactly half
+            const estimatedGross = calculateGrossAmount(subtotal);
+            const estimatedFee = estimatedGross - subtotal;
+            processingFeeChargedToBuyer = roundToTwoDecimals(estimatedFee / 2);
+            totalAmount = roundToTwoDecimals(subtotal + processingFeeChargedToBuyer);
             break;
 
         case "organiser_pays":
@@ -104,16 +109,17 @@ export function calculatePaymentBreakdown(input: PaymentInput): PaymentBreakdown
     // 2. Calculate the ACTUAL Paystack fee based on the final total Amount
     const paystackFee = calculatePaystackFee(totalAmount);
 
-    // 3. Calculate your platform commission based on the subtotal
+    // 3. Calculate your standard platform commission based on the subtotal
     let commissionCharge = calculateCommission(
         subtotal,
         commissionRate
     );
 
-    // 4. Add any overcharge (safety guard)
-    const leftover = processingFeeChargedToBuyer - paystackFee;
+    // 4. Sweeper Logic: Guard against fractions of a Kobo mismatch
+    // Since we perfectly match Paystack now, this 'leftover' will almost always be 0.
+    const leftover = roundToTwoDecimals(processingFeeChargedToBuyer - paystackFee);
     if (leftover > 0) {
-        commissionCharge += leftover;
+        commissionCharge = roundToTwoDecimals(commissionCharge + leftover);
     }
 
     return {
