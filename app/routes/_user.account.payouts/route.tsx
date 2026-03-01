@@ -1,6 +1,6 @@
 import { Check, ChevronDown, Info, Loader2 } from 'lucide-react';
 import { useEffect, useState, useTransition } from 'react';
-import { Form, useOutletContext, useNavigation } from 'react-router';
+import { Form, useOutletContext, useNavigation, Link } from 'react-router';
 
 import { Button } from "~/components/ui/button"
 import {
@@ -135,7 +135,7 @@ export default function Payouts({ loaderData }: Route.ComponentProps) {
             {user.organiserProfile?.paystackSubaccountCode ? (
                 <div>
                     <div className='mb-4'>
-                        <h2 className='font-bold tracking-tighter text-sm'>
+                        <h2 className='font-bold tracking-tight text-sm'>
                             Your Payout Account
                         </h2>
                         <p className='text-xs'>
@@ -164,8 +164,13 @@ export default function Payouts({ loaderData }: Route.ComponentProps) {
                         </div>
                     </div>
 
-                    <div className='mt-4 text-xs tracking-tighter text-gray-600'>
-                        You pay <span className='font-bold tracking-tight'>{user.organiserProfile.commissionRate}%</span> from your earnings
+                    <div className='mt-4 text-xs tracking-tight text-gray-600'>
+                        You currently pay {" "}
+                        <span className='font-bold'>{user.organiserProfile.commissionRate}%</span>{" "}
+                        commission on ticket sales. <br />
+
+                        Partners sell at <span className='font-bold tracking-tight'>0%</span>—
+                        <a href="mailto:ticketmaster@ariapass.africa" className='text-blue-500 underline underline-offset-2'>Contact sales</a>
                     </div>
                 </div>
             ) : (

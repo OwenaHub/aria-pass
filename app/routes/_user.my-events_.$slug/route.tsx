@@ -105,12 +105,13 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                                 <h1 className="text-2xl md:text-2xl font-bold tracking-tighter text-gray-900 leading-6">{event.title}</h1>
                                 <EventPlanBadge tier={event.eventPlan?.tier} />
                             </div>
-                            <p className="text-sm font-medium text-gray-500 flex flex-wrap items-start gap-x-4 gap-y-1 mb-5">
+                            <p className="text-sm font-medium text-gray-500 flex flex-wrap items-center gap-x-2.5 gap-y-1 mb-5">
                                 <span className="flex items-center gap-1.5">
-                                    <Calendar className="size-4" /> {FORMATTED_DATE} at {event.startTime.substring(0, 5)}
+                                    <Calendar className="size-4 hidden md:inline-block" /> {FORMATTED_DATE} at {event.startTime.substring(0, 5)}
                                 </span>
+                                <span className="md:hidden">•</span>
                                 <span className="flex items-center gap-1.5 capitalize">
-                                    <MapPin className="size-4" /> {event.venueName}, {event.city}
+                                    <MapPin className="size-4 hidden md:inline-block" /> {event.venueName}, {event.city}
                                 </span>
                             </p>
                             <div className="flex flex-wrap items-center gap-3 text-sm">
