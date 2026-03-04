@@ -34,8 +34,8 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                     <DialogTrigger asChild>
                         <Button
                             disabled={events.length === 0}
-                            variant={'secondary'}
-                            className='cursor-pointer text-xs flex items-center gap-2 rounded-lg'
+                            variant={'default'}
+                            className="text-white text-xs flex py-5 items-center gap-2 tracking-tight rounded-xl"
                         >
                             <UserPlus size={10} />
                             <span>Add Teammate</span>

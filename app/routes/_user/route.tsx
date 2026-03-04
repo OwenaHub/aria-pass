@@ -48,27 +48,27 @@ export async function clientLoader() {
 
 const APP_MENU = [
     {
-        icon: <Home size={20} strokeWidth={2.2} />,
+        icon: <Home size={23} strokeWidth={2.2} />,
         label: "Dashboard",
         href: "dashboard"
     },
     {
-        icon: <CalendarCheck size={20} strokeWidth={2.2} />,
+        icon: <CalendarCheck size={23} strokeWidth={2.2} />,
         label: "My Events",
         href: "my-events"
     },
     {
-        icon: <Heart size={20} strokeWidth={2.2} />,
+        icon: <Heart size={23} strokeWidth={2.2} />,
         label: "Favourites",
         href: "favourites"
     },
     {
-        icon: <ShoppingCart size={20} strokeWidth={2.2} />,
+        icon: <ShoppingCart size={23} strokeWidth={2.2} />,
         label: "Purchases",
         href: "purchases"
     },
     {
-        icon: <User size={20} strokeWidth={2.2} />,
+        icon: <User size={23} strokeWidth={2.2} />,
         label: "Account",
         href: "account"
     },
@@ -94,7 +94,7 @@ export default function ProtectedLayout({ loaderData }: Route.ComponentProps) {
 
                     <div className="h-20 w-full" />
 
-                    <div className="border p-1 border-gray-100 shadow-lg  bg-white/35 backdrop-blur-xs rounded-full w-max fixed bottom-10 z-50 left-1/2 -translate-x-1/2">
+                    <div className="border p-1 border-gray-100 shadow-lg bg-white/35 backdrop-blur-xs rounded-full w-max fixed bottom-7 z-50 left-1/2 -translate-x-1/2">
                         <section className="flex items-center gap-2">
                             {APP_MENU.map((menu, index) => (
                                 <NavLink

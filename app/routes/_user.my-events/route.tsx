@@ -29,11 +29,7 @@ export async function clientLoader() {
 
         if (!isOrganiser) {
             toast.warning("Unauthorized page", {
-                description: 'No active orgainiser profile',
-                action: {
-                    label: "Become an organiser",
-                    onClick: () => window.location.href = '/organiser-request'
-                }
+                description: 'No active orgainiser profile yet',
             });
             return redirect('/dashboard')
         }

@@ -54,8 +54,8 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button
-                        variant={'secondary'}
-                        className="text-primary text-xs flex items-center gap-2 tracking-tight rounded-md"
+                        variant={'default'}
+                        className="text-white text-xs flex py-5 items-center gap-2 tracking-tight rounded-xl"
                     >
                         <Ticket className="size-4" />
                         <span>Add Ticket</span>
@@ -81,8 +81,8 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
                 <Button
-                    variant={'secondary'}
-                    className="text-primary w-full text-xs flex items-center py-5 gap-2 tracking-tight rounded-md"
+                    variant={'default'}
+                    className="text-white w-full text-xs flex items-center py-5 gap-2 tracking-tight rounded-xl"
                 >
                     <Ticket className="size-4" />
                     <span>Add Ticket</span>

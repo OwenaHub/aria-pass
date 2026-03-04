@@ -131,58 +131,60 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
             <UpdateEventStatus event={event} />
 
             <main className="max-w-7xl mx-auto mt-5">
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                    {/* Revenue Card */}
-                    <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center justify-between">
-                            Revenue <Link to={`/spaces/${event.slug}`}><ArrowRight className="size-4 hover:text-primary-theme transition-colors" /></Link>
-                        </p>
-                        <p className="text-3xl font-bold text-gray-900 tracking-tighter">
-                            <span className="text-lg text-gray-400 mr-1">₦</span><FormatPrice withSymbol={false} price={SUM_AMOUNT.toFixed(2)} />
-                        </p>
-                    </div>
-
-                    <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Page Views</p>
-                        <div className="flex items-end justify-between">
-                            <p className="text-3xl font-bold text-gray-900 tracking-tighter">{typeof event.views === 'object' ? event.views.length : 0}</p>
-                        </div>
-                    </div>
-
-                    <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Tickets Sold</p>
-                        <div className="flex items-baseline justify-between mb-4">
-                            <p className="text-3xl font-bold text-gray-900 tracking-tighter">
-                                {TOTAL_TICKET_SOLD}<span className="text-xl text-gray-400">/{TOTAL_TICKETS}</span>
+                {(event.status === 'published' || event.tickets.length > 0) && (
+                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                        {/* Revenue Card */}
+                        <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
+                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center justify-between">
+                                Revenue <Link to={`/spaces/${event.slug}`}><ArrowRight className="size-4 hover:text-primary-theme transition-colors" /></Link>
                             </p>
-                            <span className="text-[10px] font-bold bg-gray-200 text-gray-600 px-2 py-1 rounded-md">
-                                {event.tickets.length} tier{event.tickets.length > 1 && 's'}
-                            </span>
+                            <p className="text-3xl font-bold text-gray-900 tracking-tighter">
+                                <span className="text-lg text-gray-400 mr-1">₦</span><FormatPrice withSymbol={false} price={SUM_AMOUNT.toFixed(2)} />
+                            </p>
                         </div>
-                        <div className="w-full h-1.5 bg-white border rounded-full overflow-hidden">
-                            <div className="h-full bg-emerald-500" style={{ width: `${TOTAL_TICKETS > 0 ? (TOTAL_TICKET_SOLD / TOTAL_TICKETS) * 100 : 0}%` }} />
-                        </div>
-                    </div>
 
-                    <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Engagement</p>
-                        <div className="flex items-center gap-4">
-                            <div>
-                                <p className="text-3xl font-bold text-gray-900 flex items-center gap-2">{event.likes || "0"} <Heart className="size-4 text-pink-500 fill-pink-50" /></p>
-                                <span className="text-[10px] font-bold text-gray-400 uppercase">Likes</span>
+                        <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
+                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Page Views</p>
+                            <div className="flex items-end justify-between">
+                                <p className="text-3xl font-bold text-gray-900 tracking-tighter">{typeof event.views === 'object' ? event.views.length : 0}</p>
                             </div>
-                            <div className="h-8 w-px bg-gray-100" />
-                            <div>
-                                <p className="text-3xl font-bold text-gray-900 flex items-center gap-2">{event.reviews?.length || 0} <MessageSquare className="size-4 text-indigo-500 fill-indigo-50" /></p>
-                                <span className="text-[10px] font-bold text-gray-400 uppercase">Comments</span>
+                        </div>
+
+                        <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
+                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Tickets Sold</p>
+                            <div className="flex items-center justify-between mb-4">
+                                <p className="text-3xl font-bold text-gray-900 tracking-tighter">
+                                    {TOTAL_TICKET_SOLD}<span className="text-xl text-gray-400">/{TOTAL_TICKETS}</span>
+                                </p>
+                                <span className="text-[10px] font-bold bg-gray-200 text-gray-600 px-2 py-1 rounded-md">
+                                    {event.tickets.length} tier{event.tickets.length > 1 && 's'}
+                                </span>
+                            </div>
+                            <div className="w-full h-1.5 bg-white border rounded-full overflow-hidden">
+                                <div className="h-full bg-emerald-500" style={{ width: `${TOTAL_TICKETS > 0 ? (TOTAL_TICKET_SOLD / TOTAL_TICKETS) * 100 : 0}%` }} />
+                            </div>
+                        </div>
+
+                        <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
+                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Engagement</p>
+                            <div className="flex items-center gap-4">
+                                <div>
+                                    <p className="text-3xl font-bold text-gray-900 flex items-center gap-2">{event.likes || "0"} <Heart className="size-4 text-pink-500 fill-pink-50" /></p>
+                                    <span className="text-[10px] font-bold text-gray-400 uppercase">Likes</span>
+                                </div>
+                                <div className="h-8 w-px bg-gray-100" />
+                                <div>
+                                    <p className="text-3xl font-bold text-gray-900 flex items-center gap-2">{event.reviews?.length || 0} <MessageSquare className="size-4 text-indigo-500 fill-indigo-50" /></p>
+                                    <span className="text-[10px] font-bold text-gray-400 uppercase">Comments</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                )}
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2 space-y-8">
-                        <div className="bg-white rounded-2xl border border-gray-200 p-6">
+                        <div className="bg-gray-100 rounded-2xl border border-gray-100 p-6">
                             <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-6">
                                 <div>
                                     <h3 className="text-xl tracking-tighter font-bold text-gray-900 flex items-center gap-2">
@@ -200,7 +202,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                                     ))}
                                 </div>
                             ) : (
-                                <div className="text-center p-8 border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50">
+                                <div className="text-center p-8 border border-dashed border-gray-200 rounded-2xl bg-white">
                                     <p className="text-sm font-bold text-gray-600">No tickets created yet</p>
                                     <p className="text-xs text-gray-400 mt-1 max-w-xs mx-auto">If this is a Free Event, create a ticket with zero price named "Free Entry".</p>
                                 </div>
@@ -212,7 +214,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                     </div>
 
                     <div className="lg:col-span-1 space-y-8">
-                        <div className="bg-white rounded-2xl border border-gray-200 p-6">
+                        <div className="bg-gray-100 rounded-2xl border border-gray-100 p-6 h-full">
                             <div className="flex items-center justify-between mb-6">
                                 <div>
                                     <h3 className="text-xl tracking-tighter font-bold text-gray-900 flex items-center gap-2">
@@ -225,7 +227,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                             {event.members?.length ? (
                                 <MembersTable members={event.members} />
                             ) : (
-                                <div className="text-center p-8 border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50">
+                                <div className="text-center p-8 border border-dashed border-gray-200 rounded-2xl bg-white">
                                     <p className="text-sm font-bold text-gray-600">No staff added</p>
                                     <p className="text-xs text-gray-400 mt-1">Invite team members to help manage this event.</p>
                                 </div>

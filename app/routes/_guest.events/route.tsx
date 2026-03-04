@@ -51,6 +51,17 @@ export default function Events({ loaderData }: Route.ComponentProps) {
     const { events }: { events: Promise<OrganiserEvent[]> } = loaderData;
     const [searchParams] = useSearchParams();
 
+    const updateCategoryParam = (categoryValue: string) => {
+        const newParams = new URLSearchParams(searchParams);
+
+        if (categoryValue) {
+            newParams.set('category', categoryValue);
+        } else {
+            newParams.delete('category');
+        }
+        return `?${newParams.toString()}`;
+    };
+
     return (
         <main>
             <div className='container py-10 flex flex-col gap-2'>
@@ -71,7 +82,7 @@ export default function Events({ loaderData }: Route.ComponentProps) {
                     {eventCategory.map((item) => (
                         <Link
                             preventScrollReset
-                            to={`?category=${item.toLowerCase()}`}
+                            to={updateCategoryParam(item.toLowerCase())}
                             className={`${searchParams.get('category') === item.toLowerCase() && 'bg-stone-100 outline'} rounded-full py-2 px-4 hover:bg-stone-100 text-sm font-medium tracking-tight`}
                         >
                             {item}
@@ -105,7 +116,7 @@ export default function Events({ loaderData }: Route.ComponentProps) {
                     </Link>
                     {eventCategory.map((item) => (
                         <Link
-                            to={`?category=${item.toLowerCase()}`}
+                            to={updateCategoryParam(item.toLowerCase())}
                             key={item}
                             preventScrollReset
                             className={`${searchParams.get('category') === item.toLowerCase() && 'bg-stone-100 outline'} text-nowrap rounded-full py-2 px-4 hover:bg-stone-100 text-sm tracking-tight`}>

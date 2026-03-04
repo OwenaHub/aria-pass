@@ -175,7 +175,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
         <Form className="relative flex flex-col lg:flex-row items-stretch gap-20 justify-between" method="post" encType="multipart/form-data">
             <section className="basis-4/6">
                 <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-2xl font-semibold tracking-tighter ">New Event</h1>
+                    <h1 className="text-2xl font-bold tracking-tighter ">New Event</h1>
                 </div>
 
                 <div className="flex flex-col gap-5">

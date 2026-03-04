@@ -2,7 +2,6 @@ import {
     Plus,
     QrCode,
     LayoutList,
-    Image as ImageIcon,
     Music,
     Smartphone,
     ArrowRight,
@@ -182,9 +181,9 @@ export default function EventProgramLanding() {
 
             {/* 4. Final CTA */}
             <section className="py-24 px-6">
-                <div className="max-w-4xl mx-auto bg-slate-900 rounded-[3rem] p-12 text-center text-white relative overflow-hidden">
+                <div className="max-w-4xl mx-auto bg-slate-900 rounded-[2.5rem] py-12 px-6 text-center text-white relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(79,70,229,0.3),transparent)]" />
-                    <div className="relative z-10">
+                    <div className="relative">
                         <h2 className="text-4xl font-black mb-6">Ready to launch your event?</h2>
                         <p className="text-slate-400 text-lg mb-10 max-w-md mx-auto">
                             Setting up takes less than 5 minutes. No technical skills required.

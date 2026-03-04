@@ -47,17 +47,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     const { events }: { events: Promise<OrganiserEvent[]> } = loaderData;
     const [searchParams] = useSearchParams();
 
-    const updateCategoryParam = (categoryValue: string) => {
-        const newParams = new URLSearchParams(searchParams);
-
-        if (categoryValue) {
-            newParams.set('category', categoryValue);
-        } else {
-            newParams.delete('category');
-        }
-        return `?${newParams.toString()}`;
-    };
-
     return (
         <div className="fadeIn animated bg-white overflow-x-hidden">
             {/* 1. HERO SECTION: The Hook */}

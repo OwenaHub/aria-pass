@@ -31,7 +31,7 @@ export default function Organisers() {
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
                         <button className="tracking-tighter w-full sm:w-auto px-12 py-3 bg-primary-theme hover:bg-indigo-700 text-white font-semibold rounded-full text-lg shadow-lg shadow-indigo-200 transition-all transform hover:-translate-y-1">
-                            <Link to="/organiser-request">
+                            <Link to="/register">
                                 Get Started
                             </Link>
                         </button>
@@ -148,7 +148,7 @@ export default function Organisers() {
                             </button>
                         </Link>
                         <HrWithText text="or" />
-                        <Link to={'/'} className='cursor-pointer flex-1'>
+                        <Link to={'/events'} className='cursor-pointer flex-1'>
                             <button className="px-12 tracking-tight py-4 bg-gray-100 hover:bg-gray-200 text-primary font-semibold rounded-full text-base transition-colors">
                                 See Events
                             </button>

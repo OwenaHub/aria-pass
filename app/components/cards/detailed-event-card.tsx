@@ -8,7 +8,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu"
-import { EllipsisVertical, Eye, LoaderCircle, Pen, Share, Trash } from 'lucide-react';
+import { ChevronDown, Eye, LoaderCircle, Pen, Share, Trash } from 'lucide-react';
 import { Form, Link, useNavigation } from 'react-router';
 import EventStatus from '../utility/event-status';
 
@@ -85,11 +85,10 @@ function Actions({ event }: { event: OrganiserEvent }) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="secondary">
-                    <EllipsisVertical size={14} strokeWidth={3} />
-                </Button>
+                <ChevronDown size={14} className='size-6 bg-gray-100 rounded-full p-1'/>
+
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-max relative md:right-[40%]">
+            <DropdownMenuContent className="w-max relative md:right-[20%] top-2">
                 <Link to={`${event.slug}`}>
                     <DropdownMenuItem className='cursor-pointer flex items-center gap-2'>
                         <Eye size={16} strokeWidth={1.5} />

@@ -9,7 +9,7 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
     const formattedDate = dayjs(event.date).format('MMM DD').toUpperCase();
 
     return (
-        <div key={index} className="bg-white border-gray-100 flex flex-col gap-1 group">
+        <div key={index} className="bg-white border-gray-100 flex flex-col gap-1 group animated fadeIn">
             {/* event banner */}
             <div className="relative bg-gray-100 rounded-xl group-hover:opacity-85 overflow-hidden transition h-90">
                 <Link to={`/events/${event.slug}`}>

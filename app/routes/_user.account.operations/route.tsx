@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { Button } from "~/components/ui/button";
 import client from "~/http/client";
 import type { Route } from "../_user.account.operations/+types/route";
-import { useFetcher } from "react-router";
+import { useFetcher, useNavigate, useOutletContext } from "react-router";
 
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
@@ -30,6 +30,12 @@ function OrganiserCard({ profile, fetcher }: {
     profile: OrganiseProfile,
     fetcher: any
 }) {
+    const user: User = useOutletContext();
+    const navigate = useNavigate();
+
+    if (user.accountType === 'user') {
+        navigate('/account/my-account');
+    }
     const [isOpen, setIsOpen] = useState(false);
 
     const getStatusStyles = (status: string) => {

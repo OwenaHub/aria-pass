@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useOutletContext, type MetaFunction } from "react-router";
+import { Outlet, useOutletContext, type MetaFunction } from "react-router";
 import { defaultMeta } from '~/lib/meta';
 
 export const meta: MetaFunction = (args) => {
@@ -7,44 +7,17 @@ export const meta: MetaFunction = (args) => {
         { title: "Account | AriaPass" },
     ];
 }
+
 export default function AccountLayout() {
     const user: User = useOutletContext();
-
-    const tabs = ["My Account", "Ticket purchase", "Preferences"];
-    const NAVIGATION = [
-        ...tabs,
-        ...(user.organiserProfile ? ['Payouts', 'Event Staff'] : []),
-        ...(user.accountType === 'admin' ? ['Operations'] : [])
-    ]
 
     return (
         <div>
             <section className=" mx-auto">
-                <p className="text-gray-500">{user.name}</p>
-                <h1 className="text-3xl font-bold tracking-tight">Account Setting</h1>
+                <p className="text-gray-500 tracking-tight">{user.name}</p>
+                <h1 className="text-3xl font-extrabold tracking-tighter">Account Setting</h1>
             </section>
 
-            {/* Tabs */}
-            <section className="mx-auto mt-5 flex gap-8 text-sm overflow-x-auto border-b">
-                {NAVIGATION.map((nav) => {
-                    return (
-                        <NavLink
-                            key={nav}
-                            to={nav.toLowerCase().replace(/\s+/g, "-")}
-                            className={({ isActive }) =>
-                                `border-b-3 py-2 transition-all text-nowrap font-medium ${isActive
-                                    ? "border-primary-theme text-black"
-                                    : "border-white text-gray-500 hover:text-black"
-                                }`
-                            }
-                        >
-                            {nav}
-                        </NavLink>
-                    );
-                })}
-            </section>
-
-            {/* Tab Content */}
             <section className=" mx-auto mt-8">
                 <Outlet context={user} />
             </section>

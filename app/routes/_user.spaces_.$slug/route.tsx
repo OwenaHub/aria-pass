@@ -8,7 +8,7 @@ import EventReview from "./event-reviews";
 import FormatPrice from "~/components/utility/format-price";
 import SpaceUsers from "./space-users";
 import { Banknote, Star, Users } from "lucide-react";
-import CreateProgram from "~/components/cards/create-program";
+import EventProgram from "~/components/custom/event-program";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     try {
@@ -74,9 +74,16 @@ export default function EventSpaces({ loaderData }: Route.ComponentProps) {
                         strokeWidth={0.5}
                     />
                 </div>
+                <div className="flex flex-col bg-gray-100 gap-5 rounded-lg p-4 flex-1 overflow-hidden relative">
+                    <p className="text-xs text-gray-500">Event program</p>
+
+                    <div className="w-full">
+                        <EventProgram event={space} />
+                    </div>
+                </div>
             </section>
 
-            <CreateProgram event={space} />
+
 
             <section>
                 <PurchasesTable event={space} />
