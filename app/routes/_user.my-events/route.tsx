@@ -11,7 +11,6 @@ import RecordFilter from '~/components/utility/record-filter';
 import { useEffect, useState } from 'react';
 import { defaultMeta } from '~/lib/meta';
 import DefaultError from '~/components/errors/default-error';
-import NewTeammate from '~/components/custom/new-teammate';
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -92,14 +91,13 @@ export default function MyEvents({ loaderData }: Route.ComponentProps) {
                     <div className="flex items-center gap-5 justify-between">
                         <Link to={'new'} className=''>
                             <Button
-                                variant={'default'}
-                                className='bg-primary cursor-pointer text-xs px-20 flex items-center gap-2 rounded-lg'
+                                variant={'secondary'}
+                                className='cursor-pointer text-xs px-2 py-5 flex items-center gap-2 rounded-xl shadow-none'
                             >
-                                <span>New Event</span> <Plus size={10} />
+                                <Plus size={10} />
+                                <span>New Event</span>
                             </Button>
                         </Link>
-
-                        <NewTeammate events={events} />
                     </div>
                 </div>
 
