@@ -84,7 +84,7 @@ export default function MyEvents({ loaderData }: Route.ComponentProps) {
             <section>
                 <div className="flex flex-col lg:flex-row gap-7 justify-between lg:items-end">
                     <div>
-                        <h1 className='text-primary text-3xl font-bold tracking-tight mb-5'>My Events</h1>
+                        <h1 className='text-primary text-3xl font-black tracking-tighter mb-5'>My Events</h1>
                         <RecordFilter />
                     </div>
 

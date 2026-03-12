@@ -65,7 +65,7 @@ export default function Events({ loaderData }: Route.ComponentProps) {
     return (
         <main>
             <div className='container py-10 flex flex-col gap-2'>
-                <h1 className='text-2xl font-semibold tracking-tighter'>All Events</h1>
+                <h1 className='text-3xl font-extrabold tracking-tighter'>All Events</h1>
                 <p className='text-sm text-gray-500 font-light'>Showing all events</p>
             </div>
 
@@ -89,7 +89,7 @@ export default function Events({ loaderData }: Route.ComponentProps) {
                         </Link>
                     ))}
                 </div>
-                <Button variant={"secondary"} className="rounded-full flex justify-between gap-2 px-5">
+                <Button variant={"secondary"} className="px-5 rounded-full tracking-tighter font-medium flex justify-between gap-2 ">
                     <span>Create Event</span>
                     <ChevronRight />
                 </Button>
@@ -98,10 +98,12 @@ export default function Events({ loaderData }: Route.ComponentProps) {
             <div className="lg:hidden mb-4">
                 <div className="container flex justify-between items-center">
                     <FeedFilter />
-                    <Button variant={"secondary"} className="rounded-full flex justify-between gap-2 h-10">
-                        <span>Create Event</span>
-                        <ChevronRight />
-                    </Button>
+                    <Link to="/my-events/new">
+                        <Button variant={"secondary"} className="rounded-full tracking-tighter font-medium flex justify-between gap-2 h-10">
+                            <span>Create Event</span>
+                            <ChevronRight />
+                        </Button>
+                    </Link>
                 </div>
 
                 <hr className="mt-5 mb-2" />

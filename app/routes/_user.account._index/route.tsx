@@ -64,13 +64,12 @@ export default function AccountMenu() {
                     <Link
                         key={item.path}
                         to={item.path}
-                        className="group flex flex-col items-center justify-center p-6 sm:p-8 bg-white border border-slate-200 rounded-3xl hover:border-indigo-300 hover:shadow-xl hover:-translate-y-1 transition-all text-center relative overflow-hidden"
+                        className="group flex flex-col items-center justify-center p-6 sm:p-8 bg-gray-100 rounded-3xl hover:border-indigo-300 hover:shadow-xl hover:-translate-y-1 transition-all text-center relative overflow-hidden"
                     >
                         {/* Decorative Background Hover Glow */}
                         <div className="absolute inset-0 bg-linear-to-b from-indigo-50/0 to-indigo-50/0 group-hover:from-indigo-50/50 group-hover:to-transparent transition-colors" />
                         <div className="relative z-10 flex flex-col items-center">
-
-                            <div className="w-14 h-14 bg-slate-50 text-slate-600 group-hover:bg-primary-theme group-hover:text-white rounded-2xl flex items-center justify-center mb-4 transition-colors shadow-sm">
+                            <div className="w-14 h-14 bg-slate-50 text-slate-600 border group-hover:bg-primary-theme group-hover:text-white rounded-2xl flex items-center justify-center mb-4 transition-colors">
                                 <item.icon className="size-6 shrink-0" strokeWidth={2.5} />
                             </div>
                             <h3 className="font-bold text-slate-900 tracking-tight mb-1">

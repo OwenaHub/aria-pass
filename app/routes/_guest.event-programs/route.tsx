@@ -83,10 +83,10 @@ export default function EventProgramLanding() {
                             Create beautiful, interactive digital programs for your musical events.
                             Share with a link or a QR code. Save costs, save the planet.
                         </p>
-                        <button className="flex items-center gap-3 bg-slate-900 hover:bg-black text-white px-8 py-5 rounded-2xl font-black text-lg transition-all active:scale-95 shadow-xl shadow-slate-200">
+                        <Link to={'/my-events'} className="w-full md:w-max flex items-center gap-3 bg-slate-900 hover:bg-black text-white px-8 py-5 rounded-2xl font-black text-lg transition-all active:scale-95 shadow-xl shadow-slate-200">
                             Create your event program
                             <ArrowRight className="h-5 w-5" />
-                        </button>
+                        </Link>
                     </div>
 
                     {/* Visual Mockup - The "Phone" Experience */}

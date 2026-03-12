@@ -91,7 +91,7 @@ function Actions({ event }: { event: OrganiserEvent }) {
             <DropdownMenuContent className="w-max relative md:right-[20%] top-2">
                 <Link to={`${event.slug}`}>
                     <DropdownMenuItem className='cursor-pointer flex items-center gap-2'>
-                        <Eye size={16} strokeWidth={1.5} />
+                        <Eye size={16} />
                         <span>View</span>
                     </DropdownMenuItem>
                 </Link>
@@ -104,13 +104,13 @@ function Actions({ event }: { event: OrganiserEvent }) {
                     };
                     navigator.share(shareData);
                 }}>
-                    <Share size={16} strokeWidth={1.5} />
+                    <Share size={16} />
                     <span>Share</span>
                 </DropdownMenuItem>
 
                 <Link to={`${event.slug}/edit`}>
                     <DropdownMenuItem className='cursor-pointer flex items-center gap-2'>
-                        <Pen size={16} strokeWidth={1.5} />
+                        <Pen size={16} />
                         <span>Edit</span>
                     </DropdownMenuItem>
                 </Link>
@@ -122,7 +122,7 @@ function Actions({ event }: { event: OrganiserEvent }) {
                                 variant="ghost"
                                 className='rounded-sm w-full h-8 py-0 border-0 text-start text-destructive hover:bg-red-50 hover:text-destructive cursor-pointer flex items-center justify-start gap-2'
                             >
-                                <Trash size={16} strokeWidth={1.5} />
+                                <Trash size={16} />
                                 <span>Delete</span>
                             </Button>
                         </DialogTrigger>

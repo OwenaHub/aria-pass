@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Await, Link, redirect, useOutletContext, type MetaFunction } from 'react-router';
 import {
-    ArrowRight, CalendarPlus, ChevronRight, Compass,
+    ArrowRight, CalendarPlus, Compass,
     Ticket, Users, Building2, PlusCircle, AlertCircle, Clock
 } from 'lucide-react';
 import type { Route } from '../_user.dashboard/+types/route';
@@ -143,7 +143,7 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-10">
 
                 {/* LEFT COLUMN (Span 8): Primary Workflow */}
-                <div className="lg:col-span-8 space-y-8">
+                <div className="lg:col-span-6 space-y-8">
                     {isOrganiser && (
                         <section className="border border-slate-200 rounded-2xl p-5">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -204,10 +204,10 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
                 </div>
 
                 {/* RIGHT COLUMN (Span 4): Context & Collaborations */}
-                <div className="lg:col-span-4 space-y-8">
+                <div className="lg:col-span-6 space-y-8">
                     <section className="bg-white border border-slate-200 rounded-xl p-5">
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-lg font-extrabold tracking-tighter text-slate-900">Workspaces</h2>
+                            <h2 className="text-xl font-black tracking-tighter text-slate-900">Workspaces</h2>
                             <div className="p-2 bg-slate-50 rounded-lg"><Users className="size-4 text-slate-400" /></div>
                         </div>
 
@@ -217,7 +217,7 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
                                     const hasSpaces = invitedSpaces?.length > 0 || ownedSpaces?.length > 0;
 
                                     return hasSpaces ? (
-                                        <div className="flex flex-col gap-4">
+                                        <div className="grid grid-cols-2 gap-4">
                                             {ownedSpaces?.map((space: any) => (
                                                 <SpaceCard key={`owned-${space.id}`} space={space} user={user} type="owned" />
                                             ))}

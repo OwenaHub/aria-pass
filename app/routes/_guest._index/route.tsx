@@ -53,12 +53,13 @@ export default function Home({ loaderData }: Route.ComponentProps) {
             <header className="relative pt-10 lg:pt-20 pb-16">
                 <div className="container grid lg:grid-cols-2 gap-12 items-center relative z-10">
                     <div>
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-primary-theme font-semibold text-xs uppercase tracking-tighter mb-8">
-                            <Stars className="size-4 fill-current" />
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-primary-theme font-semibold text-xs tracking-tighter mb-8">
+                            <Stars className="size-4 fill-indigo-800" />
                             Music-Only Ecosystem
                         </div>
-                        <h1 className="text-6xl md:text-8xl font-black text-slate-900 tracking-tighter leading-[0.85] mb-8">
-                            The Beat <br /> Starts <span className="text-primary-theme">Here.</span>
+                        <h1 className="text-4xl md:text-7xl font-black text-slate-900 tracking-tighter leadin] mb-8">
+                            Built for the <span className="text-primary-theme">culture</span>. 
+                            <br /> Powered by <span className="text-primary-theme">passion</span>.
                         </h1>
                         <p className="md:text-xl text-slate-500 font-medium leading-relaxed max-w-lg mb-10">
                             The only niche platform dedicated exclusively to live musical events.
@@ -66,10 +67,10 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                         </p>
 
                         <div className="flex flex-col md:flex-row gap-4 mb-10">
-                            <Link to="/events" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex justify-center items-center gap-2 hover:bg-black transition-all active:scale-95">
+                            <Link to="/events" className="bg-slate-900 text-white px-8 py-3.5 rounded-xl font-bold flex justify-center items-center gap-2 hover:bg-black transition-all active:scale-95">
                                 <span>Explore Events</span> <ArrowRight className="size-5" />
                             </Link>
-                            <Link to="/pricing" className="bg-white border-2 border-slate-100 text-slate-900 px-8 py-4 text-center rounded-2xl font-bold hover:border-indigo-200 transition-all">
+                            <Link to="/pricing" className="bg-white border border-slate-200 text-slate-900 px-8 py-3.5 text-center rounded-xl font-bold hover:border-indigo-200 transition-all">
                                 See Pricing
                             </Link>
                         </div>
@@ -244,7 +245,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                         <Link
                             preventScrollReset
                             to="?category="
-                            className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest border transition-all ${!searchParams.get('category') ? 'bg-slate-900 text-white border-slate-900' : 'border-slate-200 text-slate-500'}`}
+                            className={`px-4 py-2 rounded-full text-sm font-bold capitalize tracking-tight border transition-all ${!searchParams.get('category') ? 'bg-slate-900 text-white border-slate-900' : 'border-slate-200 text-slate-500'}`}
                         >
                             All
                         </Link>
@@ -253,7 +254,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                                 preventScrollReset
                                 key={cat}
                                 to={`?category=${cat.toLowerCase()}`}
-                                className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest border transition-all ${searchParams.get('category') === cat.toLowerCase() ? 'bg-slate-900 text-white border-slate-900' : 'border-slate-200 text-slate-500 hover:border-slate-400'}`}
+                                className={`px-4 py-2 rounded-full text-sm font-bold capitalize tracking-tight border transition-all ${searchParams.get('category') === cat.toLowerCase() ? 'bg-slate-900 text-white border-slate-900' : 'border-slate-200 text-slate-500 hover:border-slate-400'}`}
                             >
                                 {cat}
                             </Link>
@@ -261,7 +262,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                     </div>
                 </div>
 
-                <Suspense fallback={<EventCardSkeleton />}>
+                <Suspense fallback={<EventCardSkeleton listSize={4} />}>
                     <Await resolve={events}>
                         {(resolvedEvents) => <EventsMapper events={resolvedEvents} />}
                     </Await>
@@ -278,7 +279,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
             {/* 6. PARTNERSHIP CTA: The Scale */}
             <section className="pb-24 container">
-                <div className="bg-primary-theme rounded-[3.5rem] p-12 md:p-20 relative overflow-hidden text-center md:text-left">
+                <div className="bg-primary-theme rounded-lg md:rounded-[3.5rem] p-6 md:p-20 relative overflow-hidden text-center md:text-left">
                     <div className="absolute top-0 right-0 w-1/2 h-full bg-white/10 -skew-x-12 translate-x-24" />
                     <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
                         <div>

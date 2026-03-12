@@ -15,7 +15,7 @@ export default function AccountLayout() {
         <div>
             <section className=" mx-auto">
                 <p className="text-gray-500 tracking-tight">{user.name}</p>
-                <h1 className="text-3xl font-extrabold tracking-tighter">Account Setting</h1>
+                <h1 className="text-primary text-3xl font-black tracking-tighter">Account Setting</h1>
             </section>
 
             <section className=" mx-auto mt-8">

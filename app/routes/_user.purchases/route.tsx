@@ -104,7 +104,7 @@ export default function Purchases({ loaderData }: Route.ComponentProps) {
             <section>
                 <div className="flex flex-col lg:flex-row gap-7 justify-between lg:items-end sticky top-5 z-5">
                     <div>
-                        <h1 className='text-primary text-3xl font-extrabold tracking-tighter mb-5'>
+                        <h1 className='text-primary text-3xl font-black tracking-tighter mb-5'>
                             Purchases
                         </h1>
                         <small></small>
