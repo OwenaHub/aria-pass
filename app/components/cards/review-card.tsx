@@ -55,7 +55,7 @@ export default function ReviewCard({ review, user }: {
             ) : (
                 <>
                     <div className="flex items-center gap-2">
-                        <div className="font-medium text-sm tracking-tight">
+                        <div className="font-bold text-sm tracking-tight">
                             {review.isAnonymous
                                 ? <div className="flex items-center gap-0.5" title="This review is anonymous">
                                     <span className="text-gray-500">

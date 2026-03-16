@@ -40,11 +40,11 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                 <CheckoutButton event={event} />
             </div>
 
-            <div className="bg-slate-100 h-120 w-full aspect-square group-hover:opacity-75 relative overflow-hidden">
+            <div className="bg-slate-100 min-h-50 w-full aspect-auto group-hover:opacity-75 relative overflow-hidden">
                 <img
                     src={banner}
                     alt={event.title}
-                    className="h-full w-full object-cover"
+                    className="h-auto w-full object-contain"
                 />
                 <div className="absolute top-5 left-5">
                     <DynamicQR qrValue={`https://ariapass.africa/events/${event.slug}/checkout`} />
@@ -55,11 +55,9 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                         {isPastEventDate(event.date, event.startTime) ? 'EVENT ENDED' : 'SOLD OUT'}
                     </div>
                 )}
-
-                <div className="h-8 rounded-t-4xl absolute -bottom-0.5 left-0 right-0 w-full bg-linear-to-t from-gray-50 to-gray-50/60  border-0" />
             </div>
 
-            <div className='container'>
+            <div className='container pt-4'>
                 <div className='text-sm my-2'>
                     Curated by {" "}
                     <Link to="#creator" className="font-bold text-primary-theme underline underline-offset-2">
@@ -74,7 +72,7 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                     <div className="flex items-center gap-4 mb-5">
                         {/* /api/events/${params.slug}/interested */}
                         <RedirectOrFetcher route={`/events/toggle-like/${event.slug}`}>
-                            <button className="relative flex items-center gap-2 px-3 py-3 text-xs text-primary font-medium border bg-white shadow rounded-full hover:bg-gray-100 cursor-pointer transition">
+                            <button className="relative flex items-center gap-2 px-3 py-3 text-xs text-primary font-medium border bg-white rounded-full hover:bg-gray-100 cursor-pointer transition">
                                 <span className="absolute -top-2 -right-2 bg-muted text-muted-foreground border text-xs w-6 h-6 rounded-full flex items-center justify-center">
                                     {(event.likes ?? 0) > 0 && "+"}{event.likes === 0 ? '👀' : event.likes}
                                 </span>
@@ -91,7 +89,7 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                             </button>
                         </RedirectOrFetcher>
                         <div
-                            className="flex items-center gap-2 px-3 py-3 text-xs text-primary font-medium border bg-white shadow rounded-full hover:bg-gray-100 cursor-pointer transition"
+                            className="flex items-center gap-2 px-3 py-3 text-xs text-primary font-medium border bg-white rounded-full hover:bg-gray-100 cursor-pointer transition"
                             onClick={() => {
                                 const shareData = {
                                     title: event.title,
@@ -108,7 +106,7 @@ export default function MobileView({ event }: { event: OrganiserEvent }) {
                         </div>
                         <PostReviewWrapper event={event} user={user}>
                             <div
-                                className="flex items-center gap-2 px-3 py-3 text-xs text-primary font-medium border bg-white shadow rounded-full hover:bg-gray-100 cursor-pointer relative transition"
+                                className="flex items-center gap-2 px-3 py-3 text-xs text-primary font-medium border bg-white rounded-full hover:bg-gray-100 cursor-pointer relative transition"
                             >
                                 <span className="absolute -top-2 -right-2 bg-muted text-muted-foreground border text-xs w-6 h-6 rounded-full flex items-center justify-center">
                                     {(event.reviews.length ?? 0) > 0 && "+"}{event.reviews.length === 0 ? '👀' : event.reviews.length}
