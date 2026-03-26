@@ -31,7 +31,7 @@ export const meta: MetaFunction = (args) => {
     ];
 }
 
-export async function clientLoader() {
+export async function loader() {
     try {
         const { data } = await client.get('/api/tickets/purchases');
 
@@ -116,7 +116,7 @@ export default function Purchases({ loaderData }: Route.ComponentProps) {
                     <div className='flex flex-col gap-4 mt-8'>
                         {filteredData.map((group: TGroupedPurchases) => (
                             <section className='flex md:flex-row flex-col gap-3 place-items-stretch' key={group.eventId}>
-                                <div className='bg-gray-100 py-5 rounded-md px-5 sticky top-30 z-1 md:w-[300px]'>
+                                <div className='bg-gray-100 py-5 rounded-md px-5 sticky top-30 z-1 md:w-75'>
                                     <small className='font-light'>Event</small>
                                     <h3 className='font-semibold tracking-tighter text-sm text-primary '>{group.eventTitle}</h3>
                                 </div>

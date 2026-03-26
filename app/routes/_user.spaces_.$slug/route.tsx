@@ -10,7 +10,7 @@ import SpaceUsers from "./space-users";
 import { Banknote, Star, Users } from "lucide-react";
 import EventProgram from "~/components/custom/event-program";
 
-export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+export async function loader({ params }: Route.LoaderArgs) {
     try {
         const res = await client.get(`api/organiser/events/${params.slug}`);
 

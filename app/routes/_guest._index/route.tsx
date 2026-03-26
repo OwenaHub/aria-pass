@@ -15,7 +15,7 @@ import DefaultError from "~/components/errors/default-error";
 import { eventCategory } from "~/lib/d.store";
 import type { Route } from "../_guest._index/+types/route";
 
-export async function clientLoader({ request }: Route.ClientLoaderArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
     const url = new URL(request.url);
     const category = url.searchParams.get("category");
     const filter = url.searchParams.get("filter");

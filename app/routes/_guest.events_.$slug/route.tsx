@@ -41,7 +41,7 @@ export const meta: MetaFunction = ({ data }: any) => {
   ];
 };
 
-export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+export async function loader({ params }: Route.LoaderArgs) {
   try {
     const { data } = await client.get(`api/events/${params.slug}`);
     return { event: data }

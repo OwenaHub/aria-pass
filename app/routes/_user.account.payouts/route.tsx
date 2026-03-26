@@ -43,7 +43,7 @@ const defaultBank = {
     updatedAt: ""
 };
 
-export async function clientLoader() {
+export async function loader() {
     const { getUser } = useSession();
     const user = await getUser();
 

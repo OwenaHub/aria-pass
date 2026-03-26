@@ -19,7 +19,7 @@ export const meta: MetaFunction = (args) => {
     ];
 }
 
-export async function clientLoader() {
+export async function loader() {
     const { getUser } = useSession();
 
     try {

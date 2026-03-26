@@ -3,7 +3,7 @@ import client from "~/http/client";
 import type { Route } from "../_user.account.event-staff/+types/route";
 import MembersTable from "./members-table";
 
-export async function clientLoader() {
+export async function loader() {
     try {
         const { data } = await client.get('/api/organiser/members');
 

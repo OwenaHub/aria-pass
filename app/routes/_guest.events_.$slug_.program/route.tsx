@@ -11,7 +11,7 @@ import { Button } from "~/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "~/components/ui/dialog";
 import QRCode from "react-qr-code";
 
-export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+export async function loader({ params }: Route.LoaderArgs) {
     try {
         const { data } = await client.get(`api/events/${params.slug}/program`);
         const event = data as OrganiserEvent;

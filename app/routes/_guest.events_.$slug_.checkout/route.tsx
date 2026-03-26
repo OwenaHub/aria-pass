@@ -2,16 +2,17 @@ import { toast } from 'sonner';
 import client from '~/http/client';
 import type { Route } from '../_guest.events_.$slug_.checkout/+types/route';
 import { redirect, useOutletContext } from 'react-router';
-import { useState } from 'react';
-import PaystackPurchaseButton from './paystack-purchase-button';
+import { lazy, Suspense, useState } from 'react';
 import { Button } from '~/components/ui/button';
 import FormatPrice from '~/components/utility/format-price';
 import { ArrowLeft, ArrowRight, Dot } from 'lucide-react';
 import { STORAGE_URL } from '~/config/defaults';
 import { isPastEventDate } from '~/lib/utils';
 import ViewEventProgram from '~/components/cards/view-event-program';
+import PaystackPurchaseButton from '~/components/buttons/paystack.client';
+// const PaystackPurchaseButton = lazy(() => import("../../components/buttons/paystack.client"));
 
-export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+export async function loader({ params }: Route.LoaderArgs) {
     try {
         const { data } = await client.get(`api/events/${params.slug}`);
 
@@ -71,14 +72,17 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                         </h1>
                     </div>
                     {next && (
-                        <Button
-                            size={"sm"}
-                            variant={"outline"}
-                            className="w-max p-0 text-xs shadow-none rounded-full mb-5"
-                            onClick={() => setNext(false)}
-                        >
-                            <ArrowLeft /> Back
-                        </Button>
+                    //    <Suspense fallback={
+                    //         <Button disabled className="w-full py-6 rounded-xl text-xs font-semibold">
+                    //             Loading secure payment...
+                    //         </Button>
+                    //     }>
+                            <PaystackPurchaseButton
+                                user={user}
+                                organiser={event.organiser as OrganiseProfile}
+                                ticket={ticket} 
+                            />
+                        // </Suspense>
                     )}
                     {!next && (
                         <>

@@ -23,7 +23,7 @@ export const meta: MetaFunction = (args) => [
     { title: "Dashboard | AriaPass" },
 ];
 
-export async function clientLoader() {
+export async function loader() {
     const { getUser, validateSession } = useSession();
 
     try {

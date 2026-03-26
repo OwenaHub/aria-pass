@@ -4,7 +4,7 @@ import type { Route } from "../_user.account.ticket-purchase/+types/route";
 import FormatPrice from "~/components/utility/format-price";
 import PurchaseStatus from "~/components/utility/purchase-status";
 
-export async function clientLoader() {
+export async function loader() {
     try {
         const { data } = await client.get('/api/tickets/purchases');
 

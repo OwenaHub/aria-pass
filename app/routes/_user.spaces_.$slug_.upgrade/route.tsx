@@ -23,7 +23,7 @@ export const meta: MetaFunction = (args: any) => {
     ];
 }
 
-export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+export async function loader({ params }: Route.LoaderArgs) {
     try {
         const res = await client.get(`api/organiser/events/${params.slug}`);
         const { getUser } = useSession();

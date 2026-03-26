@@ -19,7 +19,7 @@ export const meta: MetaFunction = (args) => {
     ];
 }
 
-export async function clientLoader({ request }: Route.ClientLoaderArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
     const url = new URL(request.url);
     const category = url.searchParams.get("category");
     const filter = url.searchParams.get("filter");

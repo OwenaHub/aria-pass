@@ -14,7 +14,7 @@ import {
 
 dayjs.extend(relativeTime);
 
-export async function clientLoader() {
+export async function loader() {
     try {
         const { data } = await client.get('/api/admin/organiser-profiles');
         return { profiles: data }

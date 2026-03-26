@@ -10,7 +10,7 @@ import MobileNav from './mobile-nav';
 import { Separator } from '~/components/ui/separator';
 import { toast } from 'sonner';
 
-export async function clientLoader(_: Route.ClientLoaderArgs) {
+export async function loader(_: Route.LoaderArgs) {
     const { getUser } = useSession();
 
     try {

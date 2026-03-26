@@ -21,7 +21,7 @@ export const meta: MetaFunction = (args) => {
     ];
 }
 
-export async function clientLoader({ request }: Route.ClientLoaderArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
     const { data } = await client.get('api/organiser-profile');
 
     const url = new URL(request.url);

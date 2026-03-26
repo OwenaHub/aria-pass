@@ -16,7 +16,7 @@ import { CalendarCheck, Heart, Home, ShoppingCart, Square, User } from "lucide-r
 import React from "react";
 import DefaultError from "~/components/errors/default-error";
 
-export async function clientLoader() {
+export async function loader() {
     const { getUser } = useSession();
     const { intendedRoute } = useRoute();
 

@@ -28,7 +28,7 @@ export const meta: MetaFunction = (args) => {
     ];
 }
 
-export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+export async function loader({ params }: Route.LoaderArgs) {
     try {
         const res = await client.get(`api/organiser/events/${params.slug}`);
         return { event: res.data }
