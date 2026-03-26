@@ -15,7 +15,7 @@ import { BrMd } from '~/components/utility/line-break';
 export const meta: MetaFunction = (args) => {
     return [
         ...defaultMeta(args) || [],
-        { title: "Events | AriaPass - Discover the community behind the concerts" },
+        { title: "Events | AriaPass" },
     ];
 }
 

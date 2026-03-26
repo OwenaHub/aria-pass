@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { redirect, type MetaFunction } from "react-router";
 import DesktopView from "./desktop-atf";
 import MobileView from "./mobile-atf";
+import { STORAGE_URL } from "~/config/defaults";
 
 export const meta: MetaFunction = ({ data }: any) => {
   if (!data.event) {
@@ -12,6 +13,7 @@ export const meta: MetaFunction = ({ data }: any) => {
       { name: "description", content: "Discover the community behind the concerts" },
     ];
   }
+
   const event: OrganiserEvent = data.event;
 
   return [
@@ -26,8 +28,8 @@ export const meta: MetaFunction = ({ data }: any) => {
     // Open Graph (Facebook, LinkedIn)
     { property: "og:title", content: `${event.title} | AriaPass` },
     { property: "og:description", content: event.description || "Discover the community behind the concerts" },
-    { property: "og:image", content: "https://ariapass.africa/images/banners/app_banner.png" },
-    { property: "og:url", content: "https://ariapass.africa" },
+    { property: "og:image", content: `${STORAGE_URL}/${event.bannerUrl}` },
+    { property: "og:url", content: `https://ariapass.africa/events/${event.slug}` },
     { property: "og:type", content: "website" },
 
     // Twitter
@@ -35,7 +37,7 @@ export const meta: MetaFunction = ({ data }: any) => {
     { name: "twitter:site", content: "@owenahub" }, // Optional: Add your Twitter handle
     { name: "twitter:title", content: `${event.title} | AriaPass` },
     { name: "twitter:description", content: event.description || "Discover the community behind the concerts" },
-    { name: "twitter:image", content: "https://ariapass.africa/images/banners/app_banner.png" },
+    { name: "twitter:image", content: `${STORAGE_URL}/${event.bannerUrl}` },
   ];
 };
 

@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, FileText, Shield, Ticket, Users, AlertTriangle, Copyright, Scale } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link, type MetaFunction } from 'react-router';
+import { defaultMeta } from '~/lib/meta';
+
+export const meta: MetaFunction = (args) => {
+    return [
+        ...defaultMeta(args) || [],
+        { title: "Terms of Use | AriaPass" },
+    ];
+}
 
 const TermsOfUse = () => {
     const lastUpdated = "December 23, 2025";

@@ -7,7 +7,7 @@ import { defaultMeta } from '~/lib/meta'
 export const meta: MetaFunction = (args) => {
     return [
         ...defaultMeta(args) || [],
-        { title: "Organisers | AriaPass" },
+        { title: "Artists | AriaPass" },
     ];
 }
 

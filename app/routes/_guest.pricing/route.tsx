@@ -3,8 +3,17 @@ import {
     Check, HelpCircle, Zap, Star, ShieldCheck, Globe,
     ArrowRight,
 } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link, type MetaFunction } from 'react-router';
 import { BrMd, BrSm } from '~/components/utility/line-break';
+import { defaultMeta } from '~/lib/meta';
+
+export const meta: MetaFunction = (args) => {
+    return [
+        ...defaultMeta(args) || [],
+        { title: "Pricing | AriaPass" },
+    ];
+}
+
 
 const PricingPage = () => {
     const [isPartner, setIsPartner] = useState(true);

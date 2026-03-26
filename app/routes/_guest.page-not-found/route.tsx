@@ -1,4 +1,14 @@
 import { ChevronRight, Ticket } from "lucide-react";
+import type { MetaFunction } from "react-router";
+import { defaultMeta } from "~/lib/meta";
+
+export const meta: MetaFunction = (args) => {
+    return [
+        ...defaultMeta(args) || [],
+        { title: "Page Not Found | AriaPass" },
+    ];
+}
+
 
 export default function PageNotFound() {
     return (

@@ -28,7 +28,7 @@ export const meta: MetaFunction = (args: any) => {
     }
     return [
         ...(defaultMeta(args) || []),
-        { title: `${args.data.event.title} | AriaPass Dashboard` },
+        { title: `${args.data.event.title} | AriaPass` },
     ];
 }
 

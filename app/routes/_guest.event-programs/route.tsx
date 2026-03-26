@@ -10,7 +10,16 @@ import {
     ShieldCheck,
     Check
 } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link, type MetaFunction } from 'react-router';
+import { defaultMeta } from '~/lib/meta';
+
+export const meta: MetaFunction = (args) => {
+    return [
+        ...defaultMeta(args) || [],
+        { title: "Event Programs | AriaPass" },
+    ];
+}
+
 
 export default function EventProgramLanding() {
     const features = [

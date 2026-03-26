@@ -1,6 +1,15 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Database, Eye, Share2, Cookie, Lock, UserCheck, Mail } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link, type MetaFunction } from 'react-router';
+import { defaultMeta } from '~/lib/meta';
+
+export const meta: MetaFunction = (args) => {
+    return [
+        ...defaultMeta(args) || [],
+        { title: "Privacy Policy | AriaPass" },
+    ];
+}
+
 
 const PrivacyPolicy = () => {
   const lastUpdated = "December 23, 2025";
