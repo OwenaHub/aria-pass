@@ -4,7 +4,7 @@ import client from "~/http/client";
 import type { Route } from "../_user.my-events.members/+types/route";
 import { parseForm } from "~/lib/utils";
 
-export async function clientAction({ request }: Route.ClientActionArgs) {
+export async function action({ request }: Route.ActionArgs) {
     const credentials = await parseForm(request);
 
     const promise = client.post(

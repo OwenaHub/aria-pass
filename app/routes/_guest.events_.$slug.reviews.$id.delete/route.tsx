@@ -3,7 +3,7 @@ import type { Route } from "../_guest.events_.$slug.reviews.$id.edit/+types/rout
 import { toast } from "sonner";
 import { redirect } from "react-router";
 
-export async function clientAction({ params }: Route.ClientActionArgs) {
+export async function action({ params }: Route.ActionArgs) {
 
     if (!confirm('Delete this comment permanently?')) return;
 

@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { parseForm } from "~/lib/utils";
 import { redirect } from "react-router";
 
-export async function clientAction({ params, request }: Route.ClientActionArgs) {
+export async function action({ params, request }: Route.ActionArgs) {
     const credentials = await parseForm(request);
     const promise = client.patch(`/api/events/${params.slug}/reviews/${params.id}`, credentials);
 

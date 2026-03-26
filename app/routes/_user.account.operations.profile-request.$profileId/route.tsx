@@ -3,7 +3,7 @@ import type { Route } from "../_user.account.operations.profile-request.$profile
 import { toast } from "sonner";
 import { parseForm } from "~/lib/utils";
 
-export async function clientAction({ params, request }: Route.ClientActionArgs) {
+export async function action({ params, request }: Route.ActionArgs) {
     const data = await parseForm(request);
 
     const promise = new Promise(async (resolve, reject) => {

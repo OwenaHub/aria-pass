@@ -15,7 +15,7 @@ import InputError from '~/components/utility/input-error'
 import RevalidateButton from '~/components/utility/revalidate-button'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '~/components/ui/select'
 
-export async function clientAction({ request }: Route.ClientActionArgs) {
+export async function action({ request }: Route.ActionArgs) {
     const credentials = await parseForm(request);
     const { validateSession } = useSession();
 

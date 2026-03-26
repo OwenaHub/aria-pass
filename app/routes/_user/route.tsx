@@ -31,8 +31,6 @@ export async function loader() {
             toast.warning("Not authenticated", {
                 description: "Login to continue using OwenaHub",
             });
-
-            window.location.href = '/login'
         } else {
             toast.error("Something went wrong", {
                 action: {

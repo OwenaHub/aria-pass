@@ -11,7 +11,7 @@ import { Button } from "~/components/ui/button"
 import { ButtonGroup } from "~/components/ui/button-group"
 import { calculatePaymentBreakdown } from "~/lib/fee-sorting";
 
-export default function PaystackPurchaseButton({ ticket, user, organiser }: {
+export function BuyTicketButton({ ticket, user, organiser }: {
     ticket: Ticket,
     user?: User | undefined,
     organiser: OrganiseProfile | undefined

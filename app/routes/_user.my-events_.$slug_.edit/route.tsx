@@ -40,7 +40,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     }
 }
 
-export async function clientAction({ request, params }: Route.ClientActionArgs) {
+export async function action({ request, params }: Route.ActionArgs) {
     const credentials = await parseForm(request)
 
     return await formRequest(credentials, `organiser/events/${params.slug}`, "PATCH")

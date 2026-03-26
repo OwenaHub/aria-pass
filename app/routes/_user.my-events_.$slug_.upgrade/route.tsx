@@ -3,12 +3,12 @@ import { defaultMeta } from "~/lib/meta";
 import type { Route } from "../_user.my-events_.$slug/+types/route";
 import client from "~/http/client";
 import { toast } from "sonner";
-import { ArrowRight, CheckCircle2, ShieldCheck, Star, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import type { TIER_LIMITS } from "~/lib/d.store";
-import { PaystackButton } from "react-paystack";
 import useSession from "~/hooks/use-session";
 import { PAYSTACK_PUBK } from "~/config/defaults";
 import { plans } from "~/components/custom/pricing";
+import UpgradeButton from "../_user.spaces_.$slug_.upgrade/upgrade-button.client";
 
 export const meta: MetaFunction = (args: any) => {
     if (!args.data.event) {
@@ -173,10 +173,7 @@ export default function EventUpgrade({ loaderData }: Route.ComponentProps) {
                         ))}
                     </ul>
 
-                    <PaystackButton
-                        className="w-full group relative flex items-center justify-center gap-3 bg-primary-theme hover:bg-indigo-700 text-white font-semibold tracking-tighter py-5 rounded-2xl transition-all active:scale-95 shadow-xl shadow-indigo-200"
-                        {...componentProps}
-                    />
+                    <UpgradeButton componentProps={componentProps} />
 
                     <p className="text-center mt-4 text-[10px] text-slate-400 uppercase font-bold tracking-widest">
                         Instant unlock via Paystack

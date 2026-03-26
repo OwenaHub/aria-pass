@@ -29,7 +29,7 @@ export async function loader({ request }: Route.LoaderArgs) {
     return { step, profile: data };
 }
 
-export async function clientAction({ request }: Route.ClientActionArgs) {
+export async function action({ request }: Route.ActionArgs) {
     const credentials = await parseForm(request);
     const { validateSession } = useSession();
 

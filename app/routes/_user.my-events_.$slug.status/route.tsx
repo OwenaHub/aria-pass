@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import { redirect } from 'react-router';
 import { parseForm } from '~/lib/utils';
 
-export async function clientAction({ params, request }: Route.ClientActionArgs) {
+export async function action({ params, request }: Route.ActionArgs) {
     const data = await parseForm(request)
 
     const promise = client.patch(`/api/organiser/events/${params.slug}/status`, data);

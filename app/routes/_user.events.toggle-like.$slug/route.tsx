@@ -3,7 +3,7 @@ import client from '~/http/client';
 import { toast } from 'sonner';
 import { redirect } from 'react-router';
 
-export async function clientAction({ params }: Route.ClientActionArgs) {
+export async function action({ params }: Route.ActionArgs) {
     const promise = client.post(`/api/events/${params.slug}/interested`);
 
     toast.promise(promise, {

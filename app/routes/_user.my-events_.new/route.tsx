@@ -66,7 +66,7 @@ export async function loader() {
     }
 }
 
-export async function clientAction({ request }: Route.ClientActionArgs) {
+export async function action({ request }: Route.ActionArgs) {
     const credentials = await parseForm(request);
 
     return await formRequest(credentials, 'organiser/events', "POST")

@@ -2,14 +2,14 @@ import { toast } from 'sonner';
 import client from '~/http/client';
 import type { Route } from '../_guest.events_.$slug_.checkout/+types/route';
 import { redirect, useOutletContext } from 'react-router';
-import { lazy, Suspense, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '~/components/ui/button';
 import FormatPrice from '~/components/utility/format-price';
-import { ArrowLeft, ArrowRight, Dot } from 'lucide-react';
+import { ArrowRight, Dot } from 'lucide-react';
 import { STORAGE_URL } from '~/config/defaults';
 import { isPastEventDate } from '~/lib/utils';
 import ViewEventProgram from '~/components/cards/view-event-program';
-import PaystackPurchaseButton from '~/components/buttons/paystack.client';
+import { BuyTicketButton } from '~/components/buttons/buy-ticket-button.client';
 // const PaystackPurchaseButton = lazy(() => import("../../components/buttons/paystack.client"));
 
 export async function loader({ params }: Route.LoaderArgs) {
@@ -72,16 +72,16 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                         </h1>
                     </div>
                     {next && (
-                    //    <Suspense fallback={
-                    //         <Button disabled className="w-full py-6 rounded-xl text-xs font-semibold">
-                    //             Loading secure payment...
-                    //         </Button>
-                    //     }>
-                            <PaystackPurchaseButton
-                                user={user}
-                                organiser={event.organiser as OrganiseProfile}
-                                ticket={ticket} 
-                            />
+                        //    <Suspense fallback={
+                        //         <Button disabled className="w-full py-6 rounded-xl text-xs font-semibold">
+                        //             Loading secure payment...
+                        //         </Button>
+                        //     }>
+                        <BuyTicketButton
+                            user={user}
+                            organiser={event.organiser as OrganiseProfile}
+                            ticket={ticket}
+                        />
                         // </Suspense>
                     )}
                     {!next && (
@@ -125,7 +125,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                     )}
 
                     {next && (
-                        <PaystackPurchaseButton
+                        <BuyTicketButton
                             user={user}
                             organiser={event.organiser as OrganiseProfile}
                             ticket={ticket} />

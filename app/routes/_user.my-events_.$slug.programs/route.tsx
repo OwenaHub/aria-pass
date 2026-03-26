@@ -3,7 +3,7 @@ import type { Route } from "../_user.my-events_.$slug.programs/+types/route";
 import { toast } from "sonner";
 import formRequest from "~/http/form.request";
 
-export async function clientAction({ request, params }: Route.ClientActionArgs) {
+export async function action({ request, params }: Route.ActionArgs) {
     const credentials = await parseForm(request);
 
     if (credentials.type === 'program.delete' 
