@@ -9,7 +9,8 @@ import { Link, redirect, type MetaFunction } from "react-router";
 import { parseForm } from "~/lib/utils";
 import formRequest from "~/http/form.request";
 import {
-    ArrowRight, Ticket as TicketIcon, Heart, MessageSquare, Edit3, Calendar, MapPin
+    ArrowRight, Ticket as TicketIcon, Heart, MessageSquare, Edit3, Calendar, MapPin,
+    Share2
 } from "lucide-react";
 import TicketCard from "~/components/cards/ticket-card";
 import UpdateEventStatus from "./update-event-status";
@@ -21,6 +22,7 @@ import NewTeammate from "~/components/custom/new-teammate";
 import EventPlanBadge from "~/components/utility/event-plan-badge";
 import CreateProgram from "~/components/cards/create-program";
 import EventStatus from "~/components/utility/event-status";
+import EventPublishedModal from "./event-published-modal";
 
 export const meta: MetaFunction = (args: any) => {
     if (!args.data.event) {
@@ -122,6 +124,20 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                                         <Edit3 className="size-3.5" /> Edit Event
                                     </Button>
                                 </Link>
+                                <Button
+                                    onClick={() => {
+                                        const shareData = {
+                                            title: `See this event: ${event.title}`,
+                                            text: event.description,
+                                            url: `${window.location.origin}/events/${event.slug}`
+                                        };
+                                        navigator.share(shareData);
+                                    }}
+                                    variant="outline"
+                                    size="sm"
+                                    className="rounded-lg flex items-center gap-2 border-gray-200 shadow-none">
+                                    <Share2 className="size-3.5" /> Share link
+                                </Button>
                             </div>
                         </div>
                     </div>
@@ -129,6 +145,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
             </div>
 
             <UpdateEventStatus event={event} />
+            <EventPublishedModal eventSlug={event.slug} />
 
             <main className="max-w-7xl mx-auto mt-5">
                 {(event.status === 'published' || event.tickets.length > 0) && (
@@ -136,9 +153,9 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                         {/* Revenue Card */}
                         <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
                             <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center justify-between">
-                                Revenue 
+                                Revenue
                                 <Link to={`/spaces/${event.slug}`}>
-                                <ArrowRight strokeWidth={3} className="size-4 text-primary transition-colors" />
+                                    <ArrowRight strokeWidth={3} className="size-4 text-primary transition-colors" />
                                 </Link>
                             </p>
                             <p className="text-3xl font-bold text-gray-900 tracking-tighter">

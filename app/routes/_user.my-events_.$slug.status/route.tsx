@@ -16,7 +16,8 @@ export async function clientAction({ params, request }: Route.ClientActionArgs) 
     });
 
     try {
-        await promise;
+        const res = await promise;
+        return redirect(`/my-events/${params.slug}/?status=${res.data.status}`);
     } catch (error: any) {
         if (error.status === 401) {
             return redirect('/login');

@@ -50,7 +50,7 @@ export default function PaystackPurchaseButton({ ticket, user, organiser }: {
         email: form.email,
         amount: totalAmount * 100,
         subaccount: organiser?.paystackSubaccountCode,
-        transaction_charge: commissionCharge,
+        transaction_charge: commissionCharge * 100,
         metadata: {
             custom_fields: [
                 {

@@ -14,39 +14,39 @@ export default function AnnouncementBanner() {
                     <div className="flex gap-4 items-center px-2">
                         <div className="flex gap-2 items-center text-xs text-primary font-medium">
                             <span>🎉</span>
-                            <span>We processed over 1.2 million ticket sales in 3 months</span>
+                            <span>Create digital programs</span>
                         </div>
                         <div className="flex gap-2 items-center text-xs text-primary font-medium">
-                            <span>💜</span>
-                            <span>You can now add reviews to events you attended</span>
+                            <span>🤑</span>
+                            <span>Sell with 0% commission by becoming a partner</span>
                         </div>
                         <div className="flex gap-2 items-center text-xs text-primary font-medium">
-                            <span>💜</span>
-                            <span>You can now add reviews to events you attended</span>
+                            <span>👀</span>
+                            <span>As your fans to add anonymous reviews to your event</span>
                         </div>
                         <div className="flex gap-2 items-center text-xs text-primary font-medium">
-                            <span>💜</span>
-                            <span>You can now add reviews to events you attended</span>
+                            <span>🤑</span>
+                            <span>Sell with 0% commission by becoming a partner</span>
                         </div>
                     </div>
 
-                    {/* Duplicate Set (Required for seamless looping) */}
-                    <div className="flex gap-4 items-center px-2" aria-hidden="true">
+                    {/* Second Set */}
+                    <div className="flex gap-4 items-center px-2">
                         <div className="flex gap-2 items-center text-xs text-primary font-medium">
                             <span>🎉</span>
-                            <span>We processed over 1.2 million ticket sales in 3 months</span>
+                            <span>Create digital programs</span>
                         </div>
                         <div className="flex gap-2 items-center text-xs text-primary font-medium">
-                            <span>💜</span>
-                            <span>You can now add reviews to events you attended</span>
+                            <span>🤑</span>
+                            <span>Sell with 0% commission by becoming a partner</span>
                         </div>
                         <div className="flex gap-2 items-center text-xs text-primary font-medium">
-                            <span>💜</span>
-                            <span>You can now add reviews to events you attended</span>
+                            <span>👀</span>
+                            <span>As your fans to add anonymous reviews to your event</span>
                         </div>
                         <div className="flex gap-2 items-center text-xs text-primary font-medium">
-                            <span>💜</span>
-                            <span>You can now add reviews to events you attended</span>
+                            <span>🤑</span>
+                            <span>Sell with 0% commission by becoming a partner</span>
                         </div>
                     </div>
                 </div>
