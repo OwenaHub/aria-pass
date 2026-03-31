@@ -23,7 +23,6 @@ import {
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { useMediaQuery } from "~/hooks/user-media-query"
-import { Textarea } from "~/components/ui/textarea"
 import DefaultButton from "~/components/buttons/default-button"
 import { Check, Ticket } from "lucide-react"
 import { Form, useNavigation } from "react-router"
@@ -63,7 +62,7 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-106.25">
                     <DialogHeader>
-                        <DialogTitle>Add ticket to event</DialogTitle>
+                        <DialogTitle className="tracking-tighter font-bold">New Ticket</DialogTitle>
                         <DialogDescription>
                             {/*  */}
                         </DialogDescription>
@@ -160,15 +159,13 @@ const ProfileForm = React.forwardRef<HTMLFormElement, React.ComponentProps<"form
                         required
                     />
                 </div>
-                <div className="grid gap-2">
-                    <Label htmlFor="description">Description</Label>
-                    <Textarea
-                        className="placeholder:text-gray-300 rounded-xl"
-                        id="description"
-                        defaultValue="Tickets for regular members who will sit behind"
-                        name="description"
-                    />
-                </div>
+                <input
+                    type="hidden"
+                    className="placeholder:text-gray-300 rounded-xl"
+                    id="description"
+                    defaultValue="Access to the event; admits one person."
+                    name="description"
+                />
 
                 <div className="flex items-stretch gap-5">
                     <div className="grid gap-2 flex-1">

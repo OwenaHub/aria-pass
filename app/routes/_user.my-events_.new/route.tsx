@@ -153,7 +153,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
     const [form, setForm] = useState<FormProps>({
         title: '',
         description: '',
-        event_type: '',
+        event_type: eventCategory[0],
         banner_url: null,
         status: 'draft',
         engagement_visible: true,
@@ -190,8 +190,8 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                     key={item}
                                     type="button"
                                     size={"sm"} variant={"outline"}
-                                    className={`rounded-full shadow-none text-xs font-light 
-                                            ${form.event_type === item && 'bg-primary-theme text-white font-medium hover:bg-primary-bg'}`}
+                                    className={`rounded-full font-semibold shadow-none text-sm 
+                                            ${form.event_type === item && 'bg-primary-bg text-primary-theme border border-primary-theme hover:bg-primary-bg'}`}
                                     onClick={() => setForm((i) => ({ ...i, event_type: item }))}
                                 >
                                     {item}

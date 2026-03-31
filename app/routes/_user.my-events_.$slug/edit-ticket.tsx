@@ -49,11 +49,11 @@ export default function EditTicket({ ticket }: { ticket: Ticket }) {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <PencilLine size={20} strokeWidth={1} />
+                    <PencilLine className="cursor-pointer hover:opacity-50" size={20} />
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="sm:max-w-106.25">
                     <DialogHeader>
-                        <DialogTitle>Edit {ticket.name} ticket</DialogTitle>
+                        <DialogTitle className="tracking-tighter font-bold">Edit {ticket.name} ticket</DialogTitle>
                         <DialogDescription>
                             {/*  */}
                         </DialogDescription>
@@ -67,7 +67,7 @@ export default function EditTicket({ ticket }: { ticket: Ticket }) {
     return (
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
-                <PencilLine size={20} strokeWidth={1} />
+                <PencilLine className="cursor-pointer hover:opacity-50" size={20} />
             </DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader className="text-left">
@@ -141,15 +141,14 @@ const ProfileForm = React.forwardRef<HTMLFormElement, ProfileFormProps>(
                         required
                     />
                 </div>
-                <div className="grid gap-2">
-                    <Label htmlFor="description">Description</Label>
-                    <Textarea
-                        className="placeholder:text-gray-300 rounded-xl"
-                        id="description"
-                        defaultValue={ticket.description}
-                        name="description"
-                    />
-                </div>
+
+                <input
+                    type="hidden"
+                    className="placeholder:text-gray-300 rounded-xl"
+                    id="description"
+                    defaultValue={ticket.description}
+                    name="description"
+                />
 
                 <div className="flex items-stretch gap-5">
                     <div className="grid gap-2 flex-1">

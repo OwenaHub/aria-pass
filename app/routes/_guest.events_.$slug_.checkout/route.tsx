@@ -45,7 +45,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
     return (
         <div className='lg:px-14'>
             <section className='container flex flex-col md:flex-row md:items-start py-10 md:gap-20 gap-10'>
-                <div className="bg-white block flex-1 overflow-hidden rounded-2xl relative">
+                <div className="bg-white flex-1 overflow-hidden rounded-2xl relative hidden md:block">
                     <img
                         src={banner}
                         alt={event.title}

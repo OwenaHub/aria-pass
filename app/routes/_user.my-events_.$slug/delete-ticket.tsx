@@ -24,7 +24,7 @@ export function DeleteTicket({ ticket }: { ticket: Ticket }) {
         <Dialog>
             <div>
                 <DialogTrigger asChild>
-                    <Trash size={20} strokeWidth={1} />
+                    <Trash size={20} className="text-destructive cursor-pointer hover:opacity-50" />
                 </DialogTrigger>
 
                 <DialogContent className="sm:max-w-106.25">
