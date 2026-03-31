@@ -66,7 +66,12 @@ export default function Events({ loaderData }: Route.ComponentProps) {
         <main>
             <div className='container py-10 flex flex-col gap-2'>
                 <h1 className='text-3xl font-extrabold tracking-tighter'>All Events</h1>
-                <p className='text-sm text-gray-500 font-light'>Showing all events</p>
+                <p className='text-sm text-gray-500 font-light'>
+                    Showing{" "}
+                    <span className='font-semibold capitalize'>
+                        {searchParams.get('filter') || 'all'}
+                    </span>{" "} Events
+                </p>
             </div>
 
             <div className="hidden container lg:flex items-center justify-between mb-8">

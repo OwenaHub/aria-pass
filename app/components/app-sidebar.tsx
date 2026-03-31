@@ -1,5 +1,5 @@
 import React from "react"
-import { Plus, UserPlus } from "lucide-react"
+import { BookOpen, CalendarCheck, Plus, UserPlus } from "lucide-react"
 
 import { DatePicker } from "~/components/date-picker"
 import { NavUser } from "~/components/nav-user"
@@ -54,24 +54,24 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
       <SidebarContent>
         <DatePicker />
 
-        <section className="px-2 pb-1.5">
-          <Link to={'/events'} className="flex justify-between items-center gap-2 px-3 py-3 border shadow rounded-xl bg-white hover:shadow-lg transition">
-            <span className="text-sm font-medium tracking-tight">Explore events</span>
-            <span className="relative flex size-3">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75"></span>
-              <span className="relative inline-flex size-3 rounded-full bg-indigo-500"></span>
-            </span>
-
+        <section className="px-4 pb-1.5">
+          <Link to={'/events'} className="py-2 mb-2 flex items-center gap-2">
+            <CalendarCheck size={18} strokeWidth={2} />
+            <span className="text-sm font-semibold tracking-tight">See Events</span>
+          </Link>
+          <Link to={'/event-programs'} className="py-2 mb-2 flex items-center gap-2">
+            <BookOpen size={18} strokeWidth={2} />
+            <span className="text-sm font-semibold tracking-tight">Digital Programs</span>
           </Link>
         </section>
         <SidebarSeparator className="mx-0" />
       </SidebarContent>
 
-      <SidebarFooter className="bg-white shadow-[0px_0px_25px_#80808020]!">
+      <SidebarFooter className="shadow-[0px_0px_25px_#80808020]!">
         <SidebarMenu>
           <SidebarMenuItem>
             <Link to={"/my-events/new"}>
-              <SidebarMenuButton className="flex items-center justify-between bg-primary-theme hover:bg-primary-theme/80 hover:text-white text-white px-4 py-5 rounded-xl cursor-pointer">
+              <SidebarMenuButton variant={'outline'} className="bg-gray-200 hover:bg-gray-100 flex items-center justify-between px-4 py-5 rounded-lg cursor-pointer transition">
                 <span className="font-semibold tracking-tight text-sm">Add Event</span>
                 <Plus strokeWidth={4} className="size-5" />
               </SidebarMenuButton>

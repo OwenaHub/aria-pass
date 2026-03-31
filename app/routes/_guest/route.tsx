@@ -48,7 +48,7 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                 <nav className={`py-3 container flex items-center justify-between transition-all`}>
                     <div className='flex items-center gap-30'>
                         <Link to="/" className='flex items-center gap-2'>
-                            <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-10 md:w-14 object-contain" />
+                            <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-10 md:w-12 object-contain" />
                         </Link>
 
                         <ul className='hidden md:flex gap-4 items-center'>
@@ -56,8 +56,8 @@ export default function GuestLayout({ loaderData }: Route.ComponentProps) {
                                 <li key={item}>
                                     <NavLink
                                         to={item === 'Home' ? '/' : `/${item.toLowerCase().split(' ').join('-')}`}
-                                        className={({ isActive }) => `text-sm font-semibold p-2 tracking-tight transition-all ${isActive
-                                            ? 'text-primary-theme font-semibold p-2 bg-primary-bg rounded-lg ' // Styles when active
+                                        className={({ isActive }) => `text-sm p-2 tracking-tighter transition-all ${isActive
+                                            ? 'text-black font-medium p-2 rounded-lg ' // Styles when active
                                             : 'text-slate-600 hover:text-indigo-400' // Styles when inactive
                                             }`}
                                     >

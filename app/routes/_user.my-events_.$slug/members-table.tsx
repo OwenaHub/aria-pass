@@ -23,7 +23,7 @@ export default function MembersTable({ members }: { members: any[] }) {
                         >
                             {/* 1. Member Identity */}
                             <div className="flex items-center gap-4">
-                                <div className={`h-12 w-12 rounded-full flex items-center justify-center text-sm font-black text-white shadow-inner ${isPending ? 'bg-slate-300' : 'bg-gradient-to-br from-indigo-500 to-indigo-600'}`}>
+                                <div className={`h-10 w-10 rounded-full flex items-center justify-center font-bold text-primary shadow-inner ${isPending ? 'bg-slate-300' : 'bg-linear-to-br from-gray-200 to-gray-300'}`}>
                                     {initials}
                                 </div>
                                 <div>
@@ -39,14 +39,14 @@ export default function MembersTable({ members }: { members: any[] }) {
                             {/* 2. Role & Status Badges */}
                             <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
                                 <div className="flex items-center gap-2">
-                                    <span className="px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-600 flex items-center gap-1.5">
+                                    <span className="px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-600 flex items-center gap-1.5">
                                         {member.role?.toLowerCase() === 'admin' 
                                             ? <ShieldAlert className="size-3 text-indigo-500" /> 
                                             : <ShieldCheck className="size-3 text-emerald-500" />
                                         }
                                         {member.role}
                                     </span>
-                                    <span className={`px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${isPending ? 'bg-amber-50 text-amber-600' : 'bg-emerald-50 text-emerald-600'}`}>
+                                    <span className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest ${isPending ? 'bg-amber-50 text-amber-600' : 'bg-emerald-50 text-emerald-600'}`}>
                                         {member.status}
                                     </span>
                                 </div>

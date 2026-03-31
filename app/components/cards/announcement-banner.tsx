@@ -12,19 +12,19 @@ export default function AnnouncementBanner() {
                 <div className="flex whitespace-nowrap animate-marquee">
                     {/* First Set */}
                     <div className="flex gap-4 items-center px-2">
-                        <div className="flex gap-2 items-center text-xs text-primary-theme font-medium">
+                        <div className="flex gap-2 items-center text-xs text-primary font-medium">
                             <span>🎉</span>
                             <span>We processed over 1.2 million ticket sales in 3 months</span>
                         </div>
-                        <div className="flex gap-2 items-center text-xs text-primary-theme font-medium">
+                        <div className="flex gap-2 items-center text-xs text-primary font-medium">
                             <span>💜</span>
                             <span>You can now add reviews to events you attended</span>
                         </div>
-                        <div className="flex gap-2 items-center text-xs text-primary-theme font-medium">
+                        <div className="flex gap-2 items-center text-xs text-primary font-medium">
                             <span>💜</span>
                             <span>You can now add reviews to events you attended</span>
                         </div>
-                        <div className="flex gap-2 items-center text-xs text-primary-theme font-medium">
+                        <div className="flex gap-2 items-center text-xs text-primary font-medium">
                             <span>💜</span>
                             <span>You can now add reviews to events you attended</span>
                         </div>
@@ -32,19 +32,19 @@ export default function AnnouncementBanner() {
 
                     {/* Duplicate Set (Required for seamless looping) */}
                     <div className="flex gap-4 items-center px-2" aria-hidden="true">
-                        <div className="flex gap-2 items-center text-xs text-primary-theme font-medium">
+                        <div className="flex gap-2 items-center text-xs text-primary font-medium">
                             <span>🎉</span>
                             <span>We processed over 1.2 million ticket sales in 3 months</span>
                         </div>
-                        <div className="flex gap-2 items-center text-xs text-primary-theme font-medium">
+                        <div className="flex gap-2 items-center text-xs text-primary font-medium">
                             <span>💜</span>
                             <span>You can now add reviews to events you attended</span>
                         </div>
-                        <div className="flex gap-2 items-center text-xs text-primary-theme font-medium">
+                        <div className="flex gap-2 items-center text-xs text-primary font-medium">
                             <span>💜</span>
                             <span>You can now add reviews to events you attended</span>
                         </div>
-                        <div className="flex gap-2 items-center text-xs text-primary-theme font-medium">
+                        <div className="flex gap-2 items-center text-xs text-primary font-medium">
                             <span>💜</span>
                             <span>You can now add reviews to events you attended</span>
                         </div>

@@ -38,8 +38,6 @@ export default function OrganiserTicketCard({ ticket }: { ticket: Ticket }) {
                 </div>
             </div>
 
-            {/* Right: Utility Actions */}
-            {/* Kept visible at all times—no hover gimmicks for core admin actions */}
             <div className="flex items-center gap-5 border-t sm:border-t-0 border-slate-100 pt-3 sm:pt-0 w-full sm:w-auto justify-end">
                 <div className="text-slate-500 hover:text-indigo-600 transition-colors">
                     <EditTicket ticket={ticket} />

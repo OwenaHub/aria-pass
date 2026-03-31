@@ -136,7 +136,10 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                         {/* Revenue Card */}
                         <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
                             <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center justify-between">
-                                Revenue <Link to={`/spaces/${event.slug}`}><ArrowRight className="size-4 hover:text-primary-theme transition-colors" /></Link>
+                                Revenue 
+                                <Link to={`/spaces/${event.slug}`}>
+                                <ArrowRight strokeWidth={3} className="size-4 text-primary transition-colors" />
+                                </Link>
                             </p>
                             <p className="text-3xl font-bold text-gray-900 tracking-tighter">
                                 <span className="text-lg text-gray-400 mr-1">₦</span><FormatPrice withSymbol={false} price={SUM_AMOUNT.toFixed(2)} />
@@ -184,7 +187,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2 space-y-8">
-                        <div className="bg-gray-100 rounded-2xl border border-gray-100 p-6">
+                        <div className="bg-gray-100 rounded-2xl border border-gray-100 py-6 px-4">
                             <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-6">
                                 <div>
                                     <h3 className="text-xl tracking-tighter font-bold text-gray-900 flex items-center gap-2">
@@ -198,7 +201,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                             {event.tickets.length ? (
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {event.tickets.map(ticket => (
-                                        <TicketCard ticket={ticket} user="organiser" key={ticket.id} />
+                                        <TicketCard ticket={ticket} key={ticket.id} />
                                     ))}
                                 </div>
                             ) : (
@@ -214,7 +217,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                     </div>
 
                     <div className="lg:col-span-1 space-y-8">
-                        <div className="bg-gray-100 rounded-2xl border border-gray-100 p-6 h-full">
+                        <div className="bg-gray-100 rounded-2xl border border-gray-100 py-6 px-4 h-full">
                             <div className="flex items-center justify-between mb-6">
                                 <div>
                                     <h3 className="text-xl tracking-tighter font-bold text-gray-900 flex items-center gap-2">
@@ -227,7 +230,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                             {event.members?.length ? (
                                 <MembersTable members={event.members} />
                             ) : (
-                                <div className="text-center p-8 border border-dashed border-gray-200 rounded-2xl bg-white">
+                                <div className="text-start p-8 border border-dashed border-gray-300 rounded-2xl bg-white">
                                     <p className="text-sm font-bold text-gray-600">No staff added</p>
                                     <p className="text-xs text-gray-400 mt-1">Invite team members to help manage this event.</p>
                                 </div>
